@@ -20,7 +20,7 @@ class MainViewModel(private val api: ApiRepository) : ViewModel() {
             val genresResponse = api.fetchGenres()
             genresResponse.data?.let {
                 genreList.postValue(it.genres!!)
-            } //?: errorDialog.postValue(genresResponse.error!!)
+            } ?: errorDialog.postValue(genresResponse.error!!)
 
 
             val showsResponse = api.fetchPopularShows()

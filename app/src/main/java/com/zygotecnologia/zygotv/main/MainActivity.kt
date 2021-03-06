@@ -9,6 +9,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.DialogFactory
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -45,11 +46,11 @@ class MainActivity : AppCompatActivity() {
     private fun errorDialogObserver() {
         viewModel.errorDialog.observe(this, Observer { error ->
             error?.let {
-                DialogFactory.CustomDialog(
+                DialogFactory.showAlertDialog(
                     this,
                     error.title,
                     error.message
-                ).show()
+                )
             }
         })
     }

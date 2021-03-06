@@ -8,6 +8,7 @@ import com.zygotecnologia.zygotv.network.api.repository.TmdbApiRepository
 import com.zygotecnologia.zygotv.network.api.service.ApiService
 import com.zygotecnologia.zygotv.network.retrofit.OkHttpClientFactory
 import com.zygotecnologia.zygotv.network.retrofit.RetrofitClient
+import com.zygotecnologia.zygotv.utils.DialogFactory
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -15,9 +16,11 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+
 const val fullBaseUrl = BuildConfig.BASE_URL + "/" + BuildConfig.API_VERSION + "/"
 
 val MainModule = module {
+
 
     // Network
     factory<Interceptor> { HttpLoggingInterceptor() }
