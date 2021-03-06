@@ -1,7 +1,6 @@
 package com.zygotecnologia.zygotv.network.api.repository
 
 import android.content.Context
-import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.api.service.ApiService
 import com.zygotecnologia.zygotv.network.retrofit.model.RetrofitResponse
 

@@ -16,8 +16,4 @@ open class RequestError(
     @field:Json(name = "message")
     val message: String = ""
 
-) : Parcelable {
-
-    fun isValid(): Boolean = code != -1 && title.isNotEmpty() && message.isNotEmpty()
-
-}
+) : Parcelable

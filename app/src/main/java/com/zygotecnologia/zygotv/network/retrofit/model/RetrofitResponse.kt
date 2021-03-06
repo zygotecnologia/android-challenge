@@ -17,19 +17,18 @@ class RetrofitResponse<T>(
 ) : ApiResponse<T> {
 
     override suspend fun result(): Resource<T> {
-
-        //try {
+        return try {
             val response = request.invoke()
             val data = response.body()
 
-        return if (response.isSuccessful && data != null) {
+            if (response.isSuccessful && data != null) {
                 success(data)
             } else {
                 error(response.code(), response.errorBody())
             }
-/*        } catch (exception: Exception) {
+        } catch (exception: Exception) {
             failure(exception)
-        }*/
+        }
     }
 
     override fun success(data: T) = Resource.success(data)

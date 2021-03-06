@@ -1,28 +1,39 @@
 package com.zygotecnologia.zygotv.model
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Show(
+    @SerializedName("genres")
     val genres: List<Genre>?,
-    @Json(name = "original_name")
+
+    @SerializedName("original_name")
     val originalName: String?,
-    @Json(name = "genre_ids")
+
+    @SerializedName("genre_ids")
     val genreIds: List<Int>?,
-    @Json(name = "name")
+
+    @SerializedName("name")
     val name: String?,
-    @Json(name = "vote_count")
+
+    @SerializedName("vote_count")
     val voteCount: Int?,
-    @Json(name = "backdrop_path")
+
+    @SerializedName("backdrop_path")
     val backdropPath: String?,
-    @Json(name = "original_language")
+
+    @SerializedName("original_language")
     val originalLanguage: String?,
-    @Json(name = "id")
+
+    @SerializedName("id")
     val id: Int?,
-    @Json(name = "overview")
+
+    @SerializedName("overview")
     val overview: String?,
-    @Json(name = "poster_path")
+
+    @SerializedName("poster_path")
     val posterPath: String?
 ) : Parcelable

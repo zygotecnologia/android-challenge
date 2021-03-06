@@ -5,13 +5,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object TmdbRetrofitClient {
+object RetrofitClient {
 
-    fun build(baseUrl: String, client: OkHttpClient, moshiConverter: MoshiConverterFactory) =
+    fun build(baseUrl: String, client: OkHttpClient) =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
-            //.addConverterFactory(moshiConverter)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
