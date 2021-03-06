@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:paddingBottom="@dimen/double_spacing"
+        android:background="@drawable/custom_shape_rounded_dialog"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleStyle.H1"
+            android:gravity="start"
+            android:id="@+id/tv_custom_dialog_title"
+            android:layout_margin="@dimen/double_spacing"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Titulo da dialog customizada"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_custom_dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/double_spacing"
+            android:layout_marginTop="@dimen/double_spacing"
+            android:layout_marginEnd="@dimen/double_spacing"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="Esse é um exemplo de uma mensagem que teria aqui dentro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_custom_dialog_title" />
+
+        <Button
+            android:id="@+id/bt"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/double_spacing"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_custom_dialog_message"
+            tools:text="Action" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

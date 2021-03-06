@@ -1,7 +1,10 @@
 package com.zygotecnologia.zygotv.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Show(
     val genres: List<Genre>?,
     @Json(name = "original_name")
@@ -22,4 +25,4 @@ data class Show(
     val overview: String?,
     @Json(name = "poster_path")
     val posterPath: String?
-)
+) : Parcelable

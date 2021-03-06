@@ -1,7 +1,10 @@
 package com.zygotecnologia.zygotv.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ShowResponse(
     @Json(name = "page")
     val page: Int?,
@@ -14,4 +17,5 @@ data class ShowResponse(
 
     @Json(name = "results")
     val results: List<Show>?
-)
+
+) : Parcelable
