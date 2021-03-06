@@ -18,11 +18,11 @@ object OkHttpClientFactory {
             .connectTimeout(1, TimeUnit.MINUTES)
             .addInterceptor(interceptor)
 
-        //if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             context?.let { clientBuilder.addInterceptor(ChuckInterceptor(it)) }
             clientBuilder
                 .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
-        //}
+        }
 
         return clientBuilder.build()
     }

@@ -13,6 +13,7 @@ import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 
 class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
@@ -34,10 +35,7 @@ class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdap
             textView.text = show.name
 
             val imageView: ImageView = itemView.findViewById(iv_show_poster)
-            Glide.with(itemView)
-                .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(imageView)
+            show.posterPath?.loadImage(itemView, imageView)
         }
     }
 }

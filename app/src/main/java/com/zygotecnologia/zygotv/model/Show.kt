@@ -20,7 +20,7 @@ data class Show(
     val name: String?,
 
     @SerializedName("vote_count")
-    val voteCount: Int?,
+    val voteCount: Int,
 
     @SerializedName("backdrop_path")
     val backdropPath: String?,

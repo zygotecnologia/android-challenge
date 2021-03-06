@@ -1,6 +1,8 @@
 package com.zygotecnologia.zygotv.main
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
@@ -11,6 +13,7 @@ import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.DialogFactory
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.toHTML
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         loadShows()
     }
 
+    private fun setupMostPopular() {
+        binding.mostPopularTitle.text = viewModel.getMostPopularShow()?.name
+        viewModel.getMostPopularShow()?.backdropPath?.loadImage(binding.root,  binding.banner)
+    }
+
     private fun setupToolbar() {
         binding.toolbarText.text = "<html>Zygo<font color='red'>TV</font></html>".toHTML()
     }
@@ -45,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.showList.observe(this, Observer { list ->
             list?.let {
                 setListAdapter(it)
+                setupMostPopular()
             }
         })
     }
