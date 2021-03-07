@@ -16,7 +16,7 @@
     app:expandable_spinner="@drawable/ic_arrow_down"
     app:expandable_spinner_animate="true"
     app:expandable_spinner_gravity="end"
-    app:expandable_spinner_margin="20dp"
-    app:expandable_spinner_size="10dp" />
+    app:expandable_spinner_margin="10dp"
+    app:expandable_spinner_size="25dp" />
 
 

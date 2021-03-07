@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_season_poster"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,12 +27,12 @@
             style="@style/DefaultTextViewStyle.Large"
             android:layout_width="match_parent"
             android:maxLength="30"
-            tools:text="Cabeçalho da season" />
+            tools:text="Season header" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_season_overview"
             style="@style/DefaultTextViewStyle.Small"
-            android:layout_width="255dp"
+            android:layout_width="235dp"
             android:maxLength="100"
             tools:text="Lorem ipsum lalala blabla" />
 
