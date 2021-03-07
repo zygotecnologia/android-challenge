@@ -1,6 +1,5 @@
 package com.zygotecnologia.zygotv.main
 
-import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -8,18 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.expandablelayout.ExpandableLayout
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.R.id.iv_show_poster
-import com.zygotecnologia.zygotv.R.id.tv_show_title
+import com.zygotecnologia.zygotv.model.Episode
 import com.zygotecnologia.zygotv.model.Season
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowDetails
+import com.zygotecnologia.zygotv.model.SeasonResponse
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.gone
 import com.zygotecnologia.zygotv.utils.inflate
 import com.zygotecnologia.zygotv.utils.toHTML
 import com.zygotecnologia.zygotv.utils.visible
 
-class DetailsAdapter(private val seasons: List<Season>) : RecyclerView.Adapter<DetailsAdapter.ViewHolder>() {
+class DetailsAdapter(private val seasons: List<SeasonResponse>)
+    : RecyclerView.Adapter<DetailsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflate(R.layout.details_item))
 
@@ -29,17 +27,18 @@ class DetailsAdapter(private val seasons: List<Season>) : RecyclerView.Adapter<D
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(season: Season) {
+        fun bind(season: SeasonResponse) {
             setupExpandable()
             setupHeader(season)
             setupDetails(season)
         }
 
-        private fun setupDetails(season: Season) {
-
+        private fun setupDetails(season: SeasonResponse) {
+            val rvEpisodesList: RecyclerView = itemView.findViewById(R.id.rv_episodes_list)
+            rvEpisodesList.adapter = EpisodesAdapter(season.episodes ?: emptyList())
         }
 
-        private fun setupHeader(season: Season) {
+        private fun setupHeader(season: SeasonResponse) {
             val tvSeasonTitle: TextView = itemView.findViewById(R.id.tv_season_title)
             tvSeasonTitle.text = season.name
 

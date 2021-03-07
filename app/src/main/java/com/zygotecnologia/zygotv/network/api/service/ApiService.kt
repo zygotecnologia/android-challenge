@@ -1,6 +1,7 @@
 package com.zygotecnologia.zygotv.network.api.service
 
 import com.zygotecnologia.zygotv.model.GenreResponse
+import com.zygotecnologia.zygotv.model.SeasonResponse
 import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.model.ShowResponse
 import com.zygotecnologia.zygotv.network.TmdbApi
@@ -23,5 +24,10 @@ interface ApiService {
     suspend fun fetchShow(@Path("id") id: Int,
                           @Query("api_key") apiKey: String = TmdbApi.TMDB_API_KEY,
                           @Query("region") region: String = TmdbApi.TMDB_API_REGION): Response<ShowDetails>
+
+    @GET("tv/{id}/season/{season_number}")
+    suspend fun fetchSeasonDetails(@Path("id") id: Int, @Path("season_number") seasonNumber: Int,
+                          @Query("api_key") apiKey: String = TmdbApi.TMDB_API_KEY,
+                          @Query("region") region: String = TmdbApi.TMDB_API_REGION): Response<SeasonResponse>
 
 }

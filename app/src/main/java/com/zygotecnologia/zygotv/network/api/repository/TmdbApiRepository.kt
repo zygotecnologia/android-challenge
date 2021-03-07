@@ -9,5 +9,7 @@ class TmdbApiRepository(val context: Context, private val api: ApiService) : Api
     override suspend fun fetchGenres() = RetrofitResponse(context) { api.fetchGenres() }.result()
     override suspend fun fetchPopularShows() = RetrofitResponse(context) { api.fetchPopularShows() }.result()
     override suspend fun fetchShow(id: Int) = RetrofitResponse(context) { api.fetchShow(id) }.result()
+    override suspend fun fetchSeasonDetails(id: Int, seasonNumber: Int)
+            = RetrofitResponse(context) { api.fetchSeasonDetails(id, seasonNumber) }.result()
 
 }
