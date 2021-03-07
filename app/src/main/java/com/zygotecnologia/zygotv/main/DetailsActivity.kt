@@ -1,25 +1,18 @@
 package com.zygotecnologia.zygotv.main
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
-import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityDetailsBinding
-import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
-import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.utils.DialogFactory
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.toHTML
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsActivity : AppCompatActivity() {
+
+    companion object {
+        const val TITLE_INTENT_EXTRA = "title"
+        const val BANNER_INTENT_EXTRA = "banner"
+    }
 
     private lateinit var binding: ActivityDetailsBinding
 
@@ -27,11 +20,18 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupToolbar()
+        setupHeader()
+    }
+
+    private fun setupHeader() {
+        binding.tvShowTitle.text = intent.extras?.getString(TITLE_INTENT_EXTRA)
+        intent.extras?.getString(BANNER_INTENT_EXTRA)?.loadImage(binding.root, binding.banner)
+    }
+
+    private fun setupToolbar() {
         setupToolbarText()
         setupToolbarBackButton()
-
-        binding.tvShowTitle.text = intent.extras?.get("title") as CharSequence
-        intent.extras?.getString("banner")?.loadImage(binding.root, binding.banner)
     }
 
     private fun setupToolbarBackButton() {
