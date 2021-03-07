@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".main.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -28,12 +30,13 @@
                 android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_icon_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:foregroundGravity="center"
-                android:src="@drawable/chuck_ic_search_white_24dp" />
+                android:src="@drawable/ic_arrow_back" />
 
         </RelativeLayout>
 
@@ -41,13 +44,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/DefaultTextViewStyle"
-        android:id="@+id/most_popular_title"
+        android:id="@+id/tv_show_title"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        tools:text="Game of Throns"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/card_most_popular"/>
+        tools:text="Game of Throns" />
 
     <androidx.cardview.widget.CardView
         android:layout_margin="5dp"
@@ -55,9 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/most_popular_title"
-        app:layout_constraintBottom_toTopOf="@id/rv_genre_list">
+        app:cardElevation="4dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/banner"
@@ -70,16 +68,12 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="15dp"
-        android:id="@+id/rv_genre_list"
+        android:layout_marginTop="5dp"
+        android:id="@+id/rv_seasons_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_most_popular"
-        tools:listitem="@layout/shows_by_genre_item" />
+        tools:listitem="@layout/details_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

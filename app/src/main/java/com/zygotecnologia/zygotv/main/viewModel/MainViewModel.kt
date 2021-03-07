@@ -1,7 +1,5 @@
 package com.zygotecnologia.zygotv.main.viewModel
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,27 +16,39 @@ class MainViewModel(private val api: ApiRepository) : ViewModel() {
     val showList = MutableLiveData<List<Show>>()
     val genreList = MutableLiveData<List<Genre>>()
 
-    val sortedShowList : List<Show>? by lazy {
+    private val sortedShowList : List<Show>? by lazy {
         showList.value?.toList()?.sortedByDescending { it.voteCount }
+    }
+
+    val filteredGenresList : List<Genre> by lazy {
+        val filtered = mutableListOf<Genre>()
+        genreList.value?.forEach { genre ->
+            val a = showList.value!!.filter { it.genreIds!!.contains(genre.id) }
+            if(a.isNotEmpty()) filtered.add(genre)
+        }
+        filtered as List<Genre>
     }
 
     fun loadShows() {
         viewModelScope.launch {
-
-            val genresResponse = api.fetchGenres()
-            genresResponse.data?.let {
-                genreList.postValue(it.genres ?: emptyList())
-            } ?: errorDialog.postValue(genresResponse.error ?: RetrofitResponse.genericError)
-
-
-            val showsResponse = api.fetchPopularShows()
-            showList.postValue(showsResponse.data?.results?.map { show ->
-                show.copy(genres = genreList.value?.filter { show.genreIds?.contains(it.id) == true }
-                )
-            })
-
+            fetchGenres()
+            fetchShows()
         }
+    }
 
+    private suspend fun fetchShows() {
+        val showsResponse = api.fetchPopularShows()
+        showList.postValue(showsResponse.data?.results?.map { show ->
+            show.copy(genres = genreList.value?.filter { show.genreIds?.contains(it.id) == true }
+            )
+        })
+    }
+
+    private suspend fun fetchGenres() {
+        val genresResponse = api.fetchGenres()
+        genresResponse.data?.let {
+            genreList.postValue(it.genres ?: emptyList())
+        } ?: errorDialog.postValue(genresResponse.error ?: RetrofitResponse.genericError)
     }
 
     fun getMostPopularShow() = sortedShowList?.first()

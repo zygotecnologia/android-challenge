@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -21,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModel()
-    private val showList: RecyclerView by lazy { binding.rvShowList }
+    private val showList: RecyclerView by lazy { binding.rvGenreList }
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,21 +34,33 @@ class MainActivity : AppCompatActivity() {
         loadShows()
     }
 
+    private fun loadShows() = viewModel.loadShows()
+
     private fun setupMostPopular() {
         binding.mostPopularTitle.text = viewModel.getMostPopularShow()?.name
         viewModel.getMostPopularShow()?.backdropPath?.loadImage(binding.root,  binding.banner)
+        binding.banner.setOnClickListener {
+            startActivity(Intent(this, DetailsActivity::class.java))
+        }
     }
 
     private fun setupToolbar() {
-        binding.toolbarText.text = "<html>Zygo<font color='red'>TV</font></html>".toHTML()
+        setupToolbarText()
+        setupToolbarListeners()
+    }
+
+    private fun setupToolbarListeners() {
+        //TODO
+    }
+
+    private fun setupToolbarText() {
+        binding.toolbarText.text = resources.getString(R.string.toolbar_text).toHTML()
     }
 
     private fun setupObservers() {
         errorDialogObserver()
         showListLoadedObserver()
     }
-
-    private fun loadShows() = viewModel.loadShows()
 
     private fun showListLoadedObserver() {
         viewModel.showList.observe(this, Observer { list ->
@@ -58,8 +71,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setListAdapter(it: List<Show>) {
-        showList.adapter = MainAdapter(it)
+    private fun setListAdapter(showsList: List<Show>) {
+        showList.adapter = GenresAdapter(viewModel.filteredGenresList, showsList)
     }
 
     private fun errorDialogObserver() {

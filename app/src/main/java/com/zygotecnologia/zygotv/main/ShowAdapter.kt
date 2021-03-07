@@ -1,21 +1,20 @@
 package com.zygotecnologia.zygotv.main
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
+import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 
-class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class ShowAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
@@ -36,6 +35,13 @@ class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdap
 
             val imageView: ImageView = itemView.findViewById(iv_show_poster)
             show.posterPath?.loadImage(itemView, imageView)
+
+            itemView.setOnClickListener {
+                val intent = Intent(it.context, DetailsActivity::class.java)
+                intent.putExtra("title", show.name)
+                intent.putExtra("banner", show.backdropPath)
+                it.context.startActivity(intent)
+            }
         }
     }
 }
