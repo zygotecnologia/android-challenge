@@ -1,8 +1,9 @@
 package com.zygotecnologia.zygotv.model
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
-data class Show(
+data class Show (
     val genres: List<Genre>?,
     @Json(name = "original_name")
     val originalName: String?,
@@ -22,4 +23,4 @@ data class Show(
     val overview: String?,
     @Json(name = "poster_path")
     val posterPath: String?
-)
+) : Serializable

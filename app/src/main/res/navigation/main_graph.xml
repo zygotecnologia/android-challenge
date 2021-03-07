@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/homeSeriesFragment">
+
+    <fragment
+        android:id="@+id/homeSeriesFragment"
+        android:name="com.zygotecnologia.zygotv.main.series.HomeSeriesFragment"
+        android:label="fragment_home_series"
+        tools:layout="@layout/fragment_home_series">
+        <action
+            android:id="@+id/action_homeSeriesFragment_to_detailsSeriesFragment"
+            app:destination="@id/detailsSeriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsSeriesFragment"
+        android:name="com.zygotecnologia.zygotv.main.series.DetailsSeriesFragment"
+        android:label="fragment_details_series"
+        tools:layout="@layout/fragment_details_series">
+        <argument
+            android:name="showArgument"
+            app:argType="com.zygotecnologia.zygotv.model.Show" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.zygotecnologia.zygotv.main.series.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
+    <fragment
+        android:id="@+id/functionalityNotAvailableFragment"
+        android:name="com.zygotecnologia.zygotv.main.functionalityNotAvailableFragment"
+        android:label="fragment_functionality_not_available"
+        tools:layout="@layout/fragment_functionality_not_available" />
+</navigation>
