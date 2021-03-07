@@ -7,3 +7,11 @@ import android.view.ViewGroup
 fun ViewGroup.inflate(layoutId : Int) : View {
     return LayoutInflater.from(context).inflate(layoutId, this, false)
 }
+
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}

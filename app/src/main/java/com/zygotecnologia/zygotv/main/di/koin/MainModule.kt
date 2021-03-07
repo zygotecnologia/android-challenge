@@ -2,6 +2,7 @@ package com.zygotecnologia.zygotv.main.di.koin
 
 import org.koin.dsl.module
 import com.zygotecnologia.zygotv.BuildConfig
+import com.zygotecnologia.zygotv.main.viewModel.DetailsViewModel
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
 import com.zygotecnologia.zygotv.network.api.repository.ApiRepository
 import com.zygotecnologia.zygotv.network.api.repository.TmdbApiRepository
@@ -33,5 +34,6 @@ val MainModule = module {
 
     // ViewModels
     viewModel { MainViewModel(get()) }
+    viewModel { DetailsViewModel(get()) }
 
 }

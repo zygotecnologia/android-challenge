@@ -1,7 +1,7 @@
 package com.zygotecnologia.zygotv.network.api.service
 
 import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.model.ShowResponse
 import com.zygotecnologia.zygotv.network.TmdbApi
 import retrofit2.Response
@@ -22,6 +22,6 @@ interface ApiService {
     @GET("tv/{id}")
     suspend fun fetchShow(@Path("id") id: Int,
                           @Query("api_key") apiKey: String = TmdbApi.TMDB_API_KEY,
-                          @Query("region") region: String = TmdbApi.TMDB_API_REGION): Response<Show>
+                          @Query("region") region: String = TmdbApi.TMDB_API_REGION): Response<ShowDetails>
 
 }

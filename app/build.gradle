@@ -87,4 +87,6 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
+    implementation "com.github.skydoves:expandablelayout:1.0.6"
+
 }

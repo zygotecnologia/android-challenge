@@ -43,6 +43,7 @@ class ShowAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowAdap
             itemView.setOnClickListener { view ->
                 val intent = Intent(view.context, DetailsActivity::class.java)
                 intent.apply {
+                    putExtra(DetailsActivity.ID_INTENT_EXTRA, show.id)
                     putExtra(DetailsActivity.TITLE_INTENT_EXTRA, show.name)
                     putExtra(DetailsActivity.BANNER_INTENT_EXTRA, show.backdropPath)
                     view.context.startActivity(this@apply)

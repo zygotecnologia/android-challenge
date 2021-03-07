@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.skydoves.expandablelayout.ExpandableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expandable"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:animateLayoutChanges="true"
+    android:layout_marginBottom="15dp"
+    app:expandable_duration="300"
+    app:expandable_isExpanded="false"
+    app:expandable_parentLayout="@layout/layout_season_header"
+    app:expandable_secondLayout="@layout/layout_season_details"
+    app:expandable_showSpinner="true"
+    app:expandable_spinner="@drawable/ic_arrow_down"
+    app:expandable_spinner_animate="true"
+    app:expandable_spinner_gravity="end"
+    app:expandable_spinner_margin="20dp"
+    app:expandable_spinner_size="10dp" />
 
-    <TextView
-        style="@style/DefaultTextViewStyle"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Temporada 1"
-        tools:ignore="MissingConstraints" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
