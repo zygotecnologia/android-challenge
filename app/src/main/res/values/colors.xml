@@ -10,4 +10,6 @@
 
     <color name="default_background">#151515</color>
     <color name="light_gray">#D8D8D8</color>
+    <color name="text_gray">#6A6A6A</color>
+    <color name="title_gray">#c2c2c2</color>
 </resources>

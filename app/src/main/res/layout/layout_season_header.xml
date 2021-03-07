@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_season_poster"
-        android:layout_width="80dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
         android:src="@drawable/image_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -15,30 +16,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginEnd="20dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_season_poster"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_season_title"
-            style="@style/DefaultTextViewStyle"
-            android:text="Cabeçalho da season"
-            android:textSize="18sp"
-            />
+            style="@style/DefaultTextViewStyle.Large"
+            android:layout_width="match_parent"
+            android:maxLength="30"
+            tools:text="Cabeçalho da season" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_season_overview"
-            style="@style/DefaultTextViewStyle"
-            android:text="Lorem ipsum lalala blabla bolsonaro"
-            android:textColor="@color/light_gray"
-            android:layout_width="270dp"
-            android:maxLength="100" />
-
+            style="@style/DefaultTextViewStyle.Small"
+            android:layout_width="255dp"
+            android:maxLength="100"
+            tools:text="Lorem ipsum lalala blabla" />
 
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

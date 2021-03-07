@@ -8,6 +8,21 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="DefaultTextViewStyle.Gray" parent="DefaultTextViewStyle">
+        <item name="android:textColor">@color/title_gray</item>
+    </style>
+
+    <style name="DefaultTextViewStyle.Small" parent="DefaultTextViewStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:justificationMode">inter_word</item>
+    </style>
+
+    <style name="DefaultTextViewStyle.Large" parent="DefaultTextViewStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/title_gray</item>
+    </style>
+
     <style name="TitleStyle" parent="TextAppearance.AppCompat.Large">
         <item name="android:textSize">18sp</item>
         <item name="android:maxLength">100</item>
