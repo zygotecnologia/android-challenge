@@ -22,21 +22,21 @@ Android challange implementado por José Diogo Castro
     * `api`: dividida em 2 subpacotes: `repository` e `service`;
     * `model`: modelos da API e Retrofit (respostas e recursos);
     * `retrofit`: configuração do cliente Retrofit para a API.
-* `utils`: pacote com classes genéricas, como *extensions functions* e Dialogs *factory*.
+* `utils`: pacote com classes genéricas, como *extensions functions, buiders* e *factories*.
 
 ## Notas de design
-
-*
+* Chamadas da API removidas das MainActivity. Agora ocorrem dentro das `ViewModel`. Cliente do Retrofit injetado em nível de aplicação com Koin.
+* Parâmetos `api_key` e `region` setados diretamente na ApiService, evitando de passá-los em todas as chamadas.
+* Chave da API salva em variável de ambiente.
+* Tela principal remodealada e tela de detalhes desenvolvida de acordo com a especificação encontrada no Invision.
+* Crash sobre erro de conexão resolvido.
+* Utilizei uma biblioteca de terceiros para layout expansível.
+* Utilizei RecyclerView para todas as listagens.
+* Adicionei o Chuck para fazer o log das *requests* e *responses* por notificações do app.
 
 ### Disclaimer
+Parabéns a todos os envolvidos na elaboração desse desafio técnico. Achei a ideia de construir uma aplicação e pedir melhorias muito interessante, direto ao ponto :)
 
-Completar a challenge não implica em nenhum vínculo nem obrigação da Zygo
-com você. Todo o código criado será descartado. Este challenge usa elementos
-reais de necessidades da Zygo apenas como uma maneira de avaliarmos sua
-aptidão para o cargo.
+Um abraço pro time da Zygo!
 
-### Final notes
-
-Valorizamos **muito** a capacidade de nos surpreender!
-
-Boa sorte :)
+José
