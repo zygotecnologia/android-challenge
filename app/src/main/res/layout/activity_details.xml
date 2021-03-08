@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:orientation="vertical"
     tools:context=".main.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -26,9 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                tools:text="ZygoTV"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textColor="@color/white" />
+                tools:text="ZygoTV" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_icon_back"
@@ -36,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
                 android:foregroundGravity="center"
                 android:src="@drawable/ic_arrow_back" />
 
@@ -44,35 +44,35 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/DefaultTextViewStyle"
         android:id="@+id/tv_show_title"
-        android:layout_marginStart="10dp"
+        style="@style/DefaultTextViewStyle.Gray"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         tools:text="Game of Throns" />
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="5dp"
         android:id="@+id/card_most_popular"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="4dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/banner"
-            android:scaleType="matrix"
-            android:src="@drawable/image_placeholder"
-            android:background="@color/light_gray"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"
+            android:scaleType="fitXY"
+            android:src="@drawable/image_placeholder" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="5dp"
         android:id="@+id/rv_seasons_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/details_item" />

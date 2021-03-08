@@ -37,10 +37,17 @@ class MainActivity : AppCompatActivity() {
     private fun loadShows() = viewModel.loadShows()
 
     private fun setupMostPopular() {
-        binding.mostPopularTitle.text = viewModel.getMostPopularShow()?.name
+        val show = viewModel.getMostPopularShow()
+        binding.mostPopularTitle.text = show?.name
         viewModel.getMostPopularShow()?.backdropPath?.loadImage(binding.root,  binding.banner)
         binding.banner.setOnClickListener {
-            startActivity(Intent(this, DetailsActivity::class.java))
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.apply {
+                putExtra(DetailsActivity.ID_INTENT_EXTRA, show?.id)
+                putExtra(DetailsActivity.TITLE_INTENT_EXTRA, show?.name)
+                putExtra(DetailsActivity.BANNER_INTENT_EXTRA, show?.backdropPath)
+                startActivity(this@apply)
+            }
         }
     }
 

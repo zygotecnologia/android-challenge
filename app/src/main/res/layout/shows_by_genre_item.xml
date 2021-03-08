@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="20dp"
+    android:layout_marginBottom="25dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".main.MainActivity" >
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/DefaultTextViewStyle"
+        style="@style/DefaultTextViewStyle.Gray"
         android:id="@+id/tv_genre_name"
         android:layout_marginStart="5dp"
         tools:text="Título" />
