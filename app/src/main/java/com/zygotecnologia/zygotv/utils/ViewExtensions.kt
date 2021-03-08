@@ -22,7 +22,9 @@ fun View.visible() {
     }
 }
 
-fun View.bindText(id : Int, text : CharSequence) {
-    val tvEpisodeTitle: TextView = this.findViewById(id)
-    tvEpisodeTitle.text = text
+fun View.bindText(id : Int, text : CharSequence?) {
+    text?.let {
+        val tvEpisodeTitle: TextView = this.findViewById(id)
+        tvEpisodeTitle.text = it
+    }
 }

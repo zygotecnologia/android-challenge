@@ -12,6 +12,7 @@ import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.main.ui.activity.DetailsActivity
 import com.zygotecnologia.zygotv.model.show.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadPoster
+import com.zygotecnologia.zygotv.utils.bindText
 import com.zygotecnologia.zygotv.utils.inflate
 
 class ShowAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowAdapter.ViewHolder>() {
@@ -35,10 +36,8 @@ class ShowAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowAdap
             show.posterPath?.loadPoster(itemView, imageView)
         }
 
-        private fun setupShowTitle(show: Show) {
-            val textView: TextView = itemView.findViewById(tv_show_title)
-            textView.text = show.name
-        }
+        private fun setupShowTitle(show: Show) =
+            itemView.bindText(R.id.tv_show_title, show.name)
 
         private fun setItemViewClickListener(show: Show) {
             itemView.setOnClickListener { view ->

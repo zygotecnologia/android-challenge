@@ -30,21 +30,17 @@ class EpisodesAdapter(private val episodes: List<Episode>) : RecyclerView.Adapte
         }
 
         private fun setupTextViews(episode: Episode) {
-            episode.name?.let {
-                setupEpisodeTitle(it)
-            }
-            episode.overview?.let {
-                setupEpisodeOverview(it)
-            }
+            setupEpisodeTitle(episode.name)
+            setupEpisodeOverview(episode.overview)
         }
 
-        private fun setupEpisodeOverview(overview: String) =
+        private fun setupEpisodeOverview(overview: String?) =
             itemView.bindText(
                 R.id.tv_episode_overview,
-                    if (overview.isEmpty()) NO_OVERVIEW_EPISODE_MESSAGE.toHTML() else overview
+                if (overview?.isEmpty() != false) NO_OVERVIEW_EPISODE_MESSAGE.toHTML() else overview
             )
 
-        private fun setupEpisodeTitle(name: String) =
+        private fun setupEpisodeTitle(name: String?) =
             itemView.bindText(R.id.tv_episode_title, name)
 
     }

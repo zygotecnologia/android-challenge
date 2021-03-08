@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.model.genre.Genre
 import com.zygotecnologia.zygotv.model.show.Show
+import com.zygotecnologia.zygotv.utils.bindText
 import com.zygotecnologia.zygotv.utils.inflate
 
 class GenresAdapter(private val genres: List<Genre>, private val shows: List<Show>) : RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
@@ -30,10 +31,8 @@ class GenresAdapter(private val genres: List<Genre>, private val shows: List<Sho
             rvShowList.adapter = ShowAdapter(showsByGenre)
         }
 
-        private fun setupGenreName(genre: Genre) {
-            val textView: TextView = itemView.findViewById(R.id.tv_genre_name)
-            textView.text = genre.name
-        }
+        private fun setupGenreName(genre: Genre) =
+            itemView.bindText(R.id.tv_genre_name, genre.name)
 
     }
 }
