@@ -1,19 +1,18 @@
 package com.zygotecnologia.zygotv.main.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityDetailsBinding
 import com.zygotecnologia.zygotv.main.adapters.DetailsAdapter
 import com.zygotecnologia.zygotv.main.viewModel.DetailsViewModel
 import com.zygotecnologia.zygotv.model.season.SeasonResponse
-import com.zygotecnologia.zygotv.utils.DialogFactory
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
-import com.zygotecnologia.zygotv.utils.toHTML
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadBackDrop
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadPoster
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailsActivity : AppCompatActivity() {
+class DetailsActivity : BaseActivity() {
 
     companion object {
         const val ID_INTENT_EXTRA = "id"
@@ -21,7 +20,12 @@ class DetailsActivity : AppCompatActivity() {
         const val BANNER_INTENT_EXTRA = "banner"
     }
 
-    private val viewModel: DetailsViewModel by viewModel()
+    override val viewModel: DetailsViewModel by viewModel()
+
+    override val loading: View by lazy { binding.loading.root }
+    override val mainContent: View by lazy { binding.mainContent }
+    override val toolbarText: TextView by lazy { binding.toolbarText }
+
     private lateinit var binding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +38,8 @@ class DetailsActivity : AppCompatActivity() {
         setupHeader()
     }
 
-    private fun setupObservers() {
-        errorDialogObserver()
+    override fun setupObservers() {
+        super.setupObservers()
         showDetailsLoadedObserver()
         seasonDetailsLoadedObserver()
     }
@@ -72,11 +76,11 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun setupHeader() {
         binding.tvShowTitle.text = intent.extras?.getString(TITLE_INTENT_EXTRA)
-        intent.extras?.getString(BANNER_INTENT_EXTRA)?.loadImage(binding.root, binding.banner)
+        intent.extras?.getString(BANNER_INTENT_EXTRA)?.loadBackDrop(binding.root, binding.banner)
     }
 
-    private fun setupToolbar() {
-        setupToolbarText()
+    override fun setupToolbar() {
+        super.setupToolbar()
         setupToolbarBackButton()
     }
 
@@ -86,20 +90,5 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupToolbarText() {
-        binding.toolbarText.text = resources.getString(R.string.toolbar_text).toHTML()
-    }
-
-    private fun errorDialogObserver() {
-        viewModel.errorDialog.observe(this, Observer { error ->
-            error?.let {
-                DialogFactory.showAlertDialog(
-                    this,
-                    error.title,
-                    error.message
-                )
-            }
-        })
-    }
 
 }

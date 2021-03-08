@@ -2,24 +2,28 @@ package com.zygotecnologia.zygotv.main.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
-import com.zygotecnologia.zygotv.main.MainApplication
 import com.zygotecnologia.zygotv.main.adapters.GenresAdapter
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
 import com.zygotecnologia.zygotv.model.show.Show
-import com.zygotecnologia.zygotv.utils.DialogFactory
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
-import com.zygotecnologia.zygotv.utils.toHTML
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadBackDrop
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadPoster
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_progress_bar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    private val viewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel by viewModel()
+
+    override val loading: View by lazy { binding.loading.root }
+    override val mainContent: View by lazy { binding.mainContent }
+    override val toolbarText: TextView by lazy { binding.toolbarText }
+
     private val showList: RecyclerView by lazy { binding.rvGenreList }
     private lateinit var binding: ActivityMainBinding
 
@@ -37,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupMostPopular() {
         val show = viewModel.getMostPopularShow()
         binding.mostPopularTitle.text = show?.name
-        viewModel.getMostPopularShow()?.backdropPath?.loadImage(binding.root,  binding.banner)
+        viewModel.getMostPopularShow()?.backdropPath?.loadBackDrop(binding.root,  binding.banner)
         binding.banner.setOnClickListener {
             val intent = Intent(this, DetailsActivity::class.java)
             intent.apply {
@@ -49,8 +53,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupToolbar() {
-        setupToolbarText()
+    override fun setupToolbar() {
+        super.setupToolbar()
         setupToolbarListeners()
     }
 
@@ -58,12 +62,8 @@ class MainActivity : AppCompatActivity() {
         //TODO
     }
 
-    private fun setupToolbarText() {
-        binding.toolbarText.text = resources.getString(R.string.toolbar_text).toHTML()
-    }
-
-    private fun setupObservers() {
-        errorDialogObserver()
+    override fun setupObservers() {
+        super.setupObservers()
         showListLoadedObserver()
     }
 
@@ -78,18 +78,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListAdapter(showsList: List<Show>) {
         showList.adapter = GenresAdapter(viewModel.filteredGenresList, showsList)
-    }
-
-    private fun errorDialogObserver() {
-        viewModel.errorDialog.observe(this, Observer { error ->
-            error?.let {
-                DialogFactory.showAlertDialog(
-                    this,
-                    error.title,
-                    error.message
-                )
-            }
-        })
     }
 
 }

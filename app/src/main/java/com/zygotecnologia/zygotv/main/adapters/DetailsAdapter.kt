@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.expandablelayout.ExpandableLayout
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.model.season.SeasonResponse
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadPoster
 import com.zygotecnologia.zygotv.utils.gone
 import com.zygotecnologia.zygotv.utils.inflate
 import com.zygotecnologia.zygotv.utils.toHTML
@@ -46,7 +46,7 @@ class DetailsAdapter(private val seasons: List<SeasonResponse>)
             }
 
             val ivPoster : ImageView = itemView.findViewById(R.id.iv_season_poster)
-            season.posterPath?.loadImage(itemView, ivPoster)
+            season.posterPath?.loadPoster(itemView, ivPoster)
         }
 
         private fun setupExpandable() {

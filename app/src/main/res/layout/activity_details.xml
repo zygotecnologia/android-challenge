@@ -43,38 +43,57 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_show_title"
-        style="@style/DefaultTextViewStyle.Gray"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        tools:text="Game of Throns" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_most_popular"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/light_gray"
-            android:scaleType="fitXY"
-            android:src="@drawable/image_placeholder" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_seasons_list"
+    <LinearLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/details_item" />
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_show_title"
+            style="@style/DefaultTextViewStyle.Gray"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            tools:text="Game of Throns" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_most_popular"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/light_gray"
+                android:scaleType="fitXY"
+                android:src="@drawable/image_placeholder" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_seasons_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/details_item" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </LinearLayout>

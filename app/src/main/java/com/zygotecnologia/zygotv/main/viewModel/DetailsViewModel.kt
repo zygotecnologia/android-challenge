@@ -10,9 +10,8 @@ import com.zygotecnologia.zygotv.network.model.RequestError
 import com.zygotecnologia.zygotv.network.retrofit.validateResponse
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val api: ApiRepository) : ViewModel() {
+class DetailsViewModel(api: ApiRepository) : BaseViewModel(api) {
 
-    val errorDialog = MutableLiveData<RequestError>()
     val showDetails = MutableLiveData<ShowDetails>()
     lateinit var seasons : MutableList<SeasonResponse>
 
@@ -20,6 +19,7 @@ class DetailsViewModel(private val api: ApiRepository) : ViewModel() {
 
     fun loadShowDetails(showId : Int) {
         viewModelScope.launch {
+            loading(true)
             fetchShowDetails(showId)
         }
     }
@@ -39,6 +39,7 @@ class DetailsViewModel(private val api: ApiRepository) : ViewModel() {
             }
         }
         eventDataLoaded.postValue(true)
+        loading(false)
 
     }
 

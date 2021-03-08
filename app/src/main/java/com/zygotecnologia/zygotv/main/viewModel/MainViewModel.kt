@@ -10,9 +10,8 @@ import com.zygotecnologia.zygotv.network.model.RequestError
 import com.zygotecnologia.zygotv.network.model.RetrofitResponse
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val api: ApiRepository) : ViewModel() {
+class MainViewModel(api: ApiRepository) : BaseViewModel(api) {
 
-    val errorDialog = MutableLiveData<RequestError>()
     val showList = MutableLiveData<List<Show>>()
     val genreList = MutableLiveData<List<Genre>>()
 
@@ -31,8 +30,10 @@ class MainViewModel(private val api: ApiRepository) : ViewModel() {
 
     fun loadShows() {
         viewModelScope.launch {
+            loading(true)
             fetchGenres()
             fetchShows()
+            loading(false)
         }
     }
 

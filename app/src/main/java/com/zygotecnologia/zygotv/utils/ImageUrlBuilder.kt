@@ -18,11 +18,19 @@ object ImageUrlBuilder {
         return BuildConfig.BACKDROP_URL + backdropPath + "?${BuildConfig.TMDB_API_QUERY}=" + TmdbApi.TMDB_API_KEY
     }
 
-    fun String.loadImage(itemView : View, imageView: ImageView) {
+    fun String.loadPoster(itemView : View, imageView: ImageView)  =
+        this.loadImage(itemView, imageView, ::buildPosterUrl)
+
+    fun String.loadBackDrop(itemView : View, imageView: ImageView) =
+        this.loadImage(itemView, imageView, ::buildBackdropUrl)
+
+    fun String.loadImage(itemView : View, imageView: ImageView, urlBuilder : (path : String) -> String) {
         Glide.with(itemView)
-            .load(buildPosterUrl(this))
+            .load(urlBuilder(this))
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(imageView)
     }
+
+
 
 }

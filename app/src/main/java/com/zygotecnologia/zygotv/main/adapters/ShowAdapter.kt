@@ -11,7 +11,7 @@ import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.main.ui.activity.DetailsActivity
 import com.zygotecnologia.zygotv.model.show.Show
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadPoster
 import com.zygotecnologia.zygotv.utils.inflate
 
 class ShowAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowAdapter.ViewHolder>() {
@@ -32,7 +32,7 @@ class ShowAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowAdap
 
         private fun setupPoster(show: Show) {
             val imageView: ImageView = itemView.findViewById(iv_show_poster)
-            show.posterPath?.loadImage(itemView, imageView)
+            show.posterPath?.loadPoster(itemView, imageView)
         }
 
         private fun setupShowTitle(show: Show) {
