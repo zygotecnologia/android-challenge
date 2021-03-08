@@ -9,6 +9,7 @@ Android challange implementado por José Diogo Castro
 * Chuck
 * Gson
 * ExpandableLayout (skydoves)
+* NDK
 
 ## Arquitetura
 * Mantive os 4 pacotes raiz `main`, `model`, `network` e `utils`. Cada um foi subdividos em outros pacotes como mostrado abaixo.
@@ -27,16 +28,17 @@ Android challange implementado por José Diogo Castro
 ## Notas de design
 * Chamadas da API removidas das MainActivity. Agora ocorrem dentro das `ViewModel`. Cliente do Retrofit injetado em nível de aplicação com Koin.
 * Parâmetos `api_key` e `region` setados diretamente na ApiService, evitando de passá-los em todas as chamadas.
-* Chave da API salva em variável de ambiente.
+* Chave da API salva em arquivo .cpp utilizando a NDK.
 * Tela principal remodealada e tela de detalhes desenvolvida de acordo com a especificação encontrada no Invision.
 * Crash sobre erro de conexão resolvido.
 * Utilizei uma biblioteca de terceiros para layout expansível.
 * Utilizei RecyclerView para todas as listagens.
 * Adicionei o Chuck para fazer o log das *requests* e *responses* por notificações do app.
+* Adicionado *loading* durante espera das requisições.
 
 ### Disclaimer
 Parabéns a todos os envolvidos na elaboração desse desafio técnico. Achei a ideia de construir uma aplicação e pedir melhorias muito interessante, direto ao ponto :)
 
 Um abraço pro time da Zygo!
 
-José
+José Diogo Castro
