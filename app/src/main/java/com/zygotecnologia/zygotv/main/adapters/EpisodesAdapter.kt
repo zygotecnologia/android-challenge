@@ -6,9 +6,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.model.episode.Episode
+import com.zygotecnologia.zygotv.utils.bindText
 import com.zygotecnologia.zygotv.utils.inflate
+import com.zygotecnologia.zygotv.utils.toHTML
+
 
 class EpisodesAdapter(private val episodes: List<Episode>) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
+
+    companion object {
+        const val NO_OVERVIEW_EPISODE_MESSAGE = "<html><i>No overview fount for this Episode.</i></html"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflate(R.layout.episodes_by_season_item))
 
@@ -23,12 +30,22 @@ class EpisodesAdapter(private val episodes: List<Episode>) : RecyclerView.Adapte
         }
 
         private fun setupTextViews(episode: Episode) {
-            val tvEpisodeTitle: TextView = itemView.findViewById(R.id.tv_episode_title)
-            tvEpisodeTitle.text = episode.name
-
-            val tvEpisodeOverview: TextView = itemView.findViewById(R.id.tv_episode_overview)
-            tvEpisodeOverview.text = episode.overview
+            episode.name?.let {
+                setupEpisodeTitle(it)
+            }
+            episode.overview?.let {
+                setupEpisodeOverview(it)
+            }
         }
+
+        private fun setupEpisodeOverview(overview: String) =
+            itemView.bindText(
+                R.id.tv_episode_overview,
+                    if (overview.isEmpty()) NO_OVERVIEW_EPISODE_MESSAGE.toHTML() else overview
+            )
+
+        private fun setupEpisodeTitle(name: String) =
+            itemView.bindText(R.id.tv_episode_title, name)
 
     }
 }

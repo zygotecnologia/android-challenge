@@ -3,6 +3,8 @@ package com.zygotecnologia.zygotv.utils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.zygotecnologia.zygotv.R
 
 fun ViewGroup.inflate(layoutId : Int) = LayoutInflater.from(context).inflate(layoutId, this, false)
 
@@ -18,4 +20,9 @@ fun View.visible() {
         visibility = View.VISIBLE
         animate().alpha(1.0f).setDuration(1000L);
     }
+}
+
+fun View.bindText(id : Int, text : CharSequence) {
+    val tvEpisodeTitle: TextView = this.findViewById(id)
+    tvEpisodeTitle.text = text
 }
