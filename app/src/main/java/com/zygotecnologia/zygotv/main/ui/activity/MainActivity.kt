@@ -2,11 +2,13 @@ package com.zygotecnologia.zygotv.main.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
+import com.zygotecnologia.zygotv.main.MainApplication
 import com.zygotecnologia.zygotv.main.adapters.GenresAdapter
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
 import com.zygotecnologia.zygotv.model.show.Show
