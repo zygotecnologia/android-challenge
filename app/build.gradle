@@ -27,8 +27,12 @@ android {
     productFlavors {
         create("dev") {
             dimension = "default"
-            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org\"")
-            buildConfigField("String", "API_VERSION", "\"3\"")
+            buildConfigField("String", "BASE_URL", BASE_URL)
+            buildConfigField("String", "POSTER_URL", POSTER_URL)
+            buildConfigField("String", "BACKDROP_URL", BACKDROP_URL)
+            buildConfigField("String", "API_VERSION", API_VERSION)
+            buildConfigField("String", "TMDB_API_QUERY", TMDB_API_QUERY)
+            buildConfigField("String", "TMDB_API_REGION", TMDB_API_REGION)
         }
     }
 
