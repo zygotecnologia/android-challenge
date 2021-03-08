@@ -1,5 +1,7 @@
 package com.zygotecnologia.zygotv.utils
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -27,7 +29,9 @@ object ImageUrlBuilder {
     fun String.loadImage(itemView : View, imageView: ImageView, urlBuilder : (path : String) -> String) {
         Glide.with(itemView)
             .load(urlBuilder(this))
-            .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
+            .apply(RequestOptions()
+                .placeholder(ColorDrawable(Color.BLACK))
+                .fallback(ColorDrawable(Color.RED)))
             .into(imageView)
     }
 

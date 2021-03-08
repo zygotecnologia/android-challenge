@@ -9,7 +9,6 @@
         android:id="@+id/iv_season_poster"
         android:layout_width="100dp"
         android:layout_height="120dp"
-        android:src="@drawable/image_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

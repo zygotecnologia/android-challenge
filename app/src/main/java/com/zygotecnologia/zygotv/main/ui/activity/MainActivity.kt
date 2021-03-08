@@ -40,8 +40,12 @@ class MainActivity : BaseActivity() {
 
     private fun setupMostPopular() {
         val show = viewModel.getMostPopularShow()
-        binding.mostPopularTitle.text = show?.name
-        viewModel.getMostPopularShow()?.backdropPath?.loadBackDrop(binding.root,  binding.banner)
+        setupMostPopularShowName(show)
+        setupMostPopularShowBanner()
+        setupBannerClickListener(show)
+    }
+
+    private fun setupBannerClickListener(show: Show?) {
         binding.banner.setOnClickListener {
             val intent = Intent(this, DetailsActivity::class.java)
             intent.apply {
@@ -51,6 +55,14 @@ class MainActivity : BaseActivity() {
                 startActivity(this@apply)
             }
         }
+    }
+
+    private fun setupMostPopularShowBanner() {
+        viewModel.getMostPopularShow()?.backdropPath?.loadBackDrop(binding.root, binding.banner)
+    }
+
+    private fun setupMostPopularShowName(show: Show?) {
+        binding.mostPopularTitle.text = show?.name
     }
 
     override fun setupToolbar() {
