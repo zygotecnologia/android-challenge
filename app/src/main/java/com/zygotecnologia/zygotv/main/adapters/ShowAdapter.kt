@@ -10,7 +10,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.main.ui.activity.DetailsActivity
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.show.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.inflate
 

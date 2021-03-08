@@ -1,6 +1,5 @@
-package com.zygotecnologia.zygotv.network.api.model
+package com.zygotecnologia.zygotv.network.model
 
-import com.zygotecnologia.zygotv.network.retrofit.model.Resource
 import okhttp3.ResponseBody
 
 interface ApiResponse<T> {

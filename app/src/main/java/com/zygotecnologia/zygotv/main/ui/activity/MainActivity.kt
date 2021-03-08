@@ -9,7 +9,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 import com.zygotecnologia.zygotv.main.adapters.GenresAdapter
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.show.Show
 import com.zygotecnologia.zygotv.utils.DialogFactory
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.toHTML

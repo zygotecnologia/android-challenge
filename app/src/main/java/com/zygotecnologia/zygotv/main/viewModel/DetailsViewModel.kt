@@ -3,9 +3,10 @@ package com.zygotecnologia.zygotv.main.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zygotecnologia.zygotv.model.*
+import com.zygotecnologia.zygotv.model.season.SeasonResponse
+import com.zygotecnologia.zygotv.model.show.ShowDetails
 import com.zygotecnologia.zygotv.network.api.repository.ApiRepository
-import com.zygotecnologia.zygotv.network.retrofit.model.RequestError
+import com.zygotecnologia.zygotv.network.model.RequestError
 import com.zygotecnologia.zygotv.network.retrofit.validateResponse
 import kotlinx.coroutines.launch
 

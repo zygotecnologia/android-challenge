@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.model.Episode
+import com.zygotecnologia.zygotv.model.episode.Episode
 import com.zygotecnologia.zygotv.utils.inflate
 
 class EpisodesAdapter(private val episodes: List<Episode>) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {

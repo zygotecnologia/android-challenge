@@ -2,9 +2,9 @@ package com.zygotecnologia.zygotv.network.api.repository
 
 import android.content.Context
 import com.zygotecnologia.zygotv.network.api.service.ApiService
-import com.zygotecnologia.zygotv.network.retrofit.model.RetrofitResponse
+import com.zygotecnologia.zygotv.network.model.RetrofitResponse
 
-class TmdbApiRepository(val context: Context, private val api: ApiService) : ApiRepository {
+class ApiRepositoryImpl(val context: Context, private val api: ApiService) : ApiRepository {
 
     override suspend fun fetchGenres() = RetrofitResponse(context) { api.fetchGenres() }.result()
     override suspend fun fetchPopularShows() = RetrofitResponse(context) { api.fetchPopularShows() }.result()

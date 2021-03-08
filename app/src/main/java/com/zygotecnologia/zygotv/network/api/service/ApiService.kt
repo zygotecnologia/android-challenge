@@ -1,9 +1,9 @@
 package com.zygotecnologia.zygotv.network.api.service
 
-import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.SeasonResponse
-import com.zygotecnologia.zygotv.model.ShowDetails
-import com.zygotecnologia.zygotv.model.ShowResponse
+import com.zygotecnologia.zygotv.model.genre.GenreResponse
+import com.zygotecnologia.zygotv.model.season.SeasonResponse
+import com.zygotecnologia.zygotv.model.show.ShowDetails
+import com.zygotecnologia.zygotv.model.show.ShowResponse
 import com.zygotecnologia.zygotv.network.TmdbApi
 import retrofit2.Response
 import retrofit2.http.GET

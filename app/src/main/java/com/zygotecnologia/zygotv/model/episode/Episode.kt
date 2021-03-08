@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.model.episode
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

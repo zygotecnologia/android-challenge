@@ -1,15 +1,8 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.model.genre
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
-
-@Parcelize
-data class GenreResponse(
-    @SerializedName("genres")
-    val genres: List<Genre>?
-) : Parcelable
 
 @Parcelize
 data class Genre(

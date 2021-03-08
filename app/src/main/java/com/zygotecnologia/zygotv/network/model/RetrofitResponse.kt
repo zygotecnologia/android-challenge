@@ -1,11 +1,9 @@
-package com.zygotecnologia.zygotv.network.retrofit.model
+package com.zygotecnologia.zygotv.network.model
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.squareup.moshi.JsonEncodingException
-import com.zygotecnologia.zygotv.network.api.model.ApiResponse
-import com.zygotecnologia.zygotv.network.retrofit.model.RequestError
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.IOException

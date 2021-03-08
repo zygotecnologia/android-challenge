@@ -1,7 +1,10 @@
 package com.zygotecnologia.zygotv.network.api.repository
 
-import com.zygotecnologia.zygotv.model.*
-import com.zygotecnologia.zygotv.network.retrofit.model.Resource
+import com.zygotecnologia.zygotv.model.genre.GenreResponse
+import com.zygotecnologia.zygotv.model.season.SeasonResponse
+import com.zygotecnologia.zygotv.model.show.ShowDetails
+import com.zygotecnologia.zygotv.model.show.ShowResponse
+import com.zygotecnologia.zygotv.network.model.Resource
 import retrofit2.http.Path
 
 interface ApiRepository {

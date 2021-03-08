@@ -1,8 +1,8 @@
 package com.zygotecnologia.zygotv.network
 
-import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowResponse
+import com.zygotecnologia.zygotv.model.genre.GenreResponse
+import com.zygotecnologia.zygotv.model.show.Show
+import com.zygotecnologia.zygotv.model.show.ShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.network.retrofit.model
+package com.zygotecnologia.zygotv.network.model
 
 class Resource<T> private constructor(
     val status: Status,

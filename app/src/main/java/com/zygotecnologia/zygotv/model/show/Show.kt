@@ -1,8 +1,8 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.model.show
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
+import com.zygotecnologia.zygotv.model.genre.Genre
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

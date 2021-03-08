@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.model.Genre
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.genre.Genre
+import com.zygotecnologia.zygotv.model.show.Show
 import com.zygotecnologia.zygotv.utils.inflate
 
 class GenresAdapter(private val genres: List<Genre>, private val shows: List<Show>) : RecyclerView.Adapter<GenresAdapter.ViewHolder>() {

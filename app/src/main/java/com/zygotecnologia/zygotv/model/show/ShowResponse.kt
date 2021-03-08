@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.model.show
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

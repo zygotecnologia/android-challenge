@@ -7,7 +7,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityDetailsBinding
 import com.zygotecnologia.zygotv.main.adapters.DetailsAdapter
 import com.zygotecnologia.zygotv.main.viewModel.DetailsViewModel
-import com.zygotecnologia.zygotv.model.SeasonResponse
+import com.zygotecnologia.zygotv.model.season.SeasonResponse
 import com.zygotecnologia.zygotv.utils.DialogFactory
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.toHTML
