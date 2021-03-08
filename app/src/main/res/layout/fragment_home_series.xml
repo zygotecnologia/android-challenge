@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         tools:background="@color/color_background"
-        tools:context=".main.series.HomeSeriesFragment">
+        tools:context=".ui.series.HomeSeriesFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

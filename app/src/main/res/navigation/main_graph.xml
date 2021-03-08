@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeSeriesFragment"
-        android:name="com.zygotecnologia.zygotv.main.series.HomeSeriesFragment"
+        android:name="com.zygotecnologia.zygotv.ui.series.HomeSeriesFragment"
         android:label="fragment_home_series"
         tools:layout="@layout/fragment_home_series">
         <action
@@ -16,21 +16,21 @@
     </fragment>
     <fragment
         android:id="@+id/detailsSeriesFragment"
-        android:name="com.zygotecnologia.zygotv.main.series.DetailsSeriesFragment"
+        android:name="com.zygotecnologia.zygotv.ui.series.DetailsSeriesFragment"
         android:label="fragment_details_series"
         tools:layout="@layout/fragment_details_series">
         <argument
             android:name="showArgument"
-            app:argType="com.zygotecnologia.zygotv.model.Show" />
+            app:argType="com.zygotecnologia.zygotv.data.model.Show" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.zygotecnologia.zygotv.main.series.SearchResultFragment"
+        android:name="com.zygotecnologia.zygotv.ui.series.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" />
     <fragment
         android:id="@+id/functionalityNotAvailableFragment"
-        android:name="com.zygotecnologia.zygotv.main.functionalityNotAvailableFragment"
+        android:name="com.zygotecnologia.zygotv.ui.FunctionalityNotAvailableFragment"
         android:label="fragment_functionality_not_available"
         tools:layout="@layout/fragment_functionality_not_available" />
 </navigation>

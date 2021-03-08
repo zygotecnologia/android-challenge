@@ -6,14 +6,14 @@
     <data>
         <variable
             name="show"
-            type="com.zygotecnologia.zygotv.model.Show" />
+            type="com.zygotecnologia.zygotv.data.model.Show" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@color/color_background"
-        tools:context=".main.series.DetailsSeriesFragment">
+        tools:context=".ui.series.DetailsSeriesFragment">
 
         <com.zygotecnologia.zygotv.custom.ZygoTextfField
             android:id="@+id/label_featured_series_name"

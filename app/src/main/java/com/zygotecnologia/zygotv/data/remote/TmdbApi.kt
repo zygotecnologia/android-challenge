@@ -1,8 +1,8 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.data.remote
 
 import com.zygotecnologia.zygotv.data.model.GenreResponse
-import com.zygotecnologia.zygotv.data.model.ShowResponse
 import com.zygotecnologia.zygotv.data.model.Show
+import com.zygotecnologia.zygotv.data.model.ShowResponse
 import com.zygotecnologia.zygotv.data.model.seasondetail.SeasonDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
