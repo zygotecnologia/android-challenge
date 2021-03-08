@@ -24,3 +24,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+//Dependências do app
+ext {
+    koinVersion = '2.2.2'
+    okhttpLoggingVersion = '4.7.2'
+}

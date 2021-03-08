@@ -21,7 +21,7 @@
             android:layout_margin="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{viewModel.topShow.name}"
+            android:text="@{viewModel.show.name}"
             android:textColor="#000000"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
-            app:imagemURLBackDrop="@{viewModel.topShow.backdropPath}"
+            app:imagemURLBackDrop="@{viewModel.show.backdropPath}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvGenreName"
@@ -45,7 +45,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_show_list"
-            listData="@{viewModel.popularShows}"
+            listDataSeason="@{viewModel.show.seasons}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"

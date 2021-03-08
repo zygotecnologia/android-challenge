@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
 }
 
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-android-extensions'
+
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -18,9 +23,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'String', "ApiKey", API_KEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey", API_KEY
         }
     }
     compileOptions {
@@ -29,6 +38,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    androidExtensions {
+        experimental = true
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -53,4 +68,24 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+
+    //Koin
+    implementation "org.koin:koin-core:${koinVersion}"
+    implementation "org.koin:koin-androidx-viewmodel:${koinVersion}"
+    implementation "org.koin:koin-androidx-workmanager:${koinVersion}"
+
+    //Okhttp logging
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingVersion}"
+    annotationProcessor 'androidx.room:room-compiler:2.2.6'
+
+    //Room
+    implementation 'androidx.room:room-ktx:2.2.1'
+    kapt "androidx.room:room-compiler:2.2.1"
+
+    //Multidex
+    implementation 'com.android.support:multidex:1.0.0'
+
+    //Databinding
+    kapt 'com.android.databinding:compiler:3.1.3'
+
 }
