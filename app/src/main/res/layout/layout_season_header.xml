@@ -12,14 +12,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        app:layout_constraintGuide_percent="0.88"
+        android:orientation="vertical"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_season_poster"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_season_title"
@@ -31,7 +40,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_season_overview"
             style="@style/DefaultTextViewStyle.Small"
-            android:layout_width="235dp"
+            android:layout_width="match_parent"
             android:maxLength="100"
             tools:text="Lorem ipsum lalala blabla" />
 
