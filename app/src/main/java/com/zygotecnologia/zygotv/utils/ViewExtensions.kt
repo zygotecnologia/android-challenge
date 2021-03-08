@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-fun ViewGroup.inflate(layoutId : Int) : View {
-    return LayoutInflater.from(context).inflate(layoutId, this, false)
-}
+fun ViewGroup.inflate(layoutId : Int) = LayoutInflater.from(context).inflate(layoutId, this, false)
 
 fun View.gone() {
     if(visibility != View.GONE) {
@@ -18,6 +16,6 @@ fun View.gone() {
 fun View.visible() {
     if(visibility != View.VISIBLE) {
         visibility = View.VISIBLE
-        animate().alpha(1.0f).setDuration(1200L);
+        animate().alpha(1.0f).setDuration(1000L);
     }
 }
