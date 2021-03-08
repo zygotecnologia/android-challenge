@@ -9,11 +9,15 @@ fun ViewGroup.inflate(layoutId : Int) : View {
 }
 
 fun View.gone() {
-    this.animate().alpha(0.0f);
-    this.visibility = View.GONE
+    if(visibility != View.GONE) {
+        this.animate().alpha(0.0f);
+        this.visibility = View.GONE
+    }
 }
 
 fun View.visible() {
-    this.visibility = View.VISIBLE
-    this.animate().alpha(1.0f).setDuration(1200L);
+    if(visibility != View.VISIBLE) {
+        visibility = View.VISIBLE
+        animate().alpha(1.0f).setDuration(1200L);
+    }
 }
