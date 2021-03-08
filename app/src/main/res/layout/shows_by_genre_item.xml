@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".main.MainActivity" >
+    tools:context=".main.ui.activity.MainActivity" >
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/DefaultTextViewStyle.Gray"

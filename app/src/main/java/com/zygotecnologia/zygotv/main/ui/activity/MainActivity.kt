@@ -1,22 +1,18 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.main.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
+import com.zygotecnologia.zygotv.main.adapters.GenresAdapter
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.DialogFactory
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.toHTML
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {

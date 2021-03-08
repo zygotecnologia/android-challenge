@@ -1,10 +1,11 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.main.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityDetailsBinding
+import com.zygotecnologia.zygotv.main.adapters.DetailsAdapter
 import com.zygotecnologia.zygotv.main.viewModel.DetailsViewModel
 import com.zygotecnologia.zygotv.model.SeasonResponse
 import com.zygotecnologia.zygotv.utils.DialogFactory

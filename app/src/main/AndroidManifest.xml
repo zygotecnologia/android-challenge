@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZygoTV">
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".main.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.DetailsActivity"/>
+        <activity android:name=".main.ui.activity.DetailsActivity"/>
 
     </application>
 

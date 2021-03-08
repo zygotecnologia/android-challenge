@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.main.adapters
 
 import android.view.View
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.main.adapters
 
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.expandablelayout.ExpandableLayout
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.model.Episode
-import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.SeasonResponse
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.loadImage
 import com.zygotecnologia.zygotv.utils.gone
