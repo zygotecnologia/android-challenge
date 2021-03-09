@@ -10,10 +10,9 @@ open class RequestError(
     @field:Json(name = "code")
     val code: Int = -1,
 
-    @field:Json(name = "title")
-    val title: String = "",
+    val title: String = "ops!",
 
-    @field:Json(name = "message")
+    @field:Json(name = "status_message")
     val message: String = ""
 
 ) : Parcelable
