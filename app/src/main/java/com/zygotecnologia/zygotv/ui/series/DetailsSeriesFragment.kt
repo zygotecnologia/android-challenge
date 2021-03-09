@@ -11,11 +11,10 @@ import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.data.model.seasondetail.SeasonDetail
 import com.zygotecnologia.zygotv.databinding.FragmentDetailsSeriesBinding
 import com.zygotecnologia.zygotv.ui.series.adapter.DetailAdapter
-import com.zygotecnologia.zygotv.ui.series.vm.DetailsSeriesViewModel
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.viewmodel.DetailsSeriesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -46,7 +45,7 @@ class DetailsSeriesFragment : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
 
         Glide.with(this)
-            .load(show?.showArgument.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+            .load(show?.showArgument.backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
             .apply(
                 RequestOptions().transforms(CenterInside(), RoundedCorners(8))
                     .placeholder(R.drawable.image_placeholder)
@@ -56,43 +55,11 @@ class DetailsSeriesFragment : Fragment(), CoroutineScope {
 
     private  fun loadShows() {
         viewModel.tvId = show.showArgument.id!!
-        var seasons : List<SeasonDetail> = mutableListOf()
 
         viewModel.full.observe(requireActivity(), {
             binding.rvSeason.adapter = DetailAdapter(it)
         })
 
-//        viewModel.seasonDetail.observe(requireActivity(),{ show ->
-//            show?.seasons?.forEach {
-//                viewModel.episodes.observe(requireActivity(), {
-//                    listSeasonDetail += it
-//
-//                })
-//                seasons += show.seasons
-//                }
-//
-//            })
-
-
-
-
-//        val seasons =
-//            tmdbApi
-//                .fetchShowAsync(show.showArgument.id!!)
-//                ?.seasons
-//                ?: emptyList()
-//
-
-//
-//        seasons.forEach {
-//            val seasonDetail =
-//                tmdbApi
-//                    .fetchSeasonDetails(show.showArgument.id!!, it.seasonNumber)
-//
-//            listSeasonDetail += seasonDetail
-//
-//        }
-//
     }
 
 }

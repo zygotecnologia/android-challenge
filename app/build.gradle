@@ -74,5 +74,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
+    testImplementation 'org.mockito:mockito-core:2.28.2'  // Dependência do Mockito para testes no Android
+    androidTestImplementation 'org.mockito:mockito-android:2.28.2'  // Dependência do Mockito para ser possível mockar classes e métodos constantes
+    testImplementation 'org.mockito:mockito-inline:2.28.2'
+
     implementation project(":repository")
 }

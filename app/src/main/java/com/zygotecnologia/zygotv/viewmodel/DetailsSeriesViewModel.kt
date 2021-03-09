@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.series.vm
+package com.zygotecnologia.zygotv.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

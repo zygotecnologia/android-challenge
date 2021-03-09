@@ -20,6 +20,5 @@ data class Season(
     val posterPath: String,
     @Json(name ="season_number")
     val seasonNumber: Int,
-
-    var seasonDetail : SeasonDetail
+    var seasonDetail : SeasonDetail?
 ) : Serializable

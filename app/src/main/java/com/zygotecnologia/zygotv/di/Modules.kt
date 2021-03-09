@@ -3,10 +3,12 @@ package com.zygotecnologia.zygotv.di
 import com.zygotecnologia.zygotv.ui.series.DetailsSeriesFragment
 import com.zygotecnologia.zygotv.ui.series.HomeSeriesFragment
 import com.zygotecnologia.zygotv.ui.series.SearchResultFragment
-import com.zygotecnologia.zygotv.ui.series.vm.DetailsSeriesViewModel
-import com.zygotecnologia.zygotv.ui.series.vm.HomeSeriesViewModel
+import com.zygotecnologia.zygotv.viewmodel.DetailsSeriesViewModel
+import com.zygotecnologia.zygotv.viewmodel.HomeSeriesViewModel
 import com.zygotecnologia.zygotv.data.repository.TmdbClient
 import com.zygotecnologia.zygotv.data.repository.ZygoRepository
+import com.zygotecnologia.zygotv.viewmodel.SearchResultViewModel
+import com.zygotecnologia.zygotv.viewmodel.SearchViewModel
 import com.zygotecnologia.zygotv.utils.ConnectivityManager
 import org.koin.dsl.module
 
@@ -27,6 +29,8 @@ val fragmentModules = module {
 val vmModules = module {
     factory { HomeSeriesViewModel(get()) }
     factory { DetailsSeriesViewModel(get()) }
+    factory { SearchViewModel() }
+    factory { SearchResultViewModel(get()) }
 }
 
 val networkModule = module {

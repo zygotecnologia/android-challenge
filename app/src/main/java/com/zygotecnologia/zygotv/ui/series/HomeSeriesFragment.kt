@@ -12,8 +12,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.FragmentHomeSeriesBinding
-import com.zygotecnologia.zygotv.ui.MainAdapter
-import com.zygotecnologia.zygotv.ui.series.vm.HomeSeriesViewModel
+import com.zygotecnologia.zygotv.ui.series.adapter.MainAdapter
+import com.zygotecnologia.zygotv.viewmodel.HomeSeriesViewModel
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import kotlinx.coroutines.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -59,7 +59,7 @@ class HomeSeriesFragment : Fragment() {
 
             binding.labelFeaturedSeriesName.text = shows.results[0].name
             Glide.with(this@HomeSeriesFragment)
-                .load(shows.results[0].posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+                .load(shows.results[0].backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
                 .apply(
                     RequestOptions().transforms(CenterInside(), RoundedCorners(8))
                         .placeholder(R.drawable.image_placeholder)
@@ -67,10 +67,6 @@ class HomeSeriesFragment : Fragment() {
                 .into(binding.ivFeaturedSeries)
 
         })
-
-
-
-
 
         }
 

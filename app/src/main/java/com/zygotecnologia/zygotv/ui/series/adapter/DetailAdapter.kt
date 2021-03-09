@@ -38,7 +38,7 @@ class DetailAdapter(private val seasonDetail: List<Season>) : RecyclerView.Adapt
 
             seasonId.text = season.name
             seasonDescription.text = season.overview
-            rvEpisodes.adapter = EpisodeAdapter(season.seasonDetail.episodes)
+            rvEpisodes.adapter = EpisodeAdapter(season.seasonDetail!!.episodes)
 
             Glide.with(itemView)
                 .load(season.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })

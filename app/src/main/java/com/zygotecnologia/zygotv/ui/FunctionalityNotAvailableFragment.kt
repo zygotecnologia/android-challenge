@@ -9,7 +9,6 @@ import com.zygotecnologia.zygotv.R
 
 class FunctionalityNotAvailableFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
