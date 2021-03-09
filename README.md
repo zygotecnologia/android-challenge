@@ -1,4 +1,4 @@
-# Zygo Programming Challenge - Android Developer
+# Zygo Programming Challenge - Android Developer - Leonardo Pontes Santana
 
 Arquitetura: MVVM
 
@@ -8,9 +8,9 @@ Armazenar a chave de API em um local seguro; - Armazenado no gradle.properties e
 
 Features adicionadas para melhorar a qualidade do projeto:
 
-Data Binding para popular os dados em tela
-Koin para injeção de dependências e organização das camadas do MVVM
-Binding adapters para enxugar a View
-Estrutura do room para possível uso de salvamento local de informações
-Estrutura de navigation convertendo os activies em fragments
-Estrutura de teste de uma camada usando koin para injeção de teste (escolhi a camada do BD exemplo, infelizmente não tive tempo de criar infra das demais camadas)
+- Data Binding para popular os dados em tela
+- Koin para injeção de dependências e organização das camadas do MVVM
+- Binding adapters para enxugar a View
+- Estrutura do room para possível uso de salvamento local de informações
+- Estrutura de navigation convertendo os activies em fragments
+- Estrutura de teste unitário. Usei a camada do Room para exemplificar
