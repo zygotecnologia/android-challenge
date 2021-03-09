@@ -56,7 +56,8 @@ abstract class BaseActivity : AppCompatActivity() {
                 DialogFactory.showAlertDialog(
                     this,
                     error.title,
-                    error.message
+                    error.message,
+                    { finish() }
                 )
             }
         })
