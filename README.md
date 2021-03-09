@@ -35,6 +35,7 @@ Android challange implementado por José Diogo Castro
 * Utilizei RecyclerView para todas as listagens.
 * Adicionei o Chuck para fazer o log das *requests* e *responses* por notificações do app.
 * Adicionado *loading* durante espera das requisições.
+* Implementado busca por série (modesta, só com as séries que já estão carregadas)
 
 ### Disclaimer
 Parabéns a todos os envolvidos na elaboração desse desafio técnico. Achei a ideia de construir uma aplicação e pedir melhorias muito interessante, direto ao ponto :)

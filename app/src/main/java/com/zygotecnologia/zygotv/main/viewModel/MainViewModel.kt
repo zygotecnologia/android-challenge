@@ -83,4 +83,8 @@ class MainViewModel(api: ApiRepository) : BaseViewModel(api) {
 
     fun getMostPopularShow() = sortedShowList?.first()
 
+    fun findShowByName(showName : String): Show? {
+        return showList.value?.find { it.name == showName }
+    }
+
 }

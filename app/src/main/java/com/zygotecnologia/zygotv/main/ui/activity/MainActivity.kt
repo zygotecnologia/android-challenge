@@ -97,7 +97,7 @@ class MainActivity : BaseActivity() {
     private fun inputSearchObserver() {
         viewModel.input.observe(this, Observer { showName ->
             if(!showName.isNullOrEmpty()){
-                val show = viewModel.showList.value?.find { it.name == showName }
+                val show = viewModel.findShowByName(showName)
                 startActivityFromIntent(show)
             }
         })
