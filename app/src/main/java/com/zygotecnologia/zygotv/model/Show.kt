@@ -1,7 +1,9 @@
 package com.zygotecnologia.zygotv.model
 
 import android.os.Parcelable
+import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.zygotecnologia.zygotv.modelGenre.Genre
 import kotlinx.android.parcel.Parcelize
@@ -24,6 +26,7 @@ data class Show(
     @Json(name = "original_language")
     val originalLanguage: String?,
     @Json(name = "id")
+    @PrimaryKey
     val id: Int?,
     @Json(name = "overview")
     val overview: String?,

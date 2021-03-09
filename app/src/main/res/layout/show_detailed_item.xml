@@ -13,9 +13,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/black">
 
 
         <ImageView
@@ -41,16 +43,15 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@{viewModel.name}"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_show_poster"
             app:layout_constraintTop_toTopOf="@+id/iv_show_poster" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -74,6 +75,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_show_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_show_title" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_child_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

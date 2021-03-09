@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/GenresFragment">
+
+    <fragment
+        android:id="@+id/GenresFragment"
+        android:name="com.zygotecnologia.zygotv.fragments.GenresFragment"
+        android:label="GenresFragment"
+        tools:layout="@layout/fragment_genres">
+        <action
+            android:id="@+id/action_GenresFragment_to_ShowFragment"
+            app:destination="@id/ShowFragment">
+            <argument
+                android:name="show"
+                app:argType="com.zygotecnologia.zygotv.model.Show" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/ShowFragment"
+        android:name="com.zygotecnologia.zygotv.fragments.ShowFragment"
+        android:label="ShowFragment"
+        tools:layout="@layout/fragment_show">
+        <argument
+            android:name="show"
+            app:argType="com.zygotecnologia.zygotv.model.Show" />
+    </fragment>
+</navigation>

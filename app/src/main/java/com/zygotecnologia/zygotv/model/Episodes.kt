@@ -6,9 +6,11 @@ import com.zygotecnologia.zygotv.modelGenre.Genre
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Episode(
+data class Episodes(
     @Json(name = "name")
     val name: String?,
     @Json(name = "overview")
-    val overview: String?
+    val overview: String?,
+    @Json(name = "episodes")
+    val episodes: List<Episode>?,
 ): Parcelable

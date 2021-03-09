@@ -1,13 +1,12 @@
 package com.zygotecnologia.zygotv.network
 
-import com.zygotecnologia.zygotv.model.Episode
+import com.zygotecnologia.zygotv.model.Episodes
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowResponse
 import com.zygotecnologia.zygotv.modelGenre.GenreResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
-import retrofit2.http.Query
 
 interface TmdbApi {
 
@@ -28,7 +27,7 @@ interface TmdbApi {
     fun fetchEpisodeAsync(
         @Path("tv_id") tvId: Int,
         @Path("season_number") seasonNumber: Int
-    ): Call<Episode>
+    ): Call<Episodes>
 
     companion object {
         private const val TMDB_API_VERSION = "3"

@@ -1,8 +1,7 @@
 package com.zygotecnologia.zygotv.repository
 
 import com.zygotecnologia.zygotv.database.MoviesDAO
-import com.zygotecnologia.zygotv.model.Episode
-import com.zygotecnologia.zygotv.model.Season
+import com.zygotecnologia.zygotv.model.Episodes
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowResponse
 import com.zygotecnologia.zygotv.modelGenre.GenreResponse
@@ -23,8 +22,8 @@ class MoviesRepository(private val service: TmdbApi, private val moviesDao : Mov
         return service.fetchShowAsync(tvId)
     }
 
-    fun getEpisodeAsync(tvId: Int, episodeId: Int): Call<Episode> {
-        return service.fetchEpisodeAsync(tvId, episodeId)
+    fun getEpisodeAsync(tvId: Int, seasonNumber: Int): Call<Episodes> {
+        return service.fetchEpisodeAsync(tvId, seasonNumber)
     }
 
 }

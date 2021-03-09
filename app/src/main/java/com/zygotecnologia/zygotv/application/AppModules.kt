@@ -96,14 +96,23 @@ val databaseModule = module {
     }
 
     fun provideNewsDao(database: MoviesDatabase): MoviesDAO {
-        return database.newsDao()
+        return database.genresDAO()
     }
 
     single { provideDatabase(androidApplication()) }
     single { provideNewsDao(get()) }
 }
 
+val roomTestModule = module(override = true) {
+    single {
+        Room.inMemoryDatabaseBuilder(get(), MoviesDatabase::class.java)
+            .allowMainThreadQueries()
+            .build()
+    }
+}
+
 val viewModelModule = module {
 
     viewModel { MoviesViewModel(repository = get()) }
+
 }

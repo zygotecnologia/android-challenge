@@ -20,7 +20,7 @@ open class MyApplicationKt : MultiDexApplication() {
                     viewModelModule,
                     databaseModule,
                     networkModule,
-                    apiModule,
+                    apiModule
                 )
             )
         }

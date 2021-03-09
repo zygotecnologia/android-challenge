@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zygotecnologia.zygotv.model.Episode
+import com.zygotecnologia.zygotv.model.Episodes
 import com.zygotecnologia.zygotv.model.GenreCategory
 import com.zygotecnologia.zygotv.model.RequestStatus
 import com.zygotecnologia.zygotv.model.Show
@@ -42,8 +42,8 @@ class MoviesViewModel(
     val show: LiveData<Show>
         get() = _show
 
-    private val _episode = MutableLiveData<Episode>()
-    val episode: LiveData<Episode>
+    private val _episode = MutableLiveData<Episodes>()
+    val episodes: LiveData<Episodes>
         get() = _episode
 
     private var viewModelJob = Job()
@@ -131,18 +131,17 @@ class MoviesViewModel(
         }
     }
 
-    fun searchEpisode(tvId: Int, episodeId: Int) {
+    fun searchEpisode(tvId: Int, seasonNumber: Int) {
         viewModelScope.launch {
-            val callDeferred = repository.getEpisodeAsync(tvId, episodeId)
+            val callDeferred = repository.getEpisodeAsync(tvId, seasonNumber)
             try {
-                _statusShow.postValue(RequestStatus.LOADING)
+                _statusEpisode.postValue(RequestStatus.LOADING)
 
                 var response = callDeferred.await()
-
                 _episode.postValue(response)
-                _statusShow.postValue(RequestStatus.SUCCESS)
+                _statusEpisode.postValue(RequestStatus.SUCCESS)
             } catch (networkError: Exception) {
-                _statusShow.postValue(RequestStatus.ERROR)
+                _statusEpisode.postValue(RequestStatus.ERROR)
             }
         }
     }

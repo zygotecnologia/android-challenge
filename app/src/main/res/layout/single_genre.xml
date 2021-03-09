@@ -15,10 +15,10 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:background="@color/black">
 
         <TextView
             android:id="@+id/tvGenreName"
@@ -26,8 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textSize="18sp"
-            android:text="@{viewModel.genreName}"
-            android:textColor="#000000" />
+            android:text="@{viewModel.genreName}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvShows"

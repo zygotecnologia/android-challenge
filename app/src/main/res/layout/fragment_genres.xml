@@ -9,10 +9,31 @@
             type="com.zygotecnologia.zygotv.viewmodel.MoviesViewModel" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".main.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="22sp"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:id="@+id/tvGenreName"
@@ -21,11 +42,10 @@
             android:layout_margin="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{viewModel.show.name}"
-            android:textColor="#000000"
+            android:text="@{viewModel.topShow.name}"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_top" />
 
         <ImageView
             android:id="@+id/iv_show_poster"
@@ -36,7 +56,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
-            app:imagemURLBackDrop="@{viewModel.show.backdropPath}"
+            app:imagemURLBackDrop="@{viewModel.topShow.backdropPath}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvGenreName"
@@ -45,7 +65,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_show_list"
-            listDataSeason="@{viewModel.show.seasons}"
+            listData="@{viewModel.popularShows}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
