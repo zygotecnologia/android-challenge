@@ -1,11 +1,13 @@
 package com.zygotecnologia.zygotv.main.ui.activity
 
+import InputDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 import com.zygotecnologia.zygotv.main.adapters.GenresAdapter
 import com.zygotecnologia.zygotv.main.viewModel.MainViewModel
@@ -47,13 +49,17 @@ class MainActivity : BaseActivity() {
 
     private fun setupBannerClickListener(show: Show?) {
         binding.banner.setOnClickListener {
-            val intent = Intent(this, DetailsActivity::class.java)
-            intent.apply {
-                putExtra(DetailsActivity.ID_INTENT_EXTRA, show?.id)
-                putExtra(DetailsActivity.TITLE_INTENT_EXTRA, show?.name)
-                putExtra(DetailsActivity.BANNER_INTENT_EXTRA, show?.backdropPath)
-                startActivity(this@apply)
-            }
+            startActivityFromIntent(show)
+        }
+    }
+
+    private fun startActivityFromIntent(show: Show?) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.apply {
+            putExtra(DetailsActivity.ID_INTENT_EXTRA, show?.id)
+            putExtra(DetailsActivity.TITLE_INTENT_EXTRA, show?.name)
+            putExtra(DetailsActivity.BANNER_INTENT_EXTRA, show?.backdropPath)
+            startActivity(this@apply)
         }
     }
 
@@ -71,12 +77,30 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupToolbarListeners() {
-        //TODO
+        binding.toolbarIcon.setOnClickListener {
+            InputDialog(
+                this,
+                getString(R.string.search_show),
+                getString(R.string.search_message),
+                viewModel.input,
+                viewModel.showNames
+            ).show()
+        }
     }
 
     override fun setupObservers() {
         super.setupObservers()
         showListLoadedObserver()
+        inputSearchObserver()
+    }
+
+    private fun inputSearchObserver() {
+        viewModel.input.observe(this, Observer { showName ->
+            if(!showName.isNullOrEmpty()){
+                val show = viewModel.showList.value?.find { it.name == showName }
+                startActivityFromIntent(show)
+            }
+        })
     }
 
     private fun showListLoadedObserver() {

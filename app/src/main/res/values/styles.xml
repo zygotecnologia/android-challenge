@@ -44,4 +44,9 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
+    <style name="CustomDialogStyle" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+    </style>
+
 </resources>

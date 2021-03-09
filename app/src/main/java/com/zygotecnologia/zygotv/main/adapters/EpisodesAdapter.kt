@@ -25,9 +25,8 @@ class EpisodesAdapter(private val episodes: List<Episode>) : RecyclerView.Adapte
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(episode: Episode) {
+        fun bind(episode: Episode) =
             setupTextViews(episode)
-        }
 
         private fun setupTextViews(episode: Episode) {
             setupEpisodeTitle(episode.name)

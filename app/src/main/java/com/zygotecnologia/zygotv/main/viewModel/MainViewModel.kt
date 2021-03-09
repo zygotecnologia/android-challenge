@@ -15,9 +15,20 @@ class MainViewModel(api: ApiRepository) : BaseViewModel(api) {
 
     val showList = MutableLiveData<List<Show>>()
     val genreList = MutableLiveData<List<Genre>>()
+    val input = MutableLiveData("")
 
     private val sortedShowList: List<Show>? by lazy {
         showList.value?.toList()?.sortedByDescending { it.voteCount }
+    }
+
+    val showNames : List<String> by lazy {
+        val names = mutableListOf<String>()
+        showList.value?.forEach {  show ->
+            show.name?.let {
+                names.add(it)
+            }
+        }
+        names
     }
 
     val filteredGenresList: List<Genre> by lazy {

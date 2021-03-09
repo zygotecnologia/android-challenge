@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">ZygoTV</string>
     <string name="toolbar_text"><![CDATA[\<html><b>Zygo<font color=\'red\'>TV</font></b></html>]]></string>
+    <string name="search_show">Search a show</string>
+    <string name="search_message">Type show\'s name</string>
 </resources>
