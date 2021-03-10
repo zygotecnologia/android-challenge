@@ -1,0 +1,11 @@
+ext.test = [
+
+        androidx   : [
+                coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1",
+                espressoCore : "androidx.test.espresso:espresso-core:3.3.0",
+                junitExt : "androidx.test.ext:junit:1.1.2",
+                junit : "junit:junit:4.13.1",
+                koinTest: "org.koin:koin-test:2.2.2"
+        ]
+
+]

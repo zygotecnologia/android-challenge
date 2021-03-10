@@ -1,8 +1,8 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.service.remote.data
 
 import com.squareup.moshi.Json
 
-data class Show(
+data class ShowResponse(
     val genres: List<Genre>?,
     @Json(name = "original_name")
     val originalName: String?,

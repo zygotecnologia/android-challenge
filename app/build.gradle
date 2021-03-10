@@ -9,10 +9,12 @@ android {
 
     defaultConfig {
         applicationId "com.zygotecnologia.zygotv"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "API_HOST", "\"https://api.themoviedb.org\"")
+        buildConfigField("int", "TMDB_API_VERSION", "3")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,6 +32,20 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -40,6 +56,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -53,4 +70,28 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+
+    implementation depen.androidx.navfragment
+    implementation depen.androidx.navUI
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation "com.google.android.material:material:1.3.0"
+
+    implementation depen.foundation.viewModel
+    implementation depen.foundation.liveData
+    implementation depen.squareup.moshi
+    implementation depen.squareup.codeGen
+    implementation depen.squareup.retrofit
+    implementation depen.squareup.moshiRetrofitConverter
+    implementation (platform(depen.squareup.okHttpBom))
+    implementation depen.squareup.okHttp
+    implementation depen.squareup.okHttpLogging
+    implementation depen.koin.koinAndroid
+    implementation depen.koin.koinViewModel
+    implementation depen.glide.glideImage
+    implementation depen.facebook.shimmer
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    implementation "androidx.startup:startup-runtime:1.0.0"
+
 }
