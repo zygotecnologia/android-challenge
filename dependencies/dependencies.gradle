@@ -6,8 +6,8 @@ ext.depen = [
                 activityKtx     : "androidx.activity:activity-ktx:1.1.0",
                 multidex        : "androidx.multidex:multidex:2.0.1",
                 constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.4",
-                navfragment     : "androidx.navigation:navigation-fragment-ktx:2.3.3",
-                navUI           : "androidx.navigation:navigation-ui-ktx:2.3.3",
+                navfragment     : "androidx.navigation:navigation-fragment-ktx:2.1.0-beta02",
+                navUI           : "androidx.navigation:navigation-ui-ktx:2.1.0-beta02",
                 transitions     : "androidx.transition:transition-ktx:1.4.0-rc01",
         ],
         android    : [

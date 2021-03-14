@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingEnd="24dp"
+    android:id="@+id/root_series"
+    android:paddingStart="24dp"
+    android:animateLayoutChanges="true"
     tools:context=".presentation.series.SeriesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <include layout="@layout/loading_backdrop"
+        android:id="@+id/shimmerzinho"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/texto_dest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        tools:text="Nome da série"
+        tools:showIn="@layout/fragment_series" />
+
+    <ImageView
+        android:id="@+id/image_dest"
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_height="112dp"
+        />
+
+    <TextView
+        android:id="@+id/title_recycler_comedia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        android:text="Comedia" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_comedia"
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
+
+    <include layout="@layout/shimmer_item_horizontal"
+        android:id="@+id/shimmer_comedia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        />
+
+    <include layout="@layout/shimmer_item_horizontal"
+        android:id="@+id/shimmer_romance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        />
+    <TextView
+        android:id="@+id/title_recycler_romance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        android:text="Romance" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_romance"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_marginTop="6dp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

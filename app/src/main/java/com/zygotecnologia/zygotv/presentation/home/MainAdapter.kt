@@ -35,7 +35,7 @@ class MainAdapter(private val showResponses: List<ShowResponse>) : RecyclerView.
 
             val imageView: ImageView = itemView.findViewById(iv_show_poster)
             Glide.with(itemView)
-                .load(showResponse.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+                .load(showResponse.posterPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
                 .into(imageView)
         }

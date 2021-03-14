@@ -43,6 +43,8 @@ sealed class State<T> {
             else -> error("")
         }
 
+
+
         fun <T> getData(resource: Resource<T>): T? = when (resource) {
             is Resource.Success -> resource.data
             else -> null

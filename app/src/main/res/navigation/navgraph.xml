@@ -5,8 +5,19 @@
     android:id="@+id/movies_nav_graph.xml"
     app:startDestination="@id/seriesFragment">
     <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.zygotecnologia.zygotv.presentation.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
         android:id="@+id/seriesFragment"
         android:name="com.zygotecnologia.zygotv.presentation.series.SeriesFragment"
         android:label="fragment_series"
         tools:layout="@layout/fragment_series" />
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.zygotecnologia.zygotv.presentation.movie.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" />
+
 </navigation>

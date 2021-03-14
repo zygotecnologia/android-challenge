@@ -1,30 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_color"
     android:orientation="vertical">
-    <include layout="@layout/toolbar"/>
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_merge"
+        />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
-        android:layout_width="wrap_content"
-        app:tabMode="fixed"
-        app:tabBackground="@color/primary_color"
-        app:tabTextColor="@color/white"
+        android:layout_width="match_parent"
         app:tabIndicatorColor="@color/white"
-
+        android:background="@android:color/transparent"
         android:layout_gravity="center_horizontal"
         app:tabMinWidth="110dp"
-        android:layout_height="wrap_content">
+        app:tabGravity="center"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@color/color_disable"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed">
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FILMES" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SÉRIES" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAVORITOS" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <fragment
+        android:id="@+id/nav_host"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navgraph" />
 
 </LinearLayout>
+
+
