@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/fragment_series"
+    >
+
+
+    <TextView
+        android:id="@+id/texto_dest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        tools:text="Nome da série"
+        tools:showIn="@layout/fragment_series" />
+
+    <ImageView
+        android:id="@+id/image_dest"
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_height="112dp" />
+</merge>

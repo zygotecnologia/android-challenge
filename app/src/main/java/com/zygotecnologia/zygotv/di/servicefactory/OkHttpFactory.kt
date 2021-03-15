@@ -10,6 +10,7 @@ object OkHttpFactory {
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
+        .addInterceptor(AuthenticationInterceptor())
         .build()
 
 }

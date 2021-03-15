@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.service.remote.data
+package com.zygotecnologia.zygotv.service.remote.data.serie
 
 import com.squareup.moshi.Json
 

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.uistate
+package com.zygotecnologia.zygotv.common.uistate
 
 sealed class Resource<T>(
     val data: T? = null,

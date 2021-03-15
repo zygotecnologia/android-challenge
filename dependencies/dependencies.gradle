@@ -54,6 +54,10 @@ ext.depen = [
         jlleitschuh: [
                 ktLint: "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
 
+        ],
+
+        airbnb:[
+                lottie:"com.airbnb.android:lottie:3.6.1"
         ]
 
 

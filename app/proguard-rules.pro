@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+-keepnames class com.zygotecnologia.zygotv.ParcelableArg
+-keepnames class com.zygotecnologia.zygotv.SerializableArg
+-keepnames class com.zygotecnologia.zygotv.EnumArg
+

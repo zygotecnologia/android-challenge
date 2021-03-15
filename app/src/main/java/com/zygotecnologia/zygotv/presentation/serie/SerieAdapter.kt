@@ -1,7 +1,6 @@
-package com.zygotecnologia.zygotv.presentation.series
+package com.zygotecnologia.zygotv.presentation.serie
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.common.load
-import com.zygotecnologia.zygotv.service.remote.data.ShowResponse
+import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class ComedyAdapter(private val onItemClicked: (ShowResponse) -> Unit) :
-    RecyclerView.Adapter<ComedyAdapter.ComedyAdapterViewHolder>() {
+class SerieAdapter(private val onItemClicked: (ShowResponse) -> Unit) :
+    RecyclerView.Adapter<SerieAdapter.ComedyAdapterViewHolder>() {
     private lateinit var context: Context
     private val listItems = mutableListOf<ShowResponse>()
 
@@ -51,9 +50,8 @@ class ComedyAdapter(private val onItemClicked: (ShowResponse) -> Unit) :
         fun bind(response: ShowResponse, onItemClicked: (ShowResponse) -> Unit) {
             val image = itemView.findViewById<ImageView>(R.id.image_serie)
             val serieName = itemView.findViewById<TextView>(R.id.name_serie)
-            val urrl = response.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
-            Log.d("Image","${urrl}")
-            image.load(urrl)
+            val urlImage = response.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
+            image.load(urlImage)
             serieName.text = response.name
 
             itemView.setOnClickListener {

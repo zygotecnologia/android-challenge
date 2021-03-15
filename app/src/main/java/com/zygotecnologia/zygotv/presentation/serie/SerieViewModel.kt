@@ -1,29 +1,36 @@
-package com.zygotecnologia.zygotv.presentation.series
+package com.zygotecnologia.zygotv.presentation.serie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zygotecnologia.zygotv.common.SingleLiveEvent
 import com.zygotecnologia.zygotv.common.launch
-import com.zygotecnologia.zygotv.service.remote.data.ShowResponse
-import com.zygotecnologia.zygotv.service.remote.repository.MainRepository
-import com.zygotecnologia.zygotv.uistate.State
+import com.zygotecnologia.zygotv.common.toState
+import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
+import com.zygotecnologia.zygotv.service.remote.repository.serie.SerieRepository
+import com.zygotecnologia.zygotv.common.uistate.State
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 
-class SeriesViewModel(private val repository: MainRepository) : ViewModel() {
+class SeriesViewModel(private val repository: SerieRepository) : ViewModel() {
 
     private val _romanceLiveData = MutableLiveData<State<List<ShowResponse>>>()
 
-    private val _firstSerieLiveData = MutableLiveData<State<ShowResponse>>()
+    private val _highlightsLiveData = MutableLiveData<State<ShowResponse>>()
+
+    private val _highlightsClickLiveData = SingleLiveEvent<State<ShowResponse>>()
 
     private val _comediaLiveData = MutableLiveData<State<List<ShowResponse>>>()
 
     val comediaLiveData: LiveData<State<List<ShowResponse>>>
         get() = _comediaLiveData
 
-    val firstSerieLiveData: LiveData<State<ShowResponse>>
-        get() = _firstSerieLiveData
+    val highlightsLiveData: LiveData<State<ShowResponse>>
+        get() = _highlightsLiveData
+
+    val highlightsClickLiveData: SingleLiveEvent<State<ShowResponse>>
+        get() = _highlightsClickLiveData
 
     val romanceLiveData: LiveData<State<List<ShowResponse>>>
         get() = _romanceLiveData
@@ -35,7 +42,7 @@ class SeriesViewModel(private val repository: MainRepository) : ViewModel() {
     private fun getSeries() {
         launch {
             repository.getGenres().onStart {
-                _firstSerieLiveData.value = State.loading()
+                _highlightsLiveData.value = State.loading()
                 _romanceLiveData.value = State.loading()
                 _comediaLiveData.value = State.loading()
             }
@@ -43,7 +50,7 @@ class SeriesViewModel(private val repository: MainRepository) : ViewModel() {
                 .collect { value ->
                     when (value) {
                         is State.Success -> {
-                            _firstSerieLiveData.value = value.data.first().toState()
+                            _highlightsLiveData.value = value.data.first().toState()
                             _comediaLiveData.value =
                                 value.data.filter { it.genreIds!!.contains(18) }.toList().toState()
                             _romanceLiveData.value =
@@ -54,13 +61,10 @@ class SeriesViewModel(private val repository: MainRepository) : ViewModel() {
         }
 
     }
+
+    fun clickItemHighlights() {
+        _highlightsClickLiveData.value = _highlightsLiveData.value
+    }
 }
 
-private fun ShowResponse.toState(): State<ShowResponse> {
-    return State.success(this)
 
-}
-
-private fun <E> List<E>.toState(): State<List<E>> {
-    return State.success(this)
-}

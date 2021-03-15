@@ -8,7 +8,7 @@
     android:id="@+id/root_series"
     android:paddingStart="24dp"
     android:animateLayoutChanges="true"
-    tools:context=".presentation.series.SeriesFragment">
+    tools:context=".presentation.serie.SerieFragment">
 
 
     <include layout="@layout/loading_backdrop"
@@ -33,8 +33,7 @@
         android:layout_marginTop="6dp"
         android:scaleType="fitXY"
         android:visibility="gone"
-        android:layout_height="112dp"
-        />
+        android:layout_height="112dp" />
 
     <TextView
         android:id="@+id/title_recycler_comedia"

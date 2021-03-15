@@ -1,6 +1,8 @@
 package com.zygotecnologia.zygotv.common
 
-import com.zygotecnologia.zygotv.uistate.Resource
+import com.zygotecnologia.zygotv.common.uistate.Resource
+import com.zygotecnologia.zygotv.common.uistate.State
+import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import retrofit2.Response
@@ -33,4 +35,25 @@ inline fun <reified T> Any?.asResource(): Resource<T> {
             Resource.Failed(this as String)
         }
     }
+}
+
+ inline fun < reified T> Any?.asState(): State<T> {
+    return when(this){
+        is T ->{
+            State.success(this)
+        }
+        else -> {
+            State.error(this as String)
+        }
+    }
+
+}
+
+ fun ShowResponse.toState(): State<ShowResponse> {
+    return State.success(this)
+
+}
+
+ fun <E> List<E>.toState(): State<List<E>> {
+    return State.success(this)
 }

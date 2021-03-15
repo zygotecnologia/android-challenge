@@ -7,17 +7,27 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.zygotecnologia.zygotv.presentation.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/seriesFragment"
-        android:name="com.zygotecnologia.zygotv.presentation.series.SeriesFragment"
-        android:label="fragment_series"
-        tools:layout="@layout/fragment_series" />
+        android:name="com.zygotecnologia.zygotv.presentation.serie.SerieFragment"
+        tools:layout="@layout/fragment_series" >
+        <action
+            android:id="@+id/action_seriesFragment_to_serieDetailFragment"
+            app:destination="@id/serieDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/movieFragment"
         android:name="com.zygotecnologia.zygotv.presentation.movie.MovieFragment"
-        android:label="fragment_movie"
         tools:layout="@layout/fragment_movie" />
+    <fragment
+        android:id="@+id/serieDetailFragment"
+        android:name="com.zygotecnologia.zygotv.presentation.season.SeasonFragment"
+        tools:layout="@layout/fragment_season" >
+        <argument
+            android:name="myArg"
+            app:argType="com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse"
+            />
+    </fragment>
 
 </navigation>

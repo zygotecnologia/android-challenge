@@ -10,8 +10,9 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:label="Zygo TV"
         android:theme="@style/Theme.ZygoTV.NoActionBar">
-        <activity android:name="com.zygotecnologia.zygotv.presentation.home.MainActivity">
+        <activity android:name="com.zygotecnologia.zygotv.presentation.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

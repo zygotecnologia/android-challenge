@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.presentation.home
+package com.zygotecnologia.zygotv.utils
 
 import com.google.android.material.tabs.TabLayout
 

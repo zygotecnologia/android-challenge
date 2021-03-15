@@ -1,48 +1,33 @@
-package com.zygotecnologia.zygotv.presentation.series
+package com.zygotecnologia.zygotv.presentation.serie
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.common.load
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.common.gone
-import com.zygotecnologia.zygotv.common.showAnimate
+import com.zygotecnologia.zygotv.common.load
+import com.zygotecnologia.zygotv.common.uistate.State
 import com.zygotecnologia.zygotv.common.visible
 import com.zygotecnologia.zygotv.databinding.FragmentSeriesBinding
-import com.zygotecnologia.zygotv.service.remote.data.ShowResponse
-import com.zygotecnologia.zygotv.uistate.State
+import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.buildBackdropUrl
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class SeriesFragment : Fragment(R.layout.fragment_series) {
+class SerieFragment : Fragment(R.layout.fragment_series) {
 
     private var _binding: FragmentSeriesBinding? = null
     private val binding get() = _binding!!
 
-    private val serieComedyAdapter = ComedyAdapter(::onComedyClicked)
+    private val serieComedyAdapter = SerieAdapter(::onComedyClicked)
 
-    private val serieRomanceAdapter = ComedyAdapter(::onRomanceClicked)
-
-
-    private fun onComedyClicked(response: ShowResponse) {
-
-    }
-
-
-    private fun onRomanceClicked(response: ShowResponse) {
-
-    }
-
+    private val serieRomanceAdapter = SerieAdapter(::onRomanceClicked)
 
     private val viewModel by viewModel<SeriesViewModel>()
-
 
 
     override fun onCreateView(
@@ -66,6 +51,10 @@ class SeriesFragment : Fragment(R.layout.fragment_series) {
             )
         }
 
+        binding.imageDest.setOnClickListener {
+            viewModel.clickItemHighlights()
+        }
+
         binding.recyclerRomance.apply {
             adapter = serieRomanceAdapter
             layoutManager = LinearLayoutManager(
@@ -75,8 +64,8 @@ class SeriesFragment : Fragment(R.layout.fragment_series) {
             )
         }
 
-        viewModel.firstSerieLiveData.observe(viewLifecycleOwner){ state ->
-            when(state){
+        viewModel.highlightsLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is State.Loading -> {
                     binding.shimmerzinho.shimmerDest.startShimmer()
 
@@ -98,8 +87,8 @@ class SeriesFragment : Fragment(R.layout.fragment_series) {
 
         }
 
-        viewModel.comediaLiveData.observe(viewLifecycleOwner){ state->
-            when(state){
+        viewModel.comediaLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is State.Loading -> {
                     binding.shimmerComedia.shimmerLayout.startShimmer()
 
@@ -120,8 +109,8 @@ class SeriesFragment : Fragment(R.layout.fragment_series) {
 
 
 
-        viewModel.romanceLiveData.observe(viewLifecycleOwner){ state->
-            when(state){
+        viewModel.romanceLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is State.Loading -> {
                     binding.shimmerRomance.shimmerLayout.startShimmer()
 
@@ -139,6 +128,30 @@ class SeriesFragment : Fragment(R.layout.fragment_series) {
             }
         }
 
+        viewModel.highlightsClickLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is State.Loading -> {
+                }
+                is State.Success -> {
+                    navigateSeasons(state.data)
+                }
+                is State.Error -> {
 
+                }
+            }
+        }
+
+    }
+
+    private fun onComedyClicked(response: ShowResponse) = navigateSeasons(response)
+
+    private fun onRomanceClicked(response: ShowResponse) = navigateSeasons(response)
+
+    private fun navigateSeasons(response: ShowResponse) {
+        findNavController().navigate(
+            SerieFragmentDirections.actionSeriesFragmentToSerieDetailFragment(
+                response
+            )
+        )
     }
 }

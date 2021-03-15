@@ -3,8 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id "androidx.navigation.safeargs.kotlin"
-
-
 }
 
 android {
@@ -18,8 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField("String", "API_HOST", "\"https://api.themoviedb.org\"")
-        buildConfigField("int", "TMDB_API_VERSION", "3")
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -96,6 +92,7 @@ dependencies {
     implementation depen.koin.koinViewModel
     implementation depen.glide.glideImage
     implementation depen.facebook.shimmer
+    implementation depen.airbnb.lottie
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
     testImplementation "androidx.arch.core:core-testing:2.1.0"

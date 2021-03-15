@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_disable">#7F7F7F</color>
     <color name="colorGrey">#dddddd</color>
+    <color name="dividerColor">#B1B1B1</color>
 
 
 </resources>

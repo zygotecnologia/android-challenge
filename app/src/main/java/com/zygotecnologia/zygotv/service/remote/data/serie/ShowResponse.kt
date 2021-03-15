@@ -1,9 +1,13 @@
-package com.zygotecnologia.zygotv.service.remote.data
+package com.zygotecnologia.zygotv.service.remote.data.serie
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
+@Parcelize
 data class ShowResponse(
-    val genres: List<Genre>?,
+    val genres: @RawValue List<Genre>?,
     @Json(name = "original_name")
     val originalName: String?,
     @Json(name = "genre_ids")
@@ -22,4 +26,6 @@ data class ShowResponse(
     val overview: String?,
     @Json(name = "poster_path")
     val posterPath: String?
-)
+):Parcelable{
+
+}

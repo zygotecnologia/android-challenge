@@ -10,6 +10,7 @@
         android:id="@+id/image_serie"
         android:visibility="visible"
         android:scaleType="fitXY"
+        android:transitionName="transtion_name_example"
         android:layout_width="match_parent"
         android:layout_height="112dp" />
 
