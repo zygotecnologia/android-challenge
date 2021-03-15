@@ -53,7 +53,6 @@ class SeasonAdapter(private val onItemClicked: (Int, Boolean) -> Unit) :
         holder.bind(listItems[position], onItemClicked, position)
         changeVisibility(listItems[position].inVisibleDetails, holder)
 
-        Log.d("Allef", "onBindViewHolder: ${listItems[position].seasonDetails?.episodes?.size}")
         holder.binding.recyclerEpisodios.apply {
 
             val itemDecoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
@@ -80,7 +79,6 @@ class SeasonAdapter(private val onItemClicked: (Int, Boolean) -> Unit) :
             binding.imageSeason.load(url)
             binding.textSeasonNumber.text = season.name
             binding.textSeasonSinopse.text = season.overview
-
 
             binding.root.setOnClickListener {
                 onItemClicked.invoke(position, season.inVisibleDetails)

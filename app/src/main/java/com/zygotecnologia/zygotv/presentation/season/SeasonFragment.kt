@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.common.load
+import com.zygotecnologia.zygotv.common.showSnackBar
 import com.zygotecnologia.zygotv.databinding.FragmentSeasonBinding
 import com.zygotecnologia.zygotv.service.remote.data.seasons.Season
 import com.zygotecnologia.zygotv.common.uistate.State
@@ -51,25 +53,14 @@ class SeasonFragment : Fragment(R.layout.fragment_season) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textoDest.text = args.myArg.name
+        loadComponents()
 
-        args.myArg.id?.let { viewModel.getSerieSeasons(it) }
+        loadActions()
 
-        val backdrop = args.myArg.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) }
+    }
 
-        binding.imageDest.load(backdrop)
-
-        binding.recyclerSeason.apply {
-            addItemDecoration(SpacesItemDecoration(top = 12,bottom = 12))
-            adapter = seasonAdapter
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-        }
-
-        viewModel.seasonLiveData.observe(viewLifecycleOwner){ state->
+    private fun loadActions() {
+        viewModel.seasonLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.Loading -> {
 
@@ -79,12 +70,31 @@ class SeasonFragment : Fragment(R.layout.fragment_season) {
                     seasonAdapter.addItems(state.data.seasons)
                 }
                 is State.Error -> {
-
+                    binding.root.showSnackBar(
+                        binding.root,
+                        getString(R.string.get_series_error),
+                        Snackbar.LENGTH_LONG
+                    )
                 }
             }
 
         }
+    }
 
+    private fun loadComponents() {
+        binding.textoDest.text = args.myArg.name
+        args.myArg.id?.let { viewModel.getSerieSeasons(it) }
+        val backdrop = args.myArg.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) }
+        binding.imageDest.load(backdrop)
 
+        binding.recyclerSeason.apply {
+            addItemDecoration(SpacesItemDecoration(top = 12, bottom = 12))
+            adapter = seasonAdapter
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+        }
     }
 }

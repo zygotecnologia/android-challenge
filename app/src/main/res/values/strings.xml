@@ -6,4 +6,5 @@
     <string name="series_section_title">Comedia</string>
     <string name="series_section_title2">Romance</string>
     <string name="content_image_season">image destaque</string>
+    <string name="get_series_error">Falha ao buscar series,\ntente novamente mais tarde!</string>
 </resources>

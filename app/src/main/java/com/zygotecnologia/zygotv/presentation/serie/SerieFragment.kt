@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.common.gone
 import com.zygotecnologia.zygotv.common.load
+import com.zygotecnologia.zygotv.common.showSnackBar
 import com.zygotecnologia.zygotv.common.uistate.State
 import com.zygotecnologia.zygotv.common.visible
 import com.zygotecnologia.zygotv.databinding.FragmentSeriesBinding
@@ -40,35 +42,17 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadComponents()
 
+        loadActions()
 
-        binding.recyclerComedia.apply {
-            adapter = serieComedyAdapter
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        }
+    }
 
-        binding.imageDest.setOnClickListener {
-            viewModel.clickItemHighlights()
-        }
-
-        binding.recyclerRomance.apply {
-            adapter = serieRomanceAdapter
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        }
-
+    private fun loadActions() {
         viewModel.highlightsLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.Loading -> {
                     binding.shimmerzinho.shimmerDest.startShimmer()
-
                 }
                 is State.Success -> {
                     binding.shimmerzinho.shimmerDest.stopShimmer()
@@ -80,7 +64,11 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
                     binding.imageDest.load(backdrop)
                 }
                 is State.Error -> {
-
+                    binding.root.showSnackBar(
+                        binding.root,
+                        getString(R.string.get_series_error),
+                        Snackbar.LENGTH_LONG
+                    )
                 }
             }
 
@@ -102,18 +90,19 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
                     serieComedyAdapter.addItems(state.data)
                 }
                 is State.Error -> {
-
+                    binding.root.showSnackBar(
+                        binding.root,
+                        getString(R.string.get_series_error),
+                        Snackbar.LENGTH_LONG
+                    )
                 }
             }
         }
-
-
 
         viewModel.romanceLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.Loading -> {
                     binding.shimmerRomance.shimmerLayout.startShimmer()
-
                 }
                 is State.Success -> {
                     binding.shimmerRomance.shimmerLayout.stopShimmer()
@@ -123,24 +112,53 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
                     serieRomanceAdapter.addItems(state.data)
                 }
                 is State.Error -> {
-
+                    binding.root.showSnackBar(
+                        binding.root,
+                        getString(R.string.get_series_error),
+                        Snackbar.LENGTH_LONG
+                    )
                 }
             }
         }
 
         viewModel.highlightsClickLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is State.Loading -> {
-                }
                 is State.Success -> {
                     navigateSeasons(state.data)
                 }
                 is State.Error -> {
-
+                    binding.root.showSnackBar(
+                        binding.root,
+                        getString(R.string.get_series_error),
+                        Snackbar.LENGTH_LONG
+                    )
                 }
             }
         }
+    }
 
+    private fun loadComponents() {
+        binding.recyclerComedia.apply {
+            adapter = serieComedyAdapter
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        }
+
+        binding.imageDest.setOnClickListener {
+            viewModel.clickItemHighlights()
+        }
+
+        binding.recyclerRomance.apply {
+            adapter = serieRomanceAdapter
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        }
     }
 
     private fun onComedyClicked(response: ShowResponse) = navigateSeasons(response)

@@ -23,9 +23,5 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
 
 }
