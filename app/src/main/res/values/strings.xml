@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ZygoTV</string>
+    <string name="home_tv_toolbar">TV</string>
+    <string name="home_toolbar_title">ZygoTV</string>
+    <string name="generic_construction">Em Construção</string>
+    <string name="series_section_title">Comedia</string>
+    <string name="series_section_title2">Romance</string>
+    <string name="content_image_season">image destaque</string>
 </resources>

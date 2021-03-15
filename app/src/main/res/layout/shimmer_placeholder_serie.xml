@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="132dp"
-    android:layout_marginEnd="8dp"
-    android:layout_height="wrap_content">
+    android:layout_width="@dimen/size_xlarge"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_small"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/image_serie"
-        android:visibility="visible"
-        android:scaleType="fitXY"
-        android:background="@drawable/background_item"
         android:layout_width="match_parent"
-        android:layout_height="112dp" />
+        android:layout_height="@dimen/image_view_size"
+        android:background="@drawable/background_item"
+        android:scaleType="fitXY"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/name_serie"
         android:layout_width="match_parent"
-        android:background="@drawable/background_item"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:lines="1"
-        tools:text="nome da serie"
-        />
+        android:layout_marginTop="@dimen/space_micro"
+        android:background="@drawable/background_item"
+        android:lines="1" />
 
 
 </LinearLayout>

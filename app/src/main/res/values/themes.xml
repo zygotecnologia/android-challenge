@@ -30,11 +30,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyThemeOverlay_Toolbar2" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
-        <!-- This attributes is used by title -->
+    <style name="Theme.ZigoTv.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="android:textColorPrimary">@color/white</item>
-
-        <!-- This attributes is used by navigation icon and overflow icon -->
         <item name="colorOnPrimary">@color/white</item>
     </style>
+
+
+
+
 </resources>

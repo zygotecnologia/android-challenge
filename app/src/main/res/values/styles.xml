@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.ZygoTv.Headline" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/size_large</item>
+    </style>
+
+    <style name="TextAppearance.ZygoTv.Title" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/size_medium</item>
+    </style>
+
+    <style name="TextAppearance.ZygoTv.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/size_medium2</item>
+    </style>
+
+    <style name="TextAppearance.ZygoTv.Body" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/size_normal</item>
+    </style>
+
+    <style name="TextAppearance.TabLayout" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/size_normal</item>
+
+    </style>
+    <style name="Widget.ZygoTv.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.ZygoTv.Subtitle</item>
+        <item name="android:textColor">@color/color_subtitle</item>
+
+    </style>
+
+    <style name="Widget.ZygoTv.TextView.Series" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.ZygoTv.Subtitle</item>
+        <item name="android:layout_marginTop">@dimen/space_medium</item>
+    </style>
+
+    <style name="Widget.ZygoTv.TextView.Subtitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.ZygoTv.Subtitle</item>
+        <item name="android:textColor">@color/color_subtitle</item>
+    </style>
+
+    <style name="Widget.ZygoTv.TextView.Body" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.ZygoTv.Body</item>
+        <item name="android:textColor">@color/color_body</item>
+        <item name="android:layout_marginTop">@dimen/margin_micro</item>
+        <item name="android:layout_marginBottom">@dimen/margin_normal</item>
+    </style>
+
+    <style name="Widget.ZygoTv.TextView.Body.Simple" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.ZygoTv.Body</item>
+        <item name="android:textColor">@color/color_body</item>
+    </style>
+
+
+</resources>

@@ -14,17 +14,16 @@
             android:id="@+id/text_destaque"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:background="@drawable/background_item"
-            android:textSize="16sp"
             tools:showIn="@layout/fragment_series"
-            tools:text="Nome da série" />
+            style="@style/Widget.ZygoTv.TextView.Series"
+            />
 
         <ImageView
             android:id="@+id/image_destaque"
             android:layout_width="match_parent"
-            android:layout_height="112dp"
-            android:layout_marginTop="6dp"
+            android:layout_height="@dimen/image_view_size"
+            android:layout_marginTop="@dimen/space_small"
             android:background="@drawable/background_item"
             android:scaleType="fitXY" />
 

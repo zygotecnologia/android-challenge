@@ -2,24 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
-    android:paddingStart="18dp"
-    android:paddingEnd="18dp"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/space_normal"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/margin_medium"
+    android:paddingEnd="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/text_name_episode"
+        style="@style/Widget.ZygoTv.TextView.Subtitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/text_sinopse_episode"
+        style="@style/Widget.ZygoTv.TextView.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="17dp"
-        android:textSize="14sp" />
+        android:layout_marginTop="@dimen/margin_micro" />
 
 </LinearLayout>
 

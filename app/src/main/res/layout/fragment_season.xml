@@ -9,54 +9,50 @@
 
     <TextView
         android:id="@+id/texto_dest"
+        style="@style/Widget.ZygoTv.TextView.Series"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="16sp"
-        android:transitionName="transtion_name_example"
         android:visibility="visible"
-        tools:showIn="@layout/fragment_series"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
-        tools:text="Nome da série" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:showIn="@layout/fragment_series" />
 
     <ImageView
         android:id="@+id/image_dest"
         android:layout_width="0dp"
-        android:layout_height="112dp"
+        android:layout_height="@dimen/image_view_size"
+        android:layout_marginTop="@dimen/space_normal"
+        android:contentDescription="@string/content_image_season"
         android:scaleType="fitXY"
         android:visibility="visible"
-        android:layout_marginTop="12dp"
-
-        app:layout_constraintTop_toBottomOf="@+id/texto_dest"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="@id/guideline2" />
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/texto_dest" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_season"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/image_dest"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="@dimen/space_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/image_dest" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="24dp" />
+        app:layout_constraintGuide_begin="@dimen/space_medium" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="24dp" />
+        app:layout_constraintGuide_end="@dimen/space_medium" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

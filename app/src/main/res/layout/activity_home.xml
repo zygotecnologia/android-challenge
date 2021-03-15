@@ -19,7 +19,8 @@
         android:layout_gravity="center_horizontal"
         app:tabMinWidth="110dp"
         app:tabGravity="center"
-        app:tabSelectedTextColor="@android:color/white"
+        style="@style/TextAppearance.TabLayout"
+        app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/color_disable"
         android:layout_height="wrap_content"
         app:tabMode="fixed">

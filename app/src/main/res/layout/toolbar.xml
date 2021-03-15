@@ -10,15 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:theme="@style/MyThemeOverlay_Toolbar2">
+        android:theme="@style/Theme.ZigoTv.Toolbar"
+        >
 
         <TextView
             android:id="@+id/title_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="ZygoTV"
-            android:textSize="18sp" />
+            android:text="@string/home_toolbar_title"
+            android:textAppearance="@style/TextAppearance.ZygoTv.Title" />
     </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

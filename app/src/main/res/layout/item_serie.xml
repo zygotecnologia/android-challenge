@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="132dp"
-    android:layout_marginEnd="8dp"
+    android:layout_width="@dimen/size_xlarge"
+    android:layout_marginEnd="@dimen/margin_small"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -12,14 +12,15 @@
         android:scaleType="fitXY"
         android:transitionName="transtion_name_example"
         android:layout_width="match_parent"
-        android:layout_height="112dp" />
+        android:layout_height="@dimen/image_view_size" />
 
     <TextView
+        style="@style/Widget.ZygoTv.TextView"
         android:id="@+id/name_serie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_custom_small"
         android:lines="2"
-        android:text="nome da serie"
         />
 
 

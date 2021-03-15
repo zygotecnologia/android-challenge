@@ -18,16 +18,7 @@ import com.zygotecnologia.zygotv.utils.OnTabSelected
 
 class HomeActivity : AppCompatActivity() {
 
-
     private val navController: NavController by lazy { findNavController(R.id.nav_host) }
-
-    private val navOptions: NavOptions by lazy {
-        NavOptions.Builder()
-            .setLaunchSingleTop(true)
-            .setPopUpTo(navController.graph.startDestination, false)
-            .build()
-    }
-
     private var menuItem: MenuItem? = null
     private lateinit var tabItems: TabLayout
 
@@ -39,13 +30,12 @@ class HomeActivity : AppCompatActivity() {
         val toolbarTitle: TextView = findViewById(R.id.title_toolbar)
         tabItems = findViewById(R.id.tablayout)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        setupWithNavController(toolbar, navController)
+        loadComponents(toolbar, toolbarTitle)
+        loadActions()
 
+    }
 
-        toolbarTitle.colorize("TV", android.R.color.holo_red_light)
-
+    private fun loadActions() {
         tabItems.selectTab(tabItems.getTabAt(1))
 
         tabItems.addOnTabSelectedListener(object : OnTabSelected {
@@ -58,8 +48,18 @@ class HomeActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun loadComponents(
+        toolbar: Toolbar,
+        toolbarTitle: TextView
+    ) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        setupWithNavController(toolbar, navController)
 
 
+        toolbarTitle.colorize(getString(R.string.home_tv_toolbar), R.color.toolbar_title_color)
     }
 
     private val onDestinationListener =
@@ -75,6 +75,20 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
+    private val navOptions: NavOptions by lazy {
+        NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setPopUpTo(navController.graph.startDestination, false)
+            .build()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_menu, menu)
+        menuItem = menu?.getItem(0)
+        return true
+    }
+
     override fun onResume() {
         super.onResume()
         navController.addOnDestinationChangedListener(onDestinationListener)
@@ -85,12 +99,5 @@ class HomeActivity : AppCompatActivity() {
         navController.removeOnDestinationChangedListener(onDestinationListener)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        val inflater = menuInflater
-        inflater.inflate(R.menu.search_menu, menu)
-        menuItem = menu?.getItem(0)
-
-        return true
-    }
 }
