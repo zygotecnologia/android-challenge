@@ -21,10 +21,10 @@ class SeriesViewModel(private val repository: SerieRepository) : ViewModel() {
 
     private val _highlightsClickLiveData = SingleLiveEvent<State<ShowResponse>>()
 
-    private val _comediaLiveData = MutableLiveData<State<List<ShowResponse>>>()
+    private val _comedyaLiveData = MutableLiveData<State<List<ShowResponse>>>()
 
-    val comediaLiveData: LiveData<State<List<ShowResponse>>>
-        get() = _comediaLiveData
+    val comedyLiveData: LiveData<State<List<ShowResponse>>>
+        get() = _comedyaLiveData
 
     val highlightsLiveData: LiveData<State<ShowResponse>>
         get() = _highlightsLiveData
@@ -44,15 +44,15 @@ class SeriesViewModel(private val repository: SerieRepository) : ViewModel() {
             repository.getGenres().onStart {
                 _highlightsLiveData.value = State.loading()
                 _romanceLiveData.value = State.loading()
-                _comediaLiveData.value = State.loading()
+                _comedyaLiveData.value = State.loading()
             }
                 .map { resource -> State.fromResource(resource) }
                 .collect { value ->
                     when (value) {
                         is State.Success -> {
                             _highlightsLiveData.value = value.data.first().toState()
-                            _comediaLiveData.value =
-                                value.data.filter { it.genreIds!!.contains(18) }.toList().toState()
+                            _comedyaLiveData.value =
+                                value.data.filter { it.genreIds!!.contains(10759) }.toList().toState()
                             _romanceLiveData.value =
                                 value.data.filter { it.genreIds!!.contains(18) }.toList().toState()
                         }

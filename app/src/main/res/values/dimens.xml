@@ -6,6 +6,8 @@
     <dimen name="space_normal">12dp</dimen>
     <dimen name="space_small">6dp</dimen>
     <dimen name="space_micro">4dp</dimen>
+    <dimen name="space_custom_small">9dp</dimen>
+    <dimen name="space_micro_1">1dp</dimen>
 
 
     <dimen name="margin_normal">16sp</dimen>
@@ -13,6 +15,7 @@
     <dimen name="margin_micro">2dp</dimen>
     <dimen name="margin_medium">18dp</dimen>
 
+    <dimen name="size_xlarge">132dp</dimen>
     <dimen name="size_large">24sp</dimen>
     <dimen name="size_medium">18sp</dimen>
     <dimen name="size_medium2">16sp</dimen>
@@ -21,13 +24,10 @@
 
     <dimen name="lottie_height">250dp</dimen>
     <dimen name="image_view_size">112dp</dimen>
-    <dimen name="size_xlarge">132dp</dimen>
     <dimen name="image_season_size">68dp</dimen>
     <dimen name="image_season_height">63dp</dimen>
-    <dimen name="space_micro_1">1dp</dimen>
     <dimen name="image_icon_size">40dp</dimen>
     <dimen name="corner_radius_default">7dp</dimen>
-    <dimen name="space_custom_small">9dp</dimen>
 
 
 </resources>

@@ -1,6 +1,8 @@
 package com.zygotecnologia.zygotv.common
 
+import android.content.res.Resources
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -10,7 +12,8 @@ import com.zygotecnologia.zygotv.R
 
 fun ImageView.load(url: String?) {
     var requestOptions = RequestOptions()
-    requestOptions = requestOptions.transform(RoundedCorners(7))
+    val cornerRadius = resources.getDimension(R.dimen.corner_radius_default).toInt()
+    requestOptions = requestOptions.transform(RoundedCorners(cornerRadius))
     if (!url.isNullOrBlank()) {
         Glide.with(this)
             .load(url)
@@ -18,7 +21,7 @@ fun ImageView.load(url: String?) {
             .apply(requestOptions)
             .into(this)
     } else {
-//        this.setImageResource(R.drawable.no_image)
+        this.setImageResource(R.drawable.no_image)
     }
 }
 

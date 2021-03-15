@@ -87,7 +87,7 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
 
         }
 
-        viewModel.comediaLiveData.observe(viewLifecycleOwner) { state ->
+        viewModel.comedyLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.Loading -> {
                     binding.shimmerComedia.shimmerLayout.startShimmer()

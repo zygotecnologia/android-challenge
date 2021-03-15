@@ -2,18 +2,15 @@ package com.zygotecnologia.zygotv.presentation.serie
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.common.load
+import com.zygotecnologia.zygotv.databinding.ItemSerieBinding
 import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class SerieAdapter(private val onItemClicked: (ShowResponse) -> Unit) :
-    RecyclerView.Adapter<SerieAdapter.ComedyAdapterViewHolder>() {
+    RecyclerView.Adapter<SerieAdapter.SerieAdapterViewHolder>() {
     private lateinit var context: Context
     private val listItems = mutableListOf<ShowResponse>()
 
@@ -21,15 +18,10 @@ class SerieAdapter(private val onItemClicked: (ShowResponse) -> Unit) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ComedyAdapterViewHolder {
+    ): SerieAdapterViewHolder {
         context = parent.context
-        return ComedyAdapterViewHolder(
-
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_serie,
-                parent,
-                false
-            )
+        return SerieAdapterViewHolder(
+            ItemSerieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -41,20 +33,19 @@ class SerieAdapter(private val onItemClicked: (ShowResponse) -> Unit) :
 
     override fun getItemCount() = listItems.size
 
-    override fun onBindViewHolder(holder: ComedyAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SerieAdapterViewHolder, position: Int) {
         holder.bind(listItems[position], onItemClicked)
-
     }
 
-    class ComedyAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SerieAdapterViewHolder(private val binding: ItemSerieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(response: ShowResponse, onItemClicked: (ShowResponse) -> Unit) {
-            val image = itemView.findViewById<ImageView>(R.id.image_serie)
-            val serieName = itemView.findViewById<TextView>(R.id.name_serie)
-            val urlImage = response.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
-            image.load(urlImage)
-            serieName.text = response.name
 
-            itemView.setOnClickListener {
+            val urlImage = response.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
+            binding.imageSerie.load(urlImage)
+            binding.nameSerie.text = response.name
+
+            binding.root.setOnClickListener {
                 onItemClicked.invoke(response)
             }
         }
