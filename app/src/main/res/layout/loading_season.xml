@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_normal"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/image_season"
+        android:layout_width="@dimen/image_season_size"
+        android:layout_height="@dimen/image_season_height"
+        android:scaleType="fitXY"
+        android:background="@drawable/background_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_season_number"
+        style="@style/Widget.ZygoTv.TextView"
+        android:layout_width="0dp"
+        android:background="@drawable/background_item"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal"
+        app:layout_constraintEnd_toStartOf="@+id/image_expand"
+        app:layout_constraintStart_toEndOf="@+id/image_season"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_season_sinopse"
+        style="@style/Widget.ZygoTv.TextView.Body.Simple"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/background_item"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/space_micro_1"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_expand"
+        app:layout_constraintStart_toEndOf="@+id/image_season"
+        app:layout_constraintTop_toBottomOf="@+id/text_season_number" />
+
+    <ImageView
+        android:id="@+id/image_expand"
+        android:layout_width="@dimen/image_icon_size"
+        android:layout_height="0dp"
+        android:background="@drawable/background_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,11 +30,22 @@
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/texto_dest" />
 
+    <include layout="@layout/shimmer_item_season"
+        android:id="@+id/shimmer_recycler_reason"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/image_dest"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_season"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/space_large"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"

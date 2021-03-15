@@ -18,7 +18,7 @@ data class Season(
     @Json(name = "overview")
     val overview: String? = null,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @Json(name = "season_number")
     val seasonNumber: Int,
     var inVisibleDetails:Boolean = false,

@@ -74,7 +74,7 @@ class SeasonAdapter(private val onItemClicked: (Int, Boolean) -> Unit) :
             position: Int,
         ) {
 
-            val url = season.posterPath.let { ImageUrlBuilder.buildPosterUrl(it) }
+            val url = season.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
 
             binding.imageSeason.load(url)
             binding.textSeasonNumber.text = season.name

@@ -1,22 +1,21 @@
 package com.zygotecnologia.zygotv.presentation.season
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.MaterialContainerTransform
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.common.gone
 import com.zygotecnologia.zygotv.common.load
+import com.zygotecnologia.zygotv.common.showAnimate
 import com.zygotecnologia.zygotv.common.showSnackBar
+import com.zygotecnologia.zygotv.common.uistate.State
 import com.zygotecnologia.zygotv.databinding.FragmentSeasonBinding
 import com.zygotecnologia.zygotv.service.remote.data.seasons.Season
-import com.zygotecnologia.zygotv.common.uistate.State
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.utils.SpacesItemDecoration
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -33,7 +32,7 @@ class SeasonFragment : Fragment(R.layout.fragment_season) {
     private val listItems = mutableListOf<Season>()
 
 
-    private fun clickSeason(positionClick: Int,status:Boolean) {
+    private fun clickSeason(positionClick: Int, status: Boolean) {
         listItems[positionClick].inVisibleDetails = status.not()
         seasonAdapter.notifyDataSetChanged()
     }
@@ -63,13 +62,18 @@ class SeasonFragment : Fragment(R.layout.fragment_season) {
         viewModel.seasonLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.Loading -> {
-
+                    binding.shimmerRecyclerReason.shimmerLayout.startShimmer()
                 }
                 is State.Success -> {
+                    binding.shimmerRecyclerReason.shimmerLayout.stopShimmer()
+                    binding.shimmerRecyclerReason.shimmerLayout.gone()
+                    binding.recyclerSeason.showAnimate(binding.root)
                     listItems.addAll(state.data.seasons)
                     seasonAdapter.addItems(state.data.seasons)
                 }
                 is State.Error -> {
+                    binding.shimmerRecyclerReason.shimmerLayout.stopShimmer()
+                    binding.shimmerRecyclerReason.shimmerLayout.gone()
                     binding.root.showSnackBar(
                         binding.root,
                         getString(R.string.get_series_error),

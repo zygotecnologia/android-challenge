@@ -3,6 +3,7 @@ package com.zygotecnologia.zygotv.common
 import com.zygotecnologia.zygotv.common.uistate.Resource
 import com.zygotecnologia.zygotv.common.uistate.State
 import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
+import com.zygotecnologia.zygotv.utils.NoNetworkingException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import retrofit2.Response
@@ -20,9 +21,10 @@ inline fun <reified T> Resource<T>.asFlow(): Flow<Resource<T>> {
         } else {
             responseMessage
         }
-    } catch (e: Exception) {
-        throw e
+    } catch (e: NoNetworkingException) {
+        e.message
     }
+
      return result.asResource()
 }
 

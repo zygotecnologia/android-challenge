@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zygotecnologia.zygotv.common.SingleLiveEvent
+import com.zygotecnologia.zygotv.common.asState
 import com.zygotecnologia.zygotv.common.launch
 import com.zygotecnologia.zygotv.common.toState
 import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
@@ -55,6 +56,12 @@ class SeriesViewModel(private val repository: SerieRepository) : ViewModel() {
                                 value.data.filter { it.genreIds!!.contains(10759) }.toList().toState()
                             _romanceLiveData.value =
                                 value.data.filter { it.genreIds!!.contains(18) }.toList().toState()
+                        }
+
+                        is State.Error ->{
+                            _comedyaLiveData.value = value.message.asState()
+                            _highlightsLiveData.value = value.message.asState()
+                            _romanceLiveData.value = value.message.asState()
                         }
                     }
                 }

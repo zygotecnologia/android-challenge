@@ -17,6 +17,7 @@ import com.zygotecnologia.zygotv.common.visible
 import com.zygotecnologia.zygotv.databinding.FragmentSeriesBinding
 import com.zygotecnologia.zygotv.service.remote.data.serie.ShowResponse
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder.buildBackdropUrl
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -46,6 +47,9 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
 
         loadActions()
 
+
+
+
     }
 
     private fun loadActions() {
@@ -64,6 +68,8 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
                     binding.imageDest.load(backdrop)
                 }
                 is State.Error -> {
+                    binding.shimmerzinho.shimmerDest.stopShimmer()
+                    binding.shimmerzinho.shimmerDest.gone()
                     binding.root.showSnackBar(
                         binding.root,
                         getString(R.string.get_series_error),
@@ -90,6 +96,8 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
                     serieComedyAdapter.addItems(state.data)
                 }
                 is State.Error -> {
+                    binding.shimmerComedia.shimmerLayout.stopShimmer()
+                    binding.shimmerComedia.shimmerLayout.gone()
                     binding.root.showSnackBar(
                         binding.root,
                         getString(R.string.get_series_error),
@@ -112,6 +120,8 @@ class SerieFragment : Fragment(R.layout.fragment_series) {
                     serieRomanceAdapter.addItems(state.data)
                 }
                 is State.Error -> {
+                    binding.shimmerRomance.shimmerLayout.stopShimmer()
+                    binding.shimmerRomance.shimmerLayout.gone()
                     binding.root.showSnackBar(
                         binding.root,
                         getString(R.string.get_series_error),

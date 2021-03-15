@@ -5,6 +5,7 @@ import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +34,7 @@ private fun changeVisibility(view: View, visibility: Int) {
     view.visibility = visibility
 }
 
-fun View.showAnimate(parentView: LinearLayout) {
+fun View.showAnimate(parentView: ViewGroup) {
     val transition: Transition = Fade()
     transition.duration = 900
     transition.addTarget(this)

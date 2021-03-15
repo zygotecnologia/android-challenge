@@ -17,17 +17,27 @@ class SeasonRepositoryImp(private val apiService: ServiceApi) : SeasonRepository
             apiService.fetchShowAsync(id, "pt-br")
         }
 
-        val listSeasonUpdate = seasonResponse.data?.seasons?.mapIndexed { index, season ->
-            val episodes = safeCall {
-                apiService.fetchSeasonDetail(id, season.seasonNumber, "pt-br")
+        return when(seasonResponse){
+            is Resource.Success -> {
+                val listSeasonUpdate = seasonResponse.data?.seasons?.mapIndexed { index, season ->
+                    val episodes = safeCall {
+                        apiService.fetchSeasonDetail(id, season.seasonNumber, "pt-br")
+                    }
+                    return@mapIndexed seasonResponse.data.seasons[index].copy(seasonDetails = episodes.data)
+
+                }?.toList()
+
+                val seasons = listSeasonUpdate?.let { seasonResponse.data.copy(seasons = it) }.asResource<SeasonResponse>()
+
+                return flowOf(seasons)
             }
-            return@mapIndexed seasonResponse.data.seasons[index].copy(seasonDetails = episodes.data)
+            is Resource.Failed -> {
+                flowOf(Resource.Failed(seasonResponse.errorMessage!!))
+            }
+            else -> flowOf()
+        }
 
-        }?.toList()
 
-        val seasons = listSeasonUpdate?.let { seasonResponse.data.copy(seasons = it) }.asResource<SeasonResponse>()
-
-        return flowOf(seasons)
     }
 
 
