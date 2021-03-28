@@ -2,6 +2,7 @@ package com.zygotecnologia.zygotv.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.network.TmdbApi
@@ -9,41 +10,21 @@ import com.zygotecnologia.zygotv.network.TmdbClient
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
+class MainActivity : AppCompatActivity() {
 
-    override val coroutineContext: CoroutineContext
-        get() = SupervisorJob() + Dispatchers.IO
-
-    private val tmdbApi = TmdbClient.getInstance()
-
+    private lateinit var viewModel: MainViewModel
     private val showList: RecyclerView by lazy { findViewById(R.id.rv_show_list) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        launch(Dispatchers.IO) { loadShows() }
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        viewModel.loadShows().observe(this, {
+            showList.adapter = MainAdapter(it)
+        })
     }
 
-    private suspend fun loadShows() {
-        val genres =
-            tmdbApi
-                .fetchGenresAsync(TmdbApi.TMDB_API_KEY, "BR")
-                ?.genres
-                ?: emptyList()
-        val shows =
-            tmdbApi
-                .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
-                ?.results
-                ?.map { show ->
-                    show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
-                }
-                ?: emptyList()
 
-
-        withContext(Dispatchers.Main) {
-            showList.adapter = MainAdapter(shows)
-        }
-    }
 }
