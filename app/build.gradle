@@ -23,6 +23,23 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', 'TMDB_API_KEY_VALUE', "\"27490b1bf49c0e5ffaa07dfd947e9605\""
+            buildConfigField 'String', 'TMDB_API_KEY_QUERY', "\"api_key\""
+            buildConfigField 'String', 'TMDB_BASE_API_URL', "\"https://api.themoviedb.org/\""
+            buildConfigField 'String', 'TMDB_BASE_IMAGE_URL', "\"https://image.tmdb.org/t/p/original\""
+            buildConfigField 'String', 'TMDB_BASE_REGION', "\"BR\""
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+
+            buildConfigField 'String', 'TMDB_API_KEY_VALUE', "\"27490b1bf49c0e5ffaa07dfd947e9605\""
+            buildConfigField 'String', 'TMDB_API_KEY_QUERY', "\"api_key\""
+            buildConfigField 'String', 'TMDB_BASE_API_URL', "\"https://api.themoviedb.org/\""
+            buildConfigField 'String', 'TMDB_BASE_IMAGE_URL', "\"https://image.tmdb.org/t/p/original\""
+            buildConfigField 'String', 'TMDB_BASE_REGION', "\"BR\""
         }
     }
     compileOptions {
@@ -50,6 +67,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.11.0'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 

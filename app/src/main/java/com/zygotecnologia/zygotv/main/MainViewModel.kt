@@ -4,20 +4,16 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-
+    private val tmdbApi: TmdbApi
 ) : ViewModel(), LifecycleObserver {
 
     private val showList: MutableLiveData<List<Show>> by lazy { MutableLiveData<List<Show>>() }
-
-    private val tmdbApi = TmdbClient.getInstance()
 
     private val viewModelJob = SupervisorJob()
 
@@ -33,12 +29,12 @@ class MainViewModel @Inject constructor(
     private suspend fun fetchShows() {
         val genres =
                 tmdbApi
-                        .fetchGenresAsync(TmdbApi.TMDB_API_KEY, "BR")
+                        .fetchGenresAsync()
                         ?.genres
                         ?: emptyList()
         val shows =
                 tmdbApi
-                        .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
+                        .fetchPopularShowsAsync()
                         ?.results
                         ?.map { show ->
                             show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
