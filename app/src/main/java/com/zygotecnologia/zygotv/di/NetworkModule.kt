@@ -4,8 +4,8 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zygotecnologia.zygotv.BuildConfig
-import com.zygotecnologia.zygotv.model.network.TmdbApi
-import com.zygotecnologia.zygotv.model.network.TmdbConfigInterceptor
+import com.zygotecnologia.zygotv.model.network.services.TmdbApi
+import com.zygotecnologia.zygotv.model.network.interceptors.TmdbConfigInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

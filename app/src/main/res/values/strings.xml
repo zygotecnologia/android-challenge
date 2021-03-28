@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ZygoTV</string>
+
+    <string name="main_tv_progress_text">Carregando séries</string>
+
+    <string name="network_error_message">Não foi possível conectar-se a internet,\npor favor tente novamente</string>
+    <string name="generic_error_message">Ocorreu um erro inesperado,\npor favor tente novamente</string>
+
+    <string name="action_try_again">Tentar novamente</string>
 </resources>

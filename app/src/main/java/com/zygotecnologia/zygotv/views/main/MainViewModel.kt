@@ -6,7 +6,10 @@ import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.entity.Section
 import com.zygotecnologia.zygotv.model.entity.SectionType
 import com.zygotecnologia.zygotv.model.entity.Show
-import com.zygotecnologia.zygotv.model.network.TmdbApi
+import com.zygotecnologia.zygotv.model.network.ApiCaller
+import com.zygotecnologia.zygotv.model.network.NetworkResult
+import com.zygotecnologia.zygotv.model.network.services.TmdbApi
+import com.zygotecnologia.zygotv.utils.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -21,35 +24,77 @@ class MainViewModel @Inject constructor(
 ) : ViewModel(), LifecycleObserver {
 
     private val sectionList: MutableLiveData<List<Section>> by lazy { MutableLiveData<List<Section>>() }
+    private val _screenState: MutableLiveData<ScreenState> by lazy { MutableLiveData<ScreenState>() }
 
-    private val viewModelJob = SupervisorJob()
+    val screenState: LiveData<ScreenState>
+        get() = _screenState
 
     //Return section list from memory or call the API
     fun loadSections(): LiveData<List<Section>> {
         if (sectionList.value == null) {
-            viewModelScope.launch(Dispatchers.IO) {
-                fetchShowsAndGenres()
+            _screenState.value = ScreenState.LOADING
+
+            viewModelScope.launch {
+                fetchData()
             }
         }
         return sectionList
     }
 
     //Fetch shows and genres from API
-    private suspend fun fetchShowsAndGenres() {
-        val genres = tmdbApi
-            .fetchGenresAsync()
-            ?.genres
-            ?: emptyList()
+    private suspend fun fetchData() {
+        val genresResult = ApiCaller().safeApiCall(Dispatchers.IO) {
+            tmdbApi.fetchGenresAsync()
+        }
 
-        val shows = tmdbApi
-            .fetchPopularShowsAsync()
-            ?.results
-            ?.map { show ->
-                show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
+        when (genresResult) {
+            is NetworkResult.NetworkError -> {
+                withContext(Dispatchers.Main) {
+                    _screenState.value = ScreenState.NETWORK_ERROR
+                }
             }
-            ?: emptyList()
+            is NetworkResult.GenericError -> {
+                withContext(Dispatchers.Main) {
+                    _screenState.value = ScreenState.GENERIC_ERROR
+                }
+            }
+            is NetworkResult.Success -> {
+                val genres = genresResult.value
+                        ?.genres
+                        ?: emptyList()
 
-        buildSectionList(genres, shows.toMutableList())
+                fetchShows(genres)
+            }
+        }
+    }
+
+    private suspend fun fetchShows(genres: List<Genre>) {
+        val showsResult = ApiCaller().safeApiCall(Dispatchers.IO) {
+            tmdbApi.fetchPopularShowsAsync()
+        }
+
+        when (showsResult) {
+            is NetworkResult.NetworkError -> {
+                withContext(Dispatchers.Main) {
+                    _screenState.value = ScreenState.NETWORK_ERROR
+                }
+            }
+            is NetworkResult.GenericError -> {
+                withContext(Dispatchers.Main) {
+                    _screenState.value = ScreenState.GENERIC_ERROR
+                }
+            }
+            is NetworkResult.Success -> {
+                val shows = showsResult.value
+                        ?.results
+                        ?.map { show ->
+                            show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
+                        }
+                        ?: emptyList()
+
+                buildSectionList(genres, shows.toMutableList())
+            }
+        }
     }
 
     //Turn shows and genres in a section list
@@ -73,13 +118,13 @@ class MainViewModel @Inject constructor(
         sections.addAll(sortedShows)
 
         withContext(Dispatchers.Main) {
+            _screenState.value = ScreenState.SUCCESS
             sectionList.value = sections
         }
     }
 
     @MainThread
     override fun onCleared() {
-        viewModelJob.cancel()
         super.onCleared()
     }
 }

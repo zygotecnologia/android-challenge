@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.model.network
+package com.zygotecnologia.zygotv.model.network.services
 
 import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.entity.Show
