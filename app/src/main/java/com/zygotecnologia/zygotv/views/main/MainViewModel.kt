@@ -1,9 +1,9 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.views.main
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.*
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.network.TmdbApi
+import com.zygotecnologia.zygotv.model.entity.Show
+import com.zygotecnologia.zygotv.model.network.TmdbApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject

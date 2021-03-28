@@ -1,11 +1,10 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.model.network
 
 import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowResponse
+import com.zygotecnologia.zygotv.model.entity.Show
+import com.zygotecnologia.zygotv.model.network.response.ShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface TmdbApi {
 

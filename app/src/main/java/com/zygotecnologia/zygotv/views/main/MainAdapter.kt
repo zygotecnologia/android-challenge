@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.views.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.entity.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {

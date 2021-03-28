@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.model.network
 
 import com.zygotecnologia.zygotv.BuildConfig
 import okhttp3.Interceptor
