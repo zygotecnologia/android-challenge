@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.loadShows().observe(this, {
-            showList.adapter = MainAdapter(it)
+        viewModel.loadSections().observe(this, {
+            showList.adapter = SectionAdapter(it)
         })
     }
 
