@@ -27,7 +27,8 @@ class DetailsActivity : BaseViewStates() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val backButton: ImageView = findViewById(R.id.toolbar_back_button)
+        val backButton: ImageView = findViewById(R.id.app_toolbar_back_button)
+        backButton.visibility = View.VISIBLE
         backButton.setOnClickListener { finish() }
 
         this.showId = intent.getIntExtra(DETAILS_SHOW_ID_KEY, -1)

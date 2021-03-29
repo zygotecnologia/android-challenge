@@ -1,6 +1,5 @@
 package com.zygotecnologia.zygotv.views.main
 
-import androidx.annotation.MainThread
 import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.entity.Section
@@ -47,24 +46,14 @@ class MainViewModel @Inject constructor(
             tmdbApi.fetchGenresAsync()
         }
 
-        when (genresResult) {
-            is NetworkResult.NetworkError -> {
-                withContext(Dispatchers.Main) {
-                    _screenState.value = ScreenState.NETWORK_ERROR
-                }
-            }
-            is NetworkResult.GenericError -> {
-                withContext(Dispatchers.Main) {
-                    _screenState.value = ScreenState.GENERIC_ERROR
-                }
-            }
-            is NetworkResult.Success -> {
-                val genres = genresResult.value
-                        ?.genres
-                        ?: emptyList()
+        if (genresResult is NetworkResult.Success) {
+            val genres = genresResult.value
+                ?.genres
+                ?: emptyList()
 
-                fetchShows(genres)
-            }
+            fetchShows(genres)
+        } else {
+            onError(genresResult)
         }
     }
 
@@ -73,27 +62,17 @@ class MainViewModel @Inject constructor(
             tmdbApi.fetchPopularShowsAsync()
         }
 
-        when (showsResult) {
-            is NetworkResult.NetworkError -> {
-                withContext(Dispatchers.Main) {
-                    _screenState.value = ScreenState.NETWORK_ERROR
+        if (showsResult is NetworkResult.Success) {
+            val shows = showsResult.value
+                ?.results
+                ?.map { show ->
+                    show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
                 }
-            }
-            is NetworkResult.GenericError -> {
-                withContext(Dispatchers.Main) {
-                    _screenState.value = ScreenState.GENERIC_ERROR
-                }
-            }
-            is NetworkResult.Success -> {
-                val shows = showsResult.value
-                        ?.results
-                        ?.map { show ->
-                            show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
-                        }
-                        ?: emptyList()
+                ?: emptyList()
 
-                buildSectionList(genres, shows.toMutableList())
-            }
+            buildSectionList(genres, shows.toMutableList())
+        } else {
+            onError(showsResult)
         }
     }
 
@@ -123,8 +102,43 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    @MainThread
-    override fun onCleared() {
-        super.onCleared()
+    //Search
+    //TODO move to a better place to be reusable in details view
+    fun searchShow(query: String) {
+        viewModelScope.launch {
+            val searchResponse = ApiCaller().safeApiCall(Dispatchers.IO) {
+                tmdbApi.fetchSearchShowAsync(query)
+            }
+
+            if (searchResponse is NetworkResult.Success) {
+                val shows = searchResponse.value?.results ?: emptyList()
+
+                withContext(Dispatchers.Main) {
+                    //TODO create components and integrate with home screen
+                }
+            } else {
+                onError(searchResponse)
+            }
+        }
     }
+
+    //Generic error handle method
+    private suspend fun <T> onError(result: NetworkResult<T>) {
+        var state: ScreenState = ScreenState.GENERIC_ERROR
+
+        when (result) {
+            is NetworkResult.NetworkError -> {
+                state = ScreenState.NETWORK_ERROR
+            }
+            is NetworkResult.GenericError -> {
+                state = ScreenState.GENERIC_ERROR
+            }
+            else -> {}
+        }
+
+        withContext(Dispatchers.Main) {
+            _screenState.value = state
+        }
+    }
+
 }

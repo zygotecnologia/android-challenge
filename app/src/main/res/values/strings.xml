@@ -9,4 +9,7 @@
     <string name="action_try_again">Tentar novamente</string>
     <string name="app_name_start">Zygo</string>
     <string name="app_name_end">TV</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_placeholder">Buscar série</string>
 </resources>

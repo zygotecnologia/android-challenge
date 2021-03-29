@@ -7,68 +7,7 @@
     android:background="@color/background"
     tools:context=".views.main.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/app_toolbar"
-
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:padding="8dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/toolbar_zygo_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="@string/app_name_start"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif-medium"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="@string/app_name_end"
-                android:textSize="18sp"
-                android:textColor="@color/highlight_red"
-                android:fontFamily="sans-serif-medium"
-
-                app:layout_constraintStart_toEndOf="@id/toolbar_zygo_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:src="@drawable/ic_search"
-
-            android:layout_marginEnd="16dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/partial_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"

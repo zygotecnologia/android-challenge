@@ -6,6 +6,7 @@ import com.zygotecnologia.zygotv.model.entity.Show
 import com.zygotecnologia.zygotv.model.network.response.ShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface TmdbApi {
 
@@ -14,6 +15,11 @@ interface TmdbApi {
 
     @GET("$TMDB_API_VERSION/tv/popular")
     suspend fun fetchPopularShowsAsync(): ShowResponse?
+
+    @GET("$TMDB_API_VERSION/search/tv")
+    suspend fun fetchSearchShowAsync(
+        @Query("query") query: String
+    ): ShowResponse?
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(
