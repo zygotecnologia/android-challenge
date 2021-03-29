@@ -31,7 +31,7 @@ class DetailsActivity : BaseViewStates() {
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
         viewModel.loadShowId(showId).observe(this, {
-            Log.i("Test", it.toString())
+            detailsList.adapter = ShowDetailsAdapter(it)
         })
 
         viewModel.screenState.observe(this, {

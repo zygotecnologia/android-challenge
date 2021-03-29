@@ -14,5 +14,6 @@ data class Season(
     @Json(name = "season_number")
     val seasonNumber: Int?,
     @Json(name = "episodes")
-    val episodes: List<Episode>?
+    val episodes: List<Episode>?,
+    var showEpisodes: Boolean = false
 )
