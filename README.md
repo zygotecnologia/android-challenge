@@ -1,60 +1,26 @@
 # Zygo Programming Challenge - Android Developer
 
-Seu objetivo neste challenge é refatorar e adicionar novas features um pequeno aplicativo que lista Séries de TV.
+## Estrutura do projeto
 
-## Especificações
+O projeto usa como base a estrutura recomendada pelo Google em uma versão simplificada:
 
-O aplicativo possui apenas uma tela de listagem das séries, seu desafio consiste em:
+![Estrutura do Google](https://i.imgur.com/U0iuikB.png)
+(Estrutura do Google a esquerda, estrutura do projeto a direita)
 
-* Implementar a tela de Detalhes da Série;
-* Remover as chamadas de API da Main;
-* Implementar o novo layout seguindo as especificicações da nossa Designer;
-* Resolver o Crash que ocorre ao iniciar o aplicativo sem conexão à Internet;
+Como o projeto trabalha apenas com API sem uso de banco de dados não havia necessidade tanto da camada de repository como da camada de banco de dados.
 
-Acesse a [Documentação da API](https://developers.themoviedb.org/3/tv/get-tv-details) para qualquer dúvida!
+## Comunicação entre camadas
 
-**Serão avaliados:** apenas a organização do código, uso
-das ferramentas disponíveis, conhecimento e domínio sobre as linguagens e a
-capacidade de implementação das especificações
+Para comunicação entre as camadas é utilizado um combo de livedata e coroutine:
 
-## Requisitos do Novo Layout
-As novas telas podem ser encontradas no [Invision](https://isabellataques225701.invisionapp.com/console/share/6Z2ABNOYVB/549307395)
+![Estrutura do Google](https://i.imgur.com/eeAPJUa.png)
 
-* A Série em destaque deve ser a top 1 mais popular retornada pela API.
-* O restante dos resultados devem ser organizados por Gênero como mostrado no Layout
+Livedata tem uma integração incrível com a camada de view e suas bibliotecas, como a lyfecicle e a data binding, logo foi a escolha para comunicação com essa camada. 
 
-## Requisitos técnicos
+Coroutines são bem mais poderosas na hora de realizar trabalho assíncrono possuindo mais modificadores e opções de manipulação e gerência de dados, além de sua simplicidade, logo foi a escolhe para comunicação com a camada de serviços. Uma alternativa seria o Rx, porém como o projeto já estava operando com coroutines não faria sentido a troca.
 
-* O projeto atual foi desenvolvido em Kotlin, mas fique a vontade para converter para Java caso sinta-se mais confortável.
-* É permitido o uso de frameworks e bibliotecas externos, desde que dentro de um
-  sistema de gerenciamento de pacotes.
-* O código deve ser claro, preferencialmente documentado.
-* A arquitetura e design do sistema devem ser documentadas em um arquivo README
-  (brevemente, por favor).
+## Outros pontos sobre o projeto
 
-## Bônus!
+No projeto em alguns pontos foi iniciado uma estrutura de data binding, mas não houve um cenário que seu uso trouxesse grandes ganhos, logo não foi usado.
 
-Testes são muito bem vindos, sobrando qualquer tempo, faça-os e ganhe uma
-pontuação extra!
-
-Se você tiver ainda mais tempo e quiser arriscar, temos uma listinha sobre o que pode ser melhorado no projeto:
-* Remover a necessidade de passar os parâmetros `api_key` e `region` para toda a chamada da API;
-* Armazenar a chave de API em um local seguro;
-* Implementar a busca por nome das Séries;
-
-## Envio
-
-Faça um fork desse repositório para o seu GitHub, crie um branch de desenvolvimento e faça todos os seus Commits nesse branch. Ao terminar abra um Pull Request para a branch main e nos envie o link do mesmo. 
-
-### Disclaimer
-
-Completar a challenge não implica em nenhum vínculo nem obrigação da Zygo
-com você. Todo o código criado será descartado. Este challenge usa elementos
-reais de necessidades da Zygo apenas como uma maneira de avaliarmos sua
-aptidão para o cargo.
-
-### Final notes
-
-Valorizamos **muito** a capacidade de nos surpreender!
-
-Boa sorte :)
+Como biblioteca de DI foi usado o Hilt, pois além de ser uma biblioteca poderosa e simples é a biblioteca que tenho mais experiência de uso.
