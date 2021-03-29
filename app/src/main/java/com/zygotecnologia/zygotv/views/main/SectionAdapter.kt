@@ -7,15 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.databinding.ListSectionItemBinding
 import com.zygotecnologia.zygotv.model.entity.Section
+import com.zygotecnologia.zygotv.model.entity.Show
+import com.zygotecnologia.zygotv.utils.OnClickListener
 
-class SectionAdapter(private val sections: List<Section>) : RecyclerView.Adapter<SectionAdapter.ViewHolder>() {
+class SectionAdapter(
+    private val sections: List<Section>,
+    private val showClickListener: OnClickListener<Show>
+) : RecyclerView.Adapter<SectionAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = ListSectionItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false
         )
-        return ViewHolder(view, parent.context)
+        return ViewHolder(view, parent.context, showClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,7 +31,8 @@ class SectionAdapter(private val sections: List<Section>) : RecyclerView.Adapter
 
     class ViewHolder(
         private val binding: ListSectionItemBinding,
-        private val context: Context
+        private val context: Context,
+        private val showClickListener: OnClickListener<Show>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(section: Section) {
@@ -38,7 +44,7 @@ class SectionAdapter(private val sections: List<Section>) : RecyclerView.Adapter
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
-            binding.sectionItemList.adapter = ShowItemAdapter(section)
+            binding.sectionItemList.adapter = ShowItemAdapter(section, showClickListener)
         }
     }
 }

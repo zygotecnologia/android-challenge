@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.views.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,17 +10,19 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.model.entity.Show
+import com.zygotecnologia.zygotv.utils.BaseViewStates
+import com.zygotecnologia.zygotv.utils.OnClickListener
 import com.zygotecnologia.zygotv.utils.ScreenState
+import com.zygotecnologia.zygotv.views.details.DetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseViewStates(), OnClickListener<Show> {
 
     private lateinit var viewModel: MainViewModel
 
     private val sectionList: RecyclerView by lazy { findViewById(R.id.main_section_list) }
-    private val loadingContainer: ConstraintLayout by lazy { findViewById(R.id.main_progress_container) }
-    private val errorContainer: ConstraintLayout by lazy { findViewById(R.id.main_error_container) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,42 +32,25 @@ class MainActivity : AppCompatActivity() {
 
         //Observe sections change & call API
         viewModel.loadSections().observe(this, {
-            sectionList.adapter = SectionAdapter(it)
+            sectionList.adapter = SectionAdapter(it, this)
         })
 
         //Observe screen state to show/hide components
-        viewModel.screenState.observe(this, { state ->
-            when (state) {
-                ScreenState.LOADING -> {
-                    loadingContainer.visibility = View.VISIBLE
-                    sectionList.visibility = View.GONE
-                    errorContainer.visibility = View.GONE
-                }
-                ScreenState.NETWORK_ERROR -> onError(true)
-                ScreenState.GENERIC_ERROR -> onError(false)
-                ScreenState.SUCCESS -> {
-                    loadingContainer.visibility = View.GONE
-                    sectionList.visibility = View.VISIBLE
-                    errorContainer.visibility = View.GONE
-                }
-            }
+        viewModel.screenState.observe(this, {
+            super.onStateChange(it)
         })
     }
 
-    private fun onError(isNetworkError: Boolean) {
-        loadingContainer.visibility = View.GONE
-        sectionList.visibility = View.GONE
-        errorContainer.visibility = View.VISIBLE
+    override fun getContent(): View = sectionList
 
-        val text: TextView = findViewById(R.id.main_error_text)
-        val textStringId =
-                if (isNetworkError) R.string.network_error_message
-                else R.string.generic_error_message
+    override fun retryAction() {
+        viewModel.loadSections()
+    }
 
-        text.text = getString(textStringId)
-
-        val button: Button = findViewById(R.id.main_error_button)
-        button.setOnClickListener { viewModel.loadSections() }
+    override fun onClick(obj: Show) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra(DetailsActivity.DETAILS_SHOW_ID_KEY, obj.id)
+        startActivity(intent)
     }
 
 }

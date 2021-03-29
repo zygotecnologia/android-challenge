@@ -13,9 +13,11 @@ import com.zygotecnologia.zygotv.model.entity.Section
 import com.zygotecnologia.zygotv.model.entity.SectionType
 import com.zygotecnologia.zygotv.model.entity.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.OnClickListener
 
 class ShowItemAdapter(
-    private val section: Section
+    private val section: Section,
+    private val showClickListener: OnClickListener<Show>
 ) : RecyclerView.Adapter<ShowItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,7 +32,7 @@ class ShowItemAdapter(
             }
         }
 
-        return ViewHolder(view)
+        return ViewHolder(view, showClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -39,9 +41,14 @@ class ShowItemAdapter(
 
     override fun getItemCount() = section.shows.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(
+        itemView: View,
+        private val showClickListener: OnClickListener<Show>
+    ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(show: Show) {
+            itemView.setOnClickListener { showClickListener.onClick(show) }
+
             val text: TextView? = itemView.findViewById(R.id.list_show_name)
             text?.text = show.name
 
