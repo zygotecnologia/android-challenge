@@ -5,6 +5,7 @@
 O projeto usa como base a estrutura recomendada pelo Google em uma versão simplificada:
 
 ![Estrutura do Google](https://i.imgur.com/U0iuikB.png)
+
 (Estrutura do Google a esquerda, estrutura do projeto a direita)
 
 Como o projeto trabalha apenas com API sem uso de banco de dados não havia necessidade tanto da camada de repository como da camada de banco de dados.
