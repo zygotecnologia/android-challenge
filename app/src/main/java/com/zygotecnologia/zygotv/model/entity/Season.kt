@@ -12,5 +12,7 @@ data class Season(
     @Json(name = "overview")
     val overview: String?,
     @Json(name = "season_number")
-    val seasonNumber: Int?
+    val seasonNumber: Int?,
+    @Json(name = "episodes")
+    val episodes: List<Episode>?
 )
