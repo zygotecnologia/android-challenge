@@ -13,5 +13,5 @@ data class ShowResponse(
     val totalPages: Int?,
 
     @Json(name = "results")
-    val results: List<Show>?
+    val results: List<ShowDetails>?
 )

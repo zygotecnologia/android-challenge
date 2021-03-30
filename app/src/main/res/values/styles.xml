@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ZygoTv">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#DA2626</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style
+        name="Filmes">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#7F7F7F</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style
+        name="Series">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style
+        name="Favoritos">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#7F7F7F</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style
+        name="NomeDaSerie">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#DEFFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style
+        name="Temporada1">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#DEFFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style
+        name="PequenaSinopseDaT">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#8BFFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style
+        name="NomeDoEpisodio">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#DEFFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style
+        name="PequenaSinopseDoE">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#8BFFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style
+        name="ResultadosDaBusca">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#DEFFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style
+        name="Comedia">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#DEFFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

@@ -1,8 +1,6 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.api
 
-import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowResponse
+import com.zygotecnologia.zygotv.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -13,19 +11,35 @@ interface TmdbApi {
     suspend fun fetchGenresAsync(
         @Query("api_key") apiKey: String,
         @Query("region") region: String
-    ): GenreResponse?
+    ): GenreResponse
 
     @GET("$TMDB_API_VERSION/tv/popular")
     suspend fun fetchPopularShowsAsync(
         @Query("api_key") apiKey: String,
         @Query("region") region: String
-    ): ShowResponse?
+    ): ShowResponse
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(
-        @Query("api_key") apiKey: String,
-        @Path("tv_id") id: Int
-    ): Show?
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): ShowDetails
+
+    @GET("$TMDB_API_VERSION/tv/{tv_id}/season/{season_number}")
+    suspend fun fetchSeasonAsync(
+        @Path("tv_id") id: Int,
+        @Path("season_number") seasonNumber:Int,
+        @Query("api_key") apiKey: String
+    ):Season
+
+    @GET("$TMDB_API_VERSION/tv/{tv_id}/season/{season_number}/episode/{episode_number}")
+    suspend fun fetchEpisodeAsync(
+        @Path("tv_id") id: Int,
+        @Path("season_number") seasonNumber:Int,
+        @Path("episode_number") episodeNumber:Int,
+        @Query("api_key") apiKey: String
+    ): Episode
+
 
     companion object {
         private const val TMDB_API_VERSION = "3"

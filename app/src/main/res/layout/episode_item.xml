@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_title_episode_item"
+        style="@style/NomeDoEpisodio"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="96.55dp"
+        android:layout_marginBottom="36dp"
+        android:width="196.14dp"
+        android:height="24dp"
+        android:lineSpacingMultiplier="1.50"
+        android:text="Nome do episódio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_sinopse_episode_item"
+        style="@style/PequenaSinopseDoE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="256.1dp"
+        android:height="20dp"
+        android:layout_marginEnd="37dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="17dp"
+        android:layout_marginTop="1dp"
+        android:lineSpacingMultiplier="1.43"
+        android:text="Pequena sinópse do episódio aqui."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_episode_item"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_episode_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
