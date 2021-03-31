@@ -13,7 +13,6 @@ import javax.inject.Inject
 class DashboardViewModel @ViewModelInject @Inject constructor(private val dashboardUseCase: DashboardUseCase) :
     ViewModel() {
 
-    val mutableShow: MutableLiveData<ShowDetails> = MutableLiveData()
     val mutableListOfShowDetails: MutableLiveData<List<Show>> = MutableLiveData()
     val mutableListOsSeasonDetail: MutableLiveData<List<Season>> = MutableLiveData()
     val mutableSeasonAndEpisodeMap: MutableLiveData<HashMap<Season, List<Episode>>> =
@@ -63,7 +62,6 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
             dashboardUseCase.getShow(id, TmdbApi.TMDB_API_KEY).let {
                 when (it) {
                     is ApiResponse.Sucess -> {
-                        mutableShow.postValue(it.data)
                         loadSeasonDetails(it.data)
                     }
                     is ApiResponse.Failure -> mutableError.postValue(it.exception.message)

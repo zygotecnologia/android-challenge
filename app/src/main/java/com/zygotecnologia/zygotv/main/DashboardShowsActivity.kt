@@ -23,7 +23,7 @@ import com.zygotecnologia.zygotv.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
+class DashboardShowsActivity : AppCompatActivity(), FragmentListener {
 
     private val appTitleTextView: TextView by lazy { findViewById(R.id.tv_title_menu) }
     private val imgBackButtonView: ImageView by lazy { findViewById(R.id.bt_back_button_menu) }
@@ -37,7 +37,7 @@ class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_movies)
         setupToolbar()
-        setupView()
+        setupFirstFragment()
         setListeners()
     }
 
@@ -49,6 +49,11 @@ class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
         imgBackButtonView.setOnClickListener {
             fragmentChange(GenresFragment.newInstance())
         }
+
+        val title = SpannableString(getString(R.string.app_name))
+        val color = ForegroundColorSpan(Color.WHITE)
+        title.setSpan(color, 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        appTitleTextView.text = title
     }
 
     private fun setListeners() {
@@ -71,23 +76,25 @@ class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
             tvSeries.setTextColor(resources.getColor(R.color.not_seleted_tab_item))
             tvTabMovies.setTextColor(resources.getColor(R.color.not_seleted_tab_item))
         }
-
     }
 
     override fun onAttachFragment(fragment: Fragment) {
         super.onAttachFragment(fragment)
-        if (fragment is GenresFragment) {
-            fragment.callback = this
-        }
-        if (fragment is ShowFragment) {
-            fragment.callback = this
-            imgBackButtonView.visibility = View.VISIBLE
-        }
-        if (fragment is SearchFragment) {
-            fragment.callback = this
-            hideView()
-        } else {
-            showView()
+        when (fragment){
+            is GenresFragment -> {
+                fragment.callback = this
+                imgBackButtonView.visibility = View.GONE
+                showView()
+            }
+            is ShowFragment -> {
+                fragment.callback = this
+                imgBackButtonView.visibility = View.VISIBLE
+                showView()
+            }
+            is SearchFragment -> {
+                fragment.callback = this
+                hideView()
+            }
         }
     }
 
@@ -99,17 +106,8 @@ class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
         linearTab.visibility = View.GONE
     }
 
-    private fun setupView() {
-        val title = SpannableString(getString(R.string.app_name))
-        val color = ForegroundColorSpan(Color.WHITE)
-        title.setSpan(color, 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        appTitleTextView.text = title
-
+    private fun setupFirstFragment() {
         fragmentChange(GenresFragment.newInstance())
-    }
-
-    private fun filterShow(query: String?) {
-        fragmentChange(SearchFragment.newInstance(query))
     }
 
     private fun fragmentChange(fragment: Fragment) {
@@ -133,7 +131,6 @@ class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
             pbMovies.visibility = View.GONE
         }
         fragmentChange(ErrorFragment.newInstance())
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -144,20 +141,18 @@ class DashboardMoviesActivity : AppCompatActivity(), FragmentListener {
         val searchView: SearchView = searchItem?.actionView as SearchView
 
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                filterShow(query)
+                fragmentChange(SearchFragment.newInstance(query))
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
-
         }
+
         searchView.setOnQueryTextListener(queryTextListener)
-
-
         return true
     }
 }

@@ -46,7 +46,7 @@ class GenreAndShowAdapter(
             genreAndShows.listShowDetails?.let {
                     textView.text = genreAndShows.genreName
                     holderListOfShowDetails = genreAndShows.listShowDetails
-                    recyclerView.adapter = MainAdapter(it, this)
+                    recyclerView.adapter = ShowsAdapter(it, this)
             }
         }
 

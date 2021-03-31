@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dark_grey"
-        tools:context=".main.DashboardMoviesActivity">
+        tools:context=".main.DashboardShowsActivity">
 
         <ProgressBar
             android:id="@+id/pb_dash_movies"

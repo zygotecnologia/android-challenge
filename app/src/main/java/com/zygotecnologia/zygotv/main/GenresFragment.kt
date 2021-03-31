@@ -28,6 +28,8 @@ class GenresFragment : Fragment(), OnClickShowAndGenre {
     private lateinit var rvGenreAndShows: RecyclerView
     private lateinit var imgPosterShow: ImageView
     private lateinit var tvTitleShow: TextView
+    private var mostPopularShowDetails: Show? = null
+
 
 
     override fun onCreateView(
@@ -82,14 +84,22 @@ class GenresFragment : Fragment(), OnClickShowAndGenre {
 
     private fun mostPopularShow(it: List<Show>): Show? {
         var popularityRate = 0.00
-        var mostPopularShowDetails: Show? = null
         it.forEach {
             if (it.popularity > popularityRate) {
                 popularityRate = popularityRate
                 mostPopularShowDetails = it
             }
         }
+        setListeners()
         return mostPopularShowDetails
+    }
+
+    fun setListeners(){
+        imgPosterShow.setOnClickListener {
+            mostPopularShowDetails?.let { mostPopular ->
+                callback.nextFragment(ShowFragment.newInstance(mostPopular))
+            }
+        }
     }
 
     companion object {

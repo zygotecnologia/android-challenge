@@ -14,8 +14,8 @@ import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class MainAdapter(private val showDetails: List<Show>, onShowListener: OnShowListener) :
-    RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class ShowsAdapter(private val showDetails: List<Show>, onShowListener: OnShowListener) :
+    RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     private val onShowListener = onShowListener
 
@@ -42,7 +42,7 @@ class MainAdapter(private val showDetails: List<Show>, onShowListener: OnShowLis
             val imageView: ImageView = itemView.findViewById(iv_show_poster)
             Glide.with(itemView)
                 .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
+                .apply(RequestOptions().placeholder(R.drawable.show_item))
                 .into(imageView)
             itemView.setOnClickListener(this)
         }
