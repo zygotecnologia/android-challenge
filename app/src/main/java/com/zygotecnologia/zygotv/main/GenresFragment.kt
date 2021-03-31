@@ -108,7 +108,6 @@ class GenresFragment : Fragment(), OnClickShowAndGenre {
     }
 
     override fun onShowClick(show: Show) {
-        Toast.makeText(requireContext(), show.id.toString(), Toast.LENGTH_LONG).show()
         callback.nextFragment(ShowFragment.newInstance(show))
     }
 }

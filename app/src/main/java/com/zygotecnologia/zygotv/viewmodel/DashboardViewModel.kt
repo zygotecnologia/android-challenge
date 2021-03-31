@@ -48,7 +48,7 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
 
     fun loadListOfShows() {
         viewModelScope.launch {
-            dashboardUseCase.getPopularShow(TmdbApi.TMDB_API_KEY, "BR").let {
+            dashboardUseCase.getPopularShow(TmdbApi.TMDB_API_KEY, TmdbApi.TMDB_API_REGION).let {
                 when (it) {
                     is ApiResponse.Sucess -> mutableListOfShowDetails.postValue(it.data.results)
                     is ApiResponse.Failure -> mutableError.postValue(it.exception.message)
