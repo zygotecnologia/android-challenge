@@ -6,38 +6,41 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.model.Season
+import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowDetails
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
-private const val SHOW_KEY = "Show"
+private const val SHOW_KEY = "show_id"
 
 @AndroidEntryPoint
 class ShowFragment : Fragment() {
-    private lateinit var showDetail: ShowDetails
+    private lateinit var show: Show
 
     private lateinit var evSeasonsAndEpisodes: ExpandableListView
-    private lateinit var rvSelectedShow: RecyclerView
+    private lateinit var tvTitleSeletedShow: TextView
+    private lateinit var imgSeletedShow: ImageView
 
     internal lateinit var callback: FragmentListener
-
 
     private val viewModel: DashboardViewModel by viewModels()
 
     private var listOfSeasons: List<Season>? = null
-    lateinit var fragmentContext : FragmentActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            showDetail = it.getSerializable(SHOW_KEY) as ShowDetails
+            show = it.getSerializable(SHOW_KEY) as Show
         }
     }
 
@@ -50,38 +53,54 @@ class ShowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentContext = requireActivity()
-        setupView()
-        setupObservers()
-        showDetail.id?.let {
+        show.id?.let {
+            callback.showLoading(true)
             viewModel.loadShowDetails(it)
-
         }
+        setupView()
+        setShowMainInformation()
+        setupObservers()
+    }
+
+    private fun setShowMainInformation() {
+        tvTitleSeletedShow.text = show.name
+        Glide.with(this)
+            .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+            .apply(RequestOptions().placeholder(R.drawable.img_most_popular_show_custom))
+            .into(imgSeletedShow)
     }
 
     private fun setupObservers() {
-        viewModel.mutableListOsSeasonDetail.observe(fragmentContext, {
+        viewModel.mutableListOsSeasonDetail.observe(requireActivity(), {
             listOfSeasons = it
         })
 
-        viewModel.mutableSeasonAndEpisodeMap.observe(requireActivity() , { seasonsAndEpisodes ->
+        viewModel.mutableSeasonAndEpisodeMap.observe(requireActivity(), { seasonsAndEpisodes ->
             listOfSeasons?.let {
                 val adapter: ExpandableListAdapter =
                     SeasonAdapterBase(requireContext(), it, seasonsAndEpisodes)
                 evSeasonsAndEpisodes.setAdapter(adapter)
             }
+            callback.showLoading(false)
+        })
+
+        viewModel.mutableError.observe(requireActivity(), {
+            callback.showError()
         })
     }
 
     private fun setupView() {
         view?.let {
             evSeasonsAndEpisodes = it.findViewById(R.id.elv_selected_show)
+            tvTitleSeletedShow = it.findViewById(R.id.tv_title_selected_show)
+            imgSeletedShow = it.findViewById(R.id.img_show_seleted_show)
         }
     }
 
+
     companion object {
         @JvmStatic
-        fun newInstance(show: ShowDetails) =
+        fun newInstance(show: Show) =
             ShowFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(SHOW_KEY, show)

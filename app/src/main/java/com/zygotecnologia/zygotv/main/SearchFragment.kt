@@ -2,37 +2,33 @@ package com.zygotecnologia.zygotv.main
 
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.EditorInfo
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.model.ShowsSearch
+import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val SHOW_SEARCH = "show_search"
 private const val STRING_SEARCH = "string_search"
 
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), OnCLickShowListener {
     private lateinit var rvSearchView: RecyclerView
 
     internal lateinit var callback: FragmentListener
 
-    private lateinit var showsSearch:ShowsSearch
     private lateinit var query:String
 
-    //private lateinit var adapterSearch: ShowSearchedAdapter
+    private lateinit var listOfShowsSet: List<Show>
 
     private val viewModel: DashboardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            showsSearch = it.getSerializable(SHOW_SEARCH) as ShowsSearch
             query = it.getString(STRING_SEARCH)!!
         }
     }
@@ -47,15 +43,29 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
-        setupList()
+        setObservers()
+        callback.showLoading(true)
+        viewModel.loadListOfShows()
     }
 
-    private fun setupList() {
-        val listOfShowsFiltered = showsSearch.list?.filter { showDetail->
+    private fun setObservers() {
+        viewModel.mutableListOfShowDetails.observe(requireActivity(), { showList->
+            setupList(showList)
+            callback.showLoading(false)
+        })
+
+        viewModel.mutableError.observe(requireActivity(), {
+            callback.showError()
+        })
+    }
+
+    private fun setupList(listOfShowDetailsDetails: List<Show>?) {
+        val listOfShowsFiltered = listOfShowDetailsDetails?.filter { showDetail->
             showDetail.name.toString().toLowerCase().contains(query)
         }
         listOfShowsFiltered?.let {
-            rvSearchView.adapter = ShowSearchedAdapter(it)
+            listOfShowsSet = it
+            rvSearchView.adapter = ShowSearchedAdapter(it, this)
         }
 
     }
@@ -69,12 +79,16 @@ class SearchFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(query: String?, searchShow:ShowsSearch) =
+        fun newInstance(query: String?) =
             SearchFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(SHOW_SEARCH, searchShow)
                     putString(STRING_SEARCH, query)
                 }
             }
+    }
+
+    override fun onShowClick(position: Int) {
+        val clickedShowDetails = listOfShowsSet[position]
+        callback.nextFragment(ShowFragment.newInstance(clickedShowDetails))
     }
 }

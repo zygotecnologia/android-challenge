@@ -12,10 +12,9 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class MainAdapter(private val shows: List<ShowDetails>, onShowListener: OnShowListener) :
+class MainAdapter(private val showDetails: List<Show>, onShowListener: OnShowListener) :
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private val onShowListener = onShowListener
@@ -26,17 +25,17 @@ class MainAdapter(private val shows: List<ShowDetails>, onShowListener: OnShowLi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(shows[position])
+        holder.bind(showDetails[position])
     }
 
-    override fun getItemCount() = shows.size
+    override fun getItemCount() = showDetails.size
 
     class ViewHolder(itemView: View, onShowListener: OnShowListener) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private val onHolderShowListener = onShowListener
 
-        fun bind(show: ShowDetails) {
+        fun bind(show: Show) {
             val textView: TextView = itemView.findViewById(tv_show_title)
             textView.text = show.name
 

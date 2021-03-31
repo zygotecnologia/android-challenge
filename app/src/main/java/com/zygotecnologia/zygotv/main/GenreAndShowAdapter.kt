@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.model.GenreAndShows
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowDetails
 
-class GenreAndShowAdapter(private val list: List<GenreAndShows>, clickedShow: ClickedShow) :
+class GenreAndShowAdapter(
+    private val list: List<GenreAndShows>,
+    clickedShowShowAndGenre: OnClickShowAndGenre
+) :
     RecyclerView.Adapter<GenreAndShowAdapter.ViewHolder>() {
 
-    val clickedShow = clickedShow
+    val clickedShow = clickedShowShowAndGenre
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,23 +33,25 @@ class GenreAndShowAdapter(private val list: List<GenreAndShows>, clickedShow: Cl
     override fun getItemCount(): Int = list.size
 
 
-    class ViewHolder(itemView: View, clickedShow: ClickedShow) : RecyclerView.ViewHolder(itemView), OnShowListener {
+    class ViewHolder(itemView: View, clickedShowShowAndGenre: OnClickShowAndGenre) :
+        RecyclerView.ViewHolder(itemView), OnShowListener {
 
-        lateinit var holderListOfShow: List<ShowDetails>
-        private val holderClickedShow = clickedShow
+        lateinit var holderListOfShowDetails: List<Show>
+        private val holderClickedShow = clickedShowShowAndGenre
 
         fun bind(genreAndShows: GenreAndShows) {
             val textView: TextView = itemView.findViewById(R.id.tv_genre_fragment_genre)
-            textView.text = genreAndShows.genreName
+            val recyclerView: RecyclerView = itemView.findViewById(R.id.rv_show_list)
 
-            genreAndShows.listShow?.let {
-                holderListOfShow = genreAndShows.listShow
-                val recyclerView: RecyclerView = itemView.findViewById(R.id.rv_show_list)
-                recyclerView.adapter = MainAdapter(it, this)
+            genreAndShows.listShowDetails?.let {
+                    textView.text = genreAndShows.genreName
+                    holderListOfShowDetails = genreAndShows.listShowDetails
+                    recyclerView.adapter = MainAdapter(it, this)
             }
         }
+
         override fun onShowClick(position: Int) {
-            holderClickedShow.show(holderListOfShow[position])
+            holderClickedShow.onShowClick(holderListOfShowDetails[position])
         }
     }
 }

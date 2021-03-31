@@ -14,17 +14,14 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
     ViewModel() {
 
     val mutableShow: MutableLiveData<ShowDetails> = MutableLiveData()
-    val mutableListOfShow: MutableLiveData<List<ShowDetails>> = MutableLiveData()
+    val mutableListOfShowDetails: MutableLiveData<List<Show>> = MutableLiveData()
     val mutableListOsSeasonDetail: MutableLiveData<List<Season>> = MutableLiveData()
     val mutableSeasonAndEpisodeMap: MutableLiveData<HashMap<Season, List<Episode>>> =
         MutableLiveData()
     val mutableGenreAndShowList: MutableLiveData<List<GenreAndShows>> = MutableLiveData()
-    private val mutableError: MutableLiveData<String> = MutableLiveData()
+    val mutableError: MutableLiveData<String> = MutableLiveData()
     private val mutableIsLoading: MutableLiveData<Boolean> = MutableLiveData()
 
-    init {
-        loadGenres()
-    }
 
     fun loadGenres() {
         showLoading()
@@ -43,7 +40,6 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
                     is ApiResponse.Failure -> mutableError.postValue(it.exception.message)
                 }
             }
-            //setListMovies(genre, movies)
             movies?.let {
                 makeGenreAndShowList(genre, it)
             }
@@ -51,11 +47,11 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
     }
 
 
-    fun loadShow() {
+    fun loadListOfShows() {
         viewModelScope.launch {
             dashboardUseCase.getPopularShow(TmdbApi.TMDB_API_KEY, "BR").let {
                 when (it) {
-                    is ApiResponse.Sucess -> mutableListOfShow.postValue(it.data.results)
+                    is ApiResponse.Sucess -> mutableListOfShowDetails.postValue(it.data.results)
                     is ApiResponse.Failure -> mutableError.postValue(it.exception.message)
                 }
             }
@@ -90,7 +86,6 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
                             when (it) {
                                 is ApiResponse.Sucess -> {
                                     seasonList.add(it.data)
-                                    mutableListOsSeasonDetail.postValue(seasonList)
 
                                 }
                                 is ApiResponse.Failure -> mutableError.postValue(it.exception.message)
@@ -98,6 +93,7 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
                         }
                 }
             }
+            mutableListOsSeasonDetail.postValue(seasonList)
             loadEpisodesDetails(showDetails, seasonList)
         }
     }
@@ -105,9 +101,9 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
     fun loadEpisodesDetails(showDetails: ShowDetails, seasonDetailList: List<Season>) {
         val episodeList: MutableList<Episode> = mutableListOf()
         val seasonAndEpisodeMap: HashMap<Season, List<Episode>> = HashMap()
+        viewModelScope.launch {
         seasonDetailList.forEach { seasonDetailList ->
             seasonDetailList.episodes?.forEach { episode ->
-                viewModelScope.launch {
                     if (showDetails.id != null && seasonDetailList.seasonNumber != null && episode.episodeNumber != null) {
                         dashboardUseCase.getEpisode(
                             showDetails.id,
@@ -117,15 +113,15 @@ class DashboardViewModel @ViewModelInject @Inject constructor(private val dashbo
                         ).let {
                             when (it) {
                                 is ApiResponse.Sucess -> {
-                                    episodeList.add(episode)
+                                    episodeList.add(it.data)
                                 }
                                 is ApiResponse.Failure -> mutableError.postValue(it.exception.message)
                             }
                         }
                     }
                 }
-            }
             seasonAndEpisodeMap.put(seasonDetailList, episodeList)
+        }
             mutableSeasonAndEpisodeMap.postValue(seasonAndEpisodeMap)
         }
     }

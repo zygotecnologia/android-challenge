@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/img_item_selected_item"
@@ -41,12 +42,13 @@
         app:layout_constraintStart_toStartOf="@+id/tv_season_name_item_seletected_item"
         app:layout_constraintTop_toBottomOf="@+id/tv_season_name_item_seletected_item" />
 
-    <ExpandableListView
+    <ImageView
+        android:id="@+id/img_expandable_item_seleted_show"
         android:layout_width="24dp"
         android:layout_height="16dp"
         android:layout_marginStart="18.12dp"
         android:layout_marginBottom="28dp"
-        android:background="@drawable/ic_baseline_keyboard_arrow_down"
+        tools:background="@drawable/ic_arrow_down"
         app:layout_constraintBottom_toBottomOf="@+id/tv_sinopse_item_seletected_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -22,5 +22,7 @@ class Show(
     @Json(name = "overview")
     val overview: String?,
     @Json(name = "poster_path")
-    val posterPath: String?
+    val posterPath: String?,
+    @Json(name="popularity")
+    val popularity:Double
 ) : Serializable

@@ -1,6 +1,7 @@
 package com.zygotecnologia.zygotv.model
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class ShowResponse(
     @Json(name = "page")
@@ -13,5 +14,5 @@ data class ShowResponse(
     val totalPages: Int?,
 
     @Json(name = "results")
-    val results: List<ShowDetails>?
-)
+    val results: List<Show>?
+):Serializable
