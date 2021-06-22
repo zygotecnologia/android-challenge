@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.ui.shows
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,7 @@ import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class ShowsAdapter(private val shows: List<Show>) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
