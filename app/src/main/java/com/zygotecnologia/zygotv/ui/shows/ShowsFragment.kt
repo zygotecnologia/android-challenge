@@ -45,8 +45,8 @@ class ShowsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.showList.observe(requireActivity()) { shows ->
-            binding.rvShowList.adapter = ShowsAdapter(shows)
+        viewModel.genreList.observe(requireActivity()) { genres ->
+            binding.rvGenresList.adapter = GenresAdapter(genres)
         }
         viewModel.mostPopularShow.observe(requireActivity()) {
             binding.mostPopular = it

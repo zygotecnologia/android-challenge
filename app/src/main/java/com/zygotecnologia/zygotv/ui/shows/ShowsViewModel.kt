@@ -3,6 +3,7 @@ package com.zygotecnologia.zygotv.ui.shows
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbApi
 import com.zygotecnologia.zygotv.network.TmdbClient
@@ -13,6 +14,9 @@ class ShowsViewModel : ViewModel() {
 
     private val _showList = MutableLiveData<List<Show>>()
     val showList : LiveData<List<Show>> = _showList
+
+    private val _genreList = MutableLiveData<List<Genre>>()
+    val genreList : LiveData<List<Genre>> = _genreList
 
     private val _mostPopular = MutableLiveData<Show>()
     val mostPopularShow : LiveData<Show> = _mostPopular
@@ -36,8 +40,12 @@ class ShowsViewModel : ViewModel() {
                 }
                 ?: emptyList()
 
+        genres.forEach { genre ->
+            genre.shows = shows.filter { it.genreIds?.contains(genre.id) ?: false }
+        }
+
         withContext(Dispatchers.Main) {
-            _showList.value = shows
+            _genreList.value = genres
         }
     }
 
