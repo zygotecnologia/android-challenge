@@ -1,11 +1,11 @@
 package com.zygotecnologia.zygotv.ui.home
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -32,13 +32,14 @@ class HomeFragment : Fragment() {
             isSearchEnabled = false
         }
         setupObservers()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homePagerAdapter = HomePagerAdapter(parentFragmentManager, lifecycle)
+        homePagerAdapter = HomePagerAdapter(this)
 
         viewPager = view.findViewById(R.id.view_pager)
         viewPager.adapter = homePagerAdapter
@@ -82,9 +83,8 @@ class HomeFragment : Fragment() {
 }
 
 class HomePagerAdapter(
-    fm: FragmentManager,
-    lifecycle: Lifecycle
-): FragmentStateAdapter(fm, lifecycle) {
+    fm: Fragment
+): FragmentStateAdapter(fm) {
 
     override fun getItemCount() = 3 // FIXME magic number
 

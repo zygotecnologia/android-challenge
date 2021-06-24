@@ -8,33 +8,24 @@ import retrofit2.http.Query
 interface TmdbApi {
 
     @GET("$TMDB_API_VERSION/genre/tv/list")
-    suspend fun fetchGenresAsync(
-        @Query("api_key") apiKey: String,
-        @Query("region") region: String
-    ): GenreResponse?
+    suspend fun fetchGenresAsync(): GenreResponse?
 
     @GET("$TMDB_API_VERSION/tv/popular")
-    suspend fun fetchPopularShowsAsync(
-        @Query("api_key") apiKey: String,
-        @Query("region") region: String
-    ): ShowResponse?
+    suspend fun fetchPopularShowsAsync(): ShowResponse?
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(
-        @Path("tv_id") id: Int,
-        @Query("api_key") apiKey: String
+        @Path("tv_id") id: Int
     ): Show?
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}/season/{season_number}")
     suspend fun fetchSeasonAsync(
         @Path("tv_id") id: Int,
-        @Path("season_number") seasonNumber: Int,
-        @Query("api_key") apiKey: String
+        @Path("season_number") seasonNumber: Int
     ): Season?
 
     @GET("$TMDB_API_VERSION/search/tv")
     suspend fun fetchShowSearch(
-        @Query("api_key") apiKey: String,
         @Query("query") query: String
     ): Search?
 

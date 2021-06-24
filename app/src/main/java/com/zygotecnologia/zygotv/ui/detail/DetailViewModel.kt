@@ -5,19 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
+import com.zygotecnologia.zygotv.repository.ShowsRepository
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(
+    private val showsRepository: ShowsRepository
+) : ViewModel() {
 
     private val _show = MutableLiveData<Show>()
     val show : LiveData<Show> = _show
 
-    // TODO injection
-    private val tmdbApi = TmdbClient.getInstance()
-
     suspend fun loadShow(showId: Int) {
-        val show = tmdbApi.fetchShowAsync(showId, TmdbApi.TMDB_API_KEY)
+        val show = showsRepository.fetchShow(showId)
         show?.apply {
             this.numberOfSeasons?.let {
                 val seasons: ArrayList<Season> = ArrayList()
@@ -34,8 +32,6 @@ class DetailViewModel : ViewModel() {
     }
 
     private suspend fun loadSeason(showId: Int, seasonNumber: Int): Season? {
-        return tmdbApi.fetchSeasonAsync(
-           showId, seasonNumber, TmdbApi.TMDB_API_KEY
-        )
+        return showsRepository.fetchSeason(showId, seasonNumber)
     }
 }

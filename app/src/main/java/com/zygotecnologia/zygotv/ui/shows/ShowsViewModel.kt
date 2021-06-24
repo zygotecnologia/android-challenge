@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
+import com.zygotecnologia.zygotv.repository.ShowsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ShowsViewModel : ViewModel() {
+class ShowsViewModel(
+    private val showsRepository: ShowsRepository
+) : ViewModel() {
 
 //    private val _showList = MutableLiveData<List<Show>>()
 //    val showList : LiveData<List<Show>> = _showList
@@ -24,20 +25,17 @@ class ShowsViewModel : ViewModel() {
     private val _selectedShow = MutableLiveData<Int>()
     val selectedShow : LiveData<Int> = _selectedShow
 
-    // TODO injection
-    private val tmdbApi = TmdbClient.getInstance()
-
     suspend fun loadShows() {
 
         val genres =
-            tmdbApi
-                .fetchGenresAsync(TmdbApi.TMDB_API_KEY, "BR")
+            showsRepository
+                .fetchGenres()
                 ?.genres
                 ?: emptyList()
 
         val shows =
-            tmdbApi
-                .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
+            showsRepository
+                .fetchPopularShows()
                 ?.results
                 ?.map { show ->
                     show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
@@ -55,8 +53,8 @@ class ShowsViewModel : ViewModel() {
 
     suspend fun loadMostPopularShow() {
         val mostPopular =
-            tmdbApi
-                .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
+            showsRepository
+                .fetchPopularShows()
                 ?.results
                 ?.firstOrNull()
 
