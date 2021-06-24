@@ -7,6 +7,10 @@
         <variable
             name="mostPopular"
             type="com.zygotecnologia.zygotv.model.Show" />
+
+        <variable
+            name="vm"
+            type="com.zygotecnologia.zygotv.ui.shows.ShowsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +40,7 @@
             android:layout_height="112dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginBottom="24dp"
+            android:onClick="@{() -> vm.onShowClicked(mostPopular.id)}"
             app:backdropPath="@{mostPopular.backdropPath}"
             app:layout_constraintTop_toBottomOf="@+id/tvMostPopularName"
             app:layout_constraintStart_toStartOf="parent"

@@ -21,5 +21,9 @@ data class Show(
     @Json(name = "overview")
     val overview: String?,
     @Json(name = "poster_path")
-    val posterPath: String?
+    val posterPath: String?,
+    @Json(name = "number_of_seasons")
+    val numberOfSeasons: Int?,
+
+    var seasons: List<Season>?
 )

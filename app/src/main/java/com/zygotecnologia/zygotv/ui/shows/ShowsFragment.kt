@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ShowsFragmentBinding
+import com.zygotecnologia.zygotv.ui.home.HomeFragmentDirections
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,7 +23,6 @@ class ShowsFragment : Fragment() {
     private val viewModel: ShowsViewModel by viewModel()
 
     private var _binding: ShowsFragmentBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +35,7 @@ class ShowsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = ShowsFragmentBinding.inflate(inflater, container, false)
+        binding.vm = viewModel
         lifecycleScope.launch {
             viewModel.loadShows()
             viewModel.loadMostPopularShow()
@@ -50,6 +54,10 @@ class ShowsFragment : Fragment() {
         }
         viewModel.mostPopularShow.observe(requireActivity()) {
             binding.mostPopular = it
+        }
+        viewModel.selectedShow.observe(requireActivity()) {
+            val direction = HomeFragmentDirections.actionHomeFragmentToShowDetailFragment(it)
+            binding.root.findNavController().navigate(direction)
         }
     }
 }

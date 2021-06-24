@@ -12,8 +12,8 @@ import kotlinx.coroutines.withContext
 
 class ShowsViewModel : ViewModel() {
 
-    private val _showList = MutableLiveData<List<Show>>()
-    val showList : LiveData<List<Show>> = _showList
+//    private val _showList = MutableLiveData<List<Show>>()
+//    val showList : LiveData<List<Show>> = _showList
 
     private val _genreList = MutableLiveData<List<Genre>>()
     val genreList : LiveData<List<Genre>> = _genreList
@@ -21,6 +21,10 @@ class ShowsViewModel : ViewModel() {
     private val _mostPopular = MutableLiveData<Show>()
     val mostPopularShow : LiveData<Show> = _mostPopular
 
+    private val _selectedShow = MutableLiveData<Int>()
+    val selectedShow : LiveData<Int> = _selectedShow
+
+    // TODO injection
     private val tmdbApi = TmdbClient.getInstance()
 
     suspend fun loadShows() {
@@ -61,5 +65,9 @@ class ShowsViewModel : ViewModel() {
                 _mostPopular.value = it
             }
         }
+    }
+
+    fun onShowClicked(showId: Int) {
+        _selectedShow.value = showId
     }
 }

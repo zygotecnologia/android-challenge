@@ -1,34 +1,72 @@
 package com.zygotecnologia.zygotv.ui.detail
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zygotecnologia.zygotv.R
+import android.widget.ExpandableListAdapter
+import android.widget.ListAdapter
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import com.zygotecnologia.zygotv.databinding.DetailFragmentBinding
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = DetailFragment()
+        private const val SHOW_ID_ARG = "showId"
+        fun newInstance(showId: Int) = DetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(SHOW_ID_ARG, showId)
+                }
+            }
     }
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModel()
+
+    private var _binding: DetailFragmentBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupObservers()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+    ): View {
+        _binding = DetailFragmentBinding.inflate(inflater, container, false)
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                root.findNavController().navigateUp()
+            }
+        }
+        val showId = arguments?.getInt(SHOW_ID_ARG)
+        showId?.let {
+            lifecycleScope.launch { viewModel.loadShow(it) }
+        }
+        return binding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        // FIXME melhor lugar para inicializar view model?
-        // TODO: Use the ViewModel
-    }
+    private fun setupObservers() {
+        viewModel.show.observe(requireActivity()) {
+            binding.show = it
 
+            it.seasons?.let { seasonList ->
+                val adapter = SeasonsAdapter(requireContext(), seasonList)
+                binding.elvSeasons.apply {
+                    setAdapter(adapter)
+                    setOnGroupExpandListener {
+
+                    }
+                    setOnGroupCollapseListener {
+
+                    }
+                }
+            }
+        }
+    }
 }

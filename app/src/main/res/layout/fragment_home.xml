@@ -16,8 +16,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:theme="@style/Theme.ZygoTV.ToolbarTheme"
                 app:popupTheme="@style/Theme.ZygoTV.PopupOverlay"
-                app:theme="@style/Theme.ZygoTV.ToolbarTheme"
                 app:title="ZygoTV">
                 <TextView
                     android:layout_width="match_parent"

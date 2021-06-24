@@ -28,6 +28,7 @@ class HomeFragment : Fragment() {
         homePagerAdapter = HomePagerAdapter(parentFragmentManager, lifecycle)
         viewPager = view.findViewById(R.id.view_pager)
         viewPager.adapter = homePagerAdapter
+        viewPager.isSaveEnabled = true
 
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
