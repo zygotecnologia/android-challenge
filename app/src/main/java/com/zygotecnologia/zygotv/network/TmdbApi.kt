@@ -1,9 +1,6 @@
 package com.zygotecnologia.zygotv.network
 
-import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Season
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowResponse
+import com.zygotecnologia.zygotv.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -34,6 +31,12 @@ interface TmdbApi {
         @Path("season_number") seasonNumber: Int,
         @Query("api_key") apiKey: String
     ): Season?
+
+    @GET("$TMDB_API_VERSION/search/tv")
+    suspend fun fetchShowSearch(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
+    ): Search?
 
     companion object {
         private const val TMDB_API_VERSION = "3"

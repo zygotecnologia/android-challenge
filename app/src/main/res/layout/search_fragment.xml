@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <variable
-            name="isSearchEnabled"
-            type="boolean" />
-    </data>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_root"
@@ -23,37 +18,40 @@
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:isSearchEnabled="@{isSearchEnabled}"
-                app:isSearchButtonEnabled="@{true}" />
+                app:isSearchEnabled="@{false}"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize">
+            android:background="@color/black">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
+            <TextView
+                android:id="@+id/tvSearchResultTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                app:tabTextColor="@color/white"
-                app:tabIndicatorColor="@color/white"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Resultados da busca"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearchResults"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                app:layout_constraintTop_toBottomOf="@+id/tvSearchResultTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tab_layout"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                tools:listitem="@layout/search_result_item"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

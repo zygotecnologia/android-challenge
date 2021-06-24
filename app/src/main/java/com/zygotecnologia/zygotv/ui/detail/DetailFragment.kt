@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListAdapter
-import android.widget.ListAdapter
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.zygotecnologia.zygotv.databinding.DetailFragmentBinding
@@ -17,11 +15,6 @@ class DetailFragment : Fragment() {
 
     companion object {
         private const val SHOW_ID_ARG = "showId"
-        fun newInstance(showId: Int) = DetailFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(SHOW_ID_ARG, showId)
-                }
-            }
     }
 
     private val viewModel: DetailViewModel by viewModel()
@@ -40,7 +33,7 @@ class DetailFragment : Fragment() {
     ): View {
         _binding = DetailFragmentBinding.inflate(inflater, container, false)
         binding.apply {
-            toolbar.setNavigationOnClickListener {
+            toolbar.ivBackButton.setOnClickListener {
                 root.findNavController().navigateUp()
             }
         }

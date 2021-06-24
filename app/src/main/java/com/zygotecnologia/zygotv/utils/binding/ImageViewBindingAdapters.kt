@@ -15,7 +15,6 @@ object ImageViewBindingAdapters {
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.image_placeholder)
-            .centerCrop()
 
         Glide.with(context)
             .load(backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
