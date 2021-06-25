@@ -1,18 +1,44 @@
 package com.zygotecnologia.zygotv.repository
 
+import android.util.Log
 import com.zygotecnologia.zygotv.model.*
 import com.zygotecnologia.zygotv.network.TmdbApi
+import retrofit2.HttpException
+import retrofit2.await
+import java.io.IOException
+import java.net.SocketTimeoutException
 
 class ShowsRepository(
     private val tmdbApi: TmdbApi
 ) {
 
     suspend fun fetchGenres(): GenreResponse? {
-        return tmdbApi.fetchGenresAsync()
+//        try {
+            return tmdbApi.fetchGenresAsync()
+//        } catch (e: Exception) {
+//            when(e) {
+//                is HttpException -> {
+//                    Log.e("zygo", "http exception")
+//                }
+//                is SocketTimeoutException -> {
+//                    Log.e("zygo", "socket timeout exception")
+//                }
+//                is IOException -> {
+//                    Log.e("zygo", "io exception")
+//                }
+//                else -> Log.e("zygo", "unknown exception")
+//            }
+//            throw e
+//        }
     }
 
     suspend fun fetchPopularShows(): ShowResponse? {
-        return tmdbApi.fetchPopularShowsAsync()
+//        try {
+            return tmdbApi.fetchPopularShowsAsync()
+//        } catch (e: Exception) {
+//            Log.e("zygo", "exception", e)
+//            throw e
+//        }
     }
 
     suspend fun fetchShow(showId: Int): Show? {
