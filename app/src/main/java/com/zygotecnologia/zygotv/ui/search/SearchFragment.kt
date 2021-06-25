@@ -43,11 +43,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.results.observe(requireActivity()) {
-            if(it != null) {
-                binding.rvSearchResults.adapter = SearchAdapter(it)
-            } else {
-                // TODO no results
+        viewModel.results.observe(requireActivity()) { results ->
+            binding.hasResults = !results.isNullOrEmpty()
+            if(!results.isNullOrEmpty()) {
+                binding.rvSearchResults.adapter = SearchAdapter(results)
             }
         }
 

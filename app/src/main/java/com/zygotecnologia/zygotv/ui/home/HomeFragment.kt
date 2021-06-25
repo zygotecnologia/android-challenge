@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -68,8 +68,14 @@ class HomeFragment : Fragment() {
         binding.toolbar.searchSV.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
+
+                    binding.toolbar.searchSV.apply {
+                        setQuery("", false)
+                        clearFocus()
+                    }
+
                     val direction = HomeFragmentDirections.actionHomeFragmentToShowSearchFragment(it)
-                    binding.toolbar.searchSV.findNavController().navigate(direction)
+                    findNavController().navigate(direction)
                 }
                 return false
             }
@@ -86,11 +92,10 @@ class HomePagerAdapter(
     fm: Fragment
 ): FragmentStateAdapter(fm) {
 
-    override fun getItemCount() = 3 // FIXME magic number
+    override fun getItemCount() = 3
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            // TODO aba 0 (filmes) e aba 2 (favoritos)
             1 -> ShowsFragment.newInstance()
             else -> PlaceHolderFragment()
         }
