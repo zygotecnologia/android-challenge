@@ -3,7 +3,6 @@ package com.zygotecnologia.zygotv.model
 import com.squareup.moshi.Json
 
 data class Show(
-    val genres: List<Genre>?,
     @Json(name = "original_name")
     val originalName: String?,
     @Json(name = "genre_ids")
