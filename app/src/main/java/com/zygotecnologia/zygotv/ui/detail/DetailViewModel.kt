@@ -6,23 +6,26 @@ import androidx.lifecycle.ViewModel
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.utils.SingleLiveEvent
 
 class DetailViewModel(
     private val showsRepository: ShowsRepository
 ) : ViewModel() {
 
-    private val _show = MutableLiveData<Show>()
+    private val _show = SingleLiveEvent<Show>()
     val show : LiveData<Show> = _show
 
-    private val _loading = MutableLiveData(false)
+    private val _loading = SingleLiveEvent<Boolean>()
     val loading : LiveData<Boolean> = _loading
 
-    private val _error = MutableLiveData(false)
+    private val _error = SingleLiveEvent<Boolean>()
     val error : LiveData<Boolean> = _error
 
     suspend fun loadShow(showId: Int) {
         try {
+
             _loading.value = true
+
             val show = showsRepository.fetchShow(showId)
             show?.apply {
                 this.numberOfSeasons?.let {

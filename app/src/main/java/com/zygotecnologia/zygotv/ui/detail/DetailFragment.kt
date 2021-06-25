@@ -54,7 +54,7 @@ class DetailFragment : Fragment() {
         }
 
         viewModel.loading.observe(requireActivity()) {
-            binding.loading.isLoading = it
+            binding.isLoading = it
         }
 
         viewModel.error.observe(requireActivity()) { error ->

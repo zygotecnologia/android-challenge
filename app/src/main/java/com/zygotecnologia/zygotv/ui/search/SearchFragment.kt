@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.databinding.SearchFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,15 +18,14 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModel()
 
-    private var _binding: SearchFragmentBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: SearchFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SearchFragmentBinding.inflate(inflater, container, false)
+        binding = SearchFragmentBinding.inflate(inflater, container, false)
         binding.toolbar.apply {
             isBackEnabled = true
             ivBackButton.setOnClickListener {
@@ -39,8 +39,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val searchQuery = arguments?.getString(SEARCH_QUERY_ARG)
-        searchQuery?.let { viewModel.searchTvShow(searchQuery) }
+        startFetchSearching()
     }
 
     private fun setupObservers() {
@@ -51,5 +50,23 @@ class SearchFragment : Fragment() {
                 // TODO no results
             }
         }
+
+        viewModel.loading.observe(requireActivity()) {
+            binding.isLoading = it
+        }
+
+        viewModel.error.observe(requireActivity()) { error ->
+            if(error) {
+                val mySnackbar = Snackbar
+                    .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Tentar Novamente") { startFetchSearching() }
+                mySnackbar.show()
+            }
+        }
+    }
+
+    private fun startFetchSearching() {
+        val searchQuery = arguments?.getString(SEARCH_QUERY_ARG)
+        searchQuery?.let { viewModel.searchTvShow(searchQuery) }
     }
 }
