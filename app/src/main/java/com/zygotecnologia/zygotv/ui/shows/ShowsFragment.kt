@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.databinding.ShowsFragmentBinding
 import com.zygotecnologia.zygotv.ui.home.HomeFragmentDirections
@@ -21,29 +21,24 @@ class ShowsFragment : Fragment() {
 
     private val viewModel: ShowsViewModel by viewModel()
 
-    private var _binding: ShowsFragmentBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ShowsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ShowsFragmentBinding.inflate(inflater, container, false)
-        binding.vm = viewModel
-        lifecycleScope.launch {
-            viewModel.loadShows()
+        binding = ShowsFragmentBinding.inflate(inflater, container, false)
+        binding.apply {
+            vm = viewModel
+            //lifecycleOwner = this@ShowsFragment
         }
+        setupObservers()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupObservers()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        lifecycleScope.launch { viewModel.loadShows() }
     }
 
     private fun setupObservers() {
@@ -53,7 +48,7 @@ class ShowsFragment : Fragment() {
 
         viewModel.selectedShow.observe(requireActivity()) {
             val direction = HomeFragmentDirections.actionHomeFragmentToShowDetailFragment(it)
-            binding.root.findNavController().navigate(direction)
+            findNavController().navigate(direction)
         }
 
         viewModel.mostPopularShow.observe(requireActivity()) {
@@ -64,13 +59,15 @@ class ShowsFragment : Fragment() {
             binding.isLoading = it
         }
 
-        viewModel.error.observe(requireActivity()) {
-            val mySnackbar = Snackbar
-                .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Tentar Novamente") {
-                    lifecycleScope.launch { viewModel.loadShows() }
-                }
-            mySnackbar.show()
+        viewModel.error.observe(requireActivity()) { error ->
+            if(error) {
+                val mySnackbar = Snackbar
+                    .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Tentar Novamente") {
+                        lifecycleScope.launch { viewModel.loadShows() }
+                    }
+                mySnackbar.show()
+            }
         }
     }
 }

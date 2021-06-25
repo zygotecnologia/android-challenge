@@ -14,20 +14,33 @@ class DetailViewModel(
     private val _show = MutableLiveData<Show>()
     val show : LiveData<Show> = _show
 
-    suspend fun loadShow(showId: Int) {
-        val show = showsRepository.fetchShow(showId)
-        show?.apply {
-            this.numberOfSeasons?.let {
-                val seasons: ArrayList<Season> = ArrayList()
-                for (s in 1..it) {
-                    loadSeason(showId, s)?.let { season ->
-                        seasons.add(season)
-                    }
-                }
-                this.seasons = seasons
-            }
+    private val _loading = MutableLiveData(false)
+    val loading : LiveData<Boolean> = _loading
 
-            _show.value = this
+    private val _error = MutableLiveData(false)
+    val error : LiveData<Boolean> = _error
+
+    suspend fun loadShow(showId: Int) {
+        try {
+            _loading.value = true
+            val show = showsRepository.fetchShow(showId)
+            show?.apply {
+                this.numberOfSeasons?.let {
+                    val seasons: ArrayList<Season> = ArrayList()
+                    for (s in 1..it) {
+                        loadSeason(showId, s)?.let { season ->
+                            seasons.add(season)
+                        }
+                    }
+                    this.seasons = seasons
+                }
+
+                _loading.value = false
+                _show.value = this
+            }
+        } catch (e: Exception) {
+            _loading.value = false
+            _error.value = true
         }
     }
 
