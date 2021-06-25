@@ -97,4 +97,12 @@ class HomePagerAdapter(
     }
 }
 
-class PlaceHolderFragment: Fragment()
+class PlaceHolderFragment: Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.placeholder_fragment, container)
+    }
+}
