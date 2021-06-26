@@ -38,13 +38,17 @@ class ShowsViewModel(
                     ?: emptyList()
 
             val genres =
+                //                        genre.copy(shows = shows.filter { it.genreIds?.contains(genre.id) ?: false })
                 showsRepository
                     .fetchGenres()
-                    ?.genres
-                    ?.map { genre ->
-                        genre.copy(shows = shows.filter { it.genreIds?.contains(genre.id) ?: false })
-                    }
-                    ?.filter { genre -> !genre.shows.isNullOrEmpty() }
+                    ?.genres?.mapNotNull { genre ->
+//                        genre.copy(shows = shows.filter { it.genreIds?.contains(genre.id) ?: false })
+                        genre.id?.let { id ->
+                            val genreShows =
+                                showsRepository.fetchShowsByGenresId(listOf(id.toString()))
+                            genre.copy(shows = genreShows?.results)
+                        }
+                    } // { genre -> !genre?.shows.isNullOrEmpty() }
                     ?: emptyList()
 
             presentShows(shows, genres)

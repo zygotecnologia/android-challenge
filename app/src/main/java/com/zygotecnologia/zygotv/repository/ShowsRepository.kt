@@ -13,32 +13,15 @@ class ShowsRepository(
 ) {
 
     suspend fun fetchGenres(): GenreResponse? {
-//        try {
-            return tmdbApi.fetchGenresAsync()
-//        } catch (e: Exception) {
-//            when(e) {
-//                is HttpException -> {
-//                    Log.e("zygo", "http exception")
-//                }
-//                is SocketTimeoutException -> {
-//                    Log.e("zygo", "socket timeout exception")
-//                }
-//                is IOException -> {
-//                    Log.e("zygo", "io exception")
-//                }
-//                else -> Log.e("zygo", "unknown exception")
-//            }
-//            throw e
-//        }
+        return tmdbApi.fetchGenresAsync()
     }
 
     suspend fun fetchPopularShows(): ShowResponse? {
-//        try {
-            return tmdbApi.fetchPopularShowsAsync()
-//        } catch (e: Exception) {
-//            Log.e("zygo", "exception", e)
-//            throw e
-//        }
+        return tmdbApi.fetchPopularShowsAsync()
+    }
+
+    suspend fun fetchShowsByGenresId(genresId: List<String>): ShowResponse? {
+        return tmdbApi.fetchShowsByGenre(genresId.joinToString(","))
     }
 
     suspend fun fetchShow(showId: Int): Show? {

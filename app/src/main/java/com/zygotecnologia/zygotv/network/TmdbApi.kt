@@ -7,30 +7,35 @@ import retrofit2.http.Query
 
 interface TmdbApi {
 
-    @GET("$TMDB_API_VERSION/genre/tv/list")
+    @GET("genre/tv/list")
     suspend fun fetchGenresAsync(): GenreResponse?
 
-    @GET("$TMDB_API_VERSION/tv/popular")
+    @GET("tv/popular")
     suspend fun fetchPopularShowsAsync(): ShowResponse?
 
-    @GET("$TMDB_API_VERSION/tv/{tv_id}")
+    @GET("discover/tv")
+    suspend fun fetchShowsByGenre(
+        @Query("with_genres") genres: String
+    ): ShowResponse?
+
+    @GET("tv/{tv_id}")
     suspend fun fetchShowAsync(
         @Path("tv_id") id: Int
     ): Show?
 
-    @GET("$TMDB_API_VERSION/tv/{tv_id}/season/{season_number}")
+    @GET("tv/{tv_id}/season/{season_number}")
     suspend fun fetchSeasonAsync(
         @Path("tv_id") id: Int,
         @Path("season_number") seasonNumber: Int
     ): Season?
 
-    @GET("$TMDB_API_VERSION/search/tv")
+    @GET("search/tv")
     suspend fun fetchShowSearch(
         @Query("query") query: String
     ): Search?
 
     companion object {
-        private const val TMDB_API_VERSION = "3"
+        const val TMDB_API_VERSION = "/3/"
 
         const val TMDB_BASE_URL = "https://api.themoviedb.org"
         const val TMDB_API_QUERY = "api_key"
