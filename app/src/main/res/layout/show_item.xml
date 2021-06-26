@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/ivShowPoster"
-        android:layout_width="132dp"
-        android:layout_height="112dp"
+        android:layout_width="100dp"
+        android:layout_height="132dp"
         android:layout_marginVertical="8dp"
         android:scaleType="fitStart"
         android:src="@drawable/image_placeholder"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:layout_marginTop="8dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:lines="1"
         android:ellipsize="end"
         android:gravity="start"

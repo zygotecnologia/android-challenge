@@ -41,17 +41,13 @@ class ShowsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.genreList.observe(requireActivity()) { genres ->
-            binding.rvGenresList.adapter = GenresAdapter(genres)
+        viewModel.showsContent.observe(requireActivity()) { content ->
+            binding.rvGenresList.adapter = GenresAdapter(content.first, content.second)
         }
 
         viewModel.selectedShow.observe(requireActivity()) {
             val direction = HomeFragmentDirections.actionHomeFragmentToShowDetailFragment(it)
             findNavController().navigate(direction)
-        }
-
-        viewModel.mostPopularShow.observe(requireActivity()) {
-            binding.mostPopular = it
         }
 
         viewModel.loading.observe(requireActivity()) {

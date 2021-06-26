@@ -11,11 +11,8 @@ class ShowsViewModel(
     private val showsRepository: ShowsRepository
 ): ViewModel() {
 
-    private val _genreList = SingleLiveEvent<List<Genre>>()
-    val genreList : LiveData<List<Genre>> = _genreList
-
-    private val _mostPopular = SingleLiveEvent<Show>()
-    val mostPopularShow : LiveData<Show> = _mostPopular
+    private val _showsContent = SingleLiveEvent<Pair<Show, List<Genre>>>()
+    val showsContent : LiveData<Pair<Show, List<Genre>>> = _showsContent
 
     private val _selectedShow = SingleLiveEvent<Int>()
     val selectedShow : LiveData<Int> = _selectedShow
@@ -38,23 +35,22 @@ class ShowsViewModel(
                     ?: emptyList()
 
             val genres =
-                //                        genre.copy(shows = shows.filter { it.genreIds?.contains(genre.id) ?: false })
                 showsRepository
                     .fetchGenres()
                     ?.genres?.mapNotNull { genre ->
-//                        genre.copy(shows = shows.filter { it.genreIds?.contains(genre.id) ?: false })
                         genre.id?.let { id ->
                             val genreShows =
                                 showsRepository.fetchShowsByGenresId(listOf(id.toString()))
                             genre.copy(shows = genreShows?.results)
                         }
-                    } // { genre -> !genre?.shows.isNullOrEmpty() }
+                    }
                     ?: emptyList()
 
             presentShows(shows, genres)
         } catch (e: Exception) {
-            _loading.value = false
             _error.value = true
+        } finally {
+            _loading.value = false
         }
     }
 
@@ -62,14 +58,9 @@ class ShowsViewModel(
         _selectedShow.value = showId
     }
 
-    private fun presentShows(
-        shows: List<Show>,
-        genres: List<Genre>
-    ) {
-        _loading.value = false
-        _genreList.value = genres
+    private fun presentShows(shows: List<Show>, genres: List<Genre>) {
         shows.firstOrNull()?.let {
-            _mostPopular.value = it
+            _showsContent.value = Pair(it, genres)
         }
     }
 }
