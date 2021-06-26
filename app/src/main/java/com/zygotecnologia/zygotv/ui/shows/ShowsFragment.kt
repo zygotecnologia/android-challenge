@@ -30,7 +30,6 @@ class ShowsFragment : Fragment() {
         binding = ShowsFragmentBinding.inflate(inflater, container, false)
         binding.apply {
             vm = viewModel
-            //lifecycleOwner = this@ShowsFragment
         }
         setupObservers()
         return binding.root

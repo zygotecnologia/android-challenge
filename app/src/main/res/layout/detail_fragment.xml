@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="isLoading"
-            type="boolean" />
+            name="screenStatus"
+            type="com.zygotecnologia.zygotv.ui.detail.DetailViewModel.ScreenStatus" />
 
         <variable
             name="show"
@@ -85,7 +85,7 @@
         <include
             android:id="@+id/loading"
             layout="@layout/loading"
-            app:isLoading="@{isLoading}"
+            app:isLoading="@{screenStatus.loading}"
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

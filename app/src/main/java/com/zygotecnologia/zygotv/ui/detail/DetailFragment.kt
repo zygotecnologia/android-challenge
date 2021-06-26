@@ -53,16 +53,11 @@ class DetailFragment : Fragment() {
             }
         }
 
-        viewModel.loading.observe(requireActivity()) {
-            binding.isLoading = it
-        }
+        viewModel.screenStatus.observe(requireActivity()) {
+            binding.screenStatus = it
 
-        viewModel.error.observe(requireActivity()) { error ->
-            if(error) {
-                val mySnackbar = Snackbar
-                    .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Tentar Novamente") { requestLoadShow() }
-                mySnackbar.show()
+            if(it.isError) {
+                showErrorMessage()
             }
         }
     }
@@ -72,5 +67,12 @@ class DetailFragment : Fragment() {
         showId?.let {
             lifecycleScope.launch { viewModel.loadShow(it) }
         }
+    }
+
+    private fun showErrorMessage() {
+        val snackBar = Snackbar
+            .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
+            .setAction("Tentar Novamente") { requestLoadShow() }
+        snackBar.show()
     }
 }
