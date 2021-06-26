@@ -13,6 +13,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers.any
 import java.io.IOException
 
 class ShowsViewModelUnitTest {
@@ -57,10 +58,11 @@ class ShowsViewModelUnitTest {
 
     @Test
     fun `When load shows, Then the must popular show most be the first one from the response`() {
-        coEvery { showsRepository.fetchGenres() }.coAnswers { genreResponse }
         coEvery { showsRepository.fetchPopularShows() }.coAnswers { showResponse }
+        coEvery { showsRepository.fetchGenres() }.coAnswers { genreResponse }
+        coEvery { showsRepository.fetchShowsByGenresId(listOf("1")) }.coAnswers { any() }
         runBlocking { viewModel.loadShows() }
-        Truth.assertThat(viewModel.mostPopularShow.value).isEqualTo(show1)
+        Truth.assertThat(viewModel.showsContent.value?.first).isEqualTo(show1)
     }
 
     @Test
@@ -74,7 +76,7 @@ class ShowsViewModelUnitTest {
         coEvery { showsRepository.fetchGenres() }.coAnswers { genreResponse }
         coEvery { showsRepository.fetchPopularShows() }.coAnswers { showResponse }
         runBlocking { viewModel.loadShows() }
-        Truth.assertThat(viewModel.mostPopularShow.value).isNull()
+        Truth.assertThat(viewModel.showsContent.value?.first).isNull()
     }
 
     @Test

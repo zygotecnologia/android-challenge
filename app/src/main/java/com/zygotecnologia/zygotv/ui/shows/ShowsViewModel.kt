@@ -29,8 +29,7 @@ class ShowsViewModel(
             _loading.value = true
 
             val shows =
-                showsRepository
-                    .fetchPopularShows()
+                showsRepository.fetchPopularShows()
                     ?.results
                     ?: emptyList()
 
