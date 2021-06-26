@@ -37,7 +37,7 @@ class ShowsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch { viewModel.loadShows() }
+        loadShows()
     }
 
     private fun setupObservers() {
@@ -57,12 +57,18 @@ class ShowsFragment : Fragment() {
         viewModel.error.observe(requireActivity()) { error ->
             if(error) {
                 val mySnackbar = Snackbar
-                    .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Tentar Novamente") {
-                        lifecycleScope.launch { viewModel.loadShows() }
-                    }
+                    .make(binding.root, "Aconteceu um erro inesperado. Tente novamente.", Snackbar.LENGTH_LONG)
                 mySnackbar.show()
             }
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            loadShows()
+        }
+    }
+
+    private fun loadShows() {
+        lifecycleScope.launch { viewModel.loadShows() }
     }
 }
