@@ -1,6 +1,6 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.data.network
 
-import com.zygotecnologia.zygotv.secret.Keys
+import com.zygotecnologia.zygotv.utils.secret.Keys
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*

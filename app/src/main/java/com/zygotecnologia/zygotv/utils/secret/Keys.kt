@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.secret
+package com.zygotecnologia.zygotv.utils.secret
 
 object Keys {
 

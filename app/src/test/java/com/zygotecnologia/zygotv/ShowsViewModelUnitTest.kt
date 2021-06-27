@@ -6,7 +6,7 @@ import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowResponse
-import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.ui.shows.ShowsViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -52,7 +52,7 @@ class ShowsViewModelUnitTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val showsRepository = mockk<ShowsRepository>()
+    private val showsRepository = mockk<ShowsRepositoryImpl>()
 
     private val viewModel = ShowsViewModel(showsRepository)
 

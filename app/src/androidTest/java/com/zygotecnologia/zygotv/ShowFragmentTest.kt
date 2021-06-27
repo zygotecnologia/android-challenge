@@ -12,8 +12,8 @@ import androidx.test.filters.LargeTest
 import com.zygotecnologia.zygotv.main.MainActivity
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.data.network.TmdbApi
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.ui.detail.DetailViewModel
 import com.zygotecnologia.zygotv.ui.search.SearchViewModel
 import com.zygotecnologia.zygotv.ui.shows.ShowsViewModel
@@ -37,7 +37,7 @@ class ShowFragmentTest: KoinTest {
     lateinit var showsViewModel: ShowsViewModel
     lateinit var detailViewModel: DetailViewModel
     lateinit var searchViewModel: SearchViewModel
-    lateinit var showsRepository: ShowsRepository
+    lateinit var showsRepository: ShowsRepositoryImpl
     lateinit var tmdbApi: TmdbApi
 
     lateinit var showsContent : SingleLiveEvent<Pair<Show, List<Genre>>>

@@ -1,8 +1,8 @@
-package com.zygotecnologia.zygotv.repository
+package com.zygotecnologia.zygotv.data.remote
 
 import com.zygotecnologia.zygotv.model.*
 
-interface ShowsRepository {
+interface ShowsRemoteDataSource {
 
     suspend fun fetchGenres(): GenreResponse?
 

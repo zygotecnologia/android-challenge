@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
 

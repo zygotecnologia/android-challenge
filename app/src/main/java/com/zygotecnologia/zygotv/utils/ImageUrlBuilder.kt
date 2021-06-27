@@ -1,7 +1,7 @@
 package com.zygotecnologia.zygotv.utils
 
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.secret.Keys
+import com.zygotecnologia.zygotv.data.network.TmdbApi
+import com.zygotecnologia.zygotv.utils.secret.Keys
 import java.util.*
 
 object ImageUrlBuilder {

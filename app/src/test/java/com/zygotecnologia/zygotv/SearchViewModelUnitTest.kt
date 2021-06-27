@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import com.zygotecnologia.zygotv.model.Search
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.ui.search.SearchViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -36,7 +36,7 @@ class SearchViewModelUnitTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val showsRepository = mockk<ShowsRepository>()
+    private val showsRepository = mockk<ShowsRepositoryImpl>()
 
     private val viewModel = SearchViewModel(showsRepository)
 

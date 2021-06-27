@@ -5,7 +5,7 @@ import com.google.common.truth.Truth
 import com.zygotecnologia.zygotv.model.Episode
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.ui.detail.DetailViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -54,7 +54,7 @@ class DetailViewModelUnitTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val showsRepository = mockk<ShowsRepository>()
+    private val showsRepository = mockk<ShowsRepositoryImpl>()
 
     private val viewModel = DetailViewModel(showsRepository)
 

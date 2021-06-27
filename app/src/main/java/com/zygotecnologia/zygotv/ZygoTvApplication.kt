@@ -2,6 +2,7 @@ package com.zygotecnologia.zygotv
 
 import android.app.Application
 import com.zygotecnologia.zygotv.di.networkModule
+import com.zygotecnologia.zygotv.di.remoteDataSourceModule
 import com.zygotecnologia.zygotv.di.repositoryModule
 import com.zygotecnologia.zygotv.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -27,6 +28,7 @@ class ZygoTvApplication: Application() {
     private fun getModules(): List<Module> = listOf(
         viewModelModule,
         repositoryModule,
+        remoteDataSourceModule,
         networkModule
     )
 }

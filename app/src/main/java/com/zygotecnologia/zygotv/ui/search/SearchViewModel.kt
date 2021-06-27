@@ -2,12 +2,10 @@ package com.zygotecnologia.zygotv.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.net.URLEncoder
 
 class SearchViewModel(

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.data.network
 
 import com.zygotecnologia.zygotv.model.*
 import retrofit2.http.GET
