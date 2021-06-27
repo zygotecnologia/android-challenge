@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.databinding.ShowsFragmentBinding
-import com.zygotecnologia.zygotv.ui.home.HomeFragmentDirections
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,11 +41,6 @@ class ShowsFragment : Fragment() {
     private fun setupObservers() {
         viewModel.showsContent.observe(requireActivity()) { content ->
             binding.rvGenresList.adapter = GenresAdapter(content.first, content.second)
-        }
-
-        viewModel.selectedShow.observe(requireActivity()) {
-            val direction = HomeFragmentDirections.actionHomeFragmentToShowDetailFragment(it)
-            findNavController().navigate(direction)
         }
 
         viewModel.loading.observe(requireActivity()) {

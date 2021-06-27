@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
             binding.isSearchEnabled = true
         }
 
-        binding.toolbar.searchSV.setOnQueryTextFocusChangeListener { view, b ->
+        binding.toolbar.searchSV.setOnQueryTextFocusChangeListener { view, _ ->
             binding.isSearchEnabled = view.hasFocus() || binding.toolbar.searchSV.query.isNotEmpty()
         }
 

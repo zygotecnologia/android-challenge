@@ -14,9 +14,6 @@ class ShowsViewModel(
     private val _showsContent = SingleLiveEvent<Pair<Show, List<Genre>>>()
     val showsContent : LiveData<Pair<Show, List<Genre>>> = _showsContent
 
-    private val _selectedShow = SingleLiveEvent<Int>()
-    val selectedShow : LiveData<Int> = _selectedShow
-
     private val _loading = SingleLiveEvent<Boolean>()
     val loading : LiveData<Boolean> = _loading
 
@@ -51,10 +48,6 @@ class ShowsViewModel(
         } finally {
             _loading.value = false
         }
-    }
-
-    fun onShowClicked(showId: Int) {
-        _selectedShow.value = showId
     }
 
     private fun presentShows(shows: List<Show>, genres: List<Genre>) {

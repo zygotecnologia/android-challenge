@@ -86,12 +86,4 @@ class ShowsViewModelUnitTest {
         runBlocking { viewModel.loadShows() }
         Truth.assertThat(viewModel.error.value).isTrue()
     }
-
-    @Test
-    fun `When a show is clicked, Then the detail screen must be called`() {
-        coEvery { showsRepository.fetchGenres() }.coAnswers { genreResponse }
-        coEvery { showsRepository.fetchPopularShows() }.coAnswers { showResponse }
-        viewModel.onShowClicked(1)
-        Truth.assertThat(viewModel.selectedShow.value).isEqualTo(1)
-    }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URLEncoder
 
@@ -22,21 +23,32 @@ class SearchViewModel(
     private val _error = SingleLiveEvent<Boolean>()
     val error : LiveData<Boolean> = _error
 
-    fun searchTvShow(searchQuery: String) {
-        val urlEncodedSearchQuery = URLEncoder.encode(searchQuery, "UTF-8")
-        viewModelScope.launch {
-            try {
-                _loading.value = true
-
-                val searchResult = showsRepository.fetchShowSearch(urlEncodedSearchQuery)
-
-                _loading.value = false
-                _results.value = searchResult?.results
-
-            } catch (e: Exception) {
-                _loading.value = false
-                _error.value = true
-            }
+    suspend fun searchTvShow(searchQuery: String) {
+        try {
+            showLoading()
+            val urlEncodedSearchQuery = URLEncoder.encode(searchQuery, "UTF-8")
+            val searchResult = showsRepository.fetchShowSearch(urlEncodedSearchQuery)
+            sendResults(searchResult?.results)
+        } catch (e: Exception) {
+            showError()
+        } finally {
+            hideLoading()
         }
+    }
+
+    private fun hideLoading() {
+        _loading.value = false
+    }
+
+    private fun showLoading() {
+        _loading.value = true
+    }
+
+    private fun showError() {
+        _error.value = true
+    }
+
+    private fun sendResults(shows: List<Show>?) {
+        _results.value = shows
     }
 }

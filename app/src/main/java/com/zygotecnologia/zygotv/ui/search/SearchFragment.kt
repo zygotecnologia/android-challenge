@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.databinding.SearchFragmentBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
@@ -66,6 +68,6 @@ class SearchFragment : Fragment() {
 
     private fun startFetchSearching() {
         val searchQuery = arguments?.getString(SEARCH_QUERY_ARG)
-        searchQuery?.let { viewModel.searchTvShow(searchQuery) }
+        searchQuery?.let { lifecycleScope.launch { viewModel.searchTvShow(searchQuery) } }
     }
 }
