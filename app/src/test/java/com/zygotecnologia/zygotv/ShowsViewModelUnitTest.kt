@@ -7,7 +7,7 @@ import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowResponse
 import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
-import com.zygotecnologia.zygotv.ui.shows.ShowsViewModel
+import com.zygotecnologia.zygotv.presentation.shows.ShowsViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking

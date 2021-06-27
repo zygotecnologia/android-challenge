@@ -1,10 +1,9 @@
-package com.zygotecnologia.zygotv.ui.search
+package com.zygotecnologia.zygotv.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
-import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.domain.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
 import java.net.URLEncoder
 

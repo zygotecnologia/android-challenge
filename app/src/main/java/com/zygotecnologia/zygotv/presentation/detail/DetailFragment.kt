@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.detail
+package com.zygotecnologia.zygotv.presentation.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

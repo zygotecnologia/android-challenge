@@ -6,7 +6,7 @@ import com.zygotecnologia.zygotv.model.Episode
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
-import com.zygotecnologia.zygotv.ui.detail.DetailViewModel
+import com.zygotecnologia.zygotv.presentation.detail.DetailViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking

@@ -7,7 +7,7 @@
 
         <variable
             name="screenStatus"
-            type="com.zygotecnologia.zygotv.ui.detail.DetailViewModel.ScreenStatus" />
+            type="com.zygotecnologia.zygotv.presentation.detail.DetailViewModel.ScreenStatus" />
 
         <variable
             name="show"
@@ -40,7 +40,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/black"
-        tools:context=".ui.detail.DetailFragment">
+        tools:context=".presentation.detail.DetailFragment">
 
         <include
             android:id="@+id/headerShowLayout"

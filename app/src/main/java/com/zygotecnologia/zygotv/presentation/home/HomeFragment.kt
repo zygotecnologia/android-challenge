@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.home
+package com.zygotecnologia.zygotv.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.FragmentHomeBinding
-import com.zygotecnologia.zygotv.ui.shows.ShowsFragment
+import com.zygotecnologia.zygotv.presentation.shows.ShowsFragment
 
 class HomeFragment : Fragment() {
 

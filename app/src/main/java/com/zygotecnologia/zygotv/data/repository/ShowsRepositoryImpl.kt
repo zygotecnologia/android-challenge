@@ -1,9 +1,8 @@
 package com.zygotecnologia.zygotv.data.repository
 
 import com.zygotecnologia.zygotv.model.*
-import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.remote.ShowsRemoteDataSource
-import com.zygotecnologia.zygotv.repository.ShowsRepository
+import com.zygotecnologia.zygotv.domain.repository.ShowsRepository
 
 class ShowsRepositoryImpl(
     private val showsDataSource: ShowsRemoteDataSource

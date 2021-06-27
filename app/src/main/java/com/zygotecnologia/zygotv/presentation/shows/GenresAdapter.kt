@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.shows
+package com.zygotecnologia.zygotv.presentation.shows
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HeaderShowViewBinding
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.ui.home.HomeFragmentDirections
+import com.zygotecnologia.zygotv.presentation.home.HomeFragmentDirections
 
 class GenresAdapter(
     private val mostPopularShow: Show,

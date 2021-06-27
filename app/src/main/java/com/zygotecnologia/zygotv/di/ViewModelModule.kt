@@ -1,8 +1,8 @@
 package com.zygotecnologia.zygotv.di
 
-import com.zygotecnologia.zygotv.ui.detail.DetailViewModel
-import com.zygotecnologia.zygotv.ui.search.SearchViewModel
-import com.zygotecnologia.zygotv.ui.shows.ShowsViewModel
+import com.zygotecnologia.zygotv.presentation.detail.DetailViewModel
+import com.zygotecnologia.zygotv.presentation.search.SearchViewModel
+import com.zygotecnologia.zygotv.presentation.shows.ShowsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.shows
+package com.zygotecnologia.zygotv.presentation.search
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,31 +11,29 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.ui.home.HomeFragmentDirections
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class ShowsAdapter(
-    private val shows: List<Show>
-): RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
+class SearchAdapter(
+    private val results: List<Show>
+): RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_result_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(shows[position])
+        holder.bind(results[position])
     }
 
-    override fun getItemCount() = shows.size
+    override fun getItemCount() = results.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(show: Show) {
-            val textView: TextView = itemView.findViewById(R.id.tvShowTitle)
+            val textView: TextView = itemView.findViewById(R.id.tvSearchResultShowName)
             textView.text = show.name
 
-            val imageView: ImageView = itemView.findViewById(R.id.ivShowPoster)
+            val imageView: ImageView = itemView.findViewById(R.id.ivSearchResultPoster)
             Glide.with(itemView)
                 .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
@@ -46,7 +44,7 @@ class ShowsAdapter(
 
         private fun goToShowDetails(showId: Int) {
             itemView.setOnClickListener {
-                val direction = HomeFragmentDirections.actionHomeFragmentToShowDetailFragment(showId)
+                val direction = SearchFragmentDirections.actionSearchFragmentToShowDetailFragment(showId)
                 itemView.findNavController().navigate(direction)
             }
         }

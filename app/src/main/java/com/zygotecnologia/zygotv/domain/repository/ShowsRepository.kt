@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.repository
+package com.zygotecnologia.zygotv.domain.repository
 
 import com.zygotecnologia.zygotv.model.*
 

@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val remoteDataSourceModule = module {
     factory {
-        ShowsRemoteDataSourceImpl(get())
+        ShowsRemoteDataSourceImpl(get()) as ShowsRemoteDataSource
     }
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.zygotecnologia.zygotv.ui.home.HomeFragment"
+        android:name="com.zygotecnologia.zygotv.presentation.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/showDetailFragment"
-        android:name="com.zygotecnologia.zygotv.ui.detail.DetailFragment"
+        android:name="com.zygotecnologia.zygotv.presentation.detail.DetailFragment"
         android:label="ShowDetailFragment"
         tools:layout="@layout/detail_fragment">
         <argument
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/showSearchFragment"
-        android:name="com.zygotecnologia.zygotv.ui.search.SearchFragment"
+        android:name="com.zygotecnologia.zygotv.presentation.search.SearchFragment"
         android:label="ShowDetailFragment"
         tools:layout="@layout/search_fragment">
         <argument

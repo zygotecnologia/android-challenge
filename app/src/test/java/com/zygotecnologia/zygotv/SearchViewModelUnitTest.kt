@@ -5,7 +5,7 @@ import com.google.common.truth.Truth
 import com.zygotecnologia.zygotv.model.Search
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
-import com.zygotecnologia.zygotv.ui.search.SearchViewModel
+import com.zygotecnologia.zygotv.presentation.search.SearchViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
