@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.network
 
+import com.zygotecnologia.zygotv.secret.Keys
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*
@@ -11,7 +12,7 @@ class TmdbInterceptor: Interceptor {
         val originalHttpUrl = original.url()
 
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("api_key", TmdbApi.TMDB_API_KEY)
+            .addQueryParameter("api_key", Keys.apiKey())
             .addQueryParameter("language", Locale.getDefault().toLanguageTag() )
             .build()
 
