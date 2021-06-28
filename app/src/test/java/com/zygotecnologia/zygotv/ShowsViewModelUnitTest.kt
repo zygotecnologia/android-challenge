@@ -2,11 +2,9 @@ package com.zygotecnologia.zygotv
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import com.zygotecnologia.zygotv.domain.entity.Genre
-import com.zygotecnologia.zygotv.domain.entity.GenreResponse
-import com.zygotecnologia.zygotv.domain.entity.Show
-import com.zygotecnologia.zygotv.data.entity.ShowResponse
 import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
+import com.zygotecnologia.zygotv.domain.entity.Genre
+import com.zygotecnologia.zygotv.domain.entity.Show
 import com.zygotecnologia.zygotv.view.shows.ShowsViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -32,21 +30,10 @@ class ShowsViewModelUnitTest {
         seasons = null
     )
 
-    private val showResponse = ShowResponse(
-        page = null,
-        totalPages = null,
-        totalResults = null,
-        results = listOf(show1)
-    )
-
     private val genre1 = Genre(
         id = 1,
         name = "genre1",
         shows = null
-    )
-
-    private val genreResponse = GenreResponse(
-        genres = listOf(genre1)
     )
 
     @get:Rule
@@ -58,8 +45,8 @@ class ShowsViewModelUnitTest {
 
     @Test
     fun `When load shows, Then the must popular show most be the first one from the response`() {
-        coEvery { showsRepository.fetchPopularShows() }.coAnswers { showResponse }
-        coEvery { showsRepository.fetchGenres() }.coAnswers { genreResponse }
+        coEvery { showsRepository.fetchPopularShows() }.coAnswers { listOf(show1) }
+        coEvery { showsRepository.fetchGenres() }.coAnswers { listOf(genre1) }
         coEvery { showsRepository.fetchShowsByGenresId(listOf("1")) }.coAnswers { any() }
         runBlocking { viewModel.loadShows() }
         Truth.assertThat(viewModel.showsContent.value?.first).isEqualTo(show1)
@@ -67,14 +54,8 @@ class ShowsViewModelUnitTest {
 
     @Test
     fun `When load shows and the result is empty, Then the most popular show must be null`() {
-        val showResponse = ShowResponse(
-            page = null,
-            totalPages = null,
-            totalResults = null,
-            results = emptyList()
-        )
-        coEvery { showsRepository.fetchGenres() }.coAnswers { genreResponse }
-        coEvery { showsRepository.fetchPopularShows() }.coAnswers { showResponse }
+        coEvery { showsRepository.fetchGenres() }.coAnswers { listOf(genre1)}
+        coEvery { showsRepository.fetchPopularShows() }.coAnswers { emptyList() }
         runBlocking { viewModel.loadShows() }
         Truth.assertThat(viewModel.showsContent.value?.first).isNull()
     }
@@ -82,7 +63,7 @@ class ShowsViewModelUnitTest {
     @Test
     fun `When load shows throws an exception, Then an error must be shown`() {
         coEvery { showsRepository.fetchGenres() }.throws(IOException())
-        coEvery { showsRepository.fetchPopularShows() }.coAnswers { showResponse }
+        coEvery { showsRepository.fetchPopularShows() }.coAnswers { listOf(show1) }
         runBlocking { viewModel.loadShows() }
         Truth.assertThat(viewModel.error.value).isTrue()
     }

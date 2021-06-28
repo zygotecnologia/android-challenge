@@ -8,17 +8,19 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.pressImeActionButton
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.filters.LargeTest
-import com.zygotecnologia.zygotv.view.MainActivity
+import com.zygotecnologia.zygotv.data.network.TmdbApi
+import com.zygotecnologia.zygotv.data.remote.ShowsRemoteDataSourceImpl
+import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
 import com.zygotecnologia.zygotv.domain.entity.Genre
 import com.zygotecnologia.zygotv.domain.entity.Show
-import com.zygotecnologia.zygotv.data.network.TmdbApi
-import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
+import com.zygotecnologia.zygotv.utils.SingleLiveEvent
+import com.zygotecnologia.zygotv.view.MainActivity
 import com.zygotecnologia.zygotv.view.detail.DetailViewModel
 import com.zygotecnologia.zygotv.view.search.SearchViewModel
 import com.zygotecnologia.zygotv.view.shows.ShowsViewModel
-import com.zygotecnologia.zygotv.utils.SingleLiveEvent
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.mockk
 import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
@@ -29,42 +31,62 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 
-@LargeTest
-class ShowFragmentTest: KoinTest {
+class ZygoTvTests: KoinTest {
+
+    private val show1 = Show(
+        id = 1,
+        genreIds = listOf(1),
+        name = "show1",
+        originalLanguage = null,
+        originalName = null,
+        voteCount = null,
+        backdropPath = "",
+        overview = null,
+        posterPath = null,
+        numberOfSeasons = null,
+        seasons = null
+    )
+
+    private val genre1 = Genre(
+        id = 1,
+        name = "genre1",
+        shows = null
+    )
 
     private lateinit var scenario: ActivityScenario<MainActivity>
 
-    lateinit var showsViewModel: ShowsViewModel
-    lateinit var detailViewModel: DetailViewModel
-    lateinit var searchViewModel: SearchViewModel
-    lateinit var showsRepository: ShowsRepositoryImpl
-    lateinit var tmdbApi: TmdbApi
-
-    lateinit var showsContent : SingleLiveEvent<Pair<Show, List<Genre>>>
-    lateinit var show: SingleLiveEvent<Show>
+    private lateinit var showsViewModel: ShowsViewModel
+    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var searchViewModel: SearchViewModel
+    private lateinit var showsRepository: ShowsRepositoryImpl
+    private lateinit var showsDataSource: ShowsRemoteDataSourceImpl
+    private lateinit var tmdbApi: TmdbApi
 
     private lateinit var module: Module
 
+    private lateinit var showsContent: SingleLiveEvent<Pair<Show, List<Genre>>>
+
     @Before
     fun before() {
+        MockKAnnotations.init(this)
+
         showsViewModel = mockk(relaxed = true)
         detailViewModel = mockk(relaxed = true)
         searchViewModel = mockk(relaxed = true)
 
         showsRepository = mockk(relaxed = true)
+        showsDataSource = mockk(relaxed = true)
         tmdbApi = mockk(relaxed = true)
 
         showsContent = SingleLiveEvent()
-        show = SingleLiveEvent()
-
         every { showsViewModel.showsContent } returns showsContent
-        every { detailViewModel.show } returns show
 
         module = module(createdAtStart = true, override = true) {
             single { showsViewModel }
             single { detailViewModel }
             single { searchViewModel }
             single { showsRepository }
+            single { showsDataSource }
             single { tmdbApi }
         }
 
@@ -116,23 +138,3 @@ class ShowFragmentTest: KoinTest {
         onView(withId(R.id.elvSeasons)).check(matches(isDisplayed()))
     }
 }
-
-private val show1 = Show(
-    id = 1,
-    genreIds = listOf(1),
-    name = "show1",
-    originalLanguage = null,
-    originalName = null,
-    voteCount = null,
-    backdropPath = "",
-    overview = null,
-    posterPath = null,
-    numberOfSeasons = null,
-    seasons = null
-)
-
-private val genre1 = Genre(
-    id = 1,
-    name = "genre1",
-    shows = null
-)

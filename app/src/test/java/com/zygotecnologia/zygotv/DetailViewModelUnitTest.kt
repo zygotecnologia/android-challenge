@@ -33,7 +33,7 @@ class DetailViewModelUnitTest {
     private val season1 = Season(
         episodes = listOf(episode1, episode2),
         overview = "Season overview",
-        postPath = null,
+        posterPath = null,
         seasonNumber = 1
     )
 

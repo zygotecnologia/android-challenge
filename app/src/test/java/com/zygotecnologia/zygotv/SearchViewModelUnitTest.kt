@@ -2,9 +2,8 @@ package com.zygotecnologia.zygotv
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import com.zygotecnologia.zygotv.domain.entity.Search
-import com.zygotecnologia.zygotv.domain.entity.Show
 import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
+import com.zygotecnologia.zygotv.domain.entity.Show
 import com.zygotecnologia.zygotv.view.search.SearchViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -29,10 +28,6 @@ class SearchViewModelUnitTest {
         seasons = null
     )
 
-    private val searchResult = Search(
-        results = listOf(show1)
-    )
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -42,7 +37,7 @@ class SearchViewModelUnitTest {
 
     @Test
     fun `When search for some show by its name, Then the list of shows must be returned`() {
-        coEvery { showsRepository.fetchShowSearch(any()) }.coAnswers { searchResult }
+        coEvery { showsRepository.fetchShowSearch(any()) }.coAnswers { listOf(show1) }
         runBlocking { viewModel.searchTvShow("show1") }
         Truth.assertThat(viewModel.results.value).isEqualTo(listOf(show1))
     }
