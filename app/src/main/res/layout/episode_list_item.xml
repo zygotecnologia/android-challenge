@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:paddingHorizontal="34dp"
+    android:paddingVertical="12dp">
+
+    <TextView
+        android:id="@+id/tvEpisodeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_default"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Nome do episódio"/>
+
+    <TextView
+        android:id="@+id/tvEpisodeSynopsis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/episode_description_text_color"
+        android:textSize="@dimen/text_size_default"
+        app:layout_constraintTop_toBottomOf="@+id/tvEpisodeName"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Pequena sinopse do episódio aqui."/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view_separator"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEpisodeSynopsis" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

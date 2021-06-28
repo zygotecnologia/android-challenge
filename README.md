@@ -1,60 +1,33 @@
-# Zygo Programming Challenge - Android Developer
+# ZygoTV - Séries de TV
 
-Seu objetivo neste challenge é refatorar e adicionar novas features um pequeno aplicativo que lista Séries de TV.
+ZygoTV é um aplicativo de catálogo de séries de TV. Nesta versão do aplicativo é possível:
 
-## Especificações
+* Ver na tela principal a série de TV mais popular no momento, além da lista dos seriados mais populares por gênero
+* Ver detalhes de uma série de TV, as suas temporadas e uma sinopse dos episódios de cada temporada
+* Pesquisar séries de TV por nome
 
-O aplicativo possui apenas uma tela de listagem das séries, seu desafio consiste em:
+### Exemplos das telas
+<img src="screenshots/home.png?raw=true" width="250"> <img src="screenshots/details.png?raw=true" width="250"> <img src="screenshots/search.png?raw=true" width="250">
 
-* Implementar a tela de Detalhes da Série;
-* Remover as chamadas de API da Main;
-* Implementar o novo layout seguindo as especificicações da nossa Designer;
-* Resolver o Crash que ocorre ao iniciar o aplicativo sem conexão à Internet;
+### Ferramentas utilizadas
+* Linguagem de programação: Kotlin
+* Android Architecture Components: ViewModel, LiveData
+* Navegação entre telas: Android Navigation Component
+* Injeção de dependências: Koin
+* Execução de tarefas assíncronas: Coroutines
+* Integração com API REST: Retrofit
+* Parser de payload json: Moshi
+* Download e gerenciamento de imagens: Glide
+* Biblioteca nativa e c++: armazenamento de chave de API
+* Mock para testes: mockk
+* Testes unitários: JUnit
+* Testes de integração: Espresso
 
-Acesse a [Documentação da API](https://developers.themoviedb.org/3/tv/get-tv-details) para qualquer dúvida!
-
-**Serão avaliados:** apenas a organização do código, uso
-das ferramentas disponíveis, conhecimento e domínio sobre as linguagens e a
-capacidade de implementação das especificações
-
-## Requisitos do Novo Layout
-As novas telas podem ser encontradas no [Invision](https://isabellataques225701.invisionapp.com/console/share/6Z2ABNOYVB/549307395)
-
-* A Série em destaque deve ser a top 1 mais popular retornada pela API.
-* O restante dos resultados devem ser organizados por Gênero como mostrado no Layout
-
-## Requisitos técnicos
-
-* O projeto atual foi desenvolvido em Kotlin, mas fique a vontade para converter para Java caso sinta-se mais confortável.
-* É permitido o uso de frameworks e bibliotecas externos, desde que dentro de um
-  sistema de gerenciamento de pacotes.
-* O código deve ser claro, preferencialmente documentado.
-* A arquitetura e design do sistema devem ser documentadas em um arquivo README
-  (brevemente, por favor).
-
-## Bônus!
-
-Testes são muito bem vindos, sobrando qualquer tempo, faça-os e ganhe uma
-pontuação extra!
-
-Se você tiver ainda mais tempo e quiser arriscar, temos uma listinha sobre o que pode ser melhorado no projeto:
-* Remover a necessidade de passar os parâmetros `api_key` e `region` para toda a chamada da API;
-* Armazenar a chave de API em um local seguro;
-* Implementar a busca por nome das Séries;
-
-## Envio
-
-Faça um fork desse repositório para o seu GitHub, crie um branch de desenvolvimento e faça todos os seus Commits nesse branch. Ao terminar abra um Pull Request para a branch main e nos envie o link do mesmo. 
-
-### Disclaimer
-
-Completar a challenge não implica em nenhum vínculo nem obrigação da Zygo
-com você. Todo o código criado será descartado. Este challenge usa elementos
-reais de necessidades da Zygo apenas como uma maneira de avaliarmos sua
-aptidão para o cargo.
-
-### Final notes
-
-Valorizamos **muito** a capacidade de nos surpreender!
-
-Boa sorte :)
+### Arquitetura
+O código está organizado segundo os princípios da Clean Architecture, com as seguintes camadas:
+* Camada de apresentação (view): componentes responsáveis por apresentar a interface do usuário (UI).
+Estes componentes estão organizados por features e é onde estão localizados as Activities, Fragments,
+ViewModels, Adapters, etc
+* Camada de domínio (domain): regras de negócio e objetos de negócio
+* Camada de dados (data): Implementação do padrão de repository, que por sua vez consulta o data
+source remoto (REST API) para obtenção dos dados
