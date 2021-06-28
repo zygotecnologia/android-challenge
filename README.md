@@ -1,4 +1,4 @@
-## ZygoTV - Séries de ZygoTV
+# ZygoTV - Séries de TV
 
 ZygoTV é um aplicativo de catálogo de séries de TV. Nesta versão do aplicativo é possível:
 
