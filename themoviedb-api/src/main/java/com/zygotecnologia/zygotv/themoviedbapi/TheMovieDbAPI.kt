@@ -16,6 +16,8 @@ object TheMovieDbAPI {
 
     private const val BASE_URL = "https://api.themoviedb.org"
     const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+    const val API_KEY = "27490b1bf49c0e5ffaa07dfd947e9605"
+    const val API_QUERY = "api_key"
 
     val tvShowByIdAPI: TvShowByIdAPI get() = make()
     val popularTvShowsAPI: PopularTvShowsAPI get() = make()

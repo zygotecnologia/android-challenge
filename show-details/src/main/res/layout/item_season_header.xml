@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:paddingLeft="24dp"
+    tools:paddingRight="24dp"
+    android:background="@color/background">
+
+    <ImageView
+        android:id="@+id/seasonImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="63dp"
+        android:layout_height="63dp" />
+
+    <TextView
+        style="@style/TextAppearance.RobotoRegular.16"
+        android:id="@+id/seasonTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/seasonImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="18dp"
+        tools:text="Temporada 1"/>
+
+    <TextView
+        style="@style/TextAppearance.RobotoRegular.14"
+        android:id="@+id/seasonOverview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/seasonImage"
+        app:layout_constraintTop_toBottomOf="@id/seasonTitle"
+        app:layout_constraintBottom_toBottomOf="@id/seasonImage"
+        app:layout_constraintRight_toRightOf="parent"
+        android:lines="2"
+        android:layout_marginLeft="18dp"
+        tools:text="Pequena sinópse da temporada aqui."/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

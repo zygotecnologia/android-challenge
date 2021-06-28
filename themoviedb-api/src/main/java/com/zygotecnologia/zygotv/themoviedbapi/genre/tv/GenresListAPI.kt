@@ -8,8 +8,5 @@ import retrofit2.http.Query
 interface GenresListAPI {
 
     @GET("${TheMovieDbAPI.API_VERSION}/genre/tv/list")
-    suspend fun get(
-        @Query("api_key") apiKey: String,
-        @Query("region") region: String
-    ): GenresResponseModel
+    suspend fun get(): GenresResponseModel
 }

@@ -8,7 +8,5 @@ import retrofit2.http.Query
 interface PopularTvShowsAPI {
 
     @GET("${TheMovieDbAPI.API_VERSION}/tv/popular")
-    suspend fun get(
-        @Query("region") region: String
-    ): PopularTvShowsResponseModel
+    suspend fun get(): PopularTvShowsResponseModel
 }

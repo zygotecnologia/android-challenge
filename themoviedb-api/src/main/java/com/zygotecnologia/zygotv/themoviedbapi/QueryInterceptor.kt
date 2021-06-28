@@ -4,14 +4,15 @@ import okhttp3.Interceptor
 
 internal object QueryInterceptor : Interceptor {
 
-    private const val API_QUERY = "api_key"
-    private const val API_KEY = "27490b1bf49c0e5ffaa07dfd947e9605"
+    private const val REGION_KEY = "region"
+    private const val REGION_VALUE = "BR"
 
     override fun intercept(chain: Interceptor.Chain) = chain
         .request()
         .url()
         .newBuilder()
-        .addQueryParameter(API_QUERY, API_KEY)
+        .addQueryParameter(TheMovieDbAPI.API_QUERY, TheMovieDbAPI.API_KEY)
+        .addQueryParameter(REGION_KEY, REGION_VALUE)
         .build().let { urlWithApiKeyQuery ->
             chain.proceed(
                 chain.request()

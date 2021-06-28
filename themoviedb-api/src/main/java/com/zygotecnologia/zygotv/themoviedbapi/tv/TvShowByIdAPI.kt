@@ -10,7 +10,6 @@ interface TvShowByIdAPI {
 
     @GET("${TheMovieDbAPI.API_VERSION}/tv/{tv_id}")
     suspend fun get(
-        @Query("api_key") apiKey: String,
         @Path("tv_id") id: Int
     ): ShowModel
 }
