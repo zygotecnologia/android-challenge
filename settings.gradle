@@ -1,2 +1,3 @@
+include ':themoviedb-api'
 include ':app'
 rootProject.name = "ZygoTV"
