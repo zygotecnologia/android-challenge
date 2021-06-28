@@ -39,14 +39,16 @@ class SearchAdapter(
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
                 .into(imageView)
 
-            show.id?.let { goToShowDetails(it) }
+            show.id?.let { id ->
+                itemView.setOnClickListener {
+                    goToShowDetails(id)
+                }
+            }
         }
 
         private fun goToShowDetails(showId: Int) {
-            itemView.setOnClickListener {
-                val direction = SearchFragmentDirections.actionSearchFragmentToShowDetailFragment(showId)
-                itemView.findNavController().navigate(direction)
-            }
+            val direction = SearchFragmentDirections.actionSearchFragmentToShowDetailFragment(showId)
+            itemView.findNavController().navigate(direction)
         }
     }
 }

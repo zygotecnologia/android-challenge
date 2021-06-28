@@ -1,7 +1,6 @@
 package com.zygotecnologia.zygotv.data.remote
 
 import com.zygotecnologia.zygotv.data.entity.*
-import com.zygotecnologia.zygotv.domain.entity.*
 
 interface ShowsRemoteDataSource {
 

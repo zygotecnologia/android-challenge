@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.zygotecnologia.zygotv.databinding.DetailFragmentBinding
+import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.databinding.FragmentDetailBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,20 +21,14 @@ class DetailFragment : Fragment() {
 
     private val viewModel: DetailViewModel by viewModel()
 
-    private var _binding: DetailFragmentBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DetailFragmentBinding.inflate(inflater, container, false)
-        binding.apply {
-            toolbar.ivBackButton.setOnClickListener {
-                findNavController().navigateUp()
-            }
-        }
-
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        setupToolbar()
         return binding.root
     }
 
@@ -43,13 +38,21 @@ class DetailFragment : Fragment() {
         requestLoadShow()
     }
 
+    private fun setupToolbar() {
+        binding.apply {
+            toolbar.ivBackButton.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
     private fun setupObservers() {
         viewModel.show.observe(requireActivity()) {
             binding.show = it
 
             it.seasons?.let { seasonList ->
                 val adapter = SeasonsAdapter(requireContext(), seasonList)
-                binding.elvSeasons.apply { setAdapter(adapter) }
+                binding.elvSeasons.setAdapter(adapter)
             }
         }
 
@@ -70,9 +73,9 @@ class DetailFragment : Fragment() {
     }
 
     private fun showErrorMessage() {
-        val snackBar = Snackbar
-            .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
-            .setAction("Tentar Novamente") { requestLoadShow() }
-        snackBar.show()
+        Snackbar
+            .make(binding.root, R.string.error_message, Snackbar.LENGTH_INDEFINITE)
+            .setAction(R.string.try_again) { requestLoadShow() }
+            .show()
     }
 }

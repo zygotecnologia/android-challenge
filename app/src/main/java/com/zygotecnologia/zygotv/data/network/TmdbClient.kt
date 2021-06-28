@@ -4,7 +4,6 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -19,7 +18,6 @@ object TmdbClient {
 
         val httpClientBuilder = OkHttpClient.Builder()
         httpClientBuilder.addInterceptor(TmdbInterceptor())
-        httpClientBuilder.addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
 
         val client = httpClientBuilder
             .readTimeout(10, TimeUnit.SECONDS)
@@ -27,7 +25,7 @@ object TmdbClient {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("${TmdbApi.TMDB_BASE_URL}${TmdbApi.TMDB_API_VERSION}")
+            .baseUrl("${TMDB_BASE_URL}${TMDB_API_VERSION}")
             .addConverterFactory(MoshiConverterFactory.create(moshiAdapter))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(client)
@@ -35,4 +33,8 @@ object TmdbClient {
 
         return retrofit.create(TmdbApi::class.java)
     }
+
+    private const val TMDB_API_VERSION = "/3/"
+    private const val TMDB_BASE_URL = "https://api.themoviedb.org"
+    const val TMDB_API_QUERY = "api_key"
 }

@@ -20,19 +20,15 @@ class HomeFragment : Fragment() {
     private lateinit var homePagerAdapter: HomePagerAdapter
     private lateinit var viewPager: ViewPager2
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.apply {
-            isSearchEnabled = false
-        }
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.apply { isSearchEnabled = false }
         setupObservers()
-
         return binding.root
     }
 
@@ -48,12 +44,13 @@ class HomeFragment : Fragment() {
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when(position) {
-                0 -> "FILMES" // TODO strings.xml
-                1 -> "SÉRIES"
-                else -> "FAVORITOS"
+                MOVIES_TAB_POS -> getString(R.string.tab1)
+                SHOWS_TAB_POS -> getString(R.string.tab2)
+                FAVORITES_TAB_POS -> getString(R.string.tab3)
+                else -> getString(R.string.tab3)
             }
         }.attach()
-        tabLayout.getTabAt(1)?.select()
+        tabLayout.getTabAt(SHOWS_TAB_POS)?.select()
     }
 
     private fun setupObservers() {
@@ -61,21 +58,20 @@ class HomeFragment : Fragment() {
             binding.isSearchEnabled = true
         }
 
-        binding.toolbar.searchSV.setOnQueryTextFocusChangeListener { view, _ ->
-            binding.isSearchEnabled = view.hasFocus() || binding.toolbar.searchSV.query.isNotEmpty()
+        binding.toolbar.svSearchShow.setOnQueryTextFocusChangeListener { view, _ ->
+            binding.isSearchEnabled = view.hasFocus() || binding.toolbar.svSearchShow.query.isNotEmpty()
         }
 
-        binding.toolbar.searchSV.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        binding.toolbar.svSearchShow.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
 
-                    binding.toolbar.searchSV.apply {
+                    binding.toolbar.svSearchShow.apply {
                         setQuery("", false)
                         clearFocus()
                     }
 
-                    val direction = HomeFragmentDirections.actionHomeFragmentToShowSearchFragment(it)
-                    findNavController().navigate(direction)
+                    goToSearchResults(it)
                 }
                 return false
             }
@@ -86,6 +82,16 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun goToSearchResults(it: String) {
+        val direction = HomeFragmentDirections.actionHomeFragmentToShowSearchFragment(it)
+        findNavController().navigate(direction)
+    }
+
+    companion object {
+        private const val MOVIES_TAB_POS = 0
+        private const val SHOWS_TAB_POS = 1
+        private const val FAVORITES_TAB_POS = 2
+    }
 }
 
 class HomePagerAdapter(
@@ -108,6 +114,6 @@ class PlaceHolderFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.placeholder_fragment, container)
+        return inflater.inflate(R.layout.fragment_placeholder, container)
     }
 }

@@ -8,40 +8,40 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.zygotecnologia.zygotv.databinding.SearchFragmentBinding
+import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.databinding.FragmentSearchBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
 
-    companion object {
-        private const val SEARCH_QUERY_ARG = "searchQuery"
-    }
-
     private val viewModel: SearchViewModel by viewModel()
 
-    private lateinit var binding: SearchFragmentBinding
+    private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = SearchFragmentBinding.inflate(inflater, container, false)
-        binding.toolbar.apply {
-            isBackEnabled = true
-            ivBackButton.setOnClickListener {
-                findNavController().navigateUp()
-            }
-        }
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        setupToolbar()
         setupObservers()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         startFetchSearching()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.apply {
+            isBackEnabled = true
+            ivBackButton.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
     private fun setupObservers() {
@@ -58,16 +58,26 @@ class SearchFragment : Fragment() {
 
         viewModel.error.observe(requireActivity()) { error ->
             if(error) {
-                val mySnackbar = Snackbar
-                    .make(binding.root, "Aconteceu um erro inesperado.", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Tentar Novamente") { startFetchSearching() }
-                mySnackbar.show()
+                showErrorMessage()
             }
         }
     }
 
+    private fun showErrorMessage() {
+        Snackbar
+            .make(binding.root, R.string.error_message, Snackbar.LENGTH_INDEFINITE)
+            .setAction(R.string.try_again) { startFetchSearching() }
+            .show()
+    }
+
     private fun startFetchSearching() {
         val searchQuery = arguments?.getString(SEARCH_QUERY_ARG)
-        searchQuery?.let { lifecycleScope.launch { viewModel.searchTvShow(searchQuery) } }
+        searchQuery?.let {
+            lifecycleScope.launch { viewModel.searchTvShow(searchQuery) }
+        }
+    }
+
+    companion object {
+        private const val SEARCH_QUERY_ARG = "searchQuery"
     }
 }

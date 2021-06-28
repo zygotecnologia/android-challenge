@@ -9,8 +9,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Em breve"
-        android:textSize="18sp"
+        android:text="@string/soon"
+        android:textSize="@dimen/placeholder_text_size"
         android:textColor="@color/white"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"

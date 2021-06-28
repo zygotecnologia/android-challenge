@@ -22,31 +22,48 @@ class ShowsViewModel(
 
     suspend fun loadShows() {
         try {
+            showLoading()
 
-            _loading.value = true
-
-            val shows = showsRepository.fetchPopularShows() ?: emptyList()
-
-            val genres = showsRepository.fetchGenres()
-                    ?.mapNotNull { genre ->
-                        genre.id?.let { id ->
-                            val genreShows = showsRepository.fetchShowsByGenresId(listOf(id.toString()))
-                            genre.copy(shows = genreShows)
-                        }
-                    }
-                    ?: emptyList()
-
+            val shows = fetchShows()
+            val genres = fetchGenres()
             presentShows(shows, genres)
         } catch (e: Exception) {
-            _error.value = true
+            showError()
         } finally {
-            _loading.value = false
+            hideLoading()
         }
+    }
+
+    private suspend fun fetchShows(): List<Show> {
+        return showsRepository.fetchPopularShows() ?: emptyList()
+    }
+
+    private suspend fun fetchGenres(): List<Genre> {
+        return showsRepository.fetchGenres()
+            ?.mapNotNull { genre ->
+                genre.id?.let { id ->
+                    val genreShows = showsRepository.fetchShowsByGenresId(listOf(id.toString()))
+                    genre.copy(shows = genreShows)
+                }
+            }
+            ?: emptyList()
     }
 
     private fun presentShows(shows: List<Show>, genres: List<Genre>) {
         shows.firstOrNull()?.let {
             _showsContent.value = Pair(it, genres)
         }
+    }
+
+    private fun showLoading() {
+        _loading.value = true
+    }
+
+    private fun hideLoading() {
+        _loading.value = false
+    }
+
+    private fun showError() {
+        _error.value = true
     }
 }

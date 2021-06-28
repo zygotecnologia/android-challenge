@@ -5,7 +5,5 @@ import com.zygotecnologia.zygotv.data.remote.ShowsRemoteDataSourceImpl
 import org.koin.dsl.module
 
 val remoteDataSourceModule = module {
-    factory {
-        ShowsRemoteDataSourceImpl(get()) as ShowsRemoteDataSource
-    }
+    factory { ShowsRemoteDataSourceImpl(get()) as ShowsRemoteDataSource }
 }

@@ -75,7 +75,8 @@ class SeasonsAdapter(
         }
 
         val seasonNumberTextView: TextView = convertView.findViewById(R.id.tvSeasonNumber)
-        seasonNumberTextView.text = "Temporada ${listPosition + 1}"
+        seasonNumberTextView.text =
+            convertView.context.getString(R.string.season_sub_header, (listPosition + 1).toString())
 
         val synopsisTextView: TextView = convertView.findViewById(R.id.tvSeasonSynopsis)
         synopsisTextView.text = season.overview

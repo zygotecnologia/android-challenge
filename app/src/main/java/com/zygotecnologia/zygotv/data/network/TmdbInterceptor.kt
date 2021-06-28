@@ -12,8 +12,8 @@ class TmdbInterceptor: Interceptor {
         val originalHttpUrl = original.url()
 
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("api_key", Keys.apiKey())
-            .addQueryParameter("language", Locale.getDefault().toLanguageTag() )
+            .addQueryParameter(API_KEY_QUERY_PARAM, Keys.apiKey())
+            .addQueryParameter(LANGUAGE_QUERY_PARAM, Locale.getDefault().toLanguageTag() )
             .build()
 
         val requestBuilder = original.newBuilder().url(url)
@@ -23,4 +23,8 @@ class TmdbInterceptor: Interceptor {
         return chain.proceed(request)
     }
 
+    companion object {
+        private const val API_KEY_QUERY_PARAM = "api_key"
+        private const val LANGUAGE_QUERY_PARAM = "language"
+    }
 }

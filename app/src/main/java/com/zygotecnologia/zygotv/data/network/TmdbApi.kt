@@ -1,7 +1,6 @@
 package com.zygotecnologia.zygotv.data.network
 
 import com.zygotecnologia.zygotv.data.entity.*
-import com.zygotecnologia.zygotv.domain.entity.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -34,10 +33,4 @@ interface TmdbApi {
     suspend fun fetchShowSearch(
         @Query("query") query: String
     ): SearchResponse?
-
-    companion object {
-        const val TMDB_API_VERSION = "/3/"
-        const val TMDB_BASE_URL = "https://api.themoviedb.org"
-        const val TMDB_API_QUERY = "api_key"
-    }
 }

@@ -23,7 +23,7 @@
         android:id="@+id/showDetailFragment"
         android:name="com.zygotecnologia.zygotv.view.detail.DetailFragment"
         android:label="ShowDetailFragment"
-        tools:layout="@layout/detail_fragment">
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="showId"
             app:argType="integer" />
@@ -33,7 +33,7 @@
         android:id="@+id/showSearchFragment"
         android:name="com.zygotecnologia.zygotv.view.search.SearchFragment"
         android:label="ShowDetailFragment"
-        tools:layout="@layout/search_fragment">
+        tools:layout="@layout/fragment_search">
         <argument
             android:name="searchQuery"
             app:argType="string" />

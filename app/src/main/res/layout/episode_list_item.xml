@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_default"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Nome do episódio"/>
@@ -23,8 +23,8 @@
         android:id="@+id/tvEpisodeSynopsis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#8AFFFFFF"
-        android:textSize="16sp"
+        android:textColor="@color/episode_description_text_color"
+        android:textSize="@dimen/text_size_default"
         app:layout_constraintTop_toBottomOf="@+id/tvEpisodeName"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Pequena sinopse do episódio aqui."/>
@@ -32,7 +32,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#B1B1B1"
+        android:background="@color/view_separator"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

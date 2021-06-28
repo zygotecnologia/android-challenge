@@ -15,7 +15,7 @@ object TextViewBindingAdapters {
     @JvmStatic
     @BindingAdapter("formatLogo")
     fun TextView.formatLogo(formatLogo: Boolean?) {
-        val logoSpannable = SpannableString("ZygoTV") // TODO strings.xml
+        val logoSpannable = SpannableString(context.getString(R.string.app_name))
         logoSpannable.setSpan(
             ForegroundColorSpan(ContextCompat.getColor(context, R.color.red)),
             4,

@@ -15,8 +15,8 @@
         app:show="@{isLoading}">
 
         <ProgressBar
-            android:layout_width="84dp"
-            android:layout_height="84dp"
+            android:layout_width="@dimen/loading_size"
+            android:layout_height="@dimen/loading_size"
             android:indeterminate="true"
             android:indeterminateTint="@color/white"
             android:layout_centerInParent="true"/>

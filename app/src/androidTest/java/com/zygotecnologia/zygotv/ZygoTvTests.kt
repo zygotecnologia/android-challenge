@@ -105,17 +105,17 @@ class ZygoTvTests: KoinTest {
     fun verifySearchMenuOption() {
         onView(withId(R.id.ivSearchIcon)).check(matches(isDisplayed()))
         onView(withId(R.id.ivSearchIcon)).perform(click())
-        onView(withId(R.id.searchSV)).check(matches(isDisplayed()))
+        onView(withId(R.id.svSearchShow)).check(matches(isDisplayed()))
     }
 
     @Test
     fun searchShow() {
         onView(withId(R.id.ivSearchIcon)).check(matches(isDisplayed()))
         onView(withId(R.id.ivSearchIcon)).perform(click())
-        onView(withId(R.id.searchSV)).check(matches(isDisplayed()))
-        onView(allOf(supportsInputMethods(), isDescendantOfA(withId(R.id.searchSV))))
+        onView(withId(R.id.svSearchShow)).check(matches(isDisplayed()))
+        onView(allOf(supportsInputMethods(), isDescendantOfA(withId(R.id.svSearchShow))))
             .perform(ViewActions.typeText("show1"))
-        onView(allOf(supportsInputMethods(), isDescendantOfA(withId(R.id.searchSV))))
+        onView(allOf(supportsInputMethods(), isDescendantOfA(withId(R.id.svSearchShow))))
             .perform(pressImeActionButton())
 
         onView(withId(R.id.tvSearchResultTitle)).check(matches(isDisplayed()))

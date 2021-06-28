@@ -5,7 +5,5 @@ import com.zygotecnologia.zygotv.domain.repository.ShowsRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory {
-        ShowsRepositoryImpl(get()) as ShowsRepository
-    }
+    factory { ShowsRepositoryImpl(get()) as ShowsRepository }
 }

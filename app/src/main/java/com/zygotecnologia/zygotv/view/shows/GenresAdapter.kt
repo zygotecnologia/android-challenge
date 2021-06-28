@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.view.shows
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +17,6 @@ class GenresAdapter(
     private val mostPopularShow: Show,
     private val genres: List<Genre>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    companion object {
-        const val VIEW_TYPE_HEADER = 0
-        const val VIEW_TYPE_GENRE_LIST = 1
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
@@ -82,5 +78,10 @@ class GenresAdapter(
                 }
             }
         }
+    }
+
+    companion object {
+        const val VIEW_TYPE_HEADER = 0
+        const val VIEW_TYPE_GENRE_LIST = 1
     }
 }
