@@ -1,9 +1,9 @@
-package com.zygotecnologia.zygotv.presentation.shows
+package com.zygotecnologia.zygotv.view.shows
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.zygotecnologia.zygotv.model.Genre
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.domain.entity.Genre
+import com.zygotecnologia.zygotv.domain.entity.Show
 import com.zygotecnologia.zygotv.domain.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
 
@@ -25,19 +25,13 @@ class ShowsViewModel(
 
             _loading.value = true
 
-            val shows =
-                showsRepository.fetchPopularShows()
-                    ?.results
-                    ?: emptyList()
+            val shows = showsRepository.fetchPopularShows() ?: emptyList()
 
-            val genres =
-                showsRepository
-                    .fetchGenres()
-                    ?.genres?.mapNotNull { genre ->
+            val genres = showsRepository.fetchGenres()
+                    ?.mapNotNull { genre ->
                         genre.id?.let { id ->
-                            val genreShows =
-                                showsRepository.fetchShowsByGenresId(listOf(id.toString()))
-                            genre.copy(shows = genreShows?.results)
+                            val genreShows = showsRepository.fetchShowsByGenresId(listOf(id.toString()))
+                            genre.copy(shows = genreShows)
                         }
                     }
                     ?: emptyList()

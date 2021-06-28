@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.presentation
+package com.zygotecnologia.zygotv.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

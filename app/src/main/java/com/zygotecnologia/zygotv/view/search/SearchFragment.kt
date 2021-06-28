@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.presentation.search
+package com.zygotecnologia.zygotv.view.search
 
 import android.os.Bundle
 import android.view.LayoutInflater

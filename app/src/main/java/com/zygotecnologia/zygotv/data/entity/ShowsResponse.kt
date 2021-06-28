@@ -1,8 +1,8 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.data.entity
 
 import com.squareup.moshi.Json
 
-data class ShowResponse(
+data class ShowsResponse(
     @Json(name = "page")
     val page: Int?,
 
@@ -13,5 +13,5 @@ data class ShowResponse(
     val totalPages: Int?,
 
     @Json(name = "results")
-    val results: List<Show>?
+    val results: List<ShowResponse>?
 )

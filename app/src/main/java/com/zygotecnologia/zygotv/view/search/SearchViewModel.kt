@@ -1,8 +1,8 @@
-package com.zygotecnologia.zygotv.presentation.search
+package com.zygotecnologia.zygotv.view.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.domain.entity.Show
 import com.zygotecnologia.zygotv.domain.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
 import java.net.URLEncoder
@@ -25,7 +25,7 @@ class SearchViewModel(
             showLoading()
             val urlEncodedSearchQuery = URLEncoder.encode(searchQuery, "UTF-8")
             val searchResult = showsRepository.fetchShowSearch(urlEncodedSearchQuery)
-            sendResults(searchResult?.results)
+            sendResults(searchResult)
         } catch (e: Exception) {
             showError()
         } finally {

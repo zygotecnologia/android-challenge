@@ -1,18 +1,19 @@
 package com.zygotecnologia.zygotv.data.remote
 
-import com.zygotecnologia.zygotv.model.*
+import com.zygotecnologia.zygotv.data.entity.*
+import com.zygotecnologia.zygotv.domain.entity.*
 
 interface ShowsRemoteDataSource {
 
-    suspend fun fetchGenres(): GenreResponse?
+    suspend fun fetchGenres(): GenresResponse?
 
-    suspend fun fetchPopularShows(): ShowResponse?
+    suspend fun fetchPopularShows(): ShowsResponse?
 
-    suspend fun fetchShowsByGenresId(genresId: List<String>): ShowResponse?
+    suspend fun fetchShowsByGenresId(genresId: List<String>): ShowsResponse?
 
-    suspend fun fetchShow(showId: Int): Show?
+    suspend fun fetchShow(showId: Int): ShowResponse?
 
-    suspend fun fetchSeason(showId: Int, seasonNumber: Int): Season?
+    suspend fun fetchSeason(showId: Int, seasonNumber: Int): SeasonResponse?
 
-    suspend fun fetchShowSearch(searchQuery: String): Search?
+    suspend fun fetchShowSearch(searchQuery: String): SearchResponse?
 }

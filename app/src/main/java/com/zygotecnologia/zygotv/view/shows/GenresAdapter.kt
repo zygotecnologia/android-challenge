@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.presentation.shows
+package com.zygotecnologia.zygotv.view.shows
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HeaderShowViewBinding
-import com.zygotecnologia.zygotv.model.Genre
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.presentation.home.HomeFragmentDirections
+import com.zygotecnologia.zygotv.domain.entity.Genre
+import com.zygotecnologia.zygotv.domain.entity.Show
+import com.zygotecnologia.zygotv.view.home.HomeFragmentDirections
 
 class GenresAdapter(
     private val mostPopularShow: Show,

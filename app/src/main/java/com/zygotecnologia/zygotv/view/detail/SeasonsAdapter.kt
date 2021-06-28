@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.presentation.detail
+package com.zygotecnologia.zygotv.view.detail
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.model.Episode
-import com.zygotecnologia.zygotv.model.Season
+import com.zygotecnologia.zygotv.domain.entity.Episode
+import com.zygotecnologia.zygotv.domain.entity.Season
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class SeasonsAdapter(
@@ -62,7 +62,7 @@ class SeasonsAdapter(
 
         val seasonPosterImageView: ImageView = convertView!!.findViewById(R.id.ivSeasonPoster)
         Glide.with(convertView)
-            .load(season.postPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+            .load(season.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(seasonPosterImageView)
 

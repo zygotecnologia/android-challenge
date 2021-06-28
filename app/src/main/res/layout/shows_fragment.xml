@@ -11,17 +11,17 @@
 
         <variable
             name="mostPopular"
-            type="com.zygotecnologia.zygotv.model.Show" />
+            type="com.zygotecnologia.zygotv.domain.entity.Show" />
 
         <variable
             name="vm"
-            type="com.zygotecnologia.zygotv.presentation.shows.ShowsViewModel" />
+            type="com.zygotecnologia.zygotv.view.shows.ShowsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.MainActivity">
+        tools:context=".view.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/showsRoot"

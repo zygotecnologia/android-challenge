@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.presentation.shows
+package com.zygotecnologia.zygotv.view.shows
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.presentation.home.HomeFragmentDirections
+import com.zygotecnologia.zygotv.domain.entity.Show
+import com.zygotecnologia.zygotv.view.home.HomeFragmentDirections
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class ShowsAdapter(

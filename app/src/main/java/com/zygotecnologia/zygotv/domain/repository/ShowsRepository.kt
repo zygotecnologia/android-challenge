@@ -1,18 +1,20 @@
 package com.zygotecnologia.zygotv.domain.repository
 
-import com.zygotecnologia.zygotv.model.*
+import com.zygotecnologia.zygotv.domain.entity.Genre
+import com.zygotecnologia.zygotv.domain.entity.Season
+import com.zygotecnologia.zygotv.domain.entity.Show
 
 interface ShowsRepository {
 
-    suspend fun fetchGenres(): GenreResponse?
+    suspend fun fetchGenres(): List<Genre>?
 
-    suspend fun fetchPopularShows(): ShowResponse?
+    suspend fun fetchPopularShows(): List<Show>?
 
-    suspend fun fetchShowsByGenresId(genresId: List<String>): ShowResponse?
+    suspend fun fetchShowsByGenresId(genresId: List<String>): List<Show>?
 
     suspend fun fetchShow(showId: Int): Show?
 
     suspend fun fetchSeason(showId: Int, seasonNumber: Int): Season?
 
-    suspend fun fetchShowSearch(searchQuery: String): Search?
+    suspend fun fetchShowSearch(searchQuery: String): List<Show>?
 }

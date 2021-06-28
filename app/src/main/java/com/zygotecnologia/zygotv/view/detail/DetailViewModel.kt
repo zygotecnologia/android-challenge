@@ -1,9 +1,9 @@
-package com.zygotecnologia.zygotv.presentation.detail
+package com.zygotecnologia.zygotv.view.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.zygotecnologia.zygotv.model.Season
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.domain.entity.Season
+import com.zygotecnologia.zygotv.domain.entity.Show
 import com.zygotecnologia.zygotv.domain.repository.ShowsRepository
 import com.zygotecnologia.zygotv.utils.SingleLiveEvent
 

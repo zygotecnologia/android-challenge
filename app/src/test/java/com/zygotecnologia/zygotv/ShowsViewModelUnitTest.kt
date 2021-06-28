@@ -2,12 +2,12 @@ package com.zygotecnologia.zygotv
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import com.zygotecnologia.zygotv.model.Genre
-import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowResponse
+import com.zygotecnologia.zygotv.domain.entity.Genre
+import com.zygotecnologia.zygotv.domain.entity.GenreResponse
+import com.zygotecnologia.zygotv.domain.entity.Show
+import com.zygotecnologia.zygotv.data.entity.ShowResponse
 import com.zygotecnologia.zygotv.data.repository.ShowsRepositoryImpl
-import com.zygotecnologia.zygotv.presentation.shows.ShowsViewModel
+import com.zygotecnologia.zygotv.view.shows.ShowsViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
