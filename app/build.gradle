@@ -36,6 +36,7 @@ android {
 dependencies {
 
     implementation project(":themoviedb-api")
+    implementation project(":show-details")
 
     implementation kotlin.core
     implementation android_core.core

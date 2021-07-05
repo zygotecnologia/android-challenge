@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
 }
+
 apply from: rootProject.projectDir.absolutePath + "/dependencies.gradle"
 
 android {
@@ -35,17 +35,13 @@ android {
 }
 
 dependencies {
-
-    implementation project(":styles")
-    implementation project(":core")
     implementation kotlin.core
     implementation kotlin.coroutines_android
     implementation kotlin.coroutines_core
+    implementation glide
     implementation android_core.core
-    implementation android_core.appcompat
-    implementation android_core.material
-    testImplementation junit
-    testImplementation mockito.core
-    testImplementation mockito.kotlin
-
+    implementation android_arch.live_data
+    implementation android_arch.viewmodel
+    implementation android_arch.lifecycle_extensions
+    implementation android_arch.lifecycle_viewmodel_ktx
 }

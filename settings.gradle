@@ -1,3 +1,4 @@
+include ':core'
 include ':styles'
 include ':show-details'
 include ':themoviedb-api'
