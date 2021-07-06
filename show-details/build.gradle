@@ -36,6 +36,7 @@ android {
 
 dependencies {
 
+    implementation project(":themoviedb-api")
     implementation project(":styles")
     implementation project(":core")
     implementation kotlin.core
@@ -47,5 +48,6 @@ dependencies {
     testImplementation junit
     testImplementation mockito.core
     testImplementation mockito.kotlin
+    testImplementation android_arch.core_testing
 
 }

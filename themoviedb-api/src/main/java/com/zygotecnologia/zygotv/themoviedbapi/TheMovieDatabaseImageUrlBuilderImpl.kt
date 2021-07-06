@@ -1,6 +1,6 @@
 package com.zygotecnologia.zygotv.themoviedbapi
 
-internal class TheMovieDatabaseImageBuilderImpl(private val apiKey: String): TheMovieDatabaseImageBuilder {
+internal class TheMovieDatabaseImageUrlBuilderImpl(private val apiKey: String): TheMovieDatabaseImageUrlBuilder {
 
     override fun getPosterCompleteUrl(path: String) = "$POSTER_URL$path?api_key=$apiKey"
 

@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-
     implementation squareup.retrofit2
     implementation squareup.moshi
     implementation squareup.moshi_kotlin

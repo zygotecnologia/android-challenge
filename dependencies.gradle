@@ -14,10 +14,11 @@ ext {
     ]
 
     android_arch = [
-            live_data            : 'androidx.lifecycle:lifecycle-livedata:2.3.1',
-            viewmodel            : 'androidx.lifecycle:lifecycle-viewmodel:2.3.1',
-            lifecycle_extensions : 'androidx.lifecycle:lifecycle-extensions:2.1.0',
-            lifecycle_viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha03"
+            live_data               : 'androidx.lifecycle:lifecycle-livedata:2.3.1',
+            viewmodel               : 'androidx.lifecycle:lifecycle-viewmodel:2.3.1',
+            lifecycle_extensions    : 'androidx.lifecycle:lifecycle-extensions:2.1.0',
+            lifecycle_viewmodel_ktx : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha03",
+            core_testing            : 'androidx.arch.core:core-testing:2.0.0'
     ]
 
     kotlin = [

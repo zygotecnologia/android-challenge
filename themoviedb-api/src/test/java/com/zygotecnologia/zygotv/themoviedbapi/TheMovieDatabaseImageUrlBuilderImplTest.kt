@@ -3,13 +3,13 @@ package com.zygotecnologia.zygotv.themoviedbapi
 import org.junit.Assert
 import org.junit.Test
 
-class TheMovieDatabaseImageBuilderImplTest {
+class TheMovieDatabaseImageUrlBuilderImplTest {
 
     @Test
     fun testBuildPosterUrl() {
         Assert.assertEquals(
             "https://image.tmdb.org/t/p/w154/path?api_key=key",
-            TheMovieDatabaseImageBuilderImpl("key").getPosterCompleteUrl("/path")
+            TheMovieDatabaseImageUrlBuilderImpl("key").getPosterCompleteUrl("/path")
         )
     }
 
@@ -17,7 +17,7 @@ class TheMovieDatabaseImageBuilderImplTest {
     fun testBuildBackdropUrl() {
         Assert.assertEquals(
             "https://image.tmdb.org/t/p/w780/path?api_key=key",
-            TheMovieDatabaseImageBuilderImpl("key").getBackdropCompleteUrl("/path")
+            TheMovieDatabaseImageUrlBuilderImpl("key").getBackdropCompleteUrl("/path")
         )
     }
 }

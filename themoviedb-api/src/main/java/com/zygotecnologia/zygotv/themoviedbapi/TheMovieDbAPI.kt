@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zygotecnologia.zygotv.themoviedbapi.genre.tv.GenresListAPI
 import com.zygotecnologia.zygotv.themoviedbapi.tv.TvShowByIdAPI
 import com.zygotecnologia.zygotv.themoviedbapi.tv.popular.PopularTvShowsAPI
+import com.zygotecnologia.zygotv.themoviedbapi.tv.season.TvSeasonsAPI
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -22,6 +23,7 @@ object TheMovieDbAPI {
     val tvShowByIdAPI: TvShowByIdAPI get() = make()
     val popularTvShowsAPI: PopularTvShowsAPI get() = make()
     val genresListAPI: GenresListAPI get() = make()
+    val tvSeasonsAPI : TvSeasonsAPI get() = make()
 
     private val moshiAdapter = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

@@ -2,6 +2,5 @@ package com.zygotecnologia.zygotv.showdetails.view
 
 data class ShowDetailsViewModel(
     val name: String,
-    val backdropUrl: String,
-    val seasons: List<SeasonViewModel>
+    val backdropUrl: String
 )
