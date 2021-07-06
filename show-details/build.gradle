@@ -1,6 +1,7 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 apply from: rootProject.projectDir.absolutePath + "/dependencies.gradle"
 
@@ -9,13 +10,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.zygotecnologia.zygotv"
-        minSdkVersion 26
+        minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -36,24 +37,17 @@ android {
 dependencies {
 
     implementation project(":themoviedb-api")
-    implementation project(":show-details")
-
+    implementation project(":styles")
+    implementation project(":core")
     implementation kotlin.core
+    implementation kotlin.coroutines_android
+    implementation kotlin.coroutines_core
     implementation android_core.core
     implementation android_core.appcompat
     implementation android_core.material
-    implementation android_core.constraint_layout
-    implementation android_core.recyclerview
-
     testImplementation junit
+    testImplementation mockito.core
+    testImplementation mockito.kotlin
+    testImplementation android_arch.core_testing
 
-    implementation squareup.retrofit2
-    implementation squareup.moshi
-    implementation squareup.moshi_kotlin
-    implementation glide
-
-    implementation retrofit_coroutines_adapter
-
-    implementation kotlin.coroutines_android
-    implementation kotlin.coroutines_core
 }
