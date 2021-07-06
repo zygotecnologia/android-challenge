@@ -6,7 +6,9 @@ import androidx.lifecycle.Observer
 import com.zygotecnologia.zygotv.core.ImageLoader
 import com.zygotecnologia.zygotv.showdetails.R
 import com.zygotecnologia.zygotv.showdetails.controller.ShowDetailsController
+import com.zygotecnologia.zygotv.showdetails.presenter.SeasonsPresenter
 import com.zygotecnologia.zygotv.showdetails.presenter.SeasonsPresenterMock
+import com.zygotecnologia.zygotv.showdetails.presenter.ShowDetailsPresenter
 import com.zygotecnologia.zygotv.showdetails.presenter.ShowDetailsPresenterMock
 import com.zygotecnologia.zygotv.showdetails.view.expandablelist.SeasonExpandableListAdapter
 import kotlinx.android.synthetic.main.activity_show_details.*
@@ -14,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_show_details.*
 class ShowDetailsActivity : AppCompatActivity() {
 
     private val detailsPresenter = ShowDetailsPresenterMock()
-    private val seasonsPresenter = SeasonsPresenterMock()
+    private val seasonsPresenter = SeasonsPresenter.make()
     private lateinit var controller: ShowDetailsController
     private val adapter = SeasonExpandableListAdapter()
 
