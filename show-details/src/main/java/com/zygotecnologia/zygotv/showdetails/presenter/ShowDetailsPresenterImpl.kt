@@ -14,6 +14,7 @@ class ShowDetailsPresenterMock {
             listOf(
                 SeasonViewModel(
                     "Temporada 1",
+                    "Overview da temporada",
                     "https://images2.vudu.com/poster2/191155-338",
                     listOf(EpisodeViewModel("Episódio 1", "Abed"))
                 )
