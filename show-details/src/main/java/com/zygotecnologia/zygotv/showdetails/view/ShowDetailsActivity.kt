@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_show_details.*
 
 class ShowDetailsActivity : AppCompatActivity() {
 
-    private val detailsPresenter = ShowDetailsPresenterMock()
+    private val detailsPresenter = ShowDetailsPresenter.make()
     private val seasonsPresenter = SeasonsPresenter.make()
     private lateinit var controller: ShowDetailsController
     private val adapter = SeasonExpandableListAdapter()
