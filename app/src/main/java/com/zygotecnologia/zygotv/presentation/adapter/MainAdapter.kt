@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
