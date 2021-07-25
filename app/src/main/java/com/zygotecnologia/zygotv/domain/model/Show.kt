@@ -1,6 +1,7 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.domain.model
 
 import com.squareup.moshi.Json
+import com.zygotecnologia.zygotv.domain.model.Genre
 
 data class Show(
     val genres: List<Genre>?,

@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
+import com.zygotecnologia.zygotv.data.network.TmdbApi
+import com.zygotecnologia.zygotv.data.network.TmdbClient
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
