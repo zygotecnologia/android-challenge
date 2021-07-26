@@ -12,7 +12,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class GenderAdapter(private val shows: List<Show>) : RecyclerView.Adapter<GenderAdapter.ViewHolder>() {
+class GenderAdapter(private val shows: List<Show>, private val listener: (Show) -> Unit) : RecyclerView.Adapter<GenderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -21,7 +21,7 @@ class GenderAdapter(private val shows: List<Show>) : RecyclerView.Adapter<Gender
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(shows[position])
+        holder.bind(shows[position], listener)
     }
 
     override fun getItemCount(): Int {
@@ -29,7 +29,7 @@ class GenderAdapter(private val shows: List<Show>) : RecyclerView.Adapter<Gender
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(show: Show) {
+        fun bind(show: Show, listener: (Show) -> Unit) {
             val textView: TextView = itemView.findViewById(R.id.tv_show_title)
             textView.text = show.name
 
@@ -38,6 +38,10 @@ class GenderAdapter(private val shows: List<Show>) : RecyclerView.Adapter<Gender
                 .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
                 .into(imageView)
+
+            itemView.setOnClickListener {
+                listener(show)
+            }
         }
     }
 }

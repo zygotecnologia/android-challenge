@@ -22,7 +22,8 @@ const val BODY_TYPE = 1
 class MainAdapter(
     private val mostPopular: Show?,
     private val genres: List<Genre>,
-    private val showsList:  Map<Genre, List<Show>>
+    private val showsList:  Map<Genre, List<Show>>,
+    private val listener: (Show) -> Unit
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -36,7 +37,7 @@ class MainAdapter(
         if (holder is HeadViewHolder) {
             holder.bind(mostPopular)
         } else {
-            (holder as ViewHolder).bind(genres[position], showsList[genres[position]])
+            (holder as ViewHolder).bind(genres[position], showsList[genres[position]], listener)
         }
     }
 
@@ -60,13 +61,13 @@ class MainAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(genre: Genre, shows: List<Show>?) {
+        fun bind(genre: Genre, shows: List<Show>?, listener: (Show) -> Unit) {
             val viewPool = RecyclerView.RecycledViewPool()
             val title: TextView = itemView.findViewById(R.id.tv_show_title)
             val recyclerView : RecyclerView = itemView.findViewById(R.id.recyclerView)
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                shows?.let { adapter = GenderAdapter(shows) }
+                shows?.let { adapter = GenderAdapter(shows, listener) }
                 setRecycledViewPool(viewPool)
             }
             title.text = genre.name

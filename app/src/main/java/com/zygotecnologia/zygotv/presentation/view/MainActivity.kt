@@ -1,6 +1,7 @@
 package com.zygotecnologia.zygotv.presentation.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.adapter.MainAdapter
 import com.zygotecnologia.zygotv.presentation.gateway.MainViewModel
 import com.zygotecnologia.zygotv.presentation.model.ShowResultView
+import com.zygotecnologia.zygotv.utils.NetworkUtil
 import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,7 +45,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setPopularShows(result: ShowResultView) {
-        binding.rvShowList.adapter = MainAdapter(result.mostPopular, result.genre, result.showByGender)
+        binding.rvShowList.adapter = MainAdapter(result.mostPopular, result.genre, result.showByGender) {
+
+        }
     }
 
     private fun loadShows() {
@@ -52,6 +56,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        loadShows()
+        if (NetworkUtil.hasInternetConnection(this)) {
+            loadShows()
+        } else {
+            Toast.makeText(this, "Precisa de Conexão com a Internet", Toast.LENGTH_LONG).show()
+        }
     }
 }
