@@ -54,7 +54,7 @@ class MainAdapter(
 
             val imageView: ImageView = itemView.findViewById(iv_show_poster)
             Glide.with(itemView)
-                .load(show?.posterPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
+                .load(show?.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
                 .into(imageView)
         }

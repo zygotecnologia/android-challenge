@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -46,7 +47,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setPopularShows(result: ShowResultView) {
         binding.rvShowList.adapter = MainAdapter(result.mostPopular, result.genre, result.showByGender) {
-
+            val intent = Intent(this, MainDetailActivity::class.java)
+            intent.putExtra(MainDetailActivity.PARAM_SHOW, it)
+            startActivity(intent)
         }
     }
 
