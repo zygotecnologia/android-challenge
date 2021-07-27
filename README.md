@@ -58,3 +58,21 @@ aptidão para o cargo.
 Valorizamos **muito** a capacidade de nos surpreender!
 
 Boa sorte :)
+
+
+# Solução
+
+O projeto foi modularizado em Clean Architecture para aplicar os conceitos de SOLID:
+
+Foi definido 3 camadas:
+
+- Data: camada de repositorio que obtem/salva dados do app.
+- Domain: camada de business, onde é feita a analise e processamento de dados.
+- Presentation: camada de view, camada de interação com o usuário e demonstração de dados.
+
+Foi usado para execução em background a lib Flow.
+
+Foi adicionada o Koin para injeção de dependência.
+
+Foi feito dois testes, para os use cases demosntrando a facilidade de testa o código em um projeto com principios SOLID e modular.
+
