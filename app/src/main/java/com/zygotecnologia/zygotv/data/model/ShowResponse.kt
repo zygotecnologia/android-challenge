@@ -1,6 +1,7 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.data.model
 
 import com.squareup.moshi.Json
+import com.zygotecnologia.zygotv.domain.model.Show
 
 data class ShowResponse(
     @Json(name = "page")
