@@ -7,7 +7,7 @@ import com.zygotecnologia.zygotv.ui.favorites.FavoritesFragment
 import com.zygotecnologia.zygotv.ui.films.FilmsFragment
 import com.zygotecnologia.zygotv.ui.series.SeriesFragment
 
-class MainActivityAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class MainActivityAdapter(fragmentActivity: FragmentActivity):  FragmentStateAdapter(fragmentActivity) {
 
     override fun createFragment(position: Int): Fragment {
         return when(position){

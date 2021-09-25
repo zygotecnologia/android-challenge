@@ -14,19 +14,11 @@ class FilmsFragment : Fragment() {
         fun newInstance() = FilmsFragment()
     }
 
-    private lateinit var viewModel: FilmsViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.films_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FilmsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
