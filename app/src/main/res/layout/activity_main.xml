@@ -20,17 +20,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_show_Popular"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_show_popular"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginEnd="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_8"
-            android:scaleType="centerCrop"
+            app:cardCornerRadius="@dimen/corner_radius_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_show_popular" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_show_popular" >
+
+            <ImageView
+                android:id="@+id/iv_show_popular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/image_placeholder" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/tv_title_crime"
@@ -42,7 +51,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_show_Popular" />
+            app:layout_constraintTop_toBottomOf="@id/cv_show_popular" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_show_list_crime"
