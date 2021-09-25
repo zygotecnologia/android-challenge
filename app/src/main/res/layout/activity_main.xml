@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginTop="@dimen/spacing_24"
             android:text="@string/category_title_crime"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16"
