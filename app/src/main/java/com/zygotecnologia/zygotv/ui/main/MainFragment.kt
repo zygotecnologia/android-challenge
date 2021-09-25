@@ -1,60 +1,107 @@
 package com.zygotecnologia.zygotv.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.data.enum.GenresIdEnum
+import com.zygotecnologia.zygotv.data.model.GenreResponse
+import com.zygotecnologia.zygotv.data.model.Show
+import com.zygotecnologia.zygotv.data.model.ShowResponse
+import com.zygotecnologia.zygotv.databinding.FragmentMainBinding
+import com.zygotecnologia.zygotv.ui.MainViewModel
+import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentMainBinding
+
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+    ): View {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        initObservers()
+
+        loadShows()
+    }
+
+    private fun initObservers(){
+        viewModel.genres.observe(viewLifecycleOwner, ::onGetGenres)
+        viewModel.shows.observe(viewLifecycleOwner, ::onGetShows)
+    }
+
+    private fun onGetGenres(genreResponse: GenreResponse?){
+        if(genreResponse != null){
+            viewModel.getShows()
+        }
+    }
+
+    private fun onGetShows(showResponse: ShowResponse?){
+        val listShows = showResponse?.results?: emptyList()
+
+        configRecyclerViews(listShows)
+        configImageBanner(listShows)
+    }
+
+    private fun loadShows(){
+        viewModel.getGenres()
+    }
+
+    private fun configRecyclerViews(listShows: List<Show>){
+        binding.rvShowListComedy.apply {
+            this.adapter = MainAdapter(listShows.filter { show -> show.genreIds?.contains(
+                GenresIdEnum.COMEDY.generoId) ?: false })
+        }
+
+        binding.rvShowListAdventure.apply {
+            this.adapter = MainAdapter(listShows.filter { show -> show.genreIds?.contains(
+                GenresIdEnum.ACTION_ADVENTURE.generoId) ?: false })
+        }
+
+        binding.rvShowListCrime.apply {
+            this.adapter = MainAdapter(listShows.filter { show -> show.genreIds?.contains(
+                GenresIdEnum.CRIME.generoId) ?: false })
+        }
+
+    }
+    private fun configImageBanner(listShows: List<Show>){
+        var mostPopuplarVotes = 0
+        var mostPopularId: Int? = 0
+
+        listShows.forEach { show ->
+            show.voteCount?.let {
+                if (it > mostPopuplarVotes) {
+                    mostPopularId = show.id
+                    mostPopuplarVotes = it
                 }
             }
+        }
+
+        val mostPopularShow = listShows.filter { it.id == mostPopularId }
+
+        listShows.map { Log.d("###", "$mostPopularShow") }
+
+        Glide.with(binding.ivShowPopular)
+            .load(mostPopularShow[0].backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
+            .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
+            .into(binding.ivShowPopular)
+
+        binding.tvTitleShowPopular.text = mostPopularShow[0].name
     }
 }

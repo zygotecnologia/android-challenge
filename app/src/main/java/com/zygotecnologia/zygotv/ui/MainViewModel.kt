@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.main
+package com.zygotecnologia.zygotv.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData

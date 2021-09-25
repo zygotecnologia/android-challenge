@@ -1,7 +1,7 @@
 package com.zygotecnologia.zygotv.di.modules
 
 import com.zygotecnologia.zygotv.data.repository.TmdbRepository
-import com.zygotecnologia.zygotv.ui.main.MainViewModel
+import com.zygotecnologia.zygotv.ui.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
