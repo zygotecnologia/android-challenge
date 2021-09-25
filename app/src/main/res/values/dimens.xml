@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+
+    <dimen name="text_size_16">16sp</dimen>
+
+    <dimen name="item_list_poster_path_width">132dp</dimen>
+    <dimen name="item_list_poster_path_height">112dp</dimen>
+
+    <dimen name="corner_radius_default">7dp</dimen>
+</resources>

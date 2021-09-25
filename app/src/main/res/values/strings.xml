@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ZygoTV</string>
+
+    <!-- Categories titles  -->
+    <string name="category_title_comedy">Comedy</string>
+    <string name="category_title_action_and_adventure">Action &amp; Adventure</string>
+    <string name="category_title_crime">Crime</string>
+
 </resources>
