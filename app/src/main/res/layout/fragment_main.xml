@@ -8,6 +8,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity" >
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_main" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
