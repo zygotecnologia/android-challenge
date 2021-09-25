@@ -1,11 +1,11 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
+import com.zygotecnologia.zygotv.data.source.TmdbApi
+import com.zygotecnologia.zygotv.data.source.TmdbClient
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
