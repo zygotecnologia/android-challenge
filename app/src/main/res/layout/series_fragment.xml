@@ -29,6 +29,8 @@
             android:layout_marginEnd="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_8"
             app:cardCornerRadius="@dimen/corner_radius_default"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_show_popular" >
