@@ -23,7 +23,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_show_popular"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/item_list_poster_path_height"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginEnd="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_8"
