@@ -2,48 +2,53 @@ package com.zygotecnologia.zygotv.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.data.source.TmdbApi
-import com.zygotecnologia.zygotv.data.source.TmdbClient
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import androidx.lifecycle.ViewModelProvider
+import com.zygotecnologia.zygotv.data.model.GenreResponse
+import com.zygotecnologia.zygotv.data.model.Show
+import com.zygotecnologia.zygotv.data.model.ShowResponse
+import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
+class MainActivity : AppCompatActivity() {
 
-    override val coroutineContext: CoroutineContext
-        get() = SupervisorJob() + Dispatchers.IO
-
-    private val tmdbApi = TmdbClient.getInstance()
-
-    private val showList: RecyclerView by lazy { findViewById(R.id.rv_show_list) }
+    private lateinit var binding : ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        launch(Dispatchers.IO) { loadShows() }
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        initObservers()
+
+        loadShows()
     }
 
-    private suspend fun loadShows() {
-        val genres =
-            tmdbApi
-                .fetchGenresAsync(TmdbApi.TMDB_API_KEY, "BR")
-                ?.genres
-                ?: emptyList()
-        val shows =
-            tmdbApi
-                .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
-                ?.results
-                ?.map { show ->
-                    show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
-                }
-                ?: emptyList()
+    private fun initObservers(){
+        viewModel.genres.observe(this, ::onGetGenres)
+        viewModel.shows.observe(this, ::onGetShows)
+    }
 
+    private fun onGetGenres(genreResponse: GenreResponse?){
+        if(genreResponse != null){
+            viewModel.getShows()
+        }
+    }
 
-        withContext(Dispatchers.Main) {
-            showList.adapter = MainAdapter(shows)
+    private fun onGetShows(showResponse: ShowResponse?){
+        configRecyclerView(showResponse?.results?: emptyList())
+    }
+
+    private fun loadShows(){
+        viewModel.getGenres()
+    }
+
+    private fun configRecyclerView(listShows: List<Show>){
+        binding.rvShowList.apply {
+            this.adapter = MainAdapter(listShows)
         }
     }
 }
