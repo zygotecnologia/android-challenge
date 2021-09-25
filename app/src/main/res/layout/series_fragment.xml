@@ -27,7 +27,7 @@
             android:layout_height="@dimen/banner_height"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginEnd="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginTop="@dimen/spacing_16"
             app:cardCornerRadius="@dimen/corner_radius_default"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
