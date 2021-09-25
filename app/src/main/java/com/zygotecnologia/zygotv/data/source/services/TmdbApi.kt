@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.data.source
+package com.zygotecnologia.zygotv.data.source.services
 
 import com.zygotecnologia.zygotv.data.model.GenreResponse
 import com.zygotecnologia.zygotv.data.model.Show

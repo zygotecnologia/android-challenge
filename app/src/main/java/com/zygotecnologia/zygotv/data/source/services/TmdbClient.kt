@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.data.source
+package com.zygotecnologia.zygotv.data.source.services
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi

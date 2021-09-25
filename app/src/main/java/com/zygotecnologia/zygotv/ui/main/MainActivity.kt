@@ -2,21 +2,19 @@ package com.zygotecnologia.zygotv.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.zygotecnologia.zygotv.data.model.GenreResponse
 import com.zygotecnologia.zygotv.data.model.Show
 import com.zygotecnologia.zygotv.data.model.ShowResponse
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 

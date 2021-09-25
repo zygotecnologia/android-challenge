@@ -1,7 +1,7 @@
 package com.zygotecnologia.zygotv.data.repository
 
-import com.zygotecnologia.zygotv.data.source.TmdbApi
-import com.zygotecnologia.zygotv.data.source.TmdbClient
+import com.zygotecnologia.zygotv.data.source.services.TmdbApi
+import com.zygotecnologia.zygotv.data.source.services.TmdbClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

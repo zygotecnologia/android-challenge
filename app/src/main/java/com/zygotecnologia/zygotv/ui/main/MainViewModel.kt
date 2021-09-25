@@ -11,9 +11,9 @@ import com.zygotecnologia.zygotv.data.repository.TmdbRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class MainViewModel: ViewModel() {
-
-    private val repository = TmdbRepository()
+class MainViewModel (
+    private val repository: TmdbRepository
+    ): ViewModel() {
 
     private var _genres = MutableLiveData<GenreResponse?>()
     val genres : LiveData<GenreResponse?>
