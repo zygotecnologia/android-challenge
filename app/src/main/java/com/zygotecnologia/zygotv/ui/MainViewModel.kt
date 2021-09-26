@@ -29,67 +29,89 @@ class MainViewModel (
     val show : LiveData<Show?>
         get() = _show
 
-    private var _season = MutableLiveData<Season?>()
-    val season : LiveData<Season?>
-        get() = _season
-
     private var _seasons = MutableLiveData<MutableList<Season>>(mutableListOf())
     val seasons : LiveData<MutableList<Season>>
         get() = _seasons
 
+    private var _loader = MutableLiveData(true)
+    val loader : LiveData<Boolean>
+        get() = _loader
 
     fun getGenres() = viewModelScope.launch {
+
+        if(loader.value != true) {
+            _loader.postValue(true)
+        }
+
         try {
             val genres = repository.fetchGenresAsync()
-            if( genres!= null ){
+
+            if( genres!= null ) {
                 _genres.postValue(genres)
             }
         }
-        catch (ex: Exception){
+        catch (ex: Exception) {
             Log.e("Error", "${ex.message}")
+            _loader.postValue(false)
         }
     }
 
     fun getPopularShows() = viewModelScope.launch {
+
+        if(loader.value != true) {
+            _loader.postValue(true)
+        }
+
         try {
             val shows = repository.fetchPopularShowsAsync()
-            if( shows!= null ){
+
+            if( shows!= null ) {
                 _shows.postValue(shows)
             }
+
+            _loader.postValue(false)
         }
-        catch (ex: Exception){
+        catch (ex: Exception) {
             Log.e("Error", "${ex.message}")
+            _loader.postValue(false)
         }
     }
 
     fun getShow(id: Int) = viewModelScope.launch {
+
+        if(loader.value != true) {
+            _loader.postValue(true)
+        }
+
         try {
             val show = repository.fetchShowAsync(id)
             _show.postValue(show)
-            show?.numberOfSeasons?.let {
 
-                for (numero in 1..it ){
+            show?.numberOfSeasons?.let {
+                for (numero in 1..it ) {
                     getSeason(id, numero)
                 }
             }
         }
-        catch (ex: Exception){
+        catch (ex: Exception) {
             Log.e("Error", "${ex.message}")
         }
     }
 
     fun getSeason(id: Int, seasonNumber: Int) = viewModelScope.launch {
+
         try {
             val season = repository.fetchSeasonAsync(id, seasonNumber)
             val seasonsList = seasons.value
+
             if (season != null && seasonsList !== null ) {
                 seasonsList.add(season)
                 _seasons.postValue(seasonsList)
             }
-
         }
-        catch (ex: Exception){
+        catch (ex: Exception) {
             Log.e("Error", "${ex.message}")
+            _loader.postValue(false)
         }
     }
 }

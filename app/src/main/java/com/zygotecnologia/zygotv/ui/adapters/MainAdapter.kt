@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.model.Show
+import com.zygotecnologia.zygotv.data.model.ShowClicked
 import com.zygotecnologia.zygotv.databinding.ItemListShowBinding
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 

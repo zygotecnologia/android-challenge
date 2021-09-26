@@ -18,63 +18,96 @@
             android:id="@+id/include_toolbar"
             layout="@layout/toolbar_secondary" />
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/ll_loader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:translationZ="@dimen/spacing_16"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="@dimen/spacing_16"
+                    tools:visibility="visible">
+
+                    <include layout="@layout/shimmer_layout_main" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tv_title_show_popular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:text="@{show.originalName}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_16"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_show_popular"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_height"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    app:cardCornerRadius="@dimen/corner_radius_default"
-                    android:clickable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_show_popular" >
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/iv_show_popular"
+                    <TextView
+                        android:id="@+id/tv_title_show_popular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:text="@{show.originalName}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_16"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_show_popular"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="center"
-                        android:src="@drawable/image_placeholder" />
+                        android:layout_height="@dimen/banner_height"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        app:cardCornerRadius="@dimen/corner_radius_default"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_show_popular" >
 
-                </com.google.android.material.card.MaterialCardView>
+                        <ImageView
+                            android:id="@+id/iv_show_popular"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="center"
+                            android:src="@drawable/image_placeholder" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_season_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_24"
-                    android:layout_marginHorizontal="@dimen/spacing_24"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/cv_show_popular"
-                    tools:listitem="@layout/item_list_seasons" />
+                    </com.google.android.material.card.MaterialCardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_season_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_24"
+                        android:layout_marginHorizontal="@dimen/spacing_24"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@+id/cv_show_popular"
+                        tools:listitem="@layout/item_list_seasons" />
 
-        </androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

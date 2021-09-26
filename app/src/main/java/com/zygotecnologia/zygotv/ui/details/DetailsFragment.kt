@@ -1,7 +1,6 @@
-package com.zygotecnologia.zygotv.ui.main
+package com.zygotecnologia.zygotv.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +55,7 @@ class DetailsFragment : Fragment() {
 
         viewModel.show.observe(viewLifecycleOwner, ::configImageBanner)
         viewModel.seasons.observe(viewLifecycleOwner, ::onGetSeasons)
+        viewModel.loader.observe(viewLifecycleOwner, ::showLoader)
 
         binding.executePendingBindings()
     }
@@ -79,7 +79,7 @@ class DetailsFragment : Fragment() {
     private fun onGetSeasons(seasonList: MutableList<Season>){
         val show = viewModel.show.value
         val showSeasonSize = show?.numberOfSeasons ?: 1
-        if(showSeasonSize == seasonList.size){
+        if(showSeasonSize == seasonList.size) {
             configRecyclerViewSeasons(seasonList)
         }
     }
@@ -91,5 +91,15 @@ class DetailsFragment : Fragment() {
             it.adapter = SeasonAdapter(list)
             it.setHasFixedSize(false)
         }
+
+        showLoader(false)
+    }
+
+
+    private fun showLoader(boolean: Boolean) {
+        if(boolean)
+            binding.llLoader.visibility = View.VISIBLE
+        else
+            binding.llLoader.visibility = View.GONE
     }
 }

@@ -1,7 +1,6 @@
 package com.zygotecnologia.zygotv.ui.series
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,8 @@ import com.zygotecnologia.zygotv.data.model.ShowResponse
 import com.zygotecnologia.zygotv.databinding.SeriesFragmentBinding
 import com.zygotecnologia.zygotv.ui.MainViewModel
 import com.zygotecnologia.zygotv.ui.adapters.MainAdapter
-import com.zygotecnologia.zygotv.ui.adapters.ShowClicked
-import com.zygotecnologia.zygotv.ui.main.DetailsFragment
+import com.zygotecnologia.zygotv.data.model.ShowClicked
+import com.zygotecnologia.zygotv.ui.details.DetailsFragment
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,6 +45,7 @@ class SeriesFragment : Fragment(), ShowClicked {
     private fun initObservers(){
         viewModel.genres.observe(viewLifecycleOwner, ::onGetGenres)
         viewModel.shows.observe(viewLifecycleOwner, ::onGetPopularShows)
+        viewModel.loader.observe(viewLifecycleOwner, ::showLoader)
     }
 
     private fun onGetGenres(genreResponse: GenreResponse?){
@@ -122,5 +122,12 @@ class SeriesFragment : Fragment(), ShowClicked {
 
     override fun onItemClick(id: Int) {
         navigate(id)
+    }
+
+    private fun showLoader(boolean: Boolean) {
+        if(boolean)
+            binding.llLoader.visibility = View.VISIBLE
+        else
+            binding.llLoader.visibility = View.GONE
     }
 }

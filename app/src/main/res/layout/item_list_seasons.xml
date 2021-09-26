@@ -37,17 +37,17 @@
 
         <TextView
             android:id="@+id/tv_show_title"
-            tools:text="Title"
-            android:text="@{data.getSeasonTitle}"
-            android:textStyle="bold"
-            android:layout_width="@dimen/item_list_poster_path_width"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:text="@{data.getSeasonTitle}"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16"
-            android:layout_marginStart="@dimen/spacing_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cv_show_poster"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            tools:text="Title" />
 
         <TextView
             android:id="@+id/tv_describe"
@@ -56,6 +56,7 @@
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_8"
             android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginBottom="6dp"
             android:text="@{data.overview}"
             android:textColor="@color/gray_secondary"
             android:textSize="@dimen/text_size_14"

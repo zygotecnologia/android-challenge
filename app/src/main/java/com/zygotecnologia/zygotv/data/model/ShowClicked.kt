@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.adapters
+package com.zygotecnologia.zygotv.data.model
 
 interface ShowClicked {
     fun onItemClick(id: Int)
