@@ -46,7 +46,8 @@
             android:textSize="@dimen/text_size_16"
             android:layout_marginStart="@dimen/spacing_16"
             app:layout_constraintStart_toEndOf="@+id/cv_show_poster"
-            app:layout_constraintTop_toTopOf="@+id/cv_show_poster" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/tv_describe"
@@ -58,10 +59,12 @@
             android:text="@{data.overview}"
             android:textColor="@color/gray_secondary"
             android:textSize="@dimen/text_size_14"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_show_poster"
             app:layout_constraintEnd_toStartOf="@+id/iv_expand_more"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/cv_show_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_show_title"
+            app:layout_constraintVertical_bias="0.525"
             tools:text="Describe" />
 
         <ImageView
@@ -69,9 +72,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/outline_expand_more_24"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_show_poster"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/cv_show_poster" />
+
+        <ImageView
+            android:id="@+id/iv_expand_less"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/outline_expand_less_24"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_show_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cv_show_poster" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_episodes"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:fadeScrollbars="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_list_episodes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_show_poster"
+                />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

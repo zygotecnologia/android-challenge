@@ -89,6 +89,7 @@ class DetailsFragment : Fragment() {
 
         binding.rvSeasonList.also{
             it.adapter = SeasonAdapter(list)
+            it.setHasFixedSize(false)
         }
     }
 }
