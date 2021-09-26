@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.main
+package com.zygotecnologia.zygotv.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +12,17 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.data.model.Show
+import com.zygotecnologia.zygotv.databinding.ShowItemBinding
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(
+    private val shows: List<Show>,
+    private val listener: ShowClicked
+    ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
-        return ViewHolder(view)
+        val binding = ViewHolder.inflateViewBinding(parent, viewType)
+        return ViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,17 +31,26 @@ class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdap
 
     override fun getItemCount() = shows.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(private val binding: ShowItemBinding, private val listener: ShowClicked) : RecyclerView.ViewHolder(binding.root) {
+
+        companion object {
+            internal fun inflateViewBinding(parent: ViewGroup, viewType: Int): ShowItemBinding {
+                return ShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            }
+        }
 
         fun bind(show: Show) {
-            val textView: TextView = itemView.findViewById(tv_show_title)
-            textView.text = show.name
 
-            val imageView: ImageView = itemView.findViewById(iv_show_poster)
+            binding.tvShowTitle.text = show.name
+
             Glide.with(itemView)
                 .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(imageView)
+                .into(binding.ivShowPoster)
+
+                binding.ivShowPoster.setOnClickListener {
+                    show.id?.let { id -> listener.onItemClick(id) }
+                }
         }
     }
 }

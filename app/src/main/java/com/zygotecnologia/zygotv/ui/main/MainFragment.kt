@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.FragmentMainBinding
+import com.zygotecnologia.zygotv.ui.adapters.MainViewPagerAdapter
 
 class MainFragment : Fragment() {
 
@@ -42,7 +43,7 @@ class MainFragment : Fragment() {
         //desabilitando o swipe do viewPager, e tornando a navegação possível somente pelas tabs
         binding.viewPager.also {
             it.isUserInputEnabled = false
-            it.adapter = MainActivityAdapter(requireActivity())
+            it.adapter = MainViewPagerAdapter(requireActivity())
             it.currentItem = 1
         }
         configTabLayout()
