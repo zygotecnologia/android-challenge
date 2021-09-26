@@ -16,4 +16,12 @@ class TmdbRepository {
     suspend fun fetchPopularShowsAsync() = withContext(Dispatchers.IO){
         tmdbApi.getApi().fetchPopularShowsAsync(apiKey = TmdbApi.TMDB_API_KEY, region = TmdbApi.TMDB_REGION)
     }
+
+    suspend fun fetchShowAsync(id: Int) = withContext(Dispatchers.IO){
+        tmdbApi.getApi().fetchShowAsync(apiKey = TmdbApi.TMDB_API_KEY, id = id)
+    }
+
+    suspend fun fetchSeasonAsync(id: Int, seasonNumber: Int) = withContext(Dispatchers.IO){
+        tmdbApi.getApi().fetchSeasonAsync(id = id, seasonNumber = seasonNumber, apiKey = TmdbApi.TMDB_API_KEY)
+    }
 }

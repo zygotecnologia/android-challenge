@@ -45,6 +45,7 @@ class MainFragment : Fragment() {
             it.isUserInputEnabled = false
             it.adapter = MainViewPagerAdapter(requireActivity())
             it.currentItem = 1
+            it.offscreenPageLimit = 3
         }
         configTabLayout()
     }

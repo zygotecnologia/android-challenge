@@ -1,18 +1,13 @@
 package com.zygotecnologia.zygotv.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.R.id.iv_show_poster
-import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.data.model.Show
-import com.zygotecnologia.zygotv.databinding.ShowItemBinding
+import com.zygotecnologia.zygotv.databinding.ItemListShowBinding
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class MainAdapter(
@@ -31,11 +26,11 @@ class MainAdapter(
 
     override fun getItemCount() = shows.size
 
-    class ViewHolder(private val binding: ShowItemBinding, private val listener: ShowClicked) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemListShowBinding, private val listener: ShowClicked) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            internal fun inflateViewBinding(parent: ViewGroup, viewType: Int): ShowItemBinding {
-                return ShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            internal fun inflateViewBinding(parent: ViewGroup, viewType: Int): ItemListShowBinding {
+                return ItemListShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             }
         }
 

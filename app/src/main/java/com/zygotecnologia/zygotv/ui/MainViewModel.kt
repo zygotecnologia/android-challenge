@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zygotecnologia.zygotv.data.model.GenreResponse
+import com.zygotecnologia.zygotv.data.model.Season
+import com.zygotecnologia.zygotv.data.model.Show
 import com.zygotecnologia.zygotv.data.model.ShowResponse
 import com.zygotecnologia.zygotv.data.repository.TmdbRepository
 import kotlinx.coroutines.launch
@@ -23,6 +25,19 @@ class MainViewModel (
     val shows : LiveData<ShowResponse?>
         get() = _shows
 
+    private var _show = MutableLiveData<Show?>()
+    val show : LiveData<Show?>
+        get() = _show
+
+    private var _season = MutableLiveData<Season?>()
+    val season : LiveData<Season?>
+        get() = _season
+
+    private var _seasons = MutableLiveData<MutableList<Season>>(mutableListOf())
+    val seasons : LiveData<MutableList<Season>>
+        get() = _seasons
+
+
     fun getGenres() = viewModelScope.launch {
         try {
             val genres = repository.fetchGenresAsync()
@@ -35,12 +50,43 @@ class MainViewModel (
         }
     }
 
-    fun getShows() = viewModelScope.launch {
+    fun getPopularShows() = viewModelScope.launch {
         try {
             val shows = repository.fetchPopularShowsAsync()
             if( shows!= null ){
                 _shows.postValue(shows)
             }
+        }
+        catch (ex: Exception){
+            Log.e("Error", "${ex.message}")
+        }
+    }
+
+    fun getShow(id: Int) = viewModelScope.launch {
+        try {
+            val show = repository.fetchShowAsync(id)
+            _show.postValue(show)
+            show?.numberOfSeasons?.let {
+
+                for (numero in 1..it ){
+                    getSeason(id, numero)
+                }
+            }
+        }
+        catch (ex: Exception){
+            Log.e("Error", "${ex.message}")
+        }
+    }
+
+    fun getSeason(id: Int, seasonNumber: Int) = viewModelScope.launch {
+        try {
+            val season = repository.fetchSeasonAsync(id, seasonNumber)
+            val seasonsList = seasons.value
+            if (season != null && seasonsList !== null ) {
+                seasonsList.add(season)
+                _seasons.postValue(seasonsList)
+            }
+
         }
         catch (ex: Exception){
             Log.e("Error", "${ex.message}")

@@ -64,7 +64,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_crime"
-            tools:listitem="@layout/show_item" />
+            tools:listitem="@layout/item_list_show" />
 
         <TextView
             android:id="@+id/tv_title_action_adventure"
@@ -85,7 +85,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_title_action_adventure"
-            tools:listitem="@layout/show_item" />
+            tools:listitem="@layout/item_list_show" />
 
         <TextView
             android:id="@+id/tv_title_comedy"
@@ -106,7 +106,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_title_comedy"
-            tools:listitem="@layout/show_item" />
+            tools:listitem="@layout/item_list_show" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

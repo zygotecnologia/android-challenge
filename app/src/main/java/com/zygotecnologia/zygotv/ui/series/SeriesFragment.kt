@@ -102,7 +102,7 @@ class SeriesFragment : Fragment(), ShowClicked {
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(binding.ivShowPopular)
 
-        binding.tvTitleShowPopular.text = mostPopularShow[0].name
+        binding.tvTitleShowPopular.text = mostPopularShow[0].originalName
 
         binding.cvShowPopular.setOnClickListener {
             mostPopularId?.let { id -> navigate(id) }
