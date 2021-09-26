@@ -43,7 +43,7 @@
                     android:elevation="@dimen/spacing_16"
                     tools:visibility="visible">
 
-                    <include layout="@layout/shimmer_layout_main" />
+                    <include layout="@layout/shimmer_layout_details" />
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
