@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="data"
+            type="com.zygotecnologia.zygotv.data.model.Season" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_show_poster"
+            android:layout_width="110dp"
+            android:layout_height="170dp"
+            app:cardCornerRadius="@dimen/corner_radius_default"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_show_poster"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_show_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:text="@{data.getSeasonTitle}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_show_poster"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tv_describe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginBottom="6dp"
+            android:text="@{data.overview}"
+            android:textColor="@color/gray_secondary"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_show_poster"
+            app:layout_constraintEnd_toStartOf="@+id/iv_expand_more"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cv_show_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_show_title"
+            app:layout_constraintVertical_bias="0.525"
+            tools:text="Describe" />
+
+        <ImageView
+            android:id="@+id/iv_expand_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/outline_expand_more_24"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_show_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cv_show_poster" />
+
+        <ImageView
+            android:id="@+id/iv_expand_less"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/outline_expand_less_24"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_show_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cv_show_poster" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_episodes"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:fadeScrollbars="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_list_episodes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_show_poster"
+                />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
