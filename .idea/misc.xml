@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/drawable/ic_launcher.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.21875" />
         <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/drawable/image_placeholder.xml" value="0.134375" />
         <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/drawable/logo_zygotv.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/drawable/outline_arrow_back_24.xml" value="0.20364583333333333" />
@@ -27,6 +30,7 @@
         <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/layout/toolbar.xml" value="0.3625" />
         <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/layout/toolbar_main.xml" value="0.23694779116465864" />
         <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/layout/toolbar_secondary.xml" value="0.1875" />
+        <entry key="..\:/Users/david/Documents/GitHub/android-challenge/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.37864583333333335" />
       </map>
     </option>
   </component>
