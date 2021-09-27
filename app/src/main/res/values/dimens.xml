@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="md_20dp">20</dimen>
+    <dimen name="md_18dp">18</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_epi_title_start">19dp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+</resources>
