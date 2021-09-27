@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableRow>
+
+        <ImageButton
+            android:id="@+id/bt_back_bar"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_arrow_back_white"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/title"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:padding="10dp"/>
+    </TableRow>
+</TableRow>

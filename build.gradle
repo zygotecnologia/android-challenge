@@ -4,8 +4,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
+        classpath "io.insert-koin:koin-gradle-plugin:2.2.3"
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
