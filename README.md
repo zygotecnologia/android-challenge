@@ -17,10 +17,6 @@ Algumas tecnologias foram utilizadas:
 ### Instalação
 
 Basta clonar ou baixar o projeto do repositório e executar no android studio.
-### Como usar
-
-
-Após isso será possível acessar o extrato e as features de compra e venda das criptomoedas.
 
 
 [Kotlin]: <https://kotlinlang.org/>
