@@ -1,7 +1,7 @@
 # Zygo TV
 Zygo TV é uma aplicação que possui apenas uma tela de listagem das séries.
 
-- Ao selecionar uma série é possível visualizar os detalhes da mesma.to.
+- Ao selecionar uma série é possível visualizar os detalhes da mesma
 
 ### Tecnologias
 
