@@ -1,10 +1,10 @@
-package com.example.zygotv.data.repository.datasourceImpl
+package com.zygotecnologia.zygotv.data.repository.datasourceImpl
 
-import com.example.zygotv.data.api.ApiService
-import com.example.zygotv.data.model.genre.GenreResponse
-import com.example.zygotv.data.model.show.Show
-import com.example.zygotv.data.model.show.ShowResponse
-import com.example.zygotv.data.repository.datasource.TVRemoteDataSource
+import com.zygotecnologia.zygotv.data.api.ApiService
+import com.zygotecnologia.zygotv.data.model.genre.GenreResponse
+import com.zygotecnologia.zygotv.data.model.show.Show
+import com.zygotecnologia.zygotv.data.model.show.ShowResponse
+import com.zygotecnologia.zygotv.data.repository.datasource.TVRemoteDataSource
 
 class TVRemoteDataSourceImpl(
     private val service: ApiService,

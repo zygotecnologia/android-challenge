@@ -1,4 +1,4 @@
-package com.example.zygotv.ext
+package com.zygotecnologia.zygotv.ext
 
 import android.annotation.SuppressLint
 import android.widget.ImageView

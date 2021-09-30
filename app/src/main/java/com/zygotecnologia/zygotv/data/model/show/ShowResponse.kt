@@ -1,17 +1,17 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.data.model.show
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 data class ShowResponse(
-    @Json(name = "page")
+    @SerializedName("page")
     val page: Int?,
 
-    @Json(name = "total_results")
+    @SerializedName("total_results")
     val totalResults: Int?,
 
-    @Json(name = "total_pages")
+    @SerializedName("total_pages")
     val totalPages: Int?,
 
-    @Json(name = "results")
+    @SerializedName("results")
     val results: List<Show>?
 )

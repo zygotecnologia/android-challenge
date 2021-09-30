@@ -1,8 +1,8 @@
-package com.example.zygotv.data.repository.datasource
+package com.zygotecnologia.zygotv.data.repository.datasource
 
-import com.example.zygotv.data.model.genre.GenreResponse
-import com.example.zygotv.data.model.show.Show
-import com.example.zygotv.data.model.show.ShowResponse
+import com.zygotecnologia.zygotv.data.model.genre.GenreResponse
+import com.zygotecnologia.zygotv.data.model.show.Show
+import com.zygotecnologia.zygotv.data.model.show.ShowResponse
 
 interface TVRemoteDataSource {
     suspend fun getGenres(region: String): GenreResponse?

@@ -1,14 +1,10 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.data.model.genre
 
-import com.squareup.moshi.Json
-
-data class GenreResponse(
-    @Json(name = "genres") val genres: List<Genre>?
-)
+import com.google.gson.annotations.SerializedName
 
 data class Genre(
-    @Json(name = "id")
+    @SerializedName("id")
     val id: Int?,
-    @Json(name = "name")
+    @SerializedName("name")
     val name: String?
 )

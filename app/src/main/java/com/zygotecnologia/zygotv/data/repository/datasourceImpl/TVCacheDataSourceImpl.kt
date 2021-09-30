@@ -1,8 +1,8 @@
-package com.example.zygotv.data.repository.datasourceImpl
+package com.zygotecnologia.zygotv.data.repository.datasourceImpl
 
-import com.example.zygotv.data.model.genre.Genre
-import com.example.zygotv.data.model.show.Show
-import com.example.zygotv.data.repository.datasource.TVCacheDataSource
+import com.zygotecnologia.zygotv.data.model.genre.Genre
+import com.zygotecnologia.zygotv.data.model.show.Show
+import com.zygotecnologia.zygotv.data.repository.datasource.TVCacheDataSource
 import java.util.*
 
 class TVCacheDataSourceImpl : TVCacheDataSource {

@@ -1,7 +1,7 @@
-package com.example.zygotv.data.repository.datasource
+package com.zygotecnologia.zygotv.data.repository.datasource
 
-import com.example.zygotv.data.model.genre.Genre
-import com.example.zygotv.data.model.show.Show
+import com.zygotecnologia.zygotv.data.model.genre.Genre
+import com.zygotecnologia.zygotv.data.model.show.Show
 
 interface TVCacheDataSource {
     suspend fun getGenreListFromCache(): List<Genre>

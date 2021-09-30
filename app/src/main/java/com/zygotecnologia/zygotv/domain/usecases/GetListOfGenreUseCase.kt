@@ -1,7 +1,7 @@
-package com.example.zygotv.domain.usecases
+package com.zygotecnologia.zygotv.domain.usecases
 
-import com.example.zygotv.data.model.genre.Genre
-import com.example.zygotv.domain.TVRepository
+import com.zygotecnologia.zygotv.data.model.genre.Genre
+import com.zygotecnologia.zygotv.domain.TVRepository
 
 class GetListOfGenreUseCase(private val repository: TVRepository) {
 
