@@ -1,34 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    xmlns:Tools="http://schemas.android.com/tools"
+    android:paddingStart="@dimen/medium"
+    android:orientation="vertical"
+    Tools:ignore="RtlSymmetry"
+    android:background="@color/backgroundColor">
 
-    <ImageView
-        android:id="@+id/iv_show_poster"
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/image_placeholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_show_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-    <TextView
-        android:id="@+id/tv_show_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_show_poster"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Title" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvImage"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small"
+            android:layout_marginEnd="@dimen/medium"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="@dimen/xlarge"
+            app:cardElevation="@dimen/xsmall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_show_poster"
+                    android:layout_width="350dp"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/imgmovie" />
+
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_show_poster"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:src="@drawable/image_placeholder"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_show_title"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/iv_show_poster"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:text="Title" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
