@@ -3,6 +3,7 @@ package com.zygotecnologia.zygotv.network
 import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowResponse
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -26,6 +27,18 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Path("tv_id") id: Int
     ): Show?
+
+    @GET("$TMDB_API_VERSION/movie/top_rated")
+    suspend fun fetchMovieAsync(
+        @Query("api_key") apiKey: String,
+        @Query("region") region: String
+    ): ShowResponse?
+
+    @GET("$TMDB_API_VERSION/genre/movie/list")
+    suspend fun fetchGenresMovieAsync(
+        @Query("api_key") apiKey: String,
+        @Query("region") region: String
+    ): GenreResponse?
 
     companion object {
         private const val TMDB_API_VERSION = "3"

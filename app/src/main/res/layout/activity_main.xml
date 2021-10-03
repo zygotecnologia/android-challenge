@@ -1,19 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    android:background="@color/backgroundColor"
+    android:fillViewport="true">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_show_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/show_item" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:fillViewport="true"
+        tools:context=".presentation.activity.MainActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="ZigoTV"/>
+
+        <ImageButton
+            android:id="@+id/ibtSearchMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/background"
+            android:contentDescription="@string/btn_search_movie"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
+        <EditText
+            android:id="@+id/etSearchMovie"
+            android:layout_width="315dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:alpha="0.5"
+            android:autofillHints="no"
+            android:fontFamily="@font/lato_regular"
+            android:hint="@string/search_movie"
+            android:inputType="text"
+            android:textColor="@color/default_text_color"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/ibtSearchMovie"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSearchMovie">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layoutopc"
+                android:layout_width="410dp"
+                android:layout_height="match_parent"
+                android:alpha="0.7"
+                android:background="@color/backgroundColor"
+                app:tabIndicator="@drawable/tab_indicator_movies"
+                app:tabIndicatorColor="@color/green_tab_indicator"
+                app:tabIndicatorFullWidth="false"
+                app:tabMode="scrollable"
+                app:tabTextAppearance="@style/TextTitle" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layoutopc"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
