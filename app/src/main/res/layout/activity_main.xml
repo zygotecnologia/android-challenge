@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_text_color"
+    android:background="@color/black"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,15 +16,19 @@
 
         <ImageView
             android:id="@+id/txt_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="416dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
-            android:src="@drawable/zygo_logo" />
+            android:src="@drawable/zygo_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ibtSearchMovie"
-            android:layout_width="50dp"
-            android:layout_height="45dp"
+            android:layout_width="39dp"
+            android:layout_height="34dp"
             android:src="@drawable/ic_search_24"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -32,13 +36,17 @@
             android:id="@+id/tab_layoutopc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_logo">
+            app:layout_constraintTop_toBottomOf="@+id/txt_logo"
+            app:tabIndicatorColor="#8A8585"
+            app:tabTextColor="#EFEEEE">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textColor="@color/white"
                 tools:text="@string/all_movies" />
 
             <com.google.android.material.tabs.TabItem
