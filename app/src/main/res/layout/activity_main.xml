@@ -34,13 +34,13 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layoutopc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="369dp"
+            android:layout_height="39dp"
             android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_logo"
-            app:tabIndicatorColor="#8A8585"
+            app:tabIndicatorColor="#2B2B2B"
             app:tabTextColor="#EFEEEE">
 
             <com.google.android.material.tabs.TabItem
