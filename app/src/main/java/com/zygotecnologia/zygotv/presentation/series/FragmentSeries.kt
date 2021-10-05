@@ -10,6 +10,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
+import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class FragmentSeries : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rvSeries)!! }
+    private val showList: RecyclerView by lazy {rvSeries}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

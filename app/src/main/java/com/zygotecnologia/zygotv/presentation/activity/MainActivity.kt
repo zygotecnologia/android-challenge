@@ -7,6 +7,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.presentation.adapter.FragmentAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -21,8 +22,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
        setContentView(R.layout.activity_main)
 
-        val viewpager = findViewById<ViewPager2>(R.id.viewPager)
-        val tablayout = findViewById<TabLayout>(R.id.tab_layoutopc)
+        val viewpager = viewPager
+        val tablayout = tab_layoutopc
 
         viewpager.adapter = FragmentAdapter(this)
         viewpager.isUserInputEnabled=false

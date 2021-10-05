@@ -27,7 +27,7 @@ class FragmentMovie : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rvSeries)!! }
+    private val showList: RecyclerView by lazy {rvSeries }
     private lateinit var imgView: ImageView
     private lateinit var imgSerie: ImageView
     private val viewModel: MovieViewModel =
