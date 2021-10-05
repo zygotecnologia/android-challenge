@@ -1,19 +1,19 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.zygotecnologia.zygotv.model.Show
 import okhttp3.OkHttpClient
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object TmdbClient {
 
-    private val moshiAdapter = Moshi.Builder()
+        val moshiAdapter = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
+
+    var service = getInstance()
 
     fun getInstance(): TmdbApi {
         val retrofit = Retrofit.Builder()

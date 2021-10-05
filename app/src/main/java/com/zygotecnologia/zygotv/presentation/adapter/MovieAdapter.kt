@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 

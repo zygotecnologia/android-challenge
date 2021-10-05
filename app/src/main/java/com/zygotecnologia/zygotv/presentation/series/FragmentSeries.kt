@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
+import com.zygotecnologia.zygotv.data.network.TmdbApi
+import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

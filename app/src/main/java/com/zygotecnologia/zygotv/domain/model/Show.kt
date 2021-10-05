@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.domain.model
 
 import com.squareup.moshi.Json
 

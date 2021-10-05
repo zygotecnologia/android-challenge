@@ -55,6 +55,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     def lifeCycleVersion = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha02"
 
 
     def paging_version = "2.1.2"
@@ -79,4 +80,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion"
     //LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleVersion"
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }

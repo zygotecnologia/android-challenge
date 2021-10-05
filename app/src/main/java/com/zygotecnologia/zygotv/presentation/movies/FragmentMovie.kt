@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
+import com.zygotecnologia.zygotv.domain.model.Show
+import com.zygotecnologia.zygotv.data.network.TmdbApi
+import com.zygotecnologia.zygotv.data.network.TmdbClient
+import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +28,8 @@ class FragmentMovie : Fragment() {
 
     private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
     private lateinit var imgView:ImageView
+    private val viewModel: MovieViewModel =
+        MovieViewModel.ViewModelFactory(MoviesRepositoryImpl()).create(MovieViewModel::class.java)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,18 +71,47 @@ class FragmentMovie : Fragment() {
         }
     }
 
+
+
     fun binding(){
         imgView = view?.findViewById(R.id.img_serie)!!
     }
 
     fun clickListener(){
-        imgView.setOnClickListener{
-            handleClick(view)
+        imgView.setOnClickListener{ movie->
+            handleClick(movie.)
 
         }
     }
-    private fun handleClick(movie: View?) {
-        val intent = startActivity(Intent(context, DetailActivity::class.java))
 
+    private fun setObservers() {
+
+        viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
+            showList.adapter = movieListResponse?.let { list ->
+                MovieAdapter(list, clickListener = {
+                    handleClick(it)
+                })
+
+            }
+
+            viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            })
+
+            viewModel.loadingEvent.observe(viewLifecycleOwner, Observer { isVisible ->
+               // loading.setVisible(false)
+            })
+        })
+    }
+    private fun handleClick(movie: Show) {
+        val intent = Intent(context, DetailActivity::class.java)
+        if (movie != null) {
+            intent.putExtra("originalName", movie.originalName)
+            intent.putExtra("poster", movie.posterPath)
+            intent.putExtra("name", movie.name)
+            intent.putExtra("backdropPath", movie.backdropPath)
+            intent.putExtra("genre", movie.overview)
+        }
+        startActivity(intent)
     }
 }
