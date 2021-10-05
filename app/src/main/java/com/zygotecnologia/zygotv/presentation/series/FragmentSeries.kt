@@ -19,7 +19,7 @@ class FragmentSeries : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
+    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rvSeries)!! }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +55,9 @@ class FragmentSeries : Fragment() {
 
 
         withContext(Dispatchers.Main) {
-            showList.adapter = MovieAdapter(shows)
+            showList.adapter = MovieAdapter(shows,clickListener = {
+                (it)
+            })
         }
     }
 }

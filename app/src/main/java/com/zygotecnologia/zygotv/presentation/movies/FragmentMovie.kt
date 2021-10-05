@@ -11,12 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
+import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,8 +27,9 @@ class FragmentMovie : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
-    private lateinit var imgView:ImageView
+    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rvSeries)!! }
+    private lateinit var imgView: ImageView
+    private lateinit var imgSerie: ImageView
     private val viewModel: MovieViewModel =
         MovieViewModel.ViewModelFactory(MoviesRepositoryImpl()).create(MovieViewModel::class.java)
 
@@ -47,7 +49,7 @@ class FragmentMovie : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch(Dispatchers.IO) { loadShows() }
         binding()
-        clickListener()
+        setObservers()
     }
 
     private suspend fun loadShows() {
@@ -67,23 +69,17 @@ class FragmentMovie : Fragment() {
 
 
         withContext(Dispatchers.Main) {
-            showList.adapter = MovieAdapter(shows)
+            showList.adapter = MovieAdapter(shows,clickListener = {
+                handleClick(it)
+            })
         }
     }
 
+    fun binding() {
+        imgView = imgPoster
+//        imgSerie = imgSerieTv
 
-
-    fun binding(){
-        imgView = view?.findViewById(R.id.img_serie)!!
     }
-
-    fun clickListener(){
-        imgView.setOnClickListener{ movie->
-            handleClick(movie.)
-
-        }
-    }
-
     private fun setObservers() {
 
         viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
@@ -97,12 +93,9 @@ class FragmentMovie : Fragment() {
             viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             })
-
-            viewModel.loadingEvent.observe(viewLifecycleOwner, Observer { isVisible ->
-               // loading.setVisible(false)
-            })
         })
     }
+
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)
         if (movie != null) {

@@ -1,20 +1,18 @@
 package com.zygotecnologia.zygotv.data.repository
 
-import com.ingrid.api_marvel.domain.repository.MoviesRepository
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient.service
 import com.zygotecnologia.zygotv.domain.model.ApiResult
 import com.zygotecnologia.zygotv.domain.model.Show
+import com.zygotecnologia.zygotv.domain.repository.MoviesRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
 class MoviesRepositoryImpl : MoviesRepository {
 
     override suspend fun getMovies(resultCallback: (result: ApiResult) -> Unit) {
-        service.fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR").e
+        service.fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
         object : Callback<List<Show>?> {
 
             override fun onResponse(
@@ -32,6 +30,6 @@ class MoviesRepositoryImpl : MoviesRepository {
                 resultCallback(ApiResult.ServerError(message = "Erro de conexão"))
             }
 
-        })
+        }
     }
 }

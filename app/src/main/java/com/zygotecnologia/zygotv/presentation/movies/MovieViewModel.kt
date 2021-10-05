@@ -3,9 +3,9 @@ package com.zygotecnologia.zygotv.presentation.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ingrid.api_marvel.domain.repository.MoviesRepository
 import com.zygotecnologia.zygotv.domain.model.ApiResult
 import com.zygotecnologia.zygotv.domain.model.Show
+import com.zygotecnologia.zygotv.domain.repository.MoviesRepository
 
 class MovieViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
@@ -13,7 +13,7 @@ class MovieViewModel(private val moviesRepository: MoviesRepository) : ViewModel
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
     val movieList: MutableLiveData<List<Show>> = MutableLiveData()
 
-    fun getMovies() {
+    suspend fun getMovies() {
         loadingEvent.value = true
 
         moviesRepository.getMovies { result ->
