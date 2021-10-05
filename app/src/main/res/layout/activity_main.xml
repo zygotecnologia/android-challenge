@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_logo"
-            app:tabIndicatorColor="#2B2B2B"
+            app:tabIndicatorColor="#8A8585"
             app:tabTextColor="#EFEEEE">
 
             <com.google.android.material.tabs.TabItem
