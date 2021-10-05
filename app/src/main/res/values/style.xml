@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextTitle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="font">@font/lato_regular</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+        <style name="Theme.MaterialComponents.NoActionBar">
+            <item name="windowActionBar">false</item>
+            <item name="windowNoTitle">true</item>
+            <item name="android:layout_marginTop">0dp</item>
+        </style>
+
+        <style name="textTitle" parent="TextAppearance.Design.Tab">
+            <item name="textAllCaps">false</item>
+            <item name="fontFamily">@font/lato_regular</item>
+            <item name="android:textColor">@color/default_text_color</item>
+            <item name="android:textSize">24sp</item>
+        </style>
+
+        <style name="textTitle2" parent="TextAppearance.Design.Tab">
+            <item name="textAllCaps">false</item>
+            <item name="fontFamily">@font/lato_regular</item>
+            <item name="android:textColor">@color/default_text_color</item>
+            <item name="android:textSize">16sp</item>
+        </style>
+
+        <style name="textDefault" parent="TextAppearance.Design.Tab">
+            <item name="textAllCaps">false</item>
+            <item name="fontFamily">@font/lato_regular</item>
+            <item name="android:textColor">@color/default_text_color</item>
+            <item name="android:textSize">12sp</item>
+        </style>
+
+        <style name="Widget.Button.Toggle" parent="android:Widget">
+            <item name="background">@drawable/heart_button</item>
+            <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+        </style>
+
+        <style name="toggleButton"  parent="Theme.MaterialComponents.DayNight.NoActionBar">
+            <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
+            <item name="android:textOn"></item>
+            <item name="android:textOff"></item>
+        </style>
+
+        <style name="shapeCornerBotton40" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSizeBottomLeft">40dp</item>
+            <item name="cornerSizeBottomRight">40dp</item>
+        </style>
+
+        <style name="shapeCornerLeft100" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSizeBottomLeft">100dp</item>
+            <item name="cornerSizeTopLeft">100dp</item>
+        </style>
+
+        <style name="chipGenres" parent="Widget.MaterialComponents.Chip.Filter">
+            <item name="chipBackgroundColor">@drawable/chip_genre_on_click</item>
+            <item name="android:textAppearance">@style/textDefault</item>
+
+        </style>
+    </resources>
