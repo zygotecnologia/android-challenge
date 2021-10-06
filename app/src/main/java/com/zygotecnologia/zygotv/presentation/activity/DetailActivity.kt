@@ -9,6 +9,7 @@ import com.zygotecnologia.zygotv.R
 import kotlinx.android.synthetic.main.activity_detail2.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_movies.*
+import kotlinx.android.synthetic.main.show.*
 import kotlinx.android.synthetic.main.show_item.*
 
 class DetailActivity : AppCompatActivity() {
@@ -24,9 +25,9 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail2)
 
-        nameSerie = txtNameSerie
+        nameSerie = txtCategories
         title = txtCategories
-        imgMovie = imgPosterDetail
+        imgMovie = img_show
 
         val value = intent.getStringExtra("actor")
         val titleDesc = intent.getStringExtra("title")

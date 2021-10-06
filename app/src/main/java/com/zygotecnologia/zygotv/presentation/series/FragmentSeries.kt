@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
+import com.zygotecnologia.zygotv.domain.model.Genre
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +23,7 @@ class FragmentSeries : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy {rvSeries}
+    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,9 +59,40 @@ class FragmentSeries : Fragment() {
 
 
         withContext(Dispatchers.Main) {
-            showList.adapter = MovieAdapter(shows,clickListener = {
-                (it)
-            })
+            val genre2s: MutableList<Genre> = ArrayList()
+            val popularity = 0
+            lateinit var moviePopularity: Show
+
+            genres.forEach {
+                val genre = Genre(it.id, it.name)
+
+                val moviesGenre: MutableList<Show> = ArrayList()
+                shows.forEach { movie ->
+                    if (movie.genreIds?.contains(it.id) == true) {
+                        moviesGenre.add(movie)
+
+                        if (popularity < movie.popularity) {
+                            moviePopularity = movie
+                        }
+                    }
+                }
+                if (moviesGenre.size > 0) {
+                    genre.movies = moviesGenre
+                    genre2s.add(genre)
+                }
+                if (moviePopularity.backdropPath !== "") {
+
+                    val url = TmdbApi.TMDB_BASE_IMAGE_URL + moviePopularity.backdropPath
+
+                    imgPoster?.let {
+                        Glide.with(imgPoster.context).load(
+                            url
+                        ).into(it)
+                    }
+                }
+
+                showList.adapter = MovieAdapter(genre2s)
+            }
         }
     }
 }

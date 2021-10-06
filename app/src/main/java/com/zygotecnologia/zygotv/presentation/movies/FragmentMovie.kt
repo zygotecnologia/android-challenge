@@ -9,15 +9,20 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
-import com.zygotecnologia.zygotv.domain.model.Show
+import com.zygotecnologia.zygotv.domain.model.Genre
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
+import kotlinx.android.synthetic.main.show.*
+import kotlinx.android.synthetic.main.show.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,9 +32,7 @@ class FragmentMovie : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy {rvSeries }
-    private lateinit var imgView: ImageView
-    private lateinit var imgSerie: ImageView
+    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
     private val viewModel: MovieViewModel =
         MovieViewModel.ViewModelFactory(MoviesRepositoryImpl()).create(MovieViewModel::class.java)
 
@@ -48,8 +51,6 @@ class FragmentMovie : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch(Dispatchers.IO) { loadShows() }
-        binding()
-        setObservers()
     }
 
     private suspend fun loadShows() {
@@ -69,42 +70,68 @@ class FragmentMovie : Fragment() {
 
 
         withContext(Dispatchers.Main) {
-            showList.adapter = MovieAdapter(shows,clickListener = {
-                handleClick(it)
-            })
+
+            val genre2s: MutableList<Genre> = ArrayList()
+            val popularity = 0
+            lateinit var moviePopularity: Show
+
+            genres.forEach {
+                val genre = Genre(it.id, it.name)
+
+                val moviesGenre: MutableList<Show> = ArrayList()
+                shows.forEach { movie ->
+                    if (movie.genreIds?.contains(it.id) == true) {
+                        moviesGenre.add(movie)
+                        if (popularity < movie.popularity) {
+                            moviePopularity = movie
+                        }
+                    }
+                }
+                if (moviesGenre.size > 0) {
+                    genre.movies = moviesGenre
+                    genre2s.add(genre)
+                }
+
+               if (moviePopularity.backdropPath !== "") {
+
+                    val url = TmdbApi.TMDB_BASE_IMAGE_URL + moviePopularity.backdropPath
+
+                    imgPoster?.let {
+                        Glide.with(imgPoster.context).load(
+                            url
+                        ).into(it)
+                    }
+                }
+
+                showList.adapter = MovieAdapter(genre2s)
+            }
         }
     }
 
-    fun binding() {
-        imgView = imgPoster
-//        imgSerie = imgSerieTv
 
-    }
-    private fun setObservers() {
+        private fun setObservers() {
 
-        viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
-            showList.adapter = movieListResponse?.let { list ->
-                MovieAdapter(list, clickListener = {
-                    handleClick(it)
+            viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
+
+                viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 })
 
-            }
-
-            viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                viewModel.loadingEvent.observe(viewLifecycleOwner, Observer { isVisible ->
+                    // loading.setVisible(false)
+                })
             })
-        })
-    }
-
-    private fun handleClick(movie: Show) {
-        val intent = Intent(context, DetailActivity::class.java)
-        if (movie != null) {
-            intent.putExtra("originalName", movie.originalName)
-            intent.putExtra("poster", movie.posterPath)
-            intent.putExtra("name", movie.name)
-            intent.putExtra("backdropPath", movie.backdropPath)
-            intent.putExtra("genre", movie.overview)
         }
-        startActivity(intent)
+
+        private fun handleClick(movie: Show) {
+            val intent = Intent(context, DetailActivity::class.java)
+            if (movie != null) {
+                intent.putExtra("originalName", movie.originalName)
+                intent.putExtra("poster", movie.posterPath)
+                intent.putExtra("name", movie.name)
+                intent.putExtra("backdropPath", movie.backdropPath)
+                intent.putExtra("genre", movie.overview)
+            }
+            startActivity(intent)
+        }
     }
-}
