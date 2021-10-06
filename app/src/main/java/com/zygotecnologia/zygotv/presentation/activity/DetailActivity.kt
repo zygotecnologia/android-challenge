@@ -25,8 +25,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail2)
 
-        nameSerie = txtCategories
-        title = txtCategories
+//        nameSerie = txtCategories
+//        title = txtCategories
         imgMovie = img_show
 
         val value = intent.getStringExtra("actor")

@@ -10,11 +10,11 @@ import com.zygotecnologia.zygotv.domain.model.Genre
 import kotlinx.android.synthetic.main.show_item.view.*
 
 
-class MovieAdapter(private val genre:MutableList<Genre>):RecyclerView.Adapter<GenreHolder>() {
+class MovieAdapter(private val genre: MutableList<Genre>) : RecyclerView.Adapter<GenreHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
-        return GenreHolder(view,parent)
+        return GenreHolder(view, parent)
 
     }
 
@@ -27,11 +27,13 @@ class MovieAdapter(private val genre:MutableList<Genre>):RecyclerView.Adapter<Ge
     override fun getItemCount(): Int = genre.size
 }
 
-class GenreHolder(itemView: View,parent: ViewGroup): RecyclerView.ViewHolder(itemView){
+class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(itemView) {
     val parent = parent
-    fun bind(genre : Genre){
+    fun bind(genre: Genre) {
         itemView.txtGenre.text = genre.name
         itemView.recycler_genre.adapter = ShowAdapter(genre.movies)
-        itemView.recycler_genre.layoutManager = LinearLayoutManager(parent.context,RecyclerView.HORIZONTAL,false)
+        itemView.recycler_genre.layoutManager = LinearLayoutManager(
+            parent.context, RecyclerView.HORIZONTAL, false
+        )
     }
 }
