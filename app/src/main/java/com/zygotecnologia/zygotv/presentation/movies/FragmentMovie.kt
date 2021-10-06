@@ -5,24 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
 import com.zygotecnologia.zygotv.domain.model.Genre
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
+import com.zygotecnologia.zygotv.presentation.adapter.ShowAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
-import kotlinx.android.synthetic.main.show.*
-import kotlinx.android.synthetic.main.show.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -51,6 +48,7 @@ class FragmentMovie : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch(Dispatchers.IO) { loadShows() }
+        setObservers()
     }
 
     private suspend fun loadShows() {
@@ -94,7 +92,7 @@ class FragmentMovie : Fragment() {
                     genre2s.add(genre)
                 }
 
-               if (moviePopularity.backdropPath !== "") {
+                if (moviePopularity.backdropPath !== "") {
 
                     val url = TmdbApi.TMDB_BASE_IMAGE_URL + moviePopularity.backdropPath
 
@@ -105,35 +103,36 @@ class FragmentMovie : Fragment() {
                     }
                 }
 
-                showList.adapter = MovieAdapter(genre2s)
+                showList.adapter = MovieAdapter(genre2s, clickListener = {
+                    handleClick(it)
+                })
             }
         }
     }
 
+    private fun setObservers() {
 
-        private fun setObservers() {
-
-            viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
-
-                viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
+            showList.adapter = movieListResponse?.let { list ->
+                ShowAdapter(list as MutableList<Show>, clickListener = {
+                    handleClick(it)
                 })
+            }
 
-                viewModel.loadingEvent.observe(viewLifecycleOwner, Observer { isVisible ->
-                    // loading.setVisible(false)
-                })
+            viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             })
-        }
-
-        private fun handleClick(movie: Show) {
-            val intent = Intent(context, DetailActivity::class.java)
-            if (movie != null) {
-                intent.putExtra("originalName", movie.originalName)
-                intent.putExtra("poster", movie.posterPath)
-                intent.putExtra("name", movie.name)
-                intent.putExtra("backdropPath", movie.backdropPath)
-                intent.putExtra("genre", movie.overview)
-            }
-            startActivity(intent)
-        }
+        })
     }
+
+
+    private fun handleClick(movie: Show) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra("originalName", movie.originalName)
+        intent.putExtra("poster", movie.posterPath)
+        intent.putExtra("name", movie.name)
+        intent.putExtra("backdropPath", movie.backdropPath)
+        intent.putExtra("genre", movie.overview)
+        startActivity(intent)
+    }
+}

@@ -1,18 +1,25 @@
 package com.zygotecnologia.zygotv.presentation.series
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
+import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
 import com.zygotecnologia.zygotv.domain.model.Genre
 import com.zygotecnologia.zygotv.domain.model.Show
+import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
+import com.zygotecnologia.zygotv.presentation.adapter.ShowAdapter
+import com.zygotecnologia.zygotv.presentation.movies.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,6 +31,8 @@ class FragmentSeries : Fragment() {
     private val tmdbApi = TmdbClient.getInstance()
 
     private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
+    private val viewModel: MovieViewModel =
+        MovieViewModel.ViewModelFactory(MoviesRepositoryImpl()).create(MovieViewModel::class.java)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +49,7 @@ class FragmentSeries : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch(Dispatchers.IO) { loadShows() }
+        setObservers()
     }
 
     private suspend fun loadShows() {
@@ -92,8 +102,36 @@ class FragmentSeries : Fragment() {
                     }
                 }
 
-                showList.adapter = MovieAdapter(genre2s)
+                showList.adapter = MovieAdapter(genre2s, clickListener = {
+                    handleClick(it)
+                })
             }
         }
+    }
+
+    private fun setObservers() {
+
+        viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
+            showList.adapter = movieListResponse?.let { list ->
+                ShowAdapter(list as MutableList<Show>, clickListener = {
+                    handleClick(it)
+                })
+            }
+
+            viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            })
+        })
+    }
+
+
+    private fun handleClick(movie: Show) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra("originalName", movie.originalName)
+        intent.putExtra("poster", movie.posterPath)
+        intent.putExtra("name", movie.name)
+        intent.putExtra("backdropPath", movie.backdropPath)
+        intent.putExtra("genre", movie.overview)
+        startActivity(intent)
     }
 }
