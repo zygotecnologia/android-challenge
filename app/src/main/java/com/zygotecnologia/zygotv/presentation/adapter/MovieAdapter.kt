@@ -24,7 +24,7 @@ class MovieAdapter(private val genre: MutableList<Genre>, private val clickListe
     override fun onBindViewHolder(holder: GenreHolder, position: Int) {
 
         val genre2 = genre[position]
-         holder.bind(genre2)
+        holder.bind(genre2)
     }
 
     override fun getItemCount(): Int = genre.size
@@ -36,6 +36,7 @@ class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(i
         itemView.txtGenre.text = genre.name
         itemView.recycler_genre.adapter = ShowAdapter(genre.movies,clickListener = {
             (it)
+
         })
         itemView.recycler_genre.layoutManager = LinearLayoutManager(
             parent.context, RecyclerView.HORIZONTAL, false
