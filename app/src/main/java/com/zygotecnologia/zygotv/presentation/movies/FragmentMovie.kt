@@ -9,12 +9,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
-import com.zygotecnologia.zygotv.domain.model.Show
+import com.zygotecnologia.zygotv.domain.model.Genre
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
@@ -27,9 +29,8 @@ class FragmentMovie : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy {rvSeries }
-    private lateinit var imgView: ImageView
-    private lateinit var imgSerie: ImageView
+    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
+    private lateinit var imgView:ImageView
     private val viewModel: MovieViewModel =
         MovieViewModel.ViewModelFactory(MoviesRepositoryImpl()).create(MovieViewModel::class.java)
 
@@ -49,7 +50,7 @@ class FragmentMovie : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch(Dispatchers.IO) { loadShows() }
         binding()
-        setObservers()
+        //  clickListener()
     }
 
     private suspend fun loadShows() {
@@ -69,33 +70,68 @@ class FragmentMovie : Fragment() {
 
 
         withContext(Dispatchers.Main) {
-            showList.adapter = MovieAdapter(shows,clickListener = {
-                handleClick(it)
-            })
+
+            val genre2s : MutableList<Genre> = ArrayList()
+
+            genres.forEach {
+                val genre = Genre(it.id, it.name)
+                /*
+                val shows : MutableList<Show> = ArrayList()
+                for (a in 0..19){
+                    val show = Show(listOf(),"", listOf(),"",1,"","",R.drawable.spotify,"","https://image.tmdb.org/t/p/original/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg")
+                    shows.add(show)
+                }
+                genre.movies = shows
+                 */
+                val moviesGenre : MutableList<Show> = ArrayList()
+                shows.forEach { Movie ->
+                    if(Movie.genreIds?.contains(it.id) == true){
+                        moviesGenre.add(Movie)
+
+                    }
+                }
+                if(moviesGenre.size>0){
+                    genre.movies = moviesGenre
+                    genre2s.add(genre)
+                }
+            }
+
+            showList.adapter = MovieAdapter(genre2s)
         }
     }
 
-    fun binding() {
-        imgView = imgPoster
-//        imgSerie = imgSerieTv
 
+
+    fun binding(){
+        imgView = view?.findViewById(R.id.img_serie)!!
     }
+
+//    fun clickListener(){
+//        imgView.setOnClickListener{ movie->
+//            handleClick(movie.)
+//
+//        }
+//    }
+
     private fun setObservers() {
 
         viewModel.movieList.observe(viewLifecycleOwner, Observer { movieListResponse ->
-            showList.adapter = movieListResponse?.let { list ->
-                MovieAdapter(list, clickListener = {
-                    handleClick(it)
-                })
-
-            }
+//            showList.adapter = movieListResponse?.let { list ->
+//                MovieAdapter(list, clickListener = {
+//                    handleClick(it)
+//                })
+//
+//            }
 
             viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { message ->
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             })
+
+            viewModel.loadingEvent.observe(viewLifecycleOwner, Observer { isVisible ->
+                // loading.setVisible(false)
+            })
         })
     }
-
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)
         if (movie != null) {

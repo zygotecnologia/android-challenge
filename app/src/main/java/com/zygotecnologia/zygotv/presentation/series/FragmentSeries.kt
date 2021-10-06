@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
+import com.zygotecnologia.zygotv.domain.model.Genre
+import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
-import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ class FragmentSeries : Fragment() {
 
     private val tmdbApi = TmdbClient.getInstance()
 
-    private val showList: RecyclerView by lazy {rvSeries}
+    private val showList: RecyclerView by lazy { view?.findViewById(R.id.rv_show_list)!! }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,9 +57,24 @@ class FragmentSeries : Fragment() {
 
 
         withContext(Dispatchers.Main) {
-            showList.adapter = MovieAdapter(shows,clickListener = {
-                (it)
-            })
+            val genre2s: MutableList<Genre> = ArrayList()
+
+            genres.forEach {
+                val genre = Genre(it.id, it.name)
+
+                val moviesGenre: MutableList<Show> = ArrayList()
+                shows.forEach { Movie ->
+                    if (Movie.genreIds?.contains(it.id) == true) {
+                        moviesGenre.add(Movie)
+
+                    }
+                }
+                if (moviesGenre.size > 0) {
+                    genre.movies = moviesGenre
+                    genre2s.add(genre)
+                }
+                showList.adapter = MovieAdapter(genre2s)
+            }
         }
     }
 }

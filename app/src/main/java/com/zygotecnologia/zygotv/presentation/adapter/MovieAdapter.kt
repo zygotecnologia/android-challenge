@@ -3,48 +3,35 @@ package com.zygotecnologia.zygotv.presentation.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.domain.model.Show
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
-import kotlinx.android.synthetic.main.fragment_movies.view.*
+import com.zygotecnologia.zygotv.domain.model.Genre
 import kotlinx.android.synthetic.main.show_item.view.*
 
 
-class MovieAdapter(
-    private val list: List<Show>,
-    private val clickListener: (Show) -> Unit
-) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val genre:MutableList<Genre>):RecyclerView.Adapter<GenreHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
-        return ViewHolder(view)
+        return GenreHolder(view,parent)
+
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+    override fun onBindViewHolder(holder: GenreHolder, position: Int) {
+
+        val genre2 = genre[position]
+        holder.bind(genre2)
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount(): Int = genre.size
+}
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bind(show: Show) {
-            val textView: TextView = itemView.txtNameSerie
-            textView.text = show.name
-
-
-            val imageView: ImageView = itemView.imgPoster
-
-            Glide.with(itemView)
-                .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(imageView)
-
-        }
+class GenreHolder(itemView: View,parent: ViewGroup): RecyclerView.ViewHolder(itemView){
+    val parent = parent
+    fun bind(genre : Genre){
+        itemView.txtGenre.text = genre.name
+        itemView.recycler_genre.adapter = showAdapter(genre.movies)
+        itemView.recycler_genre.layoutManager = LinearLayoutManager(parent.context,RecyclerView.HORIZONTAL,false)
     }
 }
