@@ -72,7 +72,7 @@ class FragmentMovie : Fragment() {
         withContext(Dispatchers.Main) {
 
             val genre2s: MutableList<Genre> = ArrayList()
-            val popularity = 0
+            var popularity = 0.0
             lateinit var moviePopularity: Show
 
             genres.forEach {
@@ -83,6 +83,8 @@ class FragmentMovie : Fragment() {
                     if (movie.genreIds?.contains(it.id) == true) {
                         moviesGenre.add(movie)
                         if (popularity < movie.popularity) {
+
+                            popularity = movie.popularity
                             moviePopularity = movie
                         }
                     }

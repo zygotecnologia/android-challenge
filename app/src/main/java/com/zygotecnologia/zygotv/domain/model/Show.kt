@@ -23,5 +23,5 @@ data class Show(
     @Json(name = "poster_path")
     val posterPath: String?,
     @Json(name = "popularity")
-    val popularity: Float,
+    val popularity: Double,
 )
