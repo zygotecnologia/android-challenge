@@ -30,8 +30,5 @@ class DetailActivity : AppCompatActivity() {
         val url = intent.getStringExtra("backdropPath")
         Picasso.get().load(url).into(imgSerieDesc)
 
-        val uri = intent.getStringExtra("poster")
-        Picasso.get().load(uri).into(imgPosterDesc)
-
     }
 }

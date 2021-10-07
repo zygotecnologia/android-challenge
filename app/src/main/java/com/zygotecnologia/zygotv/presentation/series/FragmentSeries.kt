@@ -20,6 +20,7 @@ import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import com.zygotecnologia.zygotv.presentation.adapter.ShowAdapter
 import com.zygotecnologia.zygotv.presentation.movies.MovieViewModel
+import kotlinx.android.synthetic.main.activity_detail2.*
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.android.synthetic.main.fragment_movies.view.*
 import kotlinx.android.synthetic.main.item_desc.*
@@ -101,12 +102,8 @@ class FragmentSeries : Fragment() {
                             url
                         ).into(it)
                     }
-                    imgPosterDesc?.let {
-                        Glide.with(imgPosterDesc.context).load(
-                            url
-                        ).into(it)
-                    }
                     txtOriginalName.text = moviePopularity.name
+
                     imgPoster.setOnClickListener {
                         handleClick(moviePopularity)
                     }
