@@ -102,7 +102,6 @@ class FragmentMovie : Fragment() {
                         ).into(it)
                     }
                 }
-
                 showList.adapter = MovieAdapter(genre2s, clickListener = {
                     handleClick(it)
                 })
@@ -124,7 +123,6 @@ class FragmentMovie : Fragment() {
             })
         })
     }
-
 
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)

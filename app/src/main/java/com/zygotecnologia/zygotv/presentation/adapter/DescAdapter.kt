@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.domain.model.Show
+import kotlinx.android.synthetic.main.item_show.view.*
 import kotlinx.android.synthetic.main.show.view.*
 
 class DescAdapter(private val shows: MutableList<Show>, private val clickListener: (Show) -> Unit) :
@@ -24,18 +25,16 @@ class DescAdapter(private val shows: MutableList<Show>, private val clickListene
 
     override fun onBindViewHolder(holder: ShowHolder, position: Int) {
         val show = shows[position]
-        val imgMovie = holder.bind(show)
+        //val imgMovie =
+            holder.bind(show)
 
-        imgMovie?.setOnClickListener {
-            clickListener.invoke(show)
-        }
     }
     override fun getItemCount(): Int = shows.size
 }
 
 class DescHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(show: Show): ImageView? {
+    fun bind(show: Show) {
 
         if (show.posterPath !== "") {
             val url = TmdbApi.TMDB_BASE_IMAGE_URL + show.posterPath
@@ -45,7 +44,6 @@ class DescHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 ).into(it)
             }
         }
-        return itemView.img_show
     }
 }
 

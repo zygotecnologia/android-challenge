@@ -17,7 +17,7 @@
                     android:id="@+id/tv_title_show_popular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:text="original_name"
                     android:textColor="@color/white"
@@ -29,9 +29,9 @@
                     android:id="@+id/cv_show_popular"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     app:cardCornerRadius="7dp"
@@ -39,11 +39,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_show_popular">
 
-                        <ImageView
+                <ImageView
                             android:id="@+id/img_serie"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="center"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/heart_button" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -54,6 +54,7 @@
                     android:layout_height="28dp"
                     android:text="original_name"
                     android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toTopOf="@+id/rv_show_list"
                     app:layout_constraintStart_toStartOf="parent"

@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.presentation.adapter.DescAdapter
 import kotlinx.android.synthetic.main.activity_detail2.*
+import kotlinx.android.synthetic.main.item_show.*
 import kotlinx.android.synthetic.main.show.*
 
 class DetailActivity : AppCompatActivity() {

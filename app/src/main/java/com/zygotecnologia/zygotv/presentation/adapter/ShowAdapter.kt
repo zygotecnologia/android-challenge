@@ -9,31 +9,29 @@ import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.domain.model.Show
-import kotlinx.android.synthetic.main.show.view.*
+import kotlinx.android.synthetic.main.fragment_movies.view.*
+import kotlinx.android.synthetic.main.item_show.view.*
 
 class ShowAdapter(private val shows: MutableList<Show>, private val clickListener: (Show) -> Unit) :
     RecyclerView.Adapter<ShowHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.show, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_show, parent, false)
         return ShowHolder(view)
     }
 
     override fun onBindViewHolder(holder: ShowHolder, position: Int) {
         val show = shows[position]
-        val imgMovie = holder.bind(show)
+        //val imgMovie = holder.bind(show)
+        holder.bind(show)
 
-        imgMovie?.setOnClickListener {
-            clickListener.invoke(show)
-        }
+
     }
-
 
     override fun getItemCount(): Int = shows.size
 }
 
 class ShowHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    fun bind(show: Show): ImageView? {
+    fun bind(show: Show) {
 
         if (show.posterPath !== "") {
             val url = TmdbApi.TMDB_BASE_IMAGE_URL + show.posterPath
@@ -43,7 +41,7 @@ class ShowHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 ).into(it)
             }
         }
-        return itemView.img_show
+       // return itemView.img_show
     }
 }
 

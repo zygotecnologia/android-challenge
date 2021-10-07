@@ -21,6 +21,7 @@ import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import com.zygotecnologia.zygotv.presentation.adapter.ShowAdapter
 import com.zygotecnologia.zygotv.presentation.movies.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
+import kotlinx.android.synthetic.main.fragment_movies.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -67,7 +68,6 @@ class FragmentSeries : Fragment() {
                 }
                 ?: emptyList()
 
-
         withContext(Dispatchers.Main) {
             val genre2s: MutableList<Genre> = ArrayList()
             var popularity = 0.0
@@ -100,6 +100,7 @@ class FragmentSeries : Fragment() {
                             url
                         ).into(it)
                     }
+                    txtOriginalName.text = moviePopularity.originalName
                 }
 
                 showList.adapter = MovieAdapter(genre2s, clickListener = {

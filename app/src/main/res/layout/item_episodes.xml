@@ -9,7 +9,7 @@
         android:id="@+id/tv_episode_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/medium_sp"
+        android:layout_marginTop="@dimen/medium"
         android:text="@{data.name}"
         android:textColor="@color/white"
         android:textSize="@dimen/medium"
@@ -31,7 +31,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/xxsmall"
         android:background="@color/black"
         android:layout_marginTop="@dimen/small"
         app:layout_constraintTop_toBottomOf="@id/tv_episode_overview"
