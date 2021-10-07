@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">ZygoTV</string>
+    <string name="movie_title">Movie title</string>
+    <string name="btn_search_movie">Pesquisar filme</string>
+    <string name="favorites">Favoritos</string>
+    <string name="all_movies">Filmes</string>
+    <string name="series">Series</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_genre"> Genero </string>
+    <string name="title_activity_second_movie_description">SecondMovieDescription</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="star_rating_description">star rating</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="heart_icon_description">heart icon</string>
+
 </resources>
