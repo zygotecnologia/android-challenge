@@ -1,16 +1,15 @@
 package com.zygotecnologia.zygotv.presentation.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.presentation.adapter.DescAdapter
 import kotlinx.android.synthetic.main.activity_detail2.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.android.synthetic.main.show.*
-import kotlinx.android.synthetic.main.show_item.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -25,8 +24,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail2)
 
-//        nameSerie = txtCategories
-//        title = txtCategories
         imgMovie = img_show
 
         val value = intent.getStringExtra("actor")

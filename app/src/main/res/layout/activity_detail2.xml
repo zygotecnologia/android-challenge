@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="@color/black"
     tools:context=".presentation.activity.DetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +60,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/cv_show_popular" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_show_list"
+                    android:id="@+id/rvDesc"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginTop="48dp"
@@ -69,7 +70,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cv_show_popular"
                     tools:ignore="MissingConstraints"
-                    tools:listitem="@layout/show_item" />
+                    tools:listitem="@layout/item_desc" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

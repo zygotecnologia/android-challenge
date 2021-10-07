@@ -17,7 +17,7 @@ class FragmentAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa)  {
             0 -> FragmentMovie()
             1 -> FragmentSeries()
             2 -> FragmentFavorite()
-            else -> FragmentMovie()
+            else -> FragmentSeries()
         }
     }
 }

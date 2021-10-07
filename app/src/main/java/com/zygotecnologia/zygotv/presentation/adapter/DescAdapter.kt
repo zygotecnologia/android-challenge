@@ -11,10 +11,14 @@ import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.domain.model.Show
 import kotlinx.android.synthetic.main.show.view.*
 
-class ShowAdapter(private val shows: MutableList<Show>, private val clickListener: (Show) -> Unit) :
+class DescAdapter(private val shows: MutableList<Show>, private val clickListener: (Show) -> Unit) :
     RecyclerView.Adapter<ShowHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.show, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.activity_detail2,
+            parent,
+            false
+        )
         return ShowHolder(view)
     }
 
@@ -26,12 +30,10 @@ class ShowAdapter(private val shows: MutableList<Show>, private val clickListene
             clickListener.invoke(show)
         }
     }
-
-
     override fun getItemCount(): Int = shows.size
 }
 
-class ShowHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class DescHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(show: Show): ImageView? {
 
