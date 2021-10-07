@@ -101,11 +101,11 @@ class FragmentSeries : Fragment() {
                         ).into(it)
                     }
                     txtOriginalName.text = moviePopularity.originalName
+                    showList.adapter = MovieAdapter(genre2s, clickListener = {
+                        handleClick(it)
+                    })
                 }
 
-                showList.adapter = MovieAdapter(genre2s, clickListener = {
-                    handleClick(it)
-                })
             }
         }
     }

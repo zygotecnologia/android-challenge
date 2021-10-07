@@ -25,20 +25,20 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail2)
 
-        imgMovie = img_show
-
-        val value = intent.getStringExtra("actor")
-        val titleDesc = intent.getStringExtra("title")
-        val plotDesc = intent.getStringExtra("plot")
-        val genreDesc = intent.getStringExtra("genre")
-
-        nameSerie.text = value
-        title.text = titleDesc
-        plot.text = plotDesc
-        genre.text = genreDesc
-
-        val intent = intent
-        val url = intent.getStringExtra("imgMovie")
-        Picasso.get().load(url).into(imgMovie)
+//        imgMovie = img_show
+//
+//        val value = intent.getStringExtra("actor")
+//        val titleDesc = intent.getStringExtra("title")
+//        val plotDesc = intent.getStringExtra("plot")
+//        val genreDesc = intent.getStringExtra("genre")
+//
+//        nameSerie.text = value
+//        title.text = titleDesc
+//        plot.text = plotDesc
+//        genre.text = genreDesc
+//
+//        val intent = intent
+//        val url = intent.getStringExtra("imgMovie")
+//        Picasso.get().load(url).into(imgMovie)
     }
 }
