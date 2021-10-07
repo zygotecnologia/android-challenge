@@ -101,6 +101,10 @@ class FragmentSeries : Fragment() {
                         ).into(it)
                     }
                     txtOriginalName.text = moviePopularity.originalName
+                    imgPoster.setOnClickListener {
+                        handleClick(moviePopularity)
+                    }
+
                     showList.adapter = MovieAdapter(genre2s, clickListener = {
                         handleClick(it)
                     })
