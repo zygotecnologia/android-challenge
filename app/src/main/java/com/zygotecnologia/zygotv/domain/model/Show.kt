@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class Show(
     val genres: List<Genre>?,
     @Json(name = "original_name")
-    val originalName: String?,
+    val original_name: String?,
     @Json(name = "genre_ids")
     val genreIds: List<Int>?,
     @Json(name = "name")
@@ -24,4 +24,7 @@ data class Show(
     val posterPath: String?,
     @Json(name = "popularity")
     val popularity: Double,
+    @Json(name = "title")
+    val title: String?
+
 )

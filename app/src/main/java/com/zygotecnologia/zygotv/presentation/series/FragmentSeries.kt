@@ -100,7 +100,7 @@ class FragmentSeries : Fragment() {
                             url
                         ).into(it)
                     }
-                    txtOriginalName.text = moviePopularity.originalName
+                    txtOriginalName.text = moviePopularity.name
                     imgPoster.setOnClickListener {
                         handleClick(moviePopularity)
                     }
@@ -132,7 +132,7 @@ class FragmentSeries : Fragment() {
 
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("originalName", movie.originalName)
+        intent.putExtra("originalName", movie.original_name)
         intent.putExtra("poster", movie.posterPath)
         intent.putExtra("name", movie.name)
         intent.putExtra("backdropPath", movie.backdropPath)

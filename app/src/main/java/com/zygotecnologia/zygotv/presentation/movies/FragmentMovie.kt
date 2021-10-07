@@ -102,6 +102,10 @@ class FragmentMovie : Fragment() {
                         ).into(it)
                     }
                 }
+                txtOriginalName.text = moviePopularity.title
+                imgPoster.setOnClickListener {
+                    handleClick(moviePopularity)
+                }
                 showList.adapter = MovieAdapter(genre2s, clickListener = {
                     handleClick(it)
                 })
@@ -126,7 +130,7 @@ class FragmentMovie : Fragment() {
 
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("originalName", movie.originalName)
+        intent.putExtra("title", movie.title)
         intent.putExtra("poster", movie.posterPath)
         intent.putExtra("name", movie.name)
         intent.putExtra("backdropPath", movie.backdropPath)

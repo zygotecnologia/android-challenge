@@ -21,7 +21,6 @@ class ShowAdapter(private val shows: MutableList<Show>, private val clickListene
 
     override fun onBindViewHolder(holder: ShowHolder, position: Int) {
         val show = shows[position]
-        //val imgMovie = holder.bind(show)
         holder.bind(show)
     }
 

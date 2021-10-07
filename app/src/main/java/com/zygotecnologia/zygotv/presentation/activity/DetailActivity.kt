@@ -16,23 +16,29 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        lateinit var nameSerie: TextView
-        lateinit var title: TextView
+//        intent.putExtra("originalName", movie.originalName)
+//        intent.putExtra("poster", movie.posterPath)
+//        intent.putExtra("name", movie.name)
+//        intent.putExtra("backdropPath", movie.backdropPath)
+//        intent.putExtra("genre", movie.overview)
+
+        lateinit var txtTitleDesc: TextView
+       // lateinit var txtTitleMDesc: TextView
         lateinit var plot: TextView
         lateinit var genre: TextView
-        lateinit var imgMovie: ImageView
+        lateinit var imgSerieDesc: ImageView
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail2)
 
-//        imgMovie = img_show
-//
-//        val value = intent.getStringExtra("actor")
+//        imgSerieDesc = img_show
+
+        val title = intent.getStringExtra("originalName")
 //        val titleDesc = intent.getStringExtra("title")
 //        val plotDesc = intent.getStringExtra("plot")
-//        val genreDesc = intent.getStringExtra("genre")
+////        val genreDesc = intent.getStringExtra("genre")
 //
-//        nameSerie.text = value
+          txtTitleDesc.text = title
 //        title.text = titleDesc
 //        plot.text = plotDesc
 //        genre.text = genreDesc

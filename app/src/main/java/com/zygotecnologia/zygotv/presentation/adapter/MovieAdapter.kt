@@ -53,7 +53,7 @@ class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(i
 
 private fun handleClick(movie: Show,parent: ViewGroup) {
     val intent = Intent(parent.context, DetailActivity::class.java)
-    intent.putExtra("originalName", movie.originalName)
+    intent.putExtra("originalName", movie.original_name)
     intent.putExtra("poster", movie.posterPath)
     intent.putExtra("name", movie.name)
     intent.putExtra("backdropPath", movie.backdropPath)
