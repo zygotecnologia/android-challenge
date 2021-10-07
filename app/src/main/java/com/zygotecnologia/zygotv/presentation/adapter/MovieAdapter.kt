@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.domain.model.Genre
 import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
@@ -38,8 +39,10 @@ class MovieAdapter(
 class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(itemView) {
     val parent = parent
 
+
     fun bind(genre: Genre): ImageView? {
         itemView.txtGenre.text = genre.name
+
         itemView.rvGenre.adapter = ShowAdapter(genre.movies, clickListener = {
             handleClick(it,parent)
         })
@@ -54,9 +57,9 @@ class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(i
 private fun handleClick(movie: Show,parent: ViewGroup) {
     val intent = Intent(parent.context, DetailActivity::class.java)
     intent.putExtra("originalName", movie.original_name)
-    intent.putExtra("poster", movie.posterPath)
+    intent.putExtra("poster",  TmdbApi.TMDB_BASE_IMAGE_URL + movie.posterPath)
     intent.putExtra("name", movie.name)
-    intent.putExtra("backdropPath", movie.backdropPath)
+    intent.putExtra("backdropPath",  TmdbApi.TMDB_BASE_IMAGE_URL +movie.backdropPath)
     intent.putExtra("genre", movie.overview)
     parent.context.startActivity(intent)
 }

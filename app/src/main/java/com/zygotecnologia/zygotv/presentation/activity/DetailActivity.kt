@@ -9,6 +9,8 @@ import com.squareup.picasso.Picasso
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.presentation.adapter.DescAdapter
 import kotlinx.android.synthetic.main.activity_detail2.*
+import kotlinx.android.synthetic.main.fragment_movies.*
+import kotlinx.android.synthetic.main.item_desc.*
 import kotlinx.android.synthetic.main.item_show.*
 import kotlinx.android.synthetic.main.show.*
 
@@ -16,35 +18,20 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-//        intent.putExtra("originalName", movie.originalName)
-//        intent.putExtra("poster", movie.posterPath)
-//        intent.putExtra("name", movie.name)
-//        intent.putExtra("backdropPath", movie.backdropPath)
-//        intent.putExtra("genre", movie.overview)
-
-        lateinit var txtTitleDesc: TextView
-       // lateinit var txtTitleMDesc: TextView
-        lateinit var plot: TextView
-        lateinit var genre: TextView
-        lateinit var imgSerieDesc: ImageView
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail2)
 
-//        imgSerieDesc = img_show
 
-        val title = intent.getStringExtra("originalName")
-//        val titleDesc = intent.getStringExtra("title")
-//        val plotDesc = intent.getStringExtra("plot")
-////        val genreDesc = intent.getStringExtra("genre")
-//
-          txtTitleDesc.text = title
-//        title.text = titleDesc
-//        plot.text = plotDesc
-//        genre.text = genreDesc
-//
-//        val intent = intent
-//        val url = intent.getStringExtra("imgMovie")
-//        Picasso.get().load(url).into(imgMovie)
+        val title = intent.getStringExtra("name")
+
+         txtTitleDesc.text = title
+
+        val intent = intent
+        val url = intent.getStringExtra("backdropPath")
+        Picasso.get().load(url).into(imgSerieDesc)
+
+        val uri = intent.getStringExtra("poster")
+        Picasso.get().load(uri).into(imgPosterDesc)
+
     }
 }
