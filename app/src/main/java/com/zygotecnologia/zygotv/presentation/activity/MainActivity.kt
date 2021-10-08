@@ -2,8 +2,6 @@ package com.zygotecnologia.zygotv.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.presentation.adapter.FragmentAdapter
