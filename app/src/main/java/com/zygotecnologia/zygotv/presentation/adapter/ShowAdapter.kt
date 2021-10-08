@@ -32,7 +32,12 @@ class ShowAdapter(private val shows: MutableList<Show>, private val clickListene
 
 class ShowHolder(itemView: View, private val clickListener: (Show) -> Unit) : RecyclerView.ViewHolder(itemView) {
     fun bind(show: Show): ImageView? {
-        itemView.txtIdTitle.text = show.title
+
+        if(show.title == null){
+            itemView.txtIdTitle.text = show.name
+        }else{
+            itemView.txtIdTitle.text = show.title
+        }
 
         if (show.posterPath !== "") {
             val url = TmdbApi.TMDB_BASE_IMAGE_URL + show.posterPath
