@@ -11,19 +11,19 @@ import com.zygotecnologia.zygotv.domain.model.Show
 import kotlinx.android.synthetic.main.item_show.view.*
 
 class DescAdapter(private val shows: MutableList<Show>, private val clickListener: (Show) -> Unit) :
-    RecyclerView.Adapter<ShowHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowHolder {
+    RecyclerView.Adapter<DescHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DescHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.activity_detail2,
             parent,
             false
         )
-        return ShowHolder(view, clickListener)
+        return DescHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ShowHolder, position: Int) {
+    override fun onBindViewHolder(holder: DescHolder, position: Int) {
         val show = shows[position]
-            holder.bind(show)
+            holder.bind2(show)
 
     }
     override fun getItemCount(): Int = shows.size
@@ -31,7 +31,7 @@ class DescAdapter(private val shows: MutableList<Show>, private val clickListene
 
 class DescHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(show: Show) {
+    fun bind2(show: Show) {
 
         if (show.posterPath !== "") {
             val url = TmdbApi.TMDB_BASE_IMAGE_URL + show.posterPath

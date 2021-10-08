@@ -132,7 +132,6 @@ class FragmentSeries : Fragment() {
         })
     }
 
-
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)
         intent.putExtra("title", movie.title)

@@ -1,18 +1,10 @@
 package com.zygotecnologia.zygotv.presentation.activity
 
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.presentation.adapter.DescAdapter
 import kotlinx.android.synthetic.main.activity_detail2.*
-import kotlinx.android.synthetic.main.fragment_movies.*
-import kotlinx.android.synthetic.main.item_desc.*
-import kotlinx.android.synthetic.main.item_show.*
-import kotlinx.android.synthetic.main.show.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -28,7 +20,15 @@ class DetailActivity : AppCompatActivity() {
 
         val intent = intent
         val url = intent.getStringExtra("backdropPath")
-        Picasso.get().load(url).into(imgSerieDesc)
+     //   Picasso.get().load(url).into(imgSerieDesc)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val intent = intent
+        val url = intent.getStringExtra("backdropPath")
+        Glide.with(imgSerieDesc.context).load(url).into(imgSerieDesc)
     }
 }

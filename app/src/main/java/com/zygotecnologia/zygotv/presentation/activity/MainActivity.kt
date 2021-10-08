@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         TabLayoutMediator(tablayout, viewpager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
-        viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-            }
-        })
+//        viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//            override fun onPageSelected(position: Int) {
+//            }
+//        })
     }
 
     private fun getTabTitle(position: Int): String {
