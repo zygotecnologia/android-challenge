@@ -20,8 +20,10 @@ import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import com.zygotecnologia.zygotv.presentation.adapter.ShowAdapter
 import com.zygotecnologia.zygotv.presentation.movies.MovieViewModel
+import kotlinx.android.synthetic.main.activity_detail2.*
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.android.synthetic.main.fragment_movies.view.*
+import kotlinx.android.synthetic.main.item_desc.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -101,6 +103,7 @@ class FragmentSeries : Fragment() {
                         ).into(it)
                     }
                     txtOriginalName.text = moviePopularity.name
+
                     imgPoster.setOnClickListener {
                         handleClick(moviePopularity)
                     }
@@ -129,13 +132,12 @@ class FragmentSeries : Fragment() {
         })
     }
 
-
     private fun handleClick(movie: Show) {
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("originalName", movie.original_name)
-        intent.putExtra("poster", movie.posterPath)
+        intent.putExtra("title", movie.title)
+        intent.putExtra("poster", TmdbApi.TMDB_BASE_IMAGE_URL + movie.posterPath)
         intent.putExtra("name", movie.name)
-        intent.putExtra("backdropPath", movie.backdropPath)
+        intent.putExtra("backdropPath",TmdbApi.TMDB_BASE_IMAGE_URL + movie.backdropPath)
         intent.putExtra("genre", movie.overview)
         startActivity(intent)
     }

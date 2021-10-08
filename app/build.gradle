@@ -82,9 +82,6 @@ dependencies {
     //LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleVersion"
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
-
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     testImplementation "junit:junit:$junit_version"

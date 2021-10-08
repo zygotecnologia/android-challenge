@@ -9,7 +9,10 @@ import com.bumptech.glide.Glide
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.domain.model.Show
+import kotlinx.android.synthetic.main.activity_detail2.view.*
+import kotlinx.android.synthetic.main.activity_detail2.view.imgSerieDesc
 import kotlinx.android.synthetic.main.fragment_movies.view.*
+import kotlinx.android.synthetic.main.item_desc.view.*
 import kotlinx.android.synthetic.main.item_show.view.*
 
 class ShowAdapter(private val shows: MutableList<Show>, private val clickListener: (Show) -> Unit) :
@@ -29,6 +32,7 @@ class ShowAdapter(private val shows: MutableList<Show>, private val clickListene
 
 class ShowHolder(itemView: View, private val clickListener: (Show) -> Unit) : RecyclerView.ViewHolder(itemView) {
     fun bind(show: Show): ImageView? {
+        itemView.txtIdTitle.text = show.title
 
         if (show.posterPath !== "") {
             val url = TmdbApi.TMDB_BASE_IMAGE_URL + show.posterPath
@@ -38,9 +42,17 @@ class ShowHolder(itemView: View, private val clickListener: (Show) -> Unit) : Re
                 ).into(it)
             }
 
+            TmdbApi.TMDB_BASE_IMAGE_URL + show.posterPath
+            itemView.imgPosterDesc?.let {
+                Glide.with(itemView.imgPosterDesc.context).load(
+                    url
+                ).into(it)
+            }
+
             itemView.img_show.setOnClickListener{
                 clickListener.invoke(show)
             }
+
         }
         return itemView.img_show
     }
