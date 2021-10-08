@@ -23,7 +23,7 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.show, parent, false)
-        return GenreHolder(view, parent)
+        return GenreHolder(view, parent, clickListener)
 
     }
 
@@ -36,15 +36,13 @@ class MovieAdapter(
     override fun getItemCount(): Int = genre.size
 }
 
-class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(itemView) {
-    val parent = parent
-
+class GenreHolder(itemView: View, val parent: ViewGroup,private val clickListener: (Show) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(genre: Genre): ImageView? {
         itemView.txtGenre.text = genre.name
 
         itemView.rvGenre.adapter = ShowAdapter(genre.movies, clickListener = {
-            handleClick(it,parent)
+            clickListener.invoke(it)
         })
         itemView.rvGenre.layoutManager = LinearLayoutManager(
             parent.context, RecyclerView.HORIZONTAL, false
@@ -52,14 +50,4 @@ class GenreHolder(itemView: View, parent: ViewGroup) : RecyclerView.ViewHolder(i
         return itemView.img_show
 
     }
-}
-
-private fun handleClick(movie: Show,parent: ViewGroup) {
-    val intent = Intent(parent.context, DetailActivity::class.java)
-    intent.putExtra("originalName", movie.original_name)
-    intent.putExtra("poster",  TmdbApi.TMDB_BASE_IMAGE_URL + movie.posterPath)
-    intent.putExtra("name", movie.name)
-    intent.putExtra("backdropPath",  TmdbApi.TMDB_BASE_IMAGE_URL +movie.backdropPath)
-    intent.putExtra("genre", movie.overview)
-    parent.context.startActivity(intent)
 }
