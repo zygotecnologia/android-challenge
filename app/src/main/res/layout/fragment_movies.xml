@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
-                android:src="@drawable/heart_button" />
+                android:src="@drawable/imgmovie" />
 
         </com.google.android.material.card.MaterialCardView>
 
