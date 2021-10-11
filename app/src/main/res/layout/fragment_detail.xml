@@ -11,9 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="48dp">
+        android:layout_height="match_parent">
 
         <Toolbar
             android:id="@+id/idToolbar_detail"
@@ -32,8 +30,8 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/ibtSearchMovie"
-            android:layout_width="48dp"
-            android:layout_height="54dp"
+            android:layout_width="@dimen/xxlarge"
+            android:layout_height="@dimen/xxlarge"
             android:background="@color/black"
             android:src="@drawable/ic_search_24"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -42,7 +40,7 @@
             android:id="@+id/txtTitleDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/small"
             android:layout_marginTop="@dimen/medium"
             android:text="original_name"
             android:textColor="@color/white"
@@ -54,9 +52,9 @@
             android:id="@+id/cvDesc"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/medium"
+            android:layout_marginTop="@dimen/medium"
+            android:layout_marginEnd="@dimen/medium"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             app:cardCornerRadius="7dp"
@@ -76,17 +74,15 @@
         <TextView
             android:id="@+id/txtTitleMDesc"
             android:layout_width="102dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="@dimen/medium"
+            android:layout_marginTop="@dimen/small"
             android:text="original_name"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="@dimen/small_sp"
             app:layout_constraintBottom_toTopOf="@+id/rvDesc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvDesc"
-            app:layout_constraintVertical_bias="0.614" />
+           />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDesc"
@@ -96,11 +92,9 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvDesc"
-            tools:ignore="MissingConstraints"
-            tools:listitem="@layout/item_desc" />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

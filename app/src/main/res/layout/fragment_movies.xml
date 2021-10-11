@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="700dp"
             android:layout_marginLeft="@dimen/xsmall"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="@dimen/xxlarge"
             android:orientation="vertical"
             app:cardCornerRadius="7dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
