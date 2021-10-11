@@ -3,8 +3,7 @@
 
 ![image](https://user-images.githubusercontent.com/78871436/136733735-ad889794-0450-46f3-b597-89b909645dd4.png)
 
-![image](https://user-images.githubusercontent.com/78871436/136733774-02ab3bfb-c13b-4c12-a6df-4f6cd0c72932.png)
-
+![image](https://user-images.githubusercontent.com/78871436/136733908-0c764191-c75b-444e-a1fa-95fa9b4ff562.png)
 
 
 Ferramentas utilizadas:
