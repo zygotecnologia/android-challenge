@@ -7,6 +7,8 @@
   <img src="https://user-images.githubusercontent.com/78871436/136733969-fb28e396-371d-4842-8713-0d6984b9dd75.png" width="400" />
 </p>
 
+Utilizada API DO TMDB
+
 Ferramentas utilizadas:
 
 Linguagem de programação: kotlin
@@ -16,7 +18,10 @@ Gerenciamento de imagens: Glide
 
 Camadas da Clean Architecture:
 
-data - faz a comunicação com a api
+Foi definido 3 camadas
 
-model - onde todas as regras de negócio são inseridas
-presentation - componentes responsáveis por apresentar a interface do usuário (UI). Estão localizados as Activities, Fragments, ViewModels, Adapters, etc
+Data - É quem faz a comunicação com a api
+
+Model - onde todas as regras de negócio são inseridas
+
+Presentation - É o componente responsável por apresentar a interface do usuário (UI). Estão localizados as Activities, Fragments, ViewModels e Adapters.
