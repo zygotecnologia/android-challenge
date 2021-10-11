@@ -7,7 +7,7 @@
   <img src="https://user-images.githubusercontent.com/78871436/136733969-fb28e396-371d-4842-8713-0d6984b9dd75.png" width="400" />
 </p>
 
-Utilizada API DO TMDB
+Utilizado API DO TMDB
 
 Ferramentas utilizadas:
 
