@@ -1,6 +1,5 @@
 package com.zygotecnologia.zygotv.presentation.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.domain.model.Genre
 import com.zygotecnologia.zygotv.domain.model.Show
-import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import kotlinx.android.synthetic.main.item_show.view.*
 import kotlinx.android.synthetic.main.show.view.*
 

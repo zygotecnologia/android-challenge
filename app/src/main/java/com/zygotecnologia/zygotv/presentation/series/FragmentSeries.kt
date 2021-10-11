@@ -15,15 +15,13 @@ import com.zygotecnologia.zygotv.data.network.TmdbApi
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.data.repository.MoviesRepositoryImpl
 import com.zygotecnologia.zygotv.domain.model.Genre
+import com.zygotecnologia.zygotv.domain.model.Season
 import com.zygotecnologia.zygotv.domain.model.Show
 import com.zygotecnologia.zygotv.presentation.activity.DetailActivity
 import com.zygotecnologia.zygotv.presentation.adapter.MovieAdapter
 import com.zygotecnologia.zygotv.presentation.adapter.ShowAdapter
 import com.zygotecnologia.zygotv.presentation.movies.MovieViewModel
-import kotlinx.android.synthetic.main.activity_detail2.*
 import kotlinx.android.synthetic.main.fragment_movies.*
-import kotlinx.android.synthetic.main.fragment_movies.view.*
-import kotlinx.android.synthetic.main.item_desc.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -74,6 +72,8 @@ class FragmentSeries : Fragment() {
             val genre2s: MutableList<Genre> = ArrayList()
             var popularity = 0.0
             lateinit var moviePopularity: Show
+            lateinit var season: Season
+
 
             genres.forEach {
                 val genre = Genre(it.id, it.name)
@@ -137,8 +137,9 @@ class FragmentSeries : Fragment() {
         intent.putExtra("title", movie.title)
         intent.putExtra("poster", TmdbApi.TMDB_BASE_IMAGE_URL + movie.posterPath)
         intent.putExtra("name", movie.name)
-        intent.putExtra("backdropPath",TmdbApi.TMDB_BASE_IMAGE_URL + movie.backdropPath)
-        intent.putExtra("genre", movie.overview)
+        intent.putExtra("backdropPath", TmdbApi.TMDB_BASE_IMAGE_URL + movie.backdropPath)
+        intent.putExtra("overview", movie.overview)
         startActivity(intent)
     }
+
 }

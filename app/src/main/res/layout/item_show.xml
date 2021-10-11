@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginEnd="16dp"
+    android:layout_marginEnd="@dimen/medium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -24,16 +24,16 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="center"
-            android:src="@drawable/heart_button" />
+            android:src="@drawable/imgmovie" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/txtIdTitle"
         android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/small_sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_series"
         tools:text="Title" />
