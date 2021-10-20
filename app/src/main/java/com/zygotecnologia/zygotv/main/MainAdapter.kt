@@ -11,14 +11,15 @@ import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.R.id.iv_show_poster
 import com.zygotecnologia.zygotv.R.id.tv_show_title
+import com.zygotecnologia.zygotv.databinding.ShowItemBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
-        return ViewHolder(view)
+        val binding = ShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,17 +28,18 @@ class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdap
 
     override fun getItemCount() = shows.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(
+        private val binding: ShowItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(show: Show) {
-            val textView: TextView = itemView.findViewById(tv_show_title)
-            textView.text = show.name
+            binding.tvShowTitle.text = show.name
 
-            val imageView: ImageView = itemView.findViewById(iv_show_poster)
+            val imageUrl = show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
             Glide.with(itemView)
-                .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+                .load(imageUrl)
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(imageView)
+                .into(binding.ivShowPoster)
         }
     }
 }
