@@ -7,11 +7,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ShowItemBinding
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
+import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class ShowsAdapter(
-    private var showResponses: List<ShowResponse> = emptyList()
+    private var shows: List<Show> = emptyList()
 ) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,13 +20,13 @@ class ShowsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(showResponses[position])
+        holder.bind(shows[position])
     }
 
-    override fun getItemCount() = showResponses.size
+    override fun getItemCount() = shows.size
 
-    fun updateShows(showResponses: List<ShowResponse>) {
-        this.showResponses = showResponses
+    fun updateShows(showResponses: List<Show>) {
+        this.shows = showResponses
         notifyDataSetChanged()
     }
 
@@ -34,7 +34,7 @@ class ShowsAdapter(
         private val binding: ShowItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(showResponse: ShowResponse) {
+        fun bind(showResponse: Show) {
             binding.tvShowTitle.text = showResponse.name
 
             val imageUrl = showResponse.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
