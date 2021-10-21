@@ -57,7 +57,7 @@ private fun buildShowWith(
     voteCount = 5,
     overview = "${name} overview.",
     originalLanguage = "EN",
-    genreIds = emptyList(),
+    genreIds = listOf(1),
     backdropPath = "${name}backdropPath",
     posterPath = "${name}posterPath"
 )

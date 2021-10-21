@@ -18,4 +18,11 @@ class TmdbRepositoryImplTest {
     fun `getShows should return show list`() = runBlockingTest {
         repository.getShows().shouldNotBeEmpty()
     }
+
+    @Test
+    fun `show should contain genres`() = runBlockingTest {
+        val show = repository.getShows().first()
+
+        show.genres.shouldNotBeEmpty()
+    }
 }
