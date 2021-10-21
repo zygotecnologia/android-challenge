@@ -1,6 +1,7 @@
 package com.zygotecnologia.zygotv.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.zygotecnologia.zygotv.home.HomeViewModel
 import com.zygotecnologia.zygotv.test.FakeTmdbService
 import com.zygotecnologia.zygotv.test.getOrAwaitValue
 import com.zygotecnologia.zygotv.test.rules.MainCoroutineRule
@@ -11,7 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class MainViewModelTest {
+class HomeViewModelTest {
 
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
@@ -20,7 +21,7 @@ class MainViewModelTest {
     val taskExecutorRule = InstantTaskExecutorRule()
 
 
-    private fun getViewModel() = MainViewModel(
+    private fun getViewModel() = HomeViewModel(
         tmdbService = FakeTmdbService()
     )
 

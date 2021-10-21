@@ -1,21 +1,18 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.R.id.iv_show_poster
-import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.databinding.ShowItemBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class ShowsAdapter(
+    private var shows: List<Show> = emptyList()
+) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,6 +24,11 @@ class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdap
     }
 
     override fun getItemCount() = shows.size
+
+    fun updateShows(shows: List<Show>) {
+        this.shows = shows
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(
         private val binding: ShowItemBinding

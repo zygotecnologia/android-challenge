@@ -1,11 +1,11 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.home
 
 import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbService
 import kotlinx.coroutines.flow.flow
 
-class MainViewModel(
+class HomeViewModel(
     private val tmdbService: TmdbService
 ) : ViewModel() {
 
