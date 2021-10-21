@@ -1,15 +1,31 @@
 package com.zygotecnologia.zygotv.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.network.TmdbService
+import kotlinx.coroutines.flow.flow
 
-class MainViewModel: ViewModel() {
+class MainViewModel(
+    private val tmdbService: TmdbService
+) : ViewModel() {
 
-    val shows: LiveData<List<Show>> = MutableLiveData(emptyList())
+    private val _shows = flow {
+        emit(getShows())
+    }
+    val shows: LiveData<List<Show>> = _shows.asLiveData()
 
-    private fun loadShows() {
+    private suspend fun getShows(): List<Show> {
+        val genres = tmdbService.fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
+            ?.genres
+            ?: emptyList()
 
+        val shows = tmdbService.fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
+            ?.results
+            ?.map { show ->
+                show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
+            }
+            ?: emptyList()
+
+        return shows
     }
 }

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
-import com.zygotecnologia.zygotv.network.TmdbApi
+import com.zygotecnologia.zygotv.network.TmdbService
 import com.zygotecnologia.zygotv.network.TmdbClient
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -33,12 +33,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private suspend fun loadShows() {
         val genres =
             tmdbApi
-                .fetchGenresAsync(TmdbApi.TMDB_API_KEY, "BR")
+                .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
                 ?.genres
                 ?: emptyList()
         val shows =
             tmdbApi
-                .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
+                .fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
                 ?.results
                 ?.map { show ->
                     show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })

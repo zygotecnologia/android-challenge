@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface TmdbApi {
+interface TmdbService {
 
     @GET("$TMDB_API_VERSION/genre/tv/list")
     suspend fun fetchGenresAsync(
