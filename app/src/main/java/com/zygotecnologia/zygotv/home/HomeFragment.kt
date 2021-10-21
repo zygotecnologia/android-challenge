@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
+import com.zygotecnologia.zygotv.tmdb.presentation.ShowsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {

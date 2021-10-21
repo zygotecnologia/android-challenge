@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.network
+package com.zygotecnologia.zygotv.tmdb.data.source.remote.service
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

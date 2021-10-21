@@ -1,8 +1,8 @@
 package com.zygotecnologia.zygotv.home
 
 import androidx.lifecycle.*
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.network.TmdbService
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import kotlinx.coroutines.flow.flow
 
 class HomeViewModel(
@@ -12,20 +12,15 @@ class HomeViewModel(
     private val _shows = flow {
         emit(getShows())
     }
-    val shows: LiveData<List<Show>> = _shows.asLiveData()
+    val shows: LiveData<List<ShowResponse>> = _shows.asLiveData()
 
-    private suspend fun getShows(): List<Show> {
-        val genres = tmdbService.fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
-            ?.genres
-            ?: emptyList()
+    private suspend fun getShows(): List<ShowResponse> {
+        val genres = tmdbService
+            .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
+            .genreResponses
 
-        val shows = tmdbService.fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
-            ?.results
-            ?.map { show ->
-                show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
-            }
-            ?: emptyList()
-
-        return shows
+        return tmdbService
+            .fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
+            .results
     }
 }

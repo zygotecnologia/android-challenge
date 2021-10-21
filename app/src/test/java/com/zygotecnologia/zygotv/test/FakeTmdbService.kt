@@ -1,25 +1,25 @@
 package com.zygotecnologia.zygotv.test
 
-import com.zygotecnologia.zygotv.model.Genre
-import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.ShowResponse
-import com.zygotecnologia.zygotv.network.TmdbService
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreListResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowsPageResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 
 class FakeTmdbService : TmdbService {
 
-    override suspend fun fetchGenresAsync(apiKey: String, region: String): GenreResponse? {
-        return GenreResponse(
-            genres = listOf(
-                Genre(
+    override suspend fun fetchGenresAsync(apiKey: String, region: String): GenreListResponse {
+        return GenreListResponse(
+            genreResponses = listOf(
+                GenreResponse(
                     id = 1,
                     name = "Drama"
                 ),
-                Genre(
+                GenreResponse(
                     id = 2,
                     name = "Comedy"
                 ),
-                Genre(
+                GenreResponse(
                     id = 3,
                     name = "Action"
                 )
@@ -27,8 +27,8 @@ class FakeTmdbService : TmdbService {
         )
     }
 
-    override suspend fun fetchPopularShowsAsync(apiKey: String, region: String): ShowResponse {
-        return ShowResponse(
+    override suspend fun fetchPopularShowsAsync(apiKey: String, region: String): ShowsPageResponse {
+        return ShowsPageResponse(
             page = 0,
             totalResults = 5,
             totalPages = 1,
@@ -42,7 +42,7 @@ class FakeTmdbService : TmdbService {
         )
     }
 
-    override suspend fun fetchShowAsync(apiKey: String, id: Int): Show? {
+    override suspend fun fetchShowAsync(apiKey: String, id: Int): ShowResponse {
         return buildShowWith(name = "You")
     }
 }
@@ -50,14 +50,13 @@ class FakeTmdbService : TmdbService {
 private fun buildShowWith(
     id: Int = 1,
     name: String
-) = Show(
+) = ShowResponse(
     id = id,
     name = name,
     originalName = name,
     voteCount = 5,
     overview = "${name} overview.",
     originalLanguage = "EN",
-    genres = emptyList(),
     genreIds = emptyList(),
     backdropPath = "${name}backdropPath",
     posterPath = "${name}posterPath"

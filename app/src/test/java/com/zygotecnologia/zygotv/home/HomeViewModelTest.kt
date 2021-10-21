@@ -1,7 +1,6 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.zygotecnologia.zygotv.home.HomeViewModel
 import com.zygotecnologia.zygotv.test.FakeTmdbService
 import com.zygotecnologia.zygotv.test.getOrAwaitValue
 import com.zygotecnologia.zygotv.test.rules.MainCoroutineRule
