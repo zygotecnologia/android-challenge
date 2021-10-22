@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.main.presentation
 
 import android.app.Application
 import com.zygotecnologia.zygotv.di.appModule

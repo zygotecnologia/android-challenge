@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.ZygoTv.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back_24</item>
+        <item name="titleCentered">true</item>
+        <item name="titleTextColor">?attr/colorOnBackground</item>
+    </style>
+</resources>

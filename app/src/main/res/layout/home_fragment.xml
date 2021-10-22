@@ -7,5 +7,5 @@
     android:layout_height="match_parent"
     android:layout_marginHorizontal="8dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context=".main.MainActivity"
+    tools:context=".main.presentation.MainActivity"
     tools:listitem="@layout/genre_item" />

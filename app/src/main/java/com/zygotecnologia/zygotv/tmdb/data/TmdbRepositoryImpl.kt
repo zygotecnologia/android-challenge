@@ -81,7 +81,7 @@ class TmdbRepositoryImpl(
         originalLanguage = originalLanguage,
         overview = overview,
         backdropPath = backdropPath,
-        posterPath = backdropPath,
+        posterPath = posterPath,
         genres = genres.filter { genreIds.contains(it.id) },
     )
 }
