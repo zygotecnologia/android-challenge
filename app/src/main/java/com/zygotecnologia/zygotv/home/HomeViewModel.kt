@@ -12,9 +12,10 @@ class HomeViewModel(
 ) : ViewModel() {
 
     private val _showsByGenre = flow {
+        kotlinx.coroutines.delay(5000)
         emit(tmdbRepository.getShowsByGenre())
     }.map { list ->
-        list.filter { genre -> genre.shows.isEmpty() }
+        list.filter { genre -> genre.shows.isNotEmpty() }
     }
     val showsByGenre: LiveData<List<GenreWithShows>> = _showsByGenre.asLiveData()
 }

@@ -43,6 +43,12 @@ class FakeTmdbRepository : TmdbRepository {
             )
         )
     )
+
+    override suspend fun getMostPopularShow(): Show = buildShowWith(
+        id = 1,
+        name = "You",
+        genres = listOf(buildGenreWith(id = 1, name = "Drama"))
+    )
 }
 
 private fun buildShowWith(

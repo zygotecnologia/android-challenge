@@ -11,29 +11,35 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.databinding.HighlightedShowItemBinding
 import com.zygotecnologia.zygotv.databinding.ShowItemBinding
+import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class ShowsAdapter : ListAdapter<Show, ShowsAdapter.ViewHolder>(ShowDiffUtil()) {
+class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewHolder>() {
+
+    private var highlightedShows: List<Show> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = HighlightedShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(highlightedShows[position])
     }
 
+    override fun getItemCount() = highlightedShows.size
+
     class ViewHolder(
-        private val binding: ShowItemBinding
+        private val binding: HighlightedShowItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(show: Show) {
             binding.showTitle.text = show.name
 
-            val imageUrl = show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
+            val imageUrl = show.backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
             Glide.with(itemView)
                 .load(imageUrl)
                 .apply(
@@ -41,20 +47,7 @@ class ShowsAdapter : ListAdapter<Show, ShowsAdapter.ViewHolder>(ShowDiffUtil()) 
                         .placeholder(R.drawable.image_placeholder)
                         .transform(MultiTransformation(CenterCrop(), RoundedCorners(16)))
                 )
-                .into(binding.showPoster)
+                .into(binding.showBackDrop)
         }
-    }
-
-    class ShowDiffUtil : DiffUtil.ItemCallback<Show>() {
-
-        override fun areItemsTheSame(
-            oldItem: Show,
-            newItem: Show
-        ): Boolean = oldItem.id == newItem.id
-
-        override fun areContentsTheSame(
-            oldItem: Show,
-            newItem: Show
-        ): Boolean = oldItem == newItem
     }
 }

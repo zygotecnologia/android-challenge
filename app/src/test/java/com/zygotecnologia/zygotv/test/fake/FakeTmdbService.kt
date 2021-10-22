@@ -6,7 +6,9 @@ import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowsPageResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 
-class FakeTmdbService : TmdbService {
+class FakeTmdbService(
+    private val mostPopularShow: ShowResponse = buildShowResponseWith(id = 1, name = "You")
+) : TmdbService {
 
     override suspend fun fetchGenresAsync(apiKey: String, region: String): GenreListResponse {
         return GenreListResponse(
@@ -33,21 +35,21 @@ class FakeTmdbService : TmdbService {
             totalResults = 5,
             totalPages = 1,
             results = listOf(
-                buildShowWith(id = 1, name = "You"),
-                buildShowWith(id = 2, name = "Round 6"),
-                buildShowWith(id = 3, name = "The Good Place"),
-                buildShowWith(id = 4, name = "Brooklyn 99"),
-                buildShowWith(id = 5, name = "Stranger Things")
+                mostPopularShow,
+                buildShowResponseWith(id = 2, name = "Round 6"),
+                buildShowResponseWith(id = 3, name = "The Good Place"),
+                buildShowResponseWith(id = 4, name = "Brooklyn 99"),
+                buildShowResponseWith(id = 5, name = "Stranger Things")
             )
         )
     }
 
     override suspend fun fetchShowAsync(apiKey: String, id: Int): ShowResponse {
-        return buildShowWith(name = "You")
+        return buildShowResponseWith(name = "You")
     }
 }
 
-private fun buildShowWith(
+fun buildShowResponseWith(
     id: Int = 1,
     name: String
 ) = ShowResponse(

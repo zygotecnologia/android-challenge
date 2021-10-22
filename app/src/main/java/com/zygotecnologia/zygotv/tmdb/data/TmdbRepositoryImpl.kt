@@ -12,11 +12,21 @@ class TmdbRepositoryImpl(
     private val tmdbService: TmdbService
 ) : TmdbRepository {
 
+    /**
+     * Returns a list of shows.
+     *
+     * The shows are sorted by popularity by default.
+     */
     override suspend fun getShows(): List<Show> {
         val genres = getGenres()
         return getShows(genres)
     }
 
+    /**
+     * Returns a list of genres with each containing a list of shows from such genre.
+     *
+     * The same show can appear in multiple genres, and genres might not contain any show.
+     */
     override suspend fun getShowsByGenre(): List<GenreWithShows> {
         val genres = getGenres()
         val allShows = getShows(genres)
@@ -28,6 +38,16 @@ class TmdbRepositoryImpl(
 
             GenreWithShows(genre, shows)
         }
+    }
+
+    /**
+     * Returns the most popular show listed at TMDB.
+     *
+     * Since the returned list is already sorted by popularity, the first item in the list is selected.
+     */
+    override suspend fun getMostPopularShow(): Show {
+        val shows = getShows(getGenres())
+        return shows.first()
     }
 
     private suspend fun getGenres() = tmdbService
