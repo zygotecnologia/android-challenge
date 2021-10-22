@@ -32,6 +32,16 @@ class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewH
 
     override fun getItemCount() = highlightedShows.size
 
+    fun updateHighlightedShow(show: Show) {
+        val firstPosition = 0
+        val wasEmpty = highlightedShows.isEmpty()
+
+        highlightedShows = listOf(show)
+
+        if (wasEmpty) notifyItemInserted(firstPosition)
+        else notifyItemChanged(firstPosition)
+    }
+
     class ViewHolder(
         private val binding: HighlightedShowItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {

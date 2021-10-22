@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ConcatAdapter
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
 import com.zygotecnologia.zygotv.tmdb.presentation.GenresAdapter
+import com.zygotecnologia.zygotv.tmdb.presentation.HighlightedShowAdapter
 import com.zygotecnologia.zygotv.tmdb.presentation.ShowsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,12 +33,24 @@ class HomeFragment : Fragment() {
     }
 
     private fun configureList() {
-        val adapter = GenresAdapter()
+        val highlightedShowAdapter = createHighlightedShowAdapter()
+        val genresAdapter = createGenresAdapter()
 
-        binding.genreRecycler.adapter = adapter
+        binding.homeRecycler.adapter = ConcatAdapter(
+            highlightedShowAdapter,
+            genresAdapter
+        )
+    }
 
+    private fun createHighlightedShowAdapter() = HighlightedShowAdapter().also { showAdapter ->
+        viewModel.mostPopularShow.observe(viewLifecycleOwner) {
+            showAdapter.updateHighlightedShow(it)
+        }
+    }
+
+    private fun createGenresAdapter() = GenresAdapter().also { genreAdapter ->
         viewModel.showsByGenre.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            genreAdapter.submitList(it)
         }
     }
 

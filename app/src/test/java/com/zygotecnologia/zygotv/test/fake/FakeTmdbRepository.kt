@@ -5,14 +5,16 @@ import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 
-class FakeTmdbRepository : TmdbRepository {
+class FakeTmdbRepository(
+    private val mostPopularShow: Show = buildShowWith(
+        id = 1,
+        name = "You",
+        genres = listOf(buildGenreWith(id = 1, name = "Drama"))
+    )
+) : TmdbRepository {
 
     override suspend fun getShows(): List<Show> = listOf(
-        buildShowWith(
-            id = 1,
-            name = "You",
-            genres = listOf(buildGenreWith(id = 1, name = "Drama"))
-        ),
+        mostPopularShow,
         buildShowWith(
             id = 2,
             name = "Brooklyn 99",
@@ -32,6 +34,7 @@ class FakeTmdbRepository : TmdbRepository {
         GenreWithShows(
             genre = buildGenreWith(id = 1, name = "Drama"),
             shows = listOf(
+                mostPopularShow,
                 buildShowWith(
                     id = 3,
                     name = "The Good Place",
@@ -44,14 +47,10 @@ class FakeTmdbRepository : TmdbRepository {
         )
     )
 
-    override suspend fun getMostPopularShow(): Show = buildShowWith(
-        id = 1,
-        name = "You",
-        genres = listOf(buildGenreWith(id = 1, name = "Drama"))
-    )
+    override suspend fun getMostPopularShow(): Show = mostPopularShow
 }
 
-private fun buildShowWith(
+fun buildShowWith(
     id: Int = 1,
     name: String = "Show",
     genres: List<Genre> = listOf(buildGenreWith())
@@ -67,7 +66,7 @@ private fun buildShowWith(
     posterPath = "${name}posterPath"
 )
 
-private fun buildGenreWith(
+fun buildGenreWith(
     id: Int = 1,
     name: String = "Genre"
 ) = Genre(

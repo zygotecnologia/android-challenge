@@ -8,6 +8,12 @@ import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 
+/**
+ * Repository for retrieving information such as shows and genres from TMDB.
+ *
+ * This implementation does not have a cache, so calling multiple methods might create new network
+ * calls everytime.
+ */
 class TmdbRepositoryImpl(
     private val tmdbService: TmdbService
 ) : TmdbRepository {
