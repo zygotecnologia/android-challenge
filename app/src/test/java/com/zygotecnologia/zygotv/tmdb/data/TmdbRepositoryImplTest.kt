@@ -1,6 +1,6 @@
 package com.zygotecnologia.zygotv.tmdb.data
 
-import com.zygotecnologia.zygotv.test.FakeTmdbService
+import com.zygotecnologia.zygotv.test.fake.FakeTmdbService
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import kotlinx.coroutines.ExperimentalCoroutinesApi

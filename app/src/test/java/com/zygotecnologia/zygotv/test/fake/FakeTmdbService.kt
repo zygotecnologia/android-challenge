@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.test
+package com.zygotecnologia.zygotv.test.fake
 
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreListResponse
@@ -55,7 +55,7 @@ private fun buildShowWith(
     name = name,
     originalName = name,
     voteCount = 5,
-    overview = "${name} overview.",
+    overview = "$name overview.",
     originalLanguage = "EN",
     genreIds = listOf(1),
     backdropPath = "${name}backdropPath",
