@@ -22,9 +22,9 @@ class HomeViewModelTest {
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
 
-    private val mostPopularShow: Show = buildShowWith(name = "Squid Game")
-
-    private fun getViewModel() = HomeViewModel(
+    private fun getViewModel(
+        mostPopularShow: Show = buildShowWith(name = "You")
+    ) = HomeViewModel(
         tmdbRepository = FakeTmdbRepository(
             mostPopularShow = mostPopularShow
         )
@@ -39,7 +39,8 @@ class HomeViewModelTest {
 
     @Test
     fun `mostPopularShow should be Squid Game`() = runBlockingTest {
-        val viewModel = getViewModel()
+        val mostPopularShow = buildShowWith(name = "Squid Game")
+        val viewModel = getViewModel(mostPopularShow)
 
         viewModel.mostPopularShow.getOrAwaitValue().name shouldBe "Squid Game"
     }
