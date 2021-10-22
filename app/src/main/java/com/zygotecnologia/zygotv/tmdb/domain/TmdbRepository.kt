@@ -4,5 +4,5 @@ interface TmdbRepository {
 
     suspend fun getShows(): List<Show>
 
-    suspend fun getShowsByGenre(): Map<Genre, List<Show>>
+    suspend fun getShowsByGenre(): List<GenreWithShows>
 }

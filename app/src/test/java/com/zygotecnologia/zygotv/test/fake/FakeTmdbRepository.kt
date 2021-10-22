@@ -1,6 +1,7 @@
 package com.zygotecnologia.zygotv.test.fake
 
 import com.zygotecnologia.zygotv.tmdb.domain.Genre
+import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 
@@ -27,14 +28,17 @@ class FakeTmdbRepository : TmdbRepository {
         )
     )
 
-    override suspend fun getShowsByGenre(): Map<Genre, List<Show>> = mapOf(
-        buildGenreWith(id = 1, name = "Drama") to listOf(
-            buildShowWith(
-                id = 3,
-                name = "The Good Place",
-                genres = listOf(
-                    buildGenreWith(id = 1, name = "Drama"),
-                    buildGenreWith(id = 2, name = "Comedy")
+    override suspend fun getShowsByGenre() = listOf(
+        GenreWithShows(
+            genre = buildGenreWith(id = 1, name = "Drama"),
+            shows = listOf(
+                buildShowWith(
+                    id = 3,
+                    name = "The Good Place",
+                    genres = listOf(
+                        buildGenreWith(id = 1, name = "Drama"),
+                        buildGenreWith(id = 2, name = "Comedy")
+                    )
                 )
             )
         )

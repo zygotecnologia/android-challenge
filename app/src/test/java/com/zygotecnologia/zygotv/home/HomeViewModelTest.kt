@@ -28,6 +28,6 @@ class HomeViewModelTest {
     fun `viewModel should load show list`() = runBlockingTest {
         val viewModel = getViewModel()
 
-        viewModel.shows.getOrAwaitValue().shouldNotBeEmpty()
+        viewModel.showsByGenre.getOrAwaitValue().shouldNotBeEmpty()
     }
 }

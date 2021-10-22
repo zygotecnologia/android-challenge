@@ -4,6 +4,7 @@ import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import com.zygotecnologia.zygotv.tmdb.domain.Genre
+import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 
@@ -16,14 +17,16 @@ class TmdbRepositoryImpl(
         return getShows(genres)
     }
 
-    override suspend fun getShowsByGenre(): Map<Genre, List<Show>> {
+    override suspend fun getShowsByGenre(): List<GenreWithShows> {
         val genres = getGenres()
-        val shows = getShows(genres)
+        val allShows = getShows(genres)
 
-        return genres.associateWith { genre ->
-            shows.filter { show ->
+        return genres.map { genre ->
+            val shows = allShows.filter { show ->
                 show.genres.contains(genre)
             }
+
+            GenreWithShows(genre, shows)
         }
     }
 
