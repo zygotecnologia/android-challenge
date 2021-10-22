@@ -16,6 +16,10 @@ class TmdbRepositoryImpl(
         return getShows(genres)
     }
 
+    override suspend fun getShowsByGenre(): Map<Genre, List<Show>> {
+        TODO("Not yet implemented")
+    }
+
     private suspend fun getGenres() = tmdbService
         .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
         .genreResponses

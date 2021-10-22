@@ -26,6 +26,19 @@ class FakeTmdbRepository : TmdbRepository {
             )
         )
     )
+
+    override suspend fun getShowsByGenre(): Map<Genre, List<Show>> = mapOf(
+        buildGenreWith(id = 1, name = "Drama") to listOf(
+            buildShowWith(
+                id = 3,
+                name = "The Good Place",
+                genres = listOf(
+                    buildGenreWith(id = 1, name = "Drama"),
+                    buildGenreWith(id = 2, name = "Comedy")
+                )
+            )
+        )
+    )
 }
 
 private fun buildShowWith(
