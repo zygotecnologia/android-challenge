@@ -12,16 +12,19 @@ class TmdbRepositoryImpl(
 ) : TmdbRepository {
 
     override suspend fun getShows(): List<Show> {
-        val genres = tmdbService
-            .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
-            .genreResponses
-            .map { it.toGenre() }
-
-        return tmdbService
-            .fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
-            .results
-            .map { it.toShow(genres) }
+        val genres = getGenres()
+        return getShows(genres)
     }
+
+    private suspend fun getGenres() = tmdbService
+        .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
+        .genreResponses
+        .map { it.toGenre() }
+
+    private suspend fun getShows(genres: List<Genre>) = tmdbService
+        .fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
+        .results
+        .map { it.toShow(genres) }
 
     private fun GenreResponse.toGenre() = Genre(
         id = id,
