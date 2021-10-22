@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.tmdb.data.source.remote.service
 
+import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreListResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowsPageResponse
@@ -13,19 +14,19 @@ interface TmdbService {
     suspend fun fetchGenresAsync(
         @Query("api_key") apiKey: String,
         @Query("region") region: String
-    ): GenreListResponse
+    ): NetworkResult<GenreListResponse>
 
     @GET("$TMDB_API_VERSION/tv/popular")
     suspend fun fetchPopularShowsAsync(
         @Query("api_key") apiKey: String,
         @Query("region") region: String
-    ): ShowsPageResponse
+    ): NetworkResult<ShowsPageResponse>
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(
         @Query("api_key") apiKey: String,
         @Path("tv_id") id: Int
-    ): ShowResponse
+    ): NetworkResult<ShowResponse>
 
     companion object {
         private const val TMDB_API_VERSION = "3"

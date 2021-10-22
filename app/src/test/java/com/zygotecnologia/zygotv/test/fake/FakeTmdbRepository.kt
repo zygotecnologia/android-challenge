@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.test.fake
 
+import com.zygotecnologia.zygotv.test.asSuccess
 import com.zygotecnologia.zygotv.tmdb.domain.Genre
 import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
@@ -13,7 +14,7 @@ class FakeTmdbRepository(
     )
 ) : TmdbRepository {
 
-    override suspend fun getShows(): List<Show> = listOf(
+    override suspend fun getShows() = listOf(
         mostPopularShow,
         buildShowWith(
             id = 2,
@@ -28,7 +29,7 @@ class FakeTmdbRepository(
                 buildGenreWith(id = 2, name = "Comedy")
             )
         )
-    )
+    ).asSuccess()
 
     override suspend fun getShowsByGenre() = listOf(
         GenreWithShows(
@@ -45,9 +46,9 @@ class FakeTmdbRepository(
                 )
             )
         )
-    )
+    ).asSuccess()
 
-    override suspend fun getMostPopularShow(): Show = mostPopularShow
+    override suspend fun getMostPopularShow() = mostPopularShow.asSuccess()
 }
 
 fun buildShowWith(

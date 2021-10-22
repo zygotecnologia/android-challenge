@@ -1,10 +1,12 @@
 package com.zygotecnologia.zygotv.tmdb.domain
 
+import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
+
 interface TmdbRepository {
 
-    suspend fun getShows(): List<Show>
+    suspend fun getShows(): NetworkResult<List<Show>>
 
-    suspend fun getShowsByGenre(): List<GenreWithShows>
+    suspend fun getShowsByGenre(): NetworkResult<List<GenreWithShows>>
 
-    suspend fun getMostPopularShow(): Show
+    suspend fun getMostPopularShow(): NetworkResult<Show>
 }

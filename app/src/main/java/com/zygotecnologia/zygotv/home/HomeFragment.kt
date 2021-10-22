@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
+import com.google.android.material.snackbar.Snackbar
+import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
 import com.zygotecnologia.zygotv.tmdb.presentation.GenresAdapter
 import com.zygotecnologia.zygotv.tmdb.presentation.HighlightedShowAdapter
-import com.zygotecnologia.zygotv.tmdb.presentation.ShowsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         configureList()
+        observeNetworkError()
     }
 
     private fun configureList() {
@@ -51,6 +53,15 @@ class HomeFragment : Fragment() {
     private fun createGenresAdapter() = GenresAdapter().also { genreAdapter ->
         viewModel.showsByGenre.observe(viewLifecycleOwner) {
             genreAdapter.submitList(it)
+        }
+    }
+
+    private fun observeNetworkError() {
+        val errorSnackBar = Snackbar.make(binding.root, R.string.network_error, Snackbar.LENGTH_INDEFINITE)
+
+        viewModel.showNetworkError.observe(viewLifecycleOwner) { hasError ->
+            if (hasError) errorSnackBar.show()
+            else errorSnackBar.dismiss()
         }
     }
 
