@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ShowItemBinding
@@ -34,7 +37,11 @@ class ShowsAdapter : ListAdapter<Show, ShowsAdapter.ViewHolder>(ShowDiffUtil()) 
             val imageUrl = showResponse.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
             Glide.with(itemView)
                 .load(imageUrl)
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.image_placeholder)
+                        .transform(MultiTransformation(CenterCrop(), RoundedCorners(16)))
+                )
                 .into(binding.showPoster)
         }
     }
