@@ -14,5 +14,6 @@
     <action
         android:id="@+id/pop_to_home"
         app:destination="@id/home_fragment"
-        app:popUpTo="@id/home_fragment" />
+        app:popUpTo="@id/home_fragment"
+        app:popUpToInclusive="true"/>
 </navigation>
