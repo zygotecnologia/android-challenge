@@ -17,7 +17,14 @@ class TmdbRepositoryImpl(
     }
 
     override suspend fun getShowsByGenre(): Map<Genre, List<Show>> {
-        TODO("Not yet implemented")
+        val genres = getGenres()
+        val shows = getShows(genres)
+
+        return genres.associateWith { genre ->
+            shows.filter { show ->
+                show.genres.contains(genre)
+            }
+        }
     }
 
     private suspend fun getGenres() = tmdbService
