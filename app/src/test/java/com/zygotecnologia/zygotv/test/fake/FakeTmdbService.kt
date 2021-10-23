@@ -57,11 +57,24 @@ fun showResponseWith(
 
 fun showDetailsResponseWith(
     id: Int = 1,
-    name: String
+    name: String,
+    seasons: List<SeasonResponse> = listOf(seasonResponseWith(name = "Season 1"))
 ) = ShowDetailsResponse(
     id = id,
     name = name,
+    seasons = seasons,
     backdropPath = "${name}backdropPath",
+    posterPath = "${name}posterPath"
+)
+
+fun seasonResponseWith(
+    id: Int = 1,
+    name: String = "Season $id"
+) = SeasonResponse(
+    id = id,
+    seasonNumber = id,
+    name = name,
+    overview = "$name overview.",
     posterPath = "${name}posterPath"
 )
 

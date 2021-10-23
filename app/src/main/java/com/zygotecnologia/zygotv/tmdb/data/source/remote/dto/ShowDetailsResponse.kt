@@ -5,6 +5,7 @@ import com.squareup.moshi.Json
 data class ShowDetailsResponse(
     @Json(name = "id") val id: Int,
     @Json(name = "name") val name: String,
+    @Json(name = "seasons") val seasons: List<SeasonResponse>,
     @Json(name = "backdrop_path") val backdropPath: String?,
     @Json(name = "poster_path") val posterPath: String?
 )
