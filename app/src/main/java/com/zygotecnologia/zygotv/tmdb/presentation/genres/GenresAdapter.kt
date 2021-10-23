@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.tmdb.presentation
+package com.zygotecnologia.zygotv.tmdb.presentation.genres
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

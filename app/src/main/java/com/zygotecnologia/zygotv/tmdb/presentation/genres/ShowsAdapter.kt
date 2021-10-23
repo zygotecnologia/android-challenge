@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.tmdb.presentation
+package com.zygotecnologia.zygotv.tmdb.presentation.genres
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,26 +19,23 @@ class ShowsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ShowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val holder = ViewHolder(binding)
-
-        if (onShowClicked != null) binding.root.setOnClickListener {
-            val show = getItem(holder.bindingAdapterPosition)
-            onShowClicked.invoke(show)
-        }
-
-        return holder
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(
+    inner class ViewHolder(
         private val binding: ShowItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(show: Show) {
             binding.showTitle.text = show.name
+
+            if (onShowClicked != null) binding.root.setOnClickListener {
+                onShowClicked.invoke(show)
+            }
 
             Glide.with(itemView)
                 .load(show.posterPath.toTmdbPosterUrl())

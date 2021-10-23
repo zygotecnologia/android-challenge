@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
 import com.zygotecnologia.zygotv.tmdb.domain.show.Show
-import com.zygotecnologia.zygotv.tmdb.presentation.GenresAdapter
+import com.zygotecnologia.zygotv.tmdb.presentation.genres.GenresAdapter
 import com.zygotecnologia.zygotv.tmdb.presentation.HighlightedShowAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
