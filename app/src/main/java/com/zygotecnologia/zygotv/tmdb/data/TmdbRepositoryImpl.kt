@@ -30,16 +30,6 @@ class TmdbRepositoryImpl(
     }
 
     /**
-     * Returns a list of shows.
-     *
-     * The shows are sorted by popularity by default.
-     */
-    override suspend fun getShows(): NetworkResult<List<Show>> {
-        val genres = getGenres().dataOrNull() ?: return NetworkResult.Failure
-        return getShows(genres)
-    }
-
-    /**
      * Returns a list of genres with each containing a list of shows from such genre.
      *
      * The same show can appear in multiple genres, and genres might not contain any show.

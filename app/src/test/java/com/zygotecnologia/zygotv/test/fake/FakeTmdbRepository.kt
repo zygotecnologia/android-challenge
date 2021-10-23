@@ -19,23 +19,6 @@ class FakeTmdbRepository(
         id = showId,
     ).asSuccess()
 
-    override suspend fun getShows() = listOf(
-        mostPopularShow,
-        showWith(
-            id = 2,
-            name = "Brooklyn 99",
-            genres = listOf(genreWith(id = 2, name = "Comedy"))
-        ),
-        showWith(
-            id = 3,
-            name = "The Good Place",
-            genres = listOf(
-                genreWith(id = 1, name = "Drama"),
-                genreWith(id = 2, name = "Comedy")
-            )
-        )
-    ).asSuccess()
-
     override suspend fun getShowsByGenre() = listOf(
         GenreWithShows(
             genre = genreWith(id = 1, name = "Drama"),
