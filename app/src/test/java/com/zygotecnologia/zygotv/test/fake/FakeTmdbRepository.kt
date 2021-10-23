@@ -5,26 +5,25 @@ import com.zygotecnologia.zygotv.test.asSuccess
 import com.zygotecnologia.zygotv.tmdb.domain.*
 
 class FakeTmdbRepository(
+    private val showWithSeasons: ShowWithSeasons = showWithSeasonsWith(),
     private val mostPopularShow: Show = showWith(
-        id = 1,
+        id = 2,
         name = "You"
+    ),
+    private val otherShows: List<Show> = listOf(
+        showWith(
+            id = 3,
+            name = "The Good Place"
+        )
     )
 ) : TmdbRepository {
 
-    override suspend fun getShow(showId: Int): NetworkResult<ShowWithSeasons> = showWithSeasonsWith(
-        show = showWith(id = showId)
-    ).asSuccess()
+    override suspend fun getShow(showId: Int): NetworkResult<ShowWithSeasons> = showWithSeasons.asSuccess()
 
     override suspend fun getShowsByGenre() = listOf(
         GenreWithShows(
             genre = genreWith(id = 1, name = "Drama"),
-            shows = listOf(
-                mostPopularShow,
-                showWith(
-                    id = 3,
-                    name = "The Good Place"
-                )
-            )
+            shows = listOf(mostPopularShow) + otherShows
         )
     ).asSuccess()
 
@@ -78,9 +77,9 @@ fun showWithSeasonsWith(
 )
 
 fun seasonWithEpisodesWith(
-    season: Season = seasonWith(),
-    episodes: List<Episode> = listOf(episodeWith())
+    season: String = "Season 1",
+    episodes: List<String> = listOf("Episode 1")
 ) = SeasonWithEpisodes(
-    season = season,
-    episodes = episodes
+    season = seasonWith(name = season),
+    episodes = episodes.map { episodeWith(name = it) }
 )
