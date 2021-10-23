@@ -78,22 +78,22 @@ class TmdbRepositoryImpl(
     }
 
     private suspend fun getShowWith(showId: Int) = tmdbService
-        .fetchShowAsync(showId, TmdbService.TMDB_API_KEY)
+        .fetchShowAsync(showId)
         .map { data -> data.toShow() }
 
     private suspend fun getSeasonEpisodes(
         showId: Int,
         seasonNumber: Int
     ) = tmdbService
-        .fetchSeasonDetailsAsync(showId, seasonNumber, TmdbService.TMDB_API_KEY)
+        .fetchSeasonDetailsAsync(showId, seasonNumber)
         .map { data -> data.episodes.map { it.toEpisode() } }
 
     private suspend fun getGenres() = tmdbService
-        .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
+        .fetchGenresAsync()
         .map { data -> data.genreResponses.map { it.toGenre() } }
 
     private suspend fun getShowResponses() = tmdbService
-        .fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
+        .fetchPopularShowsAsync()
         .map { it.results }
 
     private fun GenreResponse.toGenre() = Genre(

@@ -9,7 +9,7 @@ class FakeTmdbService(
     private val mostPopularShow: ShowResponse = showResponseWith(id = 1, name = "You")
 ) : TmdbService {
 
-    override suspend fun fetchGenresAsync(apiKey: String, region: String) = GenreListResponse(
+    override suspend fun fetchGenresAsync() = GenreListResponse(
         genreResponses = listOf(
             genreResponseWith(
                 id = 1,
@@ -26,7 +26,7 @@ class FakeTmdbService(
         )
     ).asSuccess()
 
-    override suspend fun fetchPopularShowsAsync(apiKey: String, region: String) = ShowsPageResponse(
+    override suspend fun fetchPopularShowsAsync() = ShowsPageResponse(
         page = 0,
         totalResults = 5,
         totalPages = 1,
@@ -40,14 +40,12 @@ class FakeTmdbService(
     ).asSuccess()
 
     override suspend fun fetchShowAsync(
-        id: Int,
-        apiKey: String
+        id: Int
     ) = showDetailsResponseWith(name = "You").asSuccess()
 
     override suspend fun fetchSeasonDetailsAsync(
         id: Int,
-        seasonNumber: Int,
-        apiKey: String
+        seasonNumber: Int
     ): NetworkResult<SeasonDetailsResponse> = seasonDetailsResponseWith().asSuccess()
 }
 

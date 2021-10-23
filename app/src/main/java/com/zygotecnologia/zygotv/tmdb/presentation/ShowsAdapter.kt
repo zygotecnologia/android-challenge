@@ -6,14 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ShowItemBinding
 import com.zygotecnologia.zygotv.tmdb.domain.Show
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.toTmdbPosterUrl
 
 class ShowsAdapter(
     private val onShowClicked: ((Show) -> Unit)? = null
@@ -42,9 +40,8 @@ class ShowsAdapter(
         fun bind(show: Show) {
             binding.showTitle.text = show.name
 
-            val imageUrl = show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
             Glide.with(itemView)
-                .load(imageUrl)
+                .load(show.posterPath.toTmdbPosterUrl())
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.image_placeholder)

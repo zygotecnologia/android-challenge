@@ -15,3 +15,7 @@ object ImageUrlBuilder {
         return BACKDROP_URL + backdropPath + "?${TmdbService.TMDB_API_QUERY}=" + TmdbService.TMDB_API_KEY
     }
 }
+
+fun String?.toTmdbPosterUrl() = this?.let { ImageUrlBuilder.buildPosterUrl(it) }
+
+fun String?.toTmdbBackdropUrl() = this?.let { ImageUrlBuilder.buildBackdropUrl(it) }

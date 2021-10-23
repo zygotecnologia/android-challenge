@@ -4,14 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HighlightedShowItemBinding
 import com.zygotecnologia.zygotv.tmdb.domain.Show
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.toTmdbBackdropUrl
 
 class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewHolder>() {
 
@@ -45,9 +43,8 @@ class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewH
         fun bind(show: Show) {
             binding.showTitle.text = show.name
 
-            val imageUrl = show.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) }
             Glide.with(itemView)
-                .load(imageUrl)
+                .load(show.backdropPath.toTmdbBackdropUrl())
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.image_placeholder)

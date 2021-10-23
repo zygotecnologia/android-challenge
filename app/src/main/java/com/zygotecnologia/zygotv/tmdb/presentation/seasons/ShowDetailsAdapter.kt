@@ -13,7 +13,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.EpisodeItemBinding
 import com.zygotecnologia.zygotv.databinding.SeasonItemBinding
 import com.zygotecnologia.zygotv.tmdb.domain.Season
-import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.toTmdbPosterUrl
 
 class ShowDetailsAdapter(
     private val onSeasonSelected: (Season) -> Unit
@@ -73,9 +73,8 @@ class ShowDetailsAdapter(
 
             setArrowIcon(seasonItem.isCollapsed)
 
-            val imageUrl = seasonItem.season.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
             Glide.with(itemView)
-                .load(imageUrl)
+                .load(seasonItem.season.posterPath.toTmdbPosterUrl())
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.image_placeholder)
