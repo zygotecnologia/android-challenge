@@ -10,4 +10,7 @@
 
     <color name="background_black">#FF181414</color>
     <color name="title_highlight_color">#FFDF2525</color>
+
+    <color name="grey">#FFB0B0B0</color>
+
 </resources>
