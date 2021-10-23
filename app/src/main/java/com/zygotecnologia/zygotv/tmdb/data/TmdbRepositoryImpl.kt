@@ -36,12 +36,12 @@ class TmdbRepositoryImpl(
      */
     override suspend fun getShowsByGenre(): NetworkResult<List<GenreWithShows>> {
         val genres = getGenres().dataOrNull() ?: return NetworkResult.Failure
-        val allShows = getShows(genres).dataOrNull() ?: return NetworkResult.Failure
+        val allShows = getShowResponses().dataOrNull() ?: return NetworkResult.Failure
 
         val genresWithShows = genres.map { genre ->
-            val shows = allShows.filter { show ->
-                show.genres.contains(genre)
-            }
+            val shows = allShows
+                .filter { it.genreIds.contains(genre.id) }
+                .map { it.toShow() }
 
             GenreWithShows(genre, shows)
         }
@@ -55,10 +55,9 @@ class TmdbRepositoryImpl(
      * Since the returned list is already sorted by popularity, the first item in the list is selected.
      */
     override suspend fun getMostPopularShow(): NetworkResult<Show> {
-        val genres = getGenres().dataOrNull() ?: return NetworkResult.Failure
-        val shows = getShows(genres).dataOrNull() ?: return NetworkResult.Failure
+        val shows = getShowResponses().dataOrNull() ?: return NetworkResult.Failure
 
-        val mostPopularShow = shows.first()
+        val mostPopularShow = shows.first().toShow()
 
         return NetworkResult.Success(mostPopularShow)
     }
@@ -71,30 +70,26 @@ class TmdbRepositoryImpl(
         .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
         .map { data -> data.genreResponses.map { it.toGenre() } }
 
-    private suspend fun getShows(genres: List<Genre>) = tmdbService
+    private suspend fun getShowResponses() = tmdbService
         .fetchPopularShowsAsync(TmdbService.TMDB_API_KEY, "BR")
-        .map { data -> data.results.map { it.toShow(genres) } }
+        .map { it.results }
 
     private fun GenreResponse.toGenre() = Genre(
         id = id,
         name = name
     )
 
-    private fun ShowResponse.toShow(
-        genres: List<Genre>
-    ) = Show(
+    private fun ShowResponse.toShow() = Show(
         id = id,
         name = name,
         backdropPath = backdropPath,
-        posterPath = posterPath,
-        genres = genres.filter { genreIds.contains(it.id) },
+        posterPath = posterPath
     )
 
     private fun ShowDetailsResponse.toShow() = Show(
         id = id,
         name = name,
         backdropPath = backdropPath,
-        posterPath = posterPath,
-        genres = genres.map { it.toGenre() },
+        posterPath = posterPath
     )
 }

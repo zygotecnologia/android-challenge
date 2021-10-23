@@ -57,12 +57,10 @@ fun showResponseWith(
 
 fun showDetailsResponseWith(
     id: Int = 1,
-    name: String,
-    genres: List<GenreResponse> = listOf(genreResponseWith(name = "Drama"))
+    name: String
 ) = ShowDetailsResponse(
     id = id,
     name = name,
-    genres = genres,
     backdropPath = "${name}backdropPath",
     posterPath = "${name}posterPath"
 )

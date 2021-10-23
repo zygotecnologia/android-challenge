@@ -10,8 +10,7 @@ import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 class FakeTmdbRepository(
     private val mostPopularShow: Show = showWith(
         id = 1,
-        name = "You",
-        genres = listOf(genreWith(name = "Drama"))
+        name = "You"
     )
 ) : TmdbRepository {
 
@@ -26,11 +25,7 @@ class FakeTmdbRepository(
                 mostPopularShow,
                 showWith(
                     id = 3,
-                    name = "The Good Place",
-                    genres = listOf(
-                        genreWith(id = 1, name = "Drama"),
-                        genreWith(id = 2, name = "Comedy")
-                    )
+                    name = "The Good Place"
                 )
             )
         )
@@ -41,12 +36,10 @@ class FakeTmdbRepository(
 
 fun showWith(
     id: Int = 1,
-    name: String = "Show",
-    genres: List<Genre> = listOf(genreWith())
+    name: String = "Show"
 ) = Show(
     id = id,
     name = name,
-    genres = genres,
     backdropPath = "${name}backdropPath",
     posterPath = "${name}posterPath"
 )
