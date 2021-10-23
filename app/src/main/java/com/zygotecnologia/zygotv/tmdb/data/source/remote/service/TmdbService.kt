@@ -1,10 +1,7 @@
 package com.zygotecnologia.zygotv.tmdb.data.source.remote.service
 
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreListResponse
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowDetailsResponse
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowsPageResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -28,6 +25,13 @@ interface TmdbService {
         @Path("tv_id") id: Int,
         @Query("api_key") apiKey: String
     ): NetworkResult<ShowDetailsResponse>
+
+    @GET("$TMDB_API_VERSION//tv/{tv_id}/season/{season_number}")
+    suspend fun fetchSeasonDetailsAsync(
+        @Path("tv_id") id: Int,
+        @Path("season_number") seasonNumber: Int,
+        @Query("api_key") apiKey: String
+    ): NetworkResult<SeasonDetailsResponse>
 
     companion object {
         private const val TMDB_API_VERSION = "3"

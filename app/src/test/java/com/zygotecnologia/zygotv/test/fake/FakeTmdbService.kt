@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.test.fake
 
+import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.test.asSuccess
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.*
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
@@ -42,7 +43,21 @@ class FakeTmdbService(
         id: Int,
         apiKey: String
     ) = showDetailsResponseWith(name = "You").asSuccess()
+
+    override suspend fun fetchSeasonDetailsAsync(
+        id: Int,
+        seasonNumber: Int,
+        apiKey: String
+    ): NetworkResult<SeasonDetailsResponse> = seasonDetailsResponseWith().asSuccess()
 }
+
+fun genreResponseWith(
+    id: Int = 1,
+    name: String
+) = GenreResponse(
+    id = id,
+    name = name
+)
 
 fun showResponseWith(
     id: Int = 1,
@@ -58,7 +73,7 @@ fun showResponseWith(
 fun showDetailsResponseWith(
     id: Int = 1,
     name: String,
-    seasons: List<SeasonResponse> = listOf(seasonResponseWith(name = "Season 1"))
+    seasons: List<SeasonResponse> = listOf(seasonResponseWith(id = 1))
 ) = ShowDetailsResponse(
     id = id,
     name = name,
@@ -78,10 +93,17 @@ fun seasonResponseWith(
     posterPath = "${name}posterPath"
 )
 
-fun genreResponseWith(
+fun seasonDetailsResponseWith(
+    episodes: List<EpisodeResponse> = listOf(episodeResponseWith(id = 1))
+) = SeasonDetailsResponse(
+    episodes = episodes
+)
+
+fun episodeResponseWith(
     id: Int = 1,
-    name: String
-) = GenreResponse(
+    name: String = "Episode $id"
+) = EpisodeResponse(
     id = id,
-    name = name
+    name = name,
+    overview = "$name overview."
 )
