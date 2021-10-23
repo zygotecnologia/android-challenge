@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="240dp"
         android:foreground="?attr/selectableItemBackground"
-        android:src="@drawable/image_placeholder"
-        tools:layout_width="160dp" />
+        android:minWidth="160dp"
+        android:src="@drawable/image_placeholder" />
 
     <TextView
         android:id="@+id/show_title"
