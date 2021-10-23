@@ -10,8 +10,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.ShowItemBinding
-import com.zygotecnologia.zygotv.tmdb.domain.Show
-import com.zygotecnologia.zygotv.utils.toTmdbPosterUrl
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.image.toTmdbPosterUrl
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
 
 class ShowsAdapter(
     private val onShowClicked: ((Show) -> Unit)? = null

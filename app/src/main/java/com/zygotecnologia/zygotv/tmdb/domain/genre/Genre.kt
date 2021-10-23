@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.tmdb.domain
+package com.zygotecnologia.zygotv.tmdb.domain.genre
 
 data class Genre(
     val id: Int,

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.tmdb.domain
+package com.zygotecnologia.zygotv.tmdb.domain.season
 
 data class Season(
     val id: Int,

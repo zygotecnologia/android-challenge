@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.zygotecnologia.zygotv.test.fake.*
 import com.zygotecnologia.zygotv.test.getOrAwaitValue
 import com.zygotecnologia.zygotv.test.rules.MainCoroutineRule
-import com.zygotecnologia.zygotv.tmdb.domain.SeasonWithEpisodes
-import com.zygotecnologia.zygotv.tmdb.domain.Show
+import com.zygotecnologia.zygotv.tmdb.domain.season.SeasonWithEpisodes
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

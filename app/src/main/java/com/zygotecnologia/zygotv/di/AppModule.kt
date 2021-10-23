@@ -1,7 +1,7 @@
 package com.zygotecnologia.zygotv.di
 
 import com.zygotecnologia.zygotv.details.presentation.DetailsViewModel
-import com.zygotecnologia.zygotv.home.HomeViewModel
+import com.zygotecnologia.zygotv.home.presentation.HomeViewModel
 import com.zygotecnologia.zygotv.tmdb.data.TmdbRepositoryImpl
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbServiceFactory

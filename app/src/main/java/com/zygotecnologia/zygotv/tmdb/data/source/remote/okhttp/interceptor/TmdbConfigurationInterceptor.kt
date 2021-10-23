@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main.data.source.remote.okhttp.interceptor
+package com.zygotecnologia.zygotv.tmdb.data.source.remote.okhttp.interceptor
 
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import okhttp3.HttpUrl

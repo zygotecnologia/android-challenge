@@ -3,6 +3,10 @@ package com.zygotecnologia.zygotv.details.presentation
 import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.dataOrNull
 import com.zygotecnologia.zygotv.tmdb.domain.*
+import com.zygotecnologia.zygotv.tmdb.domain.season.Season
+import com.zygotecnologia.zygotv.tmdb.domain.season.SeasonWithEpisodes
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
+import com.zygotecnologia.zygotv.tmdb.domain.show.ShowWithSeasons
 import com.zygotecnologia.zygotv.tmdb.presentation.seasons.ShowDetailItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine

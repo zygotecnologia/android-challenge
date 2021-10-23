@@ -1,7 +1,7 @@
 package com.zygotecnologia.zygotv.tmdb.presentation.seasons
 
-import com.zygotecnologia.zygotv.tmdb.domain.Episode
-import com.zygotecnologia.zygotv.tmdb.domain.Season
+import com.zygotecnologia.zygotv.tmdb.domain.episode.Episode
+import com.zygotecnologia.zygotv.tmdb.domain.season.Season
 
 sealed class ShowDetailItem {
 

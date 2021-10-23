@@ -2,7 +2,7 @@ package com.zygotecnologia.zygotv.tmdb.data.source.remote.service
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.zygotecnologia.zygotv.main.data.source.remote.okhttp.interceptor.TmdbConfigurationInterceptor
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.okhttp.interceptor.TmdbConfigurationInterceptor
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResultCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

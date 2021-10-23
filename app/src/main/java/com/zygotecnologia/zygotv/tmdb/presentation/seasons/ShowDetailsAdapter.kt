@@ -12,8 +12,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.EpisodeItemBinding
 import com.zygotecnologia.zygotv.databinding.SeasonItemBinding
-import com.zygotecnologia.zygotv.tmdb.domain.Season
-import com.zygotecnologia.zygotv.utils.toTmdbPosterUrl
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.image.toTmdbPosterUrl
+import com.zygotecnologia.zygotv.tmdb.domain.season.Season
 
 class ShowDetailsAdapter(
     private val onSeasonSelected: (Season) -> Unit

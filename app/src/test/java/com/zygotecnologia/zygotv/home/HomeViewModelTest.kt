@@ -1,11 +1,12 @@
 package com.zygotecnologia.zygotv.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.zygotecnologia.zygotv.home.presentation.HomeViewModel
 import com.zygotecnologia.zygotv.test.fake.FakeTmdbRepository
 import com.zygotecnologia.zygotv.test.fake.showWith
 import com.zygotecnologia.zygotv.test.getOrAwaitValue
 import com.zygotecnologia.zygotv.test.rules.MainCoroutineRule
-import com.zygotecnologia.zygotv.tmdb.domain.Show
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi

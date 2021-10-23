@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.tmdb.domain
+package com.zygotecnologia.zygotv.tmdb.domain.show
 
 data class Show(
     val id: Int,

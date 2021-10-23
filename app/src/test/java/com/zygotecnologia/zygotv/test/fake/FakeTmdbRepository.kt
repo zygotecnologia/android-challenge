@@ -3,6 +3,13 @@ package com.zygotecnologia.zygotv.test.fake
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.test.asSuccess
 import com.zygotecnologia.zygotv.tmdb.domain.*
+import com.zygotecnologia.zygotv.tmdb.domain.episode.Episode
+import com.zygotecnologia.zygotv.tmdb.domain.genre.Genre
+import com.zygotecnologia.zygotv.tmdb.domain.genre.GenreWithShows
+import com.zygotecnologia.zygotv.tmdb.domain.season.Season
+import com.zygotecnologia.zygotv.tmdb.domain.season.SeasonWithEpisodes
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
+import com.zygotecnologia.zygotv.tmdb.domain.show.ShowWithSeasons
 
 class FakeTmdbRepository(
     private val showWithSeasons: ShowWithSeasons = showWithSeasonsWith(),

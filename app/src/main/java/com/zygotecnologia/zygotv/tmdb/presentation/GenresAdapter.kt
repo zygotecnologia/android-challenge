@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.databinding.GenreItemBinding
-import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
-import com.zygotecnologia.zygotv.tmdb.domain.Show
+import com.zygotecnologia.zygotv.tmdb.domain.genre.GenreWithShows
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
 
 class GenresAdapter(
     private val onShowClicked: ((Show) -> Unit)? = null

@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main.data.source.remote.image
+package com.zygotecnologia.zygotv.tmdb.data.source.remote.image
 
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 

@@ -8,8 +8,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HighlightedShowItemBinding
-import com.zygotecnologia.zygotv.tmdb.domain.Show
-import com.zygotecnologia.zygotv.utils.toTmdbBackdropUrl
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.image.toTmdbBackdropUrl
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
 
 class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewHolder>() {
 

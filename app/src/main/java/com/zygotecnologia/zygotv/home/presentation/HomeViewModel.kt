@@ -1,9 +1,9 @@
-package com.zygotecnologia.zygotv.home
+package com.zygotecnologia.zygotv.home.presentation
 
 import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.dataOrNull
-import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
-import com.zygotecnologia.zygotv.tmdb.domain.Show
+import com.zygotecnologia.zygotv.tmdb.domain.genre.GenreWithShows
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map

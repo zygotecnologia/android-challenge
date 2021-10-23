@@ -6,6 +6,13 @@ import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.*
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import com.zygotecnologia.zygotv.tmdb.domain.*
+import com.zygotecnologia.zygotv.tmdb.domain.episode.Episode
+import com.zygotecnologia.zygotv.tmdb.domain.genre.Genre
+import com.zygotecnologia.zygotv.tmdb.domain.genre.GenreWithShows
+import com.zygotecnologia.zygotv.tmdb.domain.season.Season
+import com.zygotecnologia.zygotv.tmdb.domain.season.SeasonWithEpisodes
+import com.zygotecnologia.zygotv.tmdb.domain.show.Show
+import com.zygotecnologia.zygotv.tmdb.domain.show.ShowWithSeasons
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
