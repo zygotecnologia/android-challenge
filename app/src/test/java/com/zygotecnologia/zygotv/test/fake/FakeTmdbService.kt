@@ -26,8 +26,10 @@ class FakeTmdbService(
         )
     ).asSuccess()
 
-    override suspend fun fetchPopularShowsAsync() = ShowsPageResponse(
-        page = 0,
+    override suspend fun fetchPopularShowsAsync(
+        page: Int
+    ) = ShowsPageResponse(
+        page = 1,
         totalResults = 5,
         totalPages = 1,
         results = listOf(

@@ -12,7 +12,9 @@ interface TmdbService {
     suspend fun fetchGenresAsync(): NetworkResult<GenreListResponse>
 
     @GET("$TMDB_API_VERSION/tv/popular")
-    suspend fun fetchPopularShowsAsync(): NetworkResult<ShowsPageResponse>
+    suspend fun fetchPopularShowsAsync(
+        @Query("page") page: Int
+    ): NetworkResult<ShowsPageResponse>
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(

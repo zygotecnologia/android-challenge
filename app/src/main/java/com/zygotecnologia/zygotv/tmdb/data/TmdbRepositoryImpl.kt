@@ -31,7 +31,8 @@ class TmdbRepositoryImpl(
      * Returns show with respective showId.
      */
     override suspend fun getShow(showId: Int): NetworkResult<ShowWithSeasons> = coroutineScope {
-        val showWithSeasons = getShowWith(showId).dataOrNull()  ?: return@coroutineScope NetworkResult.Failure
+        val showWithSeasons =
+            getShowWith(showId).dataOrNull() ?: return@coroutineScope NetworkResult.Failure
 
         val seasonsWithEpisodes = showWithSeasons.seasons.map { seasonWithEpisodes ->
             val season = seasonWithEpisodes.season
@@ -39,7 +40,8 @@ class TmdbRepositoryImpl(
             async {
                 SeasonWithEpisodes(
                     season = season,
-                    episodes = getSeasonEpisodes(showId, season.seasonNumber).dataOrNull() ?: emptyList()
+                    episodes = getSeasonEpisodes(showId, season.seasonNumber).dataOrNull()
+                        ?: emptyList()
                 )
             }
         }.awaitAll()
@@ -55,10 +57,13 @@ class TmdbRepositoryImpl(
      * Returns a list of genres with each containing a list of shows from such genre.
      *
      * The same show can appear in multiple genres, and genres might not contain any show.
+     *
+     * The first 10 pages of the most popular shows are returned. If a failure happens in between
+     * the loading of different, the shows loaded so far, if any, are returned instead of a error.
      */
     override suspend fun getShowsByGenre(): NetworkResult<List<GenreWithShows>> {
         val genres = getGenres().dataOrNull() ?: return NetworkResult.Failure
-        val allShows = getShowResponses().dataOrNull() ?: return NetworkResult.Failure
+        val allShows = getShowResponses(pagesToLoad = 10).dataOrNull() ?: return NetworkResult.Failure
 
         val genresWithShows = genres.map { genre ->
             val shows = allShows
@@ -99,9 +104,26 @@ class TmdbRepositoryImpl(
         .fetchGenresAsync()
         .map { data -> data.genreResponses.map { it.toGenre() } }
 
-    private suspend fun getShowResponses() = tmdbService
-        .fetchPopularShowsAsync()
-        .map { it.results }
+    private suspend fun getShowResponses(
+        previousShows: List<ShowResponse> = emptyList(),
+        currentPage: Int = 1,
+        pagesToLoad: Int = 1
+    ): NetworkResult<List<ShowResponse>> {
+        val showPageResult = tmdbService.fetchPopularShowsAsync(page = currentPage)
+        val showPage = showPageResult.dataOrNull() ?: return previousShows.asResult()
+
+        val shows = previousShows + showPage.results
+
+        if (currentPage < showPage.totalPages && currentPage <= pagesToLoad) return getShowResponses(
+            currentPage = currentPage + 1,
+            previousShows = shows
+        )
+
+        return NetworkResult.Success(shows)
+    }
+
+    private fun List<ShowResponse>.asResult() =
+        if (isNotEmpty()) NetworkResult.Success(this) else NetworkResult.Failure
 
     private fun GenreResponse.toGenre() = Genre(
         id = id,
