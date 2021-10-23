@@ -24,6 +24,20 @@ class TmdbRepositoryImplTest {
     )
 
     @Test
+    fun `getShows should return show with seasons and episodes`() = runBlockingTest {
+        val repository = getRepository()
+
+        val showWithSeasons = repository.getShow(showId = 5).dataOrNull()
+        val seasons = showWithSeasons?.seasons
+
+        showWithSeasons.shouldNotBeNull()
+        seasons.shouldNotBeEmpty()
+        seasons?.forEach {
+            it.episodes.shouldNotBeEmpty()
+        }
+    }
+
+    @Test
     fun `getShowsByGenre should return shows mapped by genre`() = runBlockingTest {
         val repository = getRepository()
 

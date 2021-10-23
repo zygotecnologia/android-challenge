@@ -3,14 +3,12 @@ package com.zygotecnologia.zygotv.tmdb.data
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.dataOrNull
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.map
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreResponse
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowDetailsResponse
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.*
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
-import com.zygotecnologia.zygotv.tmdb.domain.Genre
-import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
-import com.zygotecnologia.zygotv.tmdb.domain.Show
-import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
+import com.zygotecnologia.zygotv.tmdb.domain.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 
 /**
  * Repository for retrieving information such as shows and genres from TMDB.
@@ -25,8 +23,25 @@ class TmdbRepositoryImpl(
     /**
      * Returns show with respective showId.
      */
-    override suspend fun getShow(showId: Int): NetworkResult<Show> {
-        return getShowWith(showId)
+    override suspend fun getShow(showId: Int): NetworkResult<ShowWithSeasons> = coroutineScope {
+        val showWithSeasons = getShowWith(showId).dataOrNull()  ?: return@coroutineScope NetworkResult.Failure
+
+        val seasonsWithEpisodes = showWithSeasons.seasons.map { seasonWithEpisodes ->
+            val season = seasonWithEpisodes.season
+
+            async {
+                SeasonsWithEpisodes(
+                    season = season,
+                    episodes = getSeasonEpisodes(showId, season.id).dataOrNull() ?: emptyList()
+                )
+            }
+        }.awaitAll()
+
+        return@coroutineScope NetworkResult.Success(
+            showWithSeasons.copy(
+                seasons = seasonsWithEpisodes
+            )
+        )
     }
 
     /**
@@ -66,6 +81,13 @@ class TmdbRepositoryImpl(
         .fetchShowAsync(showId, TmdbService.TMDB_API_KEY)
         .map { data -> data.toShow() }
 
+    private suspend fun getSeasonEpisodes(
+        showId: Int,
+        seasonNumber: Int
+    ) = tmdbService
+        .fetchSeasonDetailsAsync(showId, seasonNumber, TmdbService.TMDB_API_KEY)
+        .map { data -> data.episodes.map { it.toEpisode() } }
+
     private suspend fun getGenres() = tmdbService
         .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
         .map { data -> data.genreResponses.map { it.toGenre() } }
@@ -86,10 +108,32 @@ class TmdbRepositoryImpl(
         posterPath = posterPath
     )
 
-    private fun ShowDetailsResponse.toShow() = Show(
+    private fun ShowDetailsResponse.toShow() = ShowWithSeasons(
+        show = Show(
+            id = id,
+            name = name,
+            backdropPath = backdropPath,
+            posterPath = posterPath
+        ),
+        seasons = seasons.map {
+            SeasonsWithEpisodes(
+                season = it.toSeason(),
+                episodes = emptyList()
+            )
+        }
+    )
+
+    private fun SeasonResponse.toSeason() = Season(
+        id = id,
+        seasonNumber = seasonNumber,
+        name = name,
+        overview = overview,
+        posterPath = posterPath
+    )
+
+    private fun EpisodeResponse.toEpisode() = Episode(
         id = id,
         name = name,
-        backdropPath = backdropPath,
-        posterPath = posterPath
+        overview = overview
     )
 }

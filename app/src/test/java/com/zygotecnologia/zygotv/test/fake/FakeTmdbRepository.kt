@@ -2,10 +2,9 @@ package com.zygotecnologia.zygotv.test.fake
 
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.test.asSuccess
-import com.zygotecnologia.zygotv.tmdb.domain.Genre
-import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
-import com.zygotecnologia.zygotv.tmdb.domain.Show
-import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.EpisodeResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.SeasonResponse
+import com.zygotecnologia.zygotv.tmdb.domain.*
 
 class FakeTmdbRepository(
     private val mostPopularShow: Show = showWith(
@@ -14,8 +13,8 @@ class FakeTmdbRepository(
     )
 ) : TmdbRepository {
 
-    override suspend fun getShow(showId: Int): NetworkResult<Show> = showWith(
-        id = showId,
+    override suspend fun getShow(showId: Int): NetworkResult<ShowWithSeasons> = showWithSeasonsWith(
+        show = showWith(id = showId)
     ).asSuccess()
 
     override suspend fun getShowsByGenre() = listOf(
@@ -50,4 +49,40 @@ fun genreWith(
 ) = Genre(
     id = id,
     name = name
+)
+
+fun seasonWith(
+    id: Int = 1,
+    name: String = "Season $id"
+) = Season(
+    id = id,
+    seasonNumber = id,
+    name = name,
+    overview = "$name overview.",
+    posterPath = "${name}posterPath"
+)
+
+fun episodeWith(
+    id: Int = 1,
+    name: String = "Episode $id"
+) = Episode(
+    id = id,
+    name = name,
+    overview = "$name overview."
+)
+
+fun showWithSeasonsWith(
+    show: Show = showWith(),
+    seasons: List<SeasonsWithEpisodes> = listOf(seasonWithEpisodesWith())
+) = ShowWithSeasons(
+    show = show,
+    seasons = seasons
+)
+
+fun seasonWithEpisodesWith(
+    season: Season = seasonWith(),
+    episodes: List<Episode> = listOf(episodeWith())
+) = SeasonsWithEpisodes(
+    season = season,
+    episodes = episodes
 )

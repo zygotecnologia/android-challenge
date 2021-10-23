@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.dataOrNull
 import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
 import com.zygotecnologia.zygotv.tmdb.domain.Show
+import com.zygotecnologia.zygotv.tmdb.domain.ShowWithSeasons
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -22,5 +23,7 @@ class DetailsViewModel(
         if (show != null) emit(show)
         _showNetworkError.postValue(show == null)
     }
-    val show: LiveData<Show> = _show.asLiveData()
+    private val showWithSeasons: LiveData<ShowWithSeasons> = _show.asLiveData()
+
+    val show: LiveData<Show> = showWithSeasons.map { it.show }
 }
