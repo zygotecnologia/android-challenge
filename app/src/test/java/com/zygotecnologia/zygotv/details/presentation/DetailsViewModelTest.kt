@@ -16,7 +16,7 @@ import org.junit.Test
 class HomeViewModelTest {
 
     @get:Rule
-    val mainCoroutineRule = MainCoroutineRule()
+    val coroutineRule = MainCoroutineRule()
 
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
@@ -32,7 +32,7 @@ class HomeViewModelTest {
     )
 
     @Test
-    fun `viewModel should load show`() = runBlockingTest {
+    fun `viewModel should load show`() = coroutineRule.dispatcher.runBlockingTest {
         val viewModel = getViewModel(
             show = showWith(name = "Lost")
         )
@@ -43,7 +43,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `viewModel should load show details`() = runBlockingTest {
+    fun `viewModel should load show details`() = coroutineRule.dispatcher.runBlockingTest {
         val viewModel = getViewModel(
             seasons = listOf(
                 seasonWithEpisodesWith(
