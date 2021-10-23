@@ -2,7 +2,7 @@ package com.zygotecnologia.zygotv.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.zygotecnologia.zygotv.test.fake.FakeTmdbRepository
-import com.zygotecnologia.zygotv.test.fake.buildShowWith
+import com.zygotecnologia.zygotv.test.fake.showWith
 import com.zygotecnologia.zygotv.test.getOrAwaitValue
 import com.zygotecnologia.zygotv.test.rules.MainCoroutineRule
 import com.zygotecnologia.zygotv.tmdb.domain.Show
@@ -23,7 +23,7 @@ class HomeViewModelTest {
     val taskExecutorRule = InstantTaskExecutorRule()
 
     private fun getViewModel(
-        mostPopularShow: Show = buildShowWith(name = "You")
+        mostPopularShow: Show = showWith(name = "You")
     ) = HomeViewModel(
         tmdbRepository = FakeTmdbRepository(
             mostPopularShow = mostPopularShow
@@ -39,7 +39,7 @@ class HomeViewModelTest {
 
     @Test
     fun `mostPopularShow should be Squid Game`() = runBlockingTest {
-        val mostPopularShow = buildShowWith(name = "Squid Game")
+        val mostPopularShow = showWith(name = "Squid Game")
         val viewModel = getViewModel(mostPopularShow)
 
         viewModel.mostPopularShow.getOrAwaitValue().name shouldBe "Squid Game"

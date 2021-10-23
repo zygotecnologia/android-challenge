@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.di
 
+import com.zygotecnologia.zygotv.details.presentation.DetailsViewModel
 import com.zygotecnologia.zygotv.home.HomeViewModel
 import com.zygotecnologia.zygotv.tmdb.data.TmdbRepositoryImpl
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
@@ -15,4 +16,6 @@ val appModule = module {
     single<TmdbRepository> { TmdbRepositoryImpl(get()) }
 
     viewModel { HomeViewModel(get()) }
+
+    viewModel { (showId : Int) -> DetailsViewModel(showId, get()) }
 }

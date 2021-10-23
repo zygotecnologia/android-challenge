@@ -2,6 +2,7 @@ package com.zygotecnologia.zygotv.tmdb.data.source.remote.service
 
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreListResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowDetailsResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowsPageResponse
 import retrofit2.http.GET
@@ -24,9 +25,9 @@ interface TmdbService {
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(
-        @Query("api_key") apiKey: String,
-        @Path("tv_id") id: Int
-    ): NetworkResult<ShowResponse>
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): NetworkResult<ShowDetailsResponse>
 
     companion object {
         private const val TMDB_API_VERSION = "3"

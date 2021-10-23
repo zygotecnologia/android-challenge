@@ -4,6 +4,7 @@ import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.dataOrNull
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.map
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.GenreResponse
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowDetailsResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import com.zygotecnologia.zygotv.tmdb.domain.Genre
@@ -20,6 +21,13 @@ import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 class TmdbRepositoryImpl(
     private val tmdbService: TmdbService
 ) : TmdbRepository {
+
+    /**
+     * Returns show with respective showId.
+     */
+    override suspend fun getShow(showId: Int): NetworkResult<Show> {
+        return getShowWith(showId)
+    }
 
     /**
      * Returns a list of shows.
@@ -65,6 +73,10 @@ class TmdbRepositoryImpl(
         return NetworkResult.Success(mostPopularShow)
     }
 
+    private suspend fun getShowWith(showId: Int) = tmdbService
+        .fetchShowAsync(showId, TmdbService.TMDB_API_KEY)
+        .map { data -> data.toShow() }
+
     private suspend fun getGenres() = tmdbService
         .fetchGenresAsync(TmdbService.TMDB_API_KEY, "BR")
         .map { data -> data.genreResponses.map { it.toGenre() } }
@@ -82,13 +94,17 @@ class TmdbRepositoryImpl(
         genres: List<Genre>
     ) = Show(
         id = id,
-        originalName = originalName,
         name = name,
-        voteCount = voteCount,
-        originalLanguage = originalLanguage,
-        overview = overview,
         backdropPath = backdropPath,
         posterPath = posterPath,
         genres = genres.filter { genreIds.contains(it.id) },
+    )
+
+    private fun ShowDetailsResponse.toShow() = Show(
+        id = id,
+        name = name,
+        backdropPath = backdropPath,
+        posterPath = posterPath,
+        genres = genres.map { it.toGenre() },
     )
 }

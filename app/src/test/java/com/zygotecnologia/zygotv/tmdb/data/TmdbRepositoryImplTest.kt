@@ -2,13 +2,10 @@ package com.zygotecnologia.zygotv.tmdb.data
 
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.dataOrNull
 import com.zygotecnologia.zygotv.test.fake.FakeTmdbService
-import com.zygotecnologia.zygotv.test.fake.buildShowResponseWith
-import com.zygotecnologia.zygotv.test.fake.buildShowWith
+import com.zygotecnologia.zygotv.test.fake.showResponseWith
 import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.ShowResponse
-import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.tmdb.domain.TmdbRepository
 import io.kotest.matchers.collections.shouldNotBeEmpty
-import io.kotest.matchers.maps.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,7 +16,7 @@ import org.junit.Test
 class TmdbRepositoryImplTest {
 
     private fun getRepository(
-        mostPopularShow: ShowResponse = buildShowResponseWith(name = "You")
+        mostPopularShow: ShowResponse = showResponseWith(name = "You")
     ): TmdbRepository = TmdbRepositoryImpl(
         tmdbService = FakeTmdbService(
             mostPopularShow = mostPopularShow
@@ -56,7 +53,7 @@ class TmdbRepositoryImplTest {
 
     @Test
     fun `getMostPopularShow should return first show from list`() = runBlockingTest {
-        val mostPopularShow = buildShowResponseWith(name = "La Casa de Papel")
+        val mostPopularShow = showResponseWith(name = "La Casa de Papel")
 
         val repository = getRepository(mostPopularShow)
         val show = repository.getMostPopularShow().dataOrNull()

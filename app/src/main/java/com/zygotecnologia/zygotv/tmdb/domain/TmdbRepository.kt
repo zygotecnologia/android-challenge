@@ -4,6 +4,8 @@ import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.
 
 interface TmdbRepository {
 
+    suspend fun getShow(showId: Int): NetworkResult<Show>
+
     suspend fun getShows(): NetworkResult<List<Show>>
 
     suspend fun getShowsByGenre(): NetworkResult<List<GenreWithShows>>

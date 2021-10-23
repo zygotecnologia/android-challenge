@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.databinding.GenreItemBinding
 import com.zygotecnologia.zygotv.tmdb.domain.GenreWithShows
+import com.zygotecnologia.zygotv.tmdb.domain.Show
 
-class GenresAdapter : ListAdapter<GenreWithShows, GenresAdapter.ViewHolder>(
+class GenresAdapter(
+    private val onShowClicked: ((Show) -> Unit)? = null
+) : ListAdapter<GenreWithShows, GenresAdapter.ViewHolder>(
     GenreWithShowsDiffUtil()
 ) {
 
@@ -20,7 +23,7 @@ class GenresAdapter : ListAdapter<GenreWithShows, GenresAdapter.ViewHolder>(
 
         setNestedRecyclerView(
             binding.showRecycler,
-            ShowsAdapter()
+            ShowsAdapter(onShowClicked)
         )
 
         return ViewHolder(binding)

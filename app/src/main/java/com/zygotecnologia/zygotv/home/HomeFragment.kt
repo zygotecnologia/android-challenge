@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
+import com.zygotecnologia.zygotv.tmdb.domain.Show
 import com.zygotecnologia.zygotv.tmdb.presentation.GenresAdapter
 import com.zygotecnologia.zygotv.tmdb.presentation.HighlightedShowAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,14 +52,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun createGenresAdapter() = GenresAdapter().also { genreAdapter ->
+    private fun createGenresAdapter(): GenresAdapter {
+        val adapter = GenresAdapter(
+            onShowClicked = { openDetails(it) }
+        )
+
         viewModel.showsByGenre.observe(viewLifecycleOwner) {
-            genreAdapter.submitList(it)
+            adapter.submitList(it)
         }
+
+        return adapter
+    }
+
+    private fun openDetails(show: Show) {
+        findNavController().navigate(
+            HomeFragmentDirections.openDetails(show.id)
+        )
     }
 
     private fun observeNetworkError() {
-        val errorSnackBar = Snackbar.make(binding.root, R.string.network_error, Snackbar.LENGTH_INDEFINITE)
+        val errorSnackBar =
+            Snackbar.make(binding.root, R.string.network_error, Snackbar.LENGTH_INDEFINITE)
 
         viewModel.showNetworkError.observe(viewLifecycleOwner) { hasError ->
             if (hasError) errorSnackBar.show()
