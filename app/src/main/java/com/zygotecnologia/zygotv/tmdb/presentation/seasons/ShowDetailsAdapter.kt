@@ -2,7 +2,6 @@ package com.zygotecnologia.zygotv.tmdb.presentation.seasons
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,9 +12,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.EpisodeItemBinding
 import com.zygotecnologia.zygotv.databinding.SeasonItemBinding
+import com.zygotecnologia.zygotv.tmdb.domain.Season
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class ShowDetailsAdapter : ListAdapter<ShowDetailItem, RecyclerView.ViewHolder>(
+class ShowDetailsAdapter(
+    private val onSeasonSelected: (Season) -> Unit
+) : ListAdapter<ShowDetailItem, RecyclerView.ViewHolder>(
     ShowDetailsDiffUtil()
 ) {
 
@@ -32,7 +34,14 @@ class ShowDetailsAdapter : ListAdapter<ShowDetailItem, RecyclerView.ViewHolder>(
 
     private fun createSeasonViewHolder(parent: ViewGroup): SeasonViewHolder {
         val binding = SeasonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SeasonViewHolder(binding)
+        val holder = SeasonViewHolder(binding)
+        
+        binding.root.setOnClickListener {
+            val seasonItem = getItem(holder.bindingAdapterPosition) as ShowDetailItem.SeasonItem
+            onSeasonSelected(seasonItem.season)
+        }
+
+        return holder
     }
 
     private fun createEpisodeViewHolder(parent: ViewGroup): EpisodeViewHolder {

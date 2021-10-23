@@ -5,8 +5,8 @@ import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.
 import com.zygotecnologia.zygotv.tmdb.domain.*
 import com.zygotecnologia.zygotv.tmdb.presentation.seasons.ShowDetailItem
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -16,9 +16,15 @@ class DetailsViewModel(
 ) : ViewModel() {
 
     private val _show = MutableStateFlow<ShowWithSeasons?>(null)
+    val show: LiveData<Show> = _show
+        .filterNotNull()
+        .map { it.show }
+        .asLiveData()
 
     private val _showNetworkError = MutableStateFlow(false)
     val showNetworkError: LiveData<Boolean> = _showNetworkError.asLiveData()
+
+    private val selectedSeason = MutableStateFlow<Season?>(null)
 
     init {
         loadShowData()
@@ -32,21 +38,27 @@ class DetailsViewModel(
         _showNetworkError.value = show == null
     }
 
-    private val showWithSeasons: LiveData<ShowWithSeasons> = _show
-        .filterNotNull()
-        .asLiveData()
-
-    val show: LiveData<Show> = showWithSeasons.map { it.show }
-
     val showDetails: LiveData<List<ShowDetailItem>> = _show
         .filterNotNull()
-        .map { it.seasons.toDetailItems() }
+        .combine(selectedSeason) { show, selectedSeason ->
+            show.seasons.toDetailItems(selectedSeason)
+        }
         .asLiveData()
 
-    private fun List<SeasonWithEpisodes>.toDetailItems(): List<ShowDetailItem> = flatMap { seasonWithEpisodes ->
-        val seasonItem = ShowDetailItem.SeasonItem(seasonWithEpisodes.season)
-        val episodeItems = seasonWithEpisodes.episodes.map { ShowDetailItem.EpisodeItem(it) }
+    private fun List<SeasonWithEpisodes>.toDetailItems(
+        selectedSeason: Season?
+    ): List<ShowDetailItem> = flatMap { seasonWithEpisodes ->
+        val season = seasonWithEpisodes.season
+        val seasonItem = ShowDetailItem.SeasonItem(season)
+
+        val episodeItems = if (season != selectedSeason) emptyList()
+        else seasonWithEpisodes.episodes.map { ShowDetailItem.EpisodeItem(it) }
 
         listOf(seasonItem) + episodeItems
+    }
+
+    fun selectSeason(season: Season) {
+        val alreadySelectedSeason = selectedSeason.value
+        selectedSeason.value = if (season == alreadySelectedSeason) null else season
     }
 }

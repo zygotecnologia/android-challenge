@@ -66,7 +66,9 @@ class DetailsFragment : Fragment() {
     }
 
     private fun createShowDetailsAdapter(): ShowDetailsAdapter {
-        val adapter = ShowDetailsAdapter()
+        val adapter = ShowDetailsAdapter(
+            onSeasonSelected = viewModel::selectSeason
+        )
 
         viewModel.showDetails.observe(viewLifecycleOwner) {
             adapter.submitList(it)

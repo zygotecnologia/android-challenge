@@ -47,11 +47,11 @@ class HomeViewModelTest {
         val viewModel = getViewModel(
             seasons = listOf(
                 seasonWithEpisodesWith(
-                    season = "Especials",
+                    seasonName = "Especials",
                     episodes = listOf("Especial")
                 ),
                 seasonWithEpisodesWith(
-                    season = "Season 1",
+                    seasonName = "Season 1",
                     episodes = listOf("Episode 1", "Episode 2")
                 ),
             )
@@ -59,6 +59,43 @@ class HomeViewModelTest {
 
         val showDetails = viewModel.showDetails.getOrAwaitValue()
 
-        showDetails.size shouldBe 5
+        showDetails.size shouldBe 2
+    }
+
+    @Test
+    fun `viewModel show details should be expanded when selecting season`() = coroutineRule.dispatcher.runBlockingTest {
+        val season = seasonWith(name = "Season 1")
+        val viewModel = getViewModel(
+            seasons = listOf(
+                seasonWithEpisodesWith(
+                    season = season,
+                    episodes = listOf("Episode 1", "Episode 2")
+                ),
+            )
+        )
+
+        viewModel.showDetails.getOrAwaitValue().size shouldBe 1
+
+        viewModel.selectSeason(season)
+
+        viewModel.showDetails.getOrAwaitValue().size shouldBe 3
+    }
+
+    @Test
+    fun `viewModel show details should collapse when selecting the same season`() = coroutineRule.dispatcher.runBlockingTest {
+        val season = seasonWith(name = "Season 1")
+        val viewModel = getViewModel(
+            seasons = listOf(
+                seasonWithEpisodesWith(
+                    season = season,
+                    episodes = listOf("Episode 1", "Episode 2")
+                ),
+            )
+        )
+        viewModel.selectSeason(season)
+
+        viewModel.selectSeason(season)
+
+        viewModel.showDetails.getOrAwaitValue().size shouldBe 1
     }
 }

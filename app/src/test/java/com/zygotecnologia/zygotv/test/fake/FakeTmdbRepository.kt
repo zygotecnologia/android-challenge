@@ -77,9 +77,10 @@ fun showWithSeasonsWith(
 )
 
 fun seasonWithEpisodesWith(
-    season: String = "Season 1",
+    seasonName: String = "Season 1",
+    season: Season = seasonWith(name = seasonName),
     episodes: List<String> = listOf("Episode 1")
 ) = SeasonWithEpisodes(
-    season = seasonWith(name = season),
+    season = season,
     episodes = episodes.map { episodeWith(name = it) }
 )
