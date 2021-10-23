@@ -30,9 +30,9 @@ class TmdbRepositoryImpl(
             val season = seasonWithEpisodes.season
 
             async {
-                SeasonsWithEpisodes(
+                SeasonWithEpisodes(
                     season = season,
-                    episodes = getSeasonEpisodes(showId, season.id).dataOrNull() ?: emptyList()
+                    episodes = getSeasonEpisodes(showId, season.seasonNumber).dataOrNull() ?: emptyList()
                 )
             }
         }.awaitAll()
@@ -116,7 +116,7 @@ class TmdbRepositoryImpl(
             posterPath = posterPath
         ),
         seasons = seasons.map {
-            SeasonsWithEpisodes(
+            SeasonWithEpisodes(
                 season = it.toSeason(),
                 episodes = emptyList()
             )

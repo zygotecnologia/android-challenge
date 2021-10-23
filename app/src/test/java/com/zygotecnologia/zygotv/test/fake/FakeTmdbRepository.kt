@@ -2,8 +2,6 @@ package com.zygotecnologia.zygotv.test.fake
 
 import com.zygotecnologia.zygotv.main.data.source.remote.retrofit.networkresult.NetworkResult
 import com.zygotecnologia.zygotv.test.asSuccess
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.EpisodeResponse
-import com.zygotecnologia.zygotv.tmdb.data.source.remote.dto.SeasonResponse
 import com.zygotecnologia.zygotv.tmdb.domain.*
 
 class FakeTmdbRepository(
@@ -73,7 +71,7 @@ fun episodeWith(
 
 fun showWithSeasonsWith(
     show: Show = showWith(),
-    seasons: List<SeasonsWithEpisodes> = listOf(seasonWithEpisodesWith())
+    seasons: List<SeasonWithEpisodes> = listOf(seasonWithEpisodesWith())
 ) = ShowWithSeasons(
     show = show,
     seasons = seasons
@@ -82,7 +80,7 @@ fun showWithSeasonsWith(
 fun seasonWithEpisodesWith(
     season: Season = seasonWith(),
     episodes: List<Episode> = listOf(episodeWith())
-) = SeasonsWithEpisodes(
+) = SeasonWithEpisodes(
     season = season,
     episodes = episodes
 )

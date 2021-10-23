@@ -51,7 +51,7 @@ class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewH
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.image_placeholder)
-                        .transform(MultiTransformation(CenterCrop(), RoundedCorners(16)))
+                        .transform(RoundedCorners(16))
                 )
                 .into(binding.showBackDrop)
         }

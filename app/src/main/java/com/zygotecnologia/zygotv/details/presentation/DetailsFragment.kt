@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.DetailsFragmentBinding
 import com.zygotecnologia.zygotv.tmdb.presentation.HighlightedShowAdapter
+import com.zygotecnologia.zygotv.tmdb.presentation.seasons.ShowDetailsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -39,13 +42,37 @@ class DetailsFragment : Fragment() {
     }
 
     private fun configureList() {
-        val adapter = HighlightedShowAdapter()
+        val highlightedShowAdapter = createHighlightedShowAdapter()
+        val showDetailsAdapter = createShowDetailsAdapter()
 
-        binding.detailsRecycler.adapter = adapter
+        binding.detailsRecycler.adapter = ConcatAdapter(
+            highlightedShowAdapter,
+            showDetailsAdapter
+        )
+
+        binding.detailsRecycler.itemAnimator = DefaultItemAnimator().also {
+            it.supportsChangeAnimations = false
+        }
+    }
+
+    private fun createHighlightedShowAdapter(): HighlightedShowAdapter {
+        val adapter = HighlightedShowAdapter()
 
         viewModel.show.observe(viewLifecycleOwner) {
             adapter.updateHighlightedShow(it)
         }
+
+        return adapter
+    }
+
+    private fun createShowDetailsAdapter(): ShowDetailsAdapter {
+        val adapter = ShowDetailsAdapter()
+
+        viewModel.showDetails.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
+        return adapter
     }
 
     private fun observeNetworkError() {

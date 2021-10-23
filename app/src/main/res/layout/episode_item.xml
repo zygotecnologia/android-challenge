@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/episode_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="?attr/colorOnBackground"
         android:textSize="18sp"
         tools:text="Episode 1" />
@@ -17,8 +21,18 @@
         android:id="@+id/episode_overview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="18sp"
         tools:text="A small overview of the episode." />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/textColorSecondary" />
 </LinearLayout>

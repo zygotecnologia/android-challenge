@@ -16,8 +16,9 @@
     <ImageView
         android:id="@+id/show_back_drop"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="32dp"
+        tools:layout_height="140dp"
         android:src="@drawable/image_placeholder" />
 </LinearLayout>

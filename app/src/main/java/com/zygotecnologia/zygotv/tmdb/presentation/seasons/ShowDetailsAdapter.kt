@@ -2,18 +2,17 @@ package com.zygotecnologia.zygotv.tmdb.presentation.seasons
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.EpisodeItemBinding
 import com.zygotecnologia.zygotv.databinding.SeasonItemBinding
-import com.zygotecnologia.zygotv.databinding.ShowItemBinding
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class ShowDetailsAdapter : ListAdapter<ShowDetailItem, RecyclerView.ViewHolder>(
@@ -69,20 +68,34 @@ class ShowDetailsAdapter : ListAdapter<ShowDetailItem, RecyclerView.ViewHolder>(
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.image_placeholder)
-                        .transform(MultiTransformation(CenterCrop(), RoundedCorners(16)))
+                        .transform(RoundedCorners(16))
                 )
                 .into(binding.poster)
         }
     }
 
-    class EpisodeViewHolder(
+    inner class EpisodeViewHolder(
         private val binding: EpisodeItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(episodeItem: ShowDetailItem.EpisodeItem) {
             val episode = episodeItem.episode
             binding.episodeTitle.text = episode.name
-            binding.episodeOverview.text = episode.overview
+            binding.episodeOverview.apply {
+                val overview = episode.overview
+                text = overview
+                isVisible = overview.isNotEmpty()
+            }
+            binding.divider.isVisible = isNextItemAnEpisode()
+        }
+
+        private fun isNextItemAnEpisode(): Boolean {
+            val nextPosition = bindingAdapterPosition + 1
+            val lastPosition = itemCount - 1
+
+            if (bindingAdapterPosition == lastPosition) return false
+
+            return getItem(nextPosition) is ShowDetailItem.EpisodeItem
         }
     }
 

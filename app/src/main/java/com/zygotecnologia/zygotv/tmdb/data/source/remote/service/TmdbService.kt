@@ -26,7 +26,7 @@ interface TmdbService {
         @Query("api_key") apiKey: String
     ): NetworkResult<ShowDetailsResponse>
 
-    @GET("$TMDB_API_VERSION//tv/{tv_id}/season/{season_number}")
+    @GET("$TMDB_API_VERSION/tv/{tv_id}/season/{season_number}")
     suspend fun fetchSeasonDetailsAsync(
         @Path("tv_id") id: Int,
         @Path("season_number") seasonNumber: Int,

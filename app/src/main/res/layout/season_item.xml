@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp">
 
     <ImageView
         android:id="@+id/poster"
@@ -20,12 +21,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="?attr/colorOnBackground"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/showMoreArrow"
-        app:layout_constraintStart_toEndOf="@+id/show_poster"
+        app:layout_constraintStart_toEndOf="@+id/poster"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Season 1" />
 
@@ -33,6 +35,8 @@
         android:id="@+id/season_overview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/season_name"

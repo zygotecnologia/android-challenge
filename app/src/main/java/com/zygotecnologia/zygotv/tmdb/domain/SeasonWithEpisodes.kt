@@ -1,6 +1,6 @@
 package com.zygotecnologia.zygotv.tmdb.domain
 
-data class SeasonsWithEpisodes(
+data class SeasonWithEpisodes(
     val season: Season,
     val episodes: List<Episode>
 )
