@@ -45,7 +45,7 @@ class HighlightedShowAdapter : RecyclerView.Adapter<HighlightedShowAdapter.ViewH
         fun bind(show: Show) {
             binding.showTitle.text = show.name
 
-            val imageUrl = show.backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
+            val imageUrl = show.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) }
             Glide.with(itemView)
                 .load(imageUrl)
                 .apply(

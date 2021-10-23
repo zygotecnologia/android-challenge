@@ -49,9 +49,10 @@ class DetailsViewModel(
         selectedSeason: Season?
     ): List<ShowDetailItem> = flatMap { seasonWithEpisodes ->
         val season = seasonWithEpisodes.season
-        val seasonItem = ShowDetailItem.SeasonItem(season)
+        val isSeasonCollapsed = season != selectedSeason
+        val seasonItem = ShowDetailItem.SeasonItem(season, isCollapsed = isSeasonCollapsed)
 
-        val episodeItems = if (season != selectedSeason) emptyList()
+        val episodeItems = if (isSeasonCollapsed) emptyList()
         else seasonWithEpisodes.episodes.map { ShowDetailItem.EpisodeItem(it) }
 
         listOf(seasonItem) + episodeItems

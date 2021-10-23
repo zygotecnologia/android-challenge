@@ -35,7 +35,7 @@ class ShowDetailsAdapter(
     private fun createSeasonViewHolder(parent: ViewGroup): SeasonViewHolder {
         val binding = SeasonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = SeasonViewHolder(binding)
-        
+
         binding.root.setOnClickListener {
             val seasonItem = getItem(holder.bindingAdapterPosition) as ShowDetailItem.SeasonItem
             onSeasonSelected(seasonItem.season)
@@ -71,6 +71,8 @@ class ShowDetailsAdapter(
             binding.seasonName.text = season.name
             binding.seasonOverview.text = season.overview
 
+            setArrowIcon(seasonItem.isCollapsed)
+
             val imageUrl = seasonItem.season.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) }
             Glide.with(itemView)
                 .load(imageUrl)
@@ -80,6 +82,15 @@ class ShowDetailsAdapter(
                         .transform(RoundedCorners(16))
                 )
                 .into(binding.poster)
+        }
+
+        private fun setArrowIcon(isCollapsed: Boolean) {
+            val arrowResId =
+                if (isCollapsed) R.drawable.ic_arrow_down_24 else R.drawable.ic_arrow_up_24
+
+            Glide.with(itemView)
+                .load(arrowResId)
+                .into(binding.showMoreArrow)
         }
     }
 

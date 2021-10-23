@@ -6,7 +6,8 @@ import com.zygotecnologia.zygotv.tmdb.domain.Season
 sealed class ShowDetailItem {
 
     data class SeasonItem(
-        val season: Season
+        val season: Season,
+        val isCollapsed: Boolean
     ): ShowDetailItem()
 
     data class EpisodeItem(
