@@ -1,11 +1,11 @@
 package com.zygotecnologia.zygotv.main.data.source.remote.okhttp.interceptor
 
+import com.zygotecnologia.zygotv.tmdb.data.source.remote.service.TmdbService
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-private const val TMDB_API_KEY = "27490b1bf49c0e5ffaa07dfd947e9605"
 private const val REGION = "BR"
 
 /**
@@ -19,7 +19,7 @@ class TmdbConfigurationInterceptor : Interceptor {
         val url: HttpUrl = chain.request()
             .url()
             .newBuilder()
-            .addQueryParameter("api_key", TMDB_API_KEY)
+            .addQueryParameter("api_key", TmdbService.TMDB_API_KEY)
             .addQueryParameter("region", REGION)
             .build()
 

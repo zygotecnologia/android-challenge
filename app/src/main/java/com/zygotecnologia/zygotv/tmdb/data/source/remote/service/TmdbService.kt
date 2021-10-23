@@ -29,7 +29,6 @@ interface TmdbService {
         private const val TMDB_API_VERSION = "3"
 
         const val TMDB_BASE_URL = "https://api.themoviedb.org"
-        const val TMDB_API_QUERY = "api_key"
         const val TMDB_API_KEY = "27490b1bf49c0e5ffaa07dfd947e9605"
     }
 }
