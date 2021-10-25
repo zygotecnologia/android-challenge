@@ -1,60 +1,46 @@
 # Zygo Programming Challenge - Android Developer
 
-Seu objetivo neste challenge é refatorar e adicionar novas features um pequeno aplicativo que lista Séries de TV.
+##Projeto
+
+Um pequeno aplicativo que lista séries de TV, criado usando Kotlin.
 
 ## Especificações
 
-O aplicativo possui apenas uma tela de listagem das séries, seu desafio consiste em:
+O aplicativo consiste em duas telas, uma página inicial que exibe a série mais popular do momento
+junto com uma lista de séries categorizadas por gênero, e uma página de detalhes que exibe as
+temporadas e episódios da série selecionada.
 
-* Implementar a tela de Detalhes da Série;
-* Remover as chamadas de API da Main;
-* Implementar o novo layout seguindo as especificicações da nossa Designer;
-* Resolver o Crash que ocorre ao iniciar o aplicativo sem conexão à Internet;
+Os dados usados pelo app são consumidos da API pública [TMDB](https://developers.themoviedb.org/3/tv).
 
-Acesse a [Documentação da API](https://developers.themoviedb.org/3/tv/get-tv-details) para qualquer dúvida!
+## Especificações técnicas
 
-**Serão avaliados:** apenas a organização do código, uso
-das ferramentas disponíveis, conhecimento e domínio sobre as linguagens e a
-capacidade de implementação das especificações
+* O projeto foi desenvolvido em Kotlin.
+* Para trabalhos assíncronos foi utilizado Coroutines e Flows (camada de dados/domínio) e LiveData (camada de apresentação).
+* Retrofit e Moshi foram utilizados para chamadas HTTP. Glide foi utilizado para carregamento de imagens.
+* Foi utilizado o Navigation component, parte do Android Jetpack, para lidar com a navegação no app.
+* Para injeção de dependências foi utilizado o Koin.
 
-## Requisitos do Novo Layout
-As novas telas podem ser encontradas no [Invision](https://isabellataques225701.invisionapp.com/console/share/6Z2ABNOYVB/549307395)
+## Arquitetura
 
-* A Série em destaque deve ser a top 1 mais popular retornada pela API.
-* O restante dos resultados devem ser organizados por Gênero como mostrado no Layout
+* O projeto segue os princípios da Clean Architecture, que fundamentalmente separa as classes em 3
+camadas: dados (data), domínio (domain) e apresentação (presentation).
 
-## Requisitos técnicos
+    * Domain: contém as classes fundamentais para as regras de negócio do app, não contendo nenhuma
+    dependência em outros frameworks ou na infraestrutura do app. Define as entidades usadas no app
+    e contratos como a interface dos repositórios.
 
-* O projeto atual foi desenvolvido em Kotlin, mas fique a vontade para converter para Java caso sinta-se mais confortável.
-* É permitido o uso de frameworks e bibliotecas externos, desde que dentro de um
-  sistema de gerenciamento de pacotes.
-* O código deve ser claro, preferencialmente documentado.
-* A arquitetura e design do sistema devem ser documentadas em um arquivo README
-  (brevemente, por favor).
+    * Data: camada responsável por obter os dados usados no restante do app. Define DTOs usados para
+    receber dados de APIs externas ou de bancos locais. Implementa o contrato dos repositórios para
+    poder fornecer dados às demais camadas ao mesmo tempo que abstrai a origem desses dados.
 
-## Bônus!
+    * Presentation: camada responsável por receber as interações do usuário, demonstrar informações
+    e se comunicar com a camada de domínio. Não possui regras complexas, apenas segue as regras já
+    definidas na camada de domínio.
 
-Testes são muito bem vindos, sobrando qualquer tempo, faça-os e ganhe uma
-pontuação extra!
+* A estrutura do projeto está dividida entre múltiplos packages (main/tmdb/home/details/di). Cada um
+desses está então dividido em packages seguindo a nomenclatura apresentada a cima, com exceção do di,
+cuja responsabilidade é unir as dependências do app em um módulo Koin.
 
-Se você tiver ainda mais tempo e quiser arriscar, temos uma listinha sobre o que pode ser melhorado no projeto:
-* Remover a necessidade de passar os parâmetros `api_key` e `region` para toda a chamada da API;
-* Armazenar a chave de API em um local seguro;
-* Implementar a busca por nome das Séries;
-
-## Envio
-
-Faça um fork desse repositório para o seu GitHub, crie um branch de desenvolvimento e faça todos os seus Commits nesse branch. Ao terminar abra um Pull Request para a branch main e nos envie o link do mesmo. 
-
-### Disclaimer
-
-Completar a challenge não implica em nenhum vínculo nem obrigação da Zygo
-com você. Todo o código criado será descartado. Este challenge usa elementos
-reais de necessidades da Zygo apenas como uma maneira de avaliarmos sua
-aptidão para o cargo.
-
-### Final notes
-
-Valorizamos **muito** a capacidade de nos surpreender!
-
-Boa sorte :)
+* A camada de apresentação segue a arquitetura MVVM, onde cada tela (activity/fragment) possui um
+view model responsável por gerenciar seu estado. O view model acessa a camada de domínio, movendo maior
+parte da lógica para fora da view.
