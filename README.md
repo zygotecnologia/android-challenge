@@ -1,7 +1,5 @@
 # Zygo Programming Challenge - Android Developer
 
-##Projeto
-
 Um pequeno aplicativo que lista séries de TV, criado usando Kotlin.
 
 ## Especificações
