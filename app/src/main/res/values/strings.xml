@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ZygoTV</string>
+    <string name="app_name_highlight">TV</string>
+    <string name="search_shows">Pesquisar shows</string>
+    <string name="search">Pesquisar</string>
+    <string name="network_error">Não foi possível conectar-se à internet!</string>
 </resources>
