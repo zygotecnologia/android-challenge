@@ -14,10 +14,16 @@ import com.zygotecnologia.zygotv.R.id.tv_show_title
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class MainAdapter(private val shows: List<Show>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainShowAdapter(
+    private val shows: List<Show>
+) : RecyclerView.Adapter<MainShowAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.show_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.show_item_row,
+            parent,
+            false
+        )
         return ViewHolder(view)
     }
 

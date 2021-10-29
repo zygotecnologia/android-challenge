@@ -17,5 +17,5 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"
         tools:visibility="visible"
-        tools:listitem="@layout/show_item" />
+        tools:listitem="@layout/genre_item_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>
