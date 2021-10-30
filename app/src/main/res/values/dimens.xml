@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Margin Field  -->
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+
+    <!--  Padding Field  -->
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="padding_24dp">24dp</dimen>
+    <dimen name="padding_32dp">32dp</dimen>
+
+    <!--  Font Size Field  -->
+    <dimen name="font_size_8sp">8sp</dimen>
+    <dimen name="font_size_16sp">16sp</dimen>
+    <dimen name="font_size_24sp">24sp</dimen>
+    <dimen name="font_size_32sp">32sp</dimen>
+
+    <dimen name="show_poster_height">225dp</dimen>
+    <dimen name="show_poster_width">175dp</dimen>
+</resources>

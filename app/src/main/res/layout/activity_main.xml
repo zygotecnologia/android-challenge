@@ -8,28 +8,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/most_popular_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+        <include
+            android:id="@+id/most_popular_show_container"
+            layout="@layout/layout_show_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Nome Da Série" />
-
-        <ImageView
-            android:id="@+id/popular_show_img"
-            android:layout_width="wrap_content"
-            android:layout_height="225dp"
-            android:layout_margin="16dp"
-            android:contentDescription="Imagem da Serie"
-            app:layout_constraintBottom_toTopOf="@id/rv_show_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/most_popular_show" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_show_list"
@@ -40,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popular_show_img"
+            app:layout_constraintTop_toBottomOf="@id/most_popular_show_container"
             tools:listitem="@layout/genre_item_row"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>

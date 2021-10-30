@@ -3,25 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/genre_title"
+        android:id="@+id/most_popular_show"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_8dp"
-        android:text="@string/show_genre_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/show_name_placeholder" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/show_recycler"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_8dp"
+    <ImageView
+        android:id="@+id/popular_show_img"
+        android:layout_width="@dimen/show_poster_width"
+        android:layout_height="@dimen/show_poster_height"
+        android:layout_margin="@dimen/margin_16dp"
+        android:contentDescription="@string/show_poster_content_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/genre_title"
-        tools:listitem="@layout/show_item_row" />
+        app:layout_constraintTop_toBottomOf="@id/most_popular_show"
+        tools:src="@drawable/image_placeholder" />
 </androidx.constraintlayout.widget.ConstraintLayout>

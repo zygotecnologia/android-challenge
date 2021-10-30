@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ZygoTV</string>
+
+    <string name="show_name_placeholder">Série Super Épica</string>
+    <string name="show_genre_placeholder">Ação e Aventura</string>
+    <string name="show_poster_content_description">Imagem da Série</string>
 </resources>
