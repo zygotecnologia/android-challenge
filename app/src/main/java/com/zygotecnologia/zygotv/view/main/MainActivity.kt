@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private fun setupPopularShow(show: Show) {
         binding.mostPopularShowContainer.mostPopularShowTitle.text = show.name
 
-        Glide.with(binding.mostPopularShowContainer.popularShowImg)
+        Glide.with(this)
             .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(binding.mostPopularShowContainer.popularShowImg)
