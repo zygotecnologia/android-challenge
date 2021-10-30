@@ -1,13 +1,12 @@
-package com.zygotecnologia.zygotv.view.main
+package com.zygotecnologia.zygotv.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.databinding.GenreItemRowBinding
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 
@@ -17,12 +16,12 @@ class MainGenreAdapter(
 ) : RecyclerView.Adapter<MainGenreAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.genre_item_row,
+        val genreBinding = GenreItemRowBinding.inflate(
+            LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return ViewHolder(view)
+        return ViewHolder(genreBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,21 +30,20 @@ class MainGenreAdapter(
 
     override fun getItemCount() = genreList.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val genreTitle: TextView by lazy { itemView.findViewById(R.id.genre_title) }
-        private val showList: RecyclerView by lazy { itemView.findViewById(R.id.show_recycler) }
+    class ViewHolder(private val genreView: GenreItemRowBinding) :
+        RecyclerView.ViewHolder(genreView.root) {
 
         fun bind(genre: Genre, shows: List<Show>) {
             val showListByGenre = shows.filter {
                 it.genreIds?.contains(genre.id) == true
             }
 
-            genreTitle.apply {
+            genreView.genreTitle.apply {
                 text = genre.name
                 rowVisibility(showListByGenre)
             }
 
-            showList.apply {
+            genreView.showRecycler.apply {
                 layoutManager = LinearLayoutManager(
                     itemView.context,
                     LinearLayoutManager.HORIZONTAL,
@@ -55,7 +53,7 @@ class MainGenreAdapter(
             }
         }
 
-        private fun View.rowVisibility(showList : List<Show>) {
+        private fun View.rowVisibility(showList: List<Show>) {
             this.isVisible = showList.isNotEmpty()
         }
     }

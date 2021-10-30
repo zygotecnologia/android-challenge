@@ -1,16 +1,12 @@
-package com.zygotecnologia.zygotv.view.main
+package com.zygotecnologia.zygotv.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.R.id.iv_show_poster
-import com.zygotecnologia.zygotv.R.id.tv_show_title
+import com.zygotecnologia.zygotv.databinding.ShowItemRowBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
@@ -19,12 +15,12 @@ class MainShowAdapter(
 ) : RecyclerView.Adapter<MainShowAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.show_item_row,
+        val genreBinding = ShowItemRowBinding.inflate(
+            LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return ViewHolder(view)
+        return ViewHolder(genreBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -33,17 +29,16 @@ class MainShowAdapter(
 
     override fun getItemCount() = shows.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(private val showView: ShowItemRowBinding) :
+        RecyclerView.ViewHolder(showView.root) {
 
         fun bind(show: Show) {
-            val textView: TextView = itemView.findViewById(tv_show_title)
-            textView.text = show.name
+            showView.tvShowTitle.text = show.name
 
-            val imageView: ImageView = itemView.findViewById(iv_show_poster)
             Glide.with(itemView)
                 .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(imageView)
+                .into(showView.ivShowPoster)
         }
     }
 }

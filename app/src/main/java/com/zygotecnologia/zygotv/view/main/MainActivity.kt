@@ -2,15 +2,14 @@ package com.zygotecnologia.zygotv.view.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
+import com.zygotecnologia.zygotv.adapter.MainGenreAdapter
+import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
@@ -25,17 +24,16 @@ import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
 
+    private lateinit var binding: ActivityMainBinding
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + Dispatchers.IO
 
     private lateinit var mainViewModel: MainViewModel
-    private val showList: RecyclerView by lazy { findViewById(R.id.rv_show_list) }
-    private val popularShowTitle: TextView by lazy { findViewById(R.id.most_popular_show) }
-    private val popularShowImage: ImageView by lazy { findViewById(R.id.popular_show_img) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         mainViewModel = ViewModelProvider(
             this,
@@ -58,18 +56,19 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun setupRecyclerView(shows: List<Show>, genre: List<Genre>) {
-        showList.apply {
+        binding.rvShowList.apply {
             adapter = MainGenreAdapter(genre, shows)
             viewVisibility(true)
         }
     }
 
     private fun setupPopularShow(show: Show) {
-        popularShowTitle.text = show.name
-        Glide.with(popularShowImage)
+        binding.mostPopularShowContainer.mostPopularShowTitle.text = show.name
+
+        Glide.with(binding.mostPopularShowContainer.popularShowImg)
             .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-            .into(popularShowImage)
+            .into(binding.mostPopularShowContainer.popularShowImg)
     }
 
     private fun View.viewVisibility(isVisible: Boolean) {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/most_popular_show"
+        android:id="@+id/most_popular_show_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_8dp"
@@ -23,6 +23,6 @@
         android:contentDescription="@string/show_poster_content_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/most_popular_show"
+        app:layout_constraintTop_toBottomOf="@id/most_popular_show_title"
         tools:src="@drawable/image_placeholder" />
 </androidx.constraintlayout.widget.ConstraintLayout>
