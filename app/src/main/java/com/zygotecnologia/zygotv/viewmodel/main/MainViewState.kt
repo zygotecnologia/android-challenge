@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.viewmodel
+package com.zygotecnologia.zygotv.viewmodel.main
 
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show

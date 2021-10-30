@@ -1,10 +1,8 @@
-package com.zygotecnologia.zygotv.viewmodel
+package com.zygotecnologia.zygotv.viewmodel.main
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zygotecnologia.zygotv.network.TmdbApi
-import com.zygotecnologia.zygotv.network.TmdbClient
 import kotlin.coroutines.CoroutineContext
 
 class MainViewModelFactory(

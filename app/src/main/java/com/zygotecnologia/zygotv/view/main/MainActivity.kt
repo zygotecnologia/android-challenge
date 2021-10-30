@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.main
+package com.zygotecnologia.zygotv.view.main
 
 import android.os.Bundle
 import android.view.View
@@ -15,9 +15,9 @@ import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
-import com.zygotecnologia.zygotv.viewmodel.MainViewModel
-import com.zygotecnologia.zygotv.viewmodel.MainViewModelFactory
-import com.zygotecnologia.zygotv.viewmodel.MainViewState
+import com.zygotecnologia.zygotv.viewmodel.main.MainViewModel
+import com.zygotecnologia.zygotv.viewmodel.main.MainViewModelFactory
+import com.zygotecnologia.zygotv.viewmodel.main.MainViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
