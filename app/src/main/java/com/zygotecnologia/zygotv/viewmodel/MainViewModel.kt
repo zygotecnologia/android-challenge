@@ -21,10 +21,12 @@ class MainViewModel(
     private val _viewState = MutableLiveData<MainViewState>()
     var viewState: LiveData<MainViewState> = _viewState
 
+    private val _mostPopularShow = MutableLiveData<Show>()
+    var mostPopularShow: LiveData<Show> = _mostPopularShow
+
     init {
         fetchMovies()
     }
-
 
     private fun fetchMovies() {
         CoroutineScope(coroutineContext).launch {
@@ -48,5 +50,11 @@ class MainViewModel(
                     show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })
                 }
                 ?: emptyList()
+
+        populatePopularShow()
+    }
+
+    private fun populatePopularShow() {
+        _mostPopularShow.postValue(shows.first())
     }
 }
