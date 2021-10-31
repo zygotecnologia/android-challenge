@@ -23,8 +23,8 @@ interface TmdbApi {
 
     @GET("$TMDB_API_VERSION/tv/{tv_id}")
     suspend fun fetchShowAsync(
-        @Query("api_key") apiKey: String,
-        @Path("tv_id") id: Int
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String
     ): Show?
 
     companion object {
