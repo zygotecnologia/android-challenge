@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.view.description.DescriptionActivity
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModel
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModelFactory
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewState
@@ -63,15 +65,29 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun setupPopularShow(show: Show) {
-        binding.mostPopularShowContainer.mostPopularShowTitle.text = show.name
+        binding.mostPopularShowContainer.apply {
+            container.setOnClickListener {
+                startActivity(
+                    Intent(this@MainActivity, DescriptionActivity::class.java).apply {
+                        putExtra(SHOW_ID_KEY, show.id)
+                    }
+                )
+            }
 
-        Glide.with(this)
-            .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
-            .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-            .into(binding.mostPopularShowContainer.popularShowImg)
+            mostPopularShowTitle.text = show.name
+
+            Glide.with(this@MainActivity)
+                .load(show.backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
+                .into(popularShowImg)
+        }
     }
 
     private fun View.viewVisibility(isVisible: Boolean) {
         this.isVisible = isVisible
+    }
+
+    companion object {
+        private const val SHOW_ID_KEY = "ShowID"
     }
 }

@@ -14,6 +14,7 @@ import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.view.description.DescriptionActivity
 
 private const val SHOW_INFORMATION = "ShowInformation"
+
 class MainShowAdapter(
     private val shows: List<Show>
 ) : RecyclerView.Adapter<MainShowAdapter.ViewHolder>() {
@@ -55,12 +56,14 @@ class MainShowAdapter(
 
         override fun onClick(v: View?) {
             showView.root.context.apply {
-                startActivity(
-                    Intent(this, DescriptionActivity::class.java).apply {
-                        putExtra(SHOW_INFORMATION, showInfo)
-                    }
-                )
+                startActivity(Intent(this, DescriptionActivity::class.java).apply {
+                    putExtra(SHOW_ID_KEY, showInfo.id)
+                })
             }
         }
+    }
+
+    companion object {
+        private const val SHOW_ID_KEY = "ShowID"
     }
 }
