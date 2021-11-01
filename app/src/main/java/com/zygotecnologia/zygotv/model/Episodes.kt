@@ -9,7 +9,6 @@ data class EpisodesResponse(
 data class Episodes(
     @Json(name = "name")
     val name: String?,
-
     @Json(name = "overview")
     val description: String?
 )

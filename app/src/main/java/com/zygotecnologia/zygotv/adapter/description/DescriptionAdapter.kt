@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.databinding.SeasonItemRowBinding
+import com.zygotecnologia.zygotv.databinding.RowSeasonItemBinding
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
@@ -15,7 +15,7 @@ class DescriptionAdapter(
 ) : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val seasonBinding = SeasonItemRowBinding.inflate(
+        val seasonBinding = RowSeasonItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -29,7 +29,7 @@ class DescriptionAdapter(
 
     override fun getItemCount() = seasonList.size
 
-    class ViewHolder(val seasonView: SeasonItemRowBinding) :
+    class ViewHolder(private val seasonView: RowSeasonItemBinding) :
         RecyclerView.ViewHolder(seasonView.root) {
 
         fun bind(season: Season) {

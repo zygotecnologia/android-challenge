@@ -38,7 +38,12 @@ class DescriptionViewModel(
     }
 
     private suspend fun loadSeasonEpisodes(showId: Int, season: Int) {
-        val seasonEpisodes = tmdbApi.fetchSeasonEpisodes(showId, season, TmdbApi.TMDB_API_KEY)
-        _viewState.postValue(seasonEpisodes?.episodes?.let { DescriptionViewState.SeasonEpisodes(it) })
+        val seasonEpisodes =
+            tmdbApi
+                .fetchSeasonEpisodes(showId, season, TmdbApi.TMDB_API_KEY)
+                ?.episodes
+                ?: emptyList()
+
+        _viewState.postValue(DescriptionViewState.SeasonEpisodes(seasonEpisodes))
     }
 }

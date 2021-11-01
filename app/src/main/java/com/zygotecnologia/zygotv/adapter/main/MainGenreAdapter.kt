@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.databinding.GenreItemRowBinding
+import com.zygotecnologia.zygotv.databinding.RowGenreItemBinding
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 
@@ -16,7 +16,7 @@ class MainGenreAdapter(
 ) : RecyclerView.Adapter<MainGenreAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val genreBinding = GenreItemRowBinding.inflate(
+        val genreBinding = RowGenreItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -30,7 +30,7 @@ class MainGenreAdapter(
 
     override fun getItemCount() = genreList.size
 
-    class ViewHolder(private val genreView: GenreItemRowBinding) :
+    class ViewHolder(private val genreView: RowGenreItemBinding) :
         RecyclerView.ViewHolder(genreView.root) {
 
         fun bind(genre: Genre, shows: List<Show>) {

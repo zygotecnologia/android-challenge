@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/popular_show_container"
-        tools:listitem="@layout/season_item_row" />
+        tools:listitem="@layout/row_season_item" />
 
     <!--    <ExpandableListView-->
     <!--        android:layout_width="0dp"-->
