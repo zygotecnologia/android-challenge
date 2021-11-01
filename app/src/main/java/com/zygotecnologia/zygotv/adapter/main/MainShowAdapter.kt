@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.adapter
+package com.zygotecnologia.zygotv.adapter.main
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,8 +12,6 @@ import com.zygotecnologia.zygotv.databinding.ShowItemRowBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.view.description.DescriptionActivity
-
-private const val SHOW_INFORMATION = "ShowInformation"
 
 class MainShowAdapter(
     private val shows: List<Show>

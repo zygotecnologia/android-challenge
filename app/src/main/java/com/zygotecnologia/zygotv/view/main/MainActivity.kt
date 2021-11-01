@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.adapter.MainGenreAdapter
+import com.zygotecnologia.zygotv.adapter.main.MainGenreAdapter
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
