@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             mostPopularShowTitle.text = show.name
 
             Glide.with(this@MainActivity)
-                .load(show.backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+                .load(show.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
                 .into(popularShowImg)
         }

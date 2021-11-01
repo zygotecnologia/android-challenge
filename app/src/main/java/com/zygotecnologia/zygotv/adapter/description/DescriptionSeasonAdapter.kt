@@ -2,6 +2,7 @@ package com.zygotecnologia.zygotv.adapter.description
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -10,9 +11,9 @@ import com.zygotecnologia.zygotv.databinding.RowSeasonItemBinding
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class DescriptionAdapter(
-    private val seasonList: List<Season>
-) : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>() {
+class DescriptionSeasonAdapter(
+    private val seasonList: List<Season>,
+) : RecyclerView.Adapter<DescriptionSeasonAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val seasonBinding = RowSeasonItemBinding.inflate(
@@ -37,13 +38,18 @@ class DescriptionAdapter(
             seasonView.seasonDescription.text = season.overview
 
             Glide.with(itemView)
-                .load(seasonView.seasonPoster.let { season.seasonPoster?.let { it1 ->
-                    ImageUrlBuilder.buildPosterUrl(
-                        it1
-                    )
-                } })
+                .load(season.seasonPoster?.let { ImageUrlBuilder.buildPosterUrl(it) })
                 .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
                 .into(seasonView.seasonPoster)
+
+            seasonView.episodesList.apply {
+                layoutManager = LinearLayoutManager(
+                    itemView.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                adapter = DescriptionEpisodeAdapter(listOf())
+            }
         }
     }
 }

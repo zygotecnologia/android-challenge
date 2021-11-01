@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.adapter.description.DescriptionAdapter
+import com.zygotecnologia.zygotv.adapter.description.DescriptionSeasonAdapter
 import com.zygotecnologia.zygotv.databinding.ActivityShowDescriptionBinding
+import com.zygotecnologia.zygotv.model.Episodes
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
@@ -25,6 +26,8 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var binding: ActivityShowDescriptionBinding
     private lateinit var viewModel: DescriptionViewModel
+
+    private lateinit var descriptionSeasonAdapter: DescriptionSeasonAdapter
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + Dispatchers.IO
@@ -44,7 +47,6 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
         setupObservers()
 
         viewModel.fetchShowDescription(intent.getIntExtra(SHOW_ID_KEY, DEFAULT_VALUE_SHOW_ID))
-        viewModel.fetchSeasonEpisodes(intent.getIntExtra(SHOW_ID_KEY, DEFAULT_VALUE_SHOW_ID), 1)
     }
 
     private fun setupObservers() {
@@ -60,17 +62,18 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
         binding.popularShowContainer.mostPopularShowTitle.text = showInformation.name
 
         Glide.with(this)
-            .load(showInformation.backdropPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
+            .load(showInformation.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(binding.popularShowContainer.popularShowImg)
 
+        descriptionSeasonAdapter = DescriptionSeasonAdapter(showInformation.season ?: listOf())
         binding.seasonsList.apply {
             layoutManager = LinearLayoutManager(
                 this@DescriptionActivity,
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            adapter = showInformation.season?.let { DescriptionAdapter(it) }
+            adapter = descriptionSeasonAdapter
         }
     }
 
