@@ -24,5 +24,5 @@ data class Show(
     @Json(name = "poster_path")
     val posterPath: String?,
     @Json(name = "seasons")
-    val season: List<Seasons>?
+    val season: List<Season>?
 ) : Serializable

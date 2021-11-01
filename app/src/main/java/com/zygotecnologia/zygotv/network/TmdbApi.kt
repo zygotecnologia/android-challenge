@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.network
 
+import com.zygotecnologia.zygotv.model.EpisodesResponse
 import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.model.ShowResponse
@@ -26,6 +27,13 @@ interface TmdbApi {
         @Path("tv_id") id: Int,
         @Query("api_key") apiKey: String
     ): Show?
+
+    @GET("$TMDB_API_VERSION/tv/{tv_id}/season/{season_number}")
+    suspend fun fetchSeasonEpisodes(
+        @Path("tv_id") id: Int,
+        @Path("season_number") seasonNumber: Int,
+        @Query("api_key") apiKey: String
+    ) : EpisodesResponse?
 
     companion object {
         private const val TMDB_API_VERSION = "3"

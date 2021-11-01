@@ -26,8 +26,19 @@ class DescriptionViewModel(
         }
     }
 
+    fun fetchSeasonEpisodes(showId: Int, season: Int) {
+        CoroutineScope(coroutineContext).launch {
+            loadSeasonEpisodes(showId, season)
+        }
+    }
+
     private suspend fun loadShowDescription(showId: Int) {
         val showDescription = tmdbApi.fetchShowAsync(showId, TmdbApi.TMDB_API_KEY)
         _viewState.postValue(showDescription?.let { DescriptionViewState.ShowDescription(it) })
+    }
+
+    private suspend fun loadSeasonEpisodes(showId: Int, season: Int) {
+        val seasonEpisodes = tmdbApi.fetchSeasonEpisodes(showId, season, TmdbApi.TMDB_API_KEY)
+        _viewState.postValue(seasonEpisodes?.episodes?.let { DescriptionViewState.SeasonEpisodes(it) })
     }
 }

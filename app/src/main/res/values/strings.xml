@@ -4,4 +4,9 @@
     <string name="show_name_placeholder">Série Super Épica</string>
     <string name="show_genre_placeholder">Ação e Aventura</string>
     <string name="show_poster_content_description">Imagem da Série</string>
+
+    <string name="show_season_info_placeholder">Temporada 1</string>
+    <string name="show_season_overview_placeholder">Descrição de série placeholder para layout desenvolvido</string>
+    <string name="episode_name_placeholder">Aquele do desenvolvimento</string>
+    <string name="episode_overview_placeholder">Descrição do episódio da séria para layout desenvolvido</string>
 </resources>
