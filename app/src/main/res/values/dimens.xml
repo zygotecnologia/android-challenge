@@ -15,6 +15,7 @@
     <!--  Font Size Field  -->
     <dimen name="font_size_8sp">8sp</dimen>
     <dimen name="font_size_16sp">16sp</dimen>
+    <dimen name="font_size_18sp">18sp</dimen>
     <dimen name="font_size_24sp">24sp</dimen>
     <dimen name="font_size_32sp">32sp</dimen>
 

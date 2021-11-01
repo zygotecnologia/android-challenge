@@ -5,6 +5,7 @@
     android:id="@+id/season_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/light_black"
     android:foreground="?attr/selectableItemBackground"
     android:padding="@dimen/margin_8dp">
 
@@ -32,6 +33,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_8dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_24sp"
         app:layout_constraintBottom_toTopOf="@id/season_description"
         app:layout_constraintEnd_toStartOf="@id/icon_expandable"
         app:layout_constraintStart_toEndOf="@id/season_poster"
@@ -43,6 +46,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_8dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_16sp"
         app:layout_constraintBottom_toBottomOf="@id/season_poster"
         app:layout_constraintEnd_toStartOf="@id/icon_expandable"
         app:layout_constraintStart_toEndOf="@id/season_poster"
