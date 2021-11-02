@@ -38,9 +38,14 @@ class DescriptionViewModel(
 
     private suspend fun loadSeasonEpisodes(showDescription: Show) {
         showDescription.season?.forEachIndexed { index, _ ->
+            var indexSearch = index
+            if (showDescription.season.size <= 1) {
+                indexSearch++
+            }
+
             showDescription.season[index].episodes?.addAll(
                 showDescription.id?.let {
-                    tmdbApi.fetchSeasonEpisodes(it, index+1, TmdbApi.TMDB_API_KEY)?.episodes
+                    tmdbApi.fetchSeasonEpisodes(it, indexSearch, TmdbApi.TMDB_API_KEY)?.episodes
                 } as List
             )
         }
