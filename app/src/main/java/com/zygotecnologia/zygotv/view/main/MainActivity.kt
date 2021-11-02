@@ -2,9 +2,7 @@ package com.zygotecnologia.zygotv.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -15,6 +13,7 @@ import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.viewVisibility
 import com.zygotecnologia.zygotv.view.description.DescriptionActivity
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModel
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModelFactory
@@ -49,6 +48,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         mainViewModel.viewState.observe(this, {
             when (it) {
                 is MainViewState.ShowList -> setupRecyclerView(it.showList, it.genreList)
+                is MainViewState.Loading -> showLoading(true)
             }
         })
 
@@ -58,6 +58,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun setupRecyclerView(shows: List<Show>, genre: List<Genre>) {
+        showLoading(false)
+
         binding.rvShowList.apply {
             adapter = MainGenreAdapter(genre, shows)
             viewVisibility(true)
@@ -83,8 +85,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun View.viewVisibility(isVisible: Boolean) {
-        this.isVisible = isVisible
+    private fun showLoading(isVisible: Boolean) {
+        binding.loading.viewVisibility(isVisible)
     }
 
     companion object {

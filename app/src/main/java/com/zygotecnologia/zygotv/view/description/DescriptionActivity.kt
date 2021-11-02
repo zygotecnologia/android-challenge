@@ -9,11 +9,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.adapter.description.DescriptionSeasonAdapter
 import com.zygotecnologia.zygotv.databinding.ActivityShowDescriptionBinding
-import com.zygotecnologia.zygotv.model.Episodes
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.viewVisibility
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewModel
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewModelFactory
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewState
@@ -53,11 +53,15 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
         viewModel.viewState.observe(this, {
             when (it) {
                 is DescriptionViewState.ShowAndSeasonsDescriptions -> setupShowInfo(it.show)
+                is DescriptionViewState.Loading -> showLoading(true)
             }
         })
     }
 
     private fun setupShowInfo(showInformation: Show) {
+        showLoading(false)
+        binding.contentContainer.viewVisibility(true)
+
         binding.popularShowContainer.mostPopularShowTitle.text = showInformation.name
 
         Glide.with(this)
@@ -65,18 +69,18 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(binding.popularShowContainer.popularShowImg)
 
-        descriptionSeasonAdapter = DescriptionSeasonAdapter(
-            showInformation.season as List<Season>
-        )
-
         binding.seasonsList.apply {
             layoutManager = LinearLayoutManager(
                 this@DescriptionActivity,
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            adapter = descriptionSeasonAdapter
+            adapter = DescriptionSeasonAdapter(showInformation.season as List<Season>)
         }
+    }
+
+    private fun showLoading(isVisible: Boolean) {
+        binding.loading.viewVisibility(isVisible)
     }
 
     companion object {

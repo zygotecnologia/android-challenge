@@ -3,9 +3,6 @@ package com.zygotecnologia.zygotv.viewmodel.description
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zygotecnologia.zygotv.model.Episodes
-import com.zygotecnologia.zygotv.model.EpisodesResponse
-import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbApi
 import kotlinx.coroutines.CoroutineScope
@@ -22,6 +19,7 @@ class DescriptionViewModel(
 
     fun fetchShowDescription(showId: Int) {
         if (showId != 0) {
+            _viewState.value = DescriptionViewState.Loading
             CoroutineScope(coroutineContext).launch {
                 loadShowDescription(showId)
             }
