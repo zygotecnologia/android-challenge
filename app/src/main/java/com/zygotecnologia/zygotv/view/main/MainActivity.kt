@@ -1,6 +1,9 @@
 package com.zygotecnologia.zygotv.view.main
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +45,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         ).get(MainViewModel::class.java)
 
         setupObservers()
+
+        mainViewModel.isConnected {
+            val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            activeNetwork?.isConnectedOrConnecting == true
+        }
     }
 
     private fun setupObservers() {
@@ -49,6 +58,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             when (it) {
                 is MainViewState.ShowList -> setupRecyclerView(it.showList, it.genreList)
                 is MainViewState.Loading -> showLoading(true)
+                is MainViewState.ConnectionStatus -> {
+                    if (it.isOnline) {
+                        mainViewModel.fetchMovies()
+                    } else {
+                        binding.noConnectionContent.root.viewVisibility(true)
+                    }
+                }
             }
         })
 

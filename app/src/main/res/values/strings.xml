@@ -9,4 +9,6 @@
     <string name="show_season_overview_placeholder">Descrição de série placeholder para layout desenvolvido</string>
     <string name="episode_name_placeholder">Aquele do desenvolvimento</string>
     <string name="episode_overview_placeholder">Descrição do episódio da séria para layout desenvolvido</string>
+
+    <string name="no_connection_info">Você está sem conexão com a internet, verifique e tente novamente!</string>
 </resources>

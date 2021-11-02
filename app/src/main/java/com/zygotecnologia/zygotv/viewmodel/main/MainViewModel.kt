@@ -24,11 +24,7 @@ class MainViewModel(
     private val _mostPopularShow = MutableLiveData<Show>()
     var mostPopularShow: LiveData<Show> = _mostPopularShow
 
-    init {
-        fetchMovies()
-    }
-
-    private fun fetchMovies() {
+    fun fetchMovies() {
         CoroutineScope(coroutineContext).launch {
             _viewState.postValue(MainViewState.Loading)
             loadShows()
@@ -52,6 +48,10 @@ class MainViewModel(
                 ?: emptyList()
 
         populatePopularShow()
+    }
+
+    fun isConnected(checkConnection: () -> Boolean) {
+        _viewState.value = MainViewState.ConnectionStatus(checkConnection.invoke())
     }
 
     private fun populatePopularShow() {
