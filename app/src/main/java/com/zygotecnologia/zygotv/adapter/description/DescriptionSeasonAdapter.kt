@@ -11,6 +11,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.RowSeasonItemBinding
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.setBackEndImage
 
 class DescriptionSeasonAdapter(
     private val seasonList: List<Season>
@@ -48,12 +49,10 @@ class DescriptionSeasonAdapter(
                 }
 
             }
-
-            Glide.with(itemView)
-                .load(season.seasonPoster?.let { ImageUrlBuilder.buildPosterUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(seasonView.seasonPoster)
-
+            seasonView.seasonPoster.setBackEndImage(
+                itemView.context,
+                ImageUrlBuilder.buildBackdropUrl(season.seasonPoster ?: "")
+            )
             seasonView.episodesList.apply {
                 layoutManager = LinearLayoutManager(
                     itemView.context,

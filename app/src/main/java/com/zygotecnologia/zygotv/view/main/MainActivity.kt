@@ -7,15 +7,13 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.adapter.main.MainGenreAdapter
 import com.zygotecnologia.zygotv.databinding.ActivityMainBinding
 import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.setBackEndImage
 import com.zygotecnologia.zygotv.utils.viewVisibility
 import com.zygotecnologia.zygotv.view.description.DescriptionActivity
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModel
@@ -91,13 +89,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                     }
                 )
             }
-
             mostPopularShowTitle.text = show.name
-
-            Glide.with(this@MainActivity)
-                .load(show.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(popularShowImg)
+            popularShowImg.setBackEndImage(
+                this@MainActivity,
+                ImageUrlBuilder.buildBackdropUrl(show.backdropPath ?: "")
+            )
         }
     }
 

@@ -11,6 +11,7 @@ import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.RowShowItemBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.setBackEndImage
 import com.zygotecnologia.zygotv.view.description.DescriptionActivity
 
 class MainShowAdapter(
@@ -39,17 +40,14 @@ class MainShowAdapter(
 
         fun bind(show: Show) {
             showInfo = show
-
             showView.showItem.setOnClickListener {
                 onClick(it)
             }
-
             showView.tvShowTitle.text = show.name
-
-            Glide.with(itemView)
-                .load(show.posterPath?.let { ImageUrlBuilder.buildPosterUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-                .into(showView.ivShowPoster)
+            showView.ivShowPoster.setBackEndImage(
+                itemView.context,
+                ImageUrlBuilder.buildBackdropUrl(show.posterPath ?: "")
+            )
         }
 
         override fun onClick(v: View?) {

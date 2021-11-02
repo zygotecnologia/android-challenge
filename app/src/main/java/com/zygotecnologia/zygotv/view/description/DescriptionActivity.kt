@@ -4,15 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.adapter.description.DescriptionSeasonAdapter
 import com.zygotecnologia.zygotv.databinding.ActivityShowDescriptionBinding
 import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
+import com.zygotecnologia.zygotv.utils.setBackEndImage
 import com.zygotecnologia.zygotv.utils.viewVisibility
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewModel
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewModelFactory
@@ -26,8 +24,6 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var binding: ActivityShowDescriptionBinding
     private lateinit var viewModel: DescriptionViewModel
-
-    private lateinit var descriptionSeasonAdapter: DescriptionSeasonAdapter
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + Dispatchers.IO
@@ -61,14 +57,11 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
     private fun setupShowInfo(showInformation: Show) {
         showLoading(false)
         binding.contentContainer.viewVisibility(true)
-
         binding.popularShowContainer.mostPopularShowTitle.text = showInformation.name
-
-        Glide.with(this)
-            .load(showInformation.backdropPath?.let { ImageUrlBuilder.buildBackdropUrl(it) })
-            .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
-            .into(binding.popularShowContainer.popularShowImg)
-
+        binding.popularShowContainer.popularShowImg.setBackEndImage(
+            this@DescriptionActivity,
+            ImageUrlBuilder.buildBackdropUrl(showInformation.backdropPath ?: "")
+        )
         binding.seasonsList.apply {
             layoutManager = LinearLayoutManager(
                 this@DescriptionActivity,
