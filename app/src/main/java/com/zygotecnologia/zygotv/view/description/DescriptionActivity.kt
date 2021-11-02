@@ -52,8 +52,7 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
     private fun setupObservers() {
         viewModel.viewState.observe(this, {
             when (it) {
-                is DescriptionViewState.ShowDescription -> setupShowInfo(it.showDescription)
-                is DescriptionViewState.SeasonEpisodes -> setupEpisodesBySeason(listOf())
+                is DescriptionViewState.ShowAndSeasonsDescriptions -> setupShowInfo(it.show)
             }
         })
     }
@@ -66,7 +65,10 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
             .apply(RequestOptions().placeholder(R.drawable.image_placeholder))
             .into(binding.popularShowContainer.popularShowImg)
 
-        descriptionSeasonAdapter = DescriptionSeasonAdapter(showInformation.season ?: listOf())
+        descriptionSeasonAdapter = DescriptionSeasonAdapter(
+            showInformation.season as List<Season>
+        )
+
         binding.seasonsList.apply {
             layoutManager = LinearLayoutManager(
                 this@DescriptionActivity,
@@ -75,10 +77,6 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
             )
             adapter = descriptionSeasonAdapter
         }
-    }
-
-    private fun setupEpisodesBySeason(episodes: List<Season>) {
-
     }
 
     companion object {

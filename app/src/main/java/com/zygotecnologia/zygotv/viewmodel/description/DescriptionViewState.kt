@@ -5,7 +5,6 @@ import com.zygotecnologia.zygotv.model.Show
 
 sealed class DescriptionViewState {
     data class Loading(val loadingSeasonEpisodes: Boolean = false) : DescriptionViewState()
-    data class ShowDescription(val showDescription: Show) : DescriptionViewState()
-    data class SeasonEpisodes(val episodes: List<Episodes>) : DescriptionViewState()
+    data class ShowAndSeasonsDescriptions(val show: Show) : DescriptionViewState()
     object Error : DescriptionViewState()
 }

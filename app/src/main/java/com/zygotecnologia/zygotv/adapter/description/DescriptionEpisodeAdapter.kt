@@ -7,7 +7,7 @@ import com.zygotecnologia.zygotv.databinding.RowEpisodeItemBinding
 import com.zygotecnologia.zygotv.model.Episodes
 
 class DescriptionEpisodeAdapter(
-    private val episodeList: List<Episodes>
+    private val episodeList: MutableList<Episodes>
 ) : RecyclerView.Adapter<DescriptionEpisodeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

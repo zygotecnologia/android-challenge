@@ -57,11 +57,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/episodes_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/season_poster"
+        app:layout_constraintTop_toBottomOf="@id/season_description"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="2"
-        tools:listitem="@layout/row_episode_item" />
+        tools:listitem="@layout/row_episode_item"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

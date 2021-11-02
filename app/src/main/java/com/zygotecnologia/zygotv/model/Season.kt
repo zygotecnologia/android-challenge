@@ -10,5 +10,6 @@ data class Season(
     @Json(name = "poster_path")
     val seasonPoster: String?,
     @Json(name = "id")
-    val seasonId: Int?
+    val seasonId: Int?,
+    val episodes: MutableList<Episodes>? = mutableListOf()
 )

@@ -1,6 +1,7 @@
 package com.zygotecnologia.zygotv.adapter.description
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.zygotecnologia.zygotv.model.Season
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
 class DescriptionSeasonAdapter(
-    private val seasonList: List<Season>,
+    private val seasonList: List<Season>
 ) : RecyclerView.Adapter<DescriptionSeasonAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,10 +33,21 @@ class DescriptionSeasonAdapter(
 
     class ViewHolder(private val seasonView: RowSeasonItemBinding) :
         RecyclerView.ViewHolder(seasonView.root) {
+        private var isShowingEpisodes = false
 
         fun bind(season: Season) {
             seasonView.seasonNumber.text = season.name
             seasonView.seasonDescription.text = season.overview
+            seasonView.root.setOnClickListener {
+                if (isShowingEpisodes) {
+                    seasonView.episodesList.visibility = View.GONE
+                    isShowingEpisodes = false
+                } else {
+                    seasonView.episodesList.visibility = View.VISIBLE
+                    isShowingEpisodes = true
+                }
+
+            }
 
             Glide.with(itemView)
                 .load(season.seasonPoster?.let { ImageUrlBuilder.buildPosterUrl(it) })
@@ -45,10 +57,10 @@ class DescriptionSeasonAdapter(
             seasonView.episodesList.apply {
                 layoutManager = LinearLayoutManager(
                     itemView.context,
-                    LinearLayoutManager.HORIZONTAL,
+                    LinearLayoutManager.VERTICAL,
                     false
                 )
-                adapter = DescriptionEpisodeAdapter(listOf())
+                adapter = season.episodes?.let { DescriptionEpisodeAdapter(it) }
             }
         }
     }
