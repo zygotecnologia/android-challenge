@@ -35,12 +35,12 @@ class MainViewModel(
     private suspend fun loadShows() {
         genres =
             tmdbApi
-                .fetchGenresAsync(TmdbApi.TMDB_API_KEY, "BR")
+                .fetchGenresAsync()
                 ?.genres
                 ?: emptyList()
         shows =
             tmdbApi
-                .fetchPopularShowsAsync(TmdbApi.TMDB_API_KEY, "BR")
+                .fetchPopularShowsAsync()
                 ?.results
                 ?.map { show ->
                     show.copy(genres = genres.filter { show.genreIds?.contains(it.id) == true })

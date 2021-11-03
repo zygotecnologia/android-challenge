@@ -29,7 +29,7 @@ class DescriptionViewModel(
     }
 
     private suspend fun loadShowDescription(showId: Int) {
-        tmdbApi.fetchShowAsync(showId, TmdbApi.TMDB_API_KEY)?.let {
+        tmdbApi.fetchShowAsync(showId)?.let {
             loadSeasonEpisodes(it)
         }
     }
@@ -43,7 +43,7 @@ class DescriptionViewModel(
 
             showDescription.season[index].episodes?.addAll(
                 showDescription.id?.let {
-                    tmdbApi.fetchSeasonEpisodes(it, indexSearch, TmdbApi.TMDB_API_KEY)?.episodes
+                    tmdbApi.fetchSeasonEpisodes(it, indexSearch)?.episodes
                 } as List
             )
         }
