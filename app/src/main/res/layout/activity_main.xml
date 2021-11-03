@@ -23,11 +23,16 @@
             android:textSize="@dimen/font_size_18sp"
             android:textStyle="bold" />
 
-        <androidx.appcompat.widget.SearchView
+        <ImageButton
+            android:id="@+id/search_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            app:searchIcon="@drawable/ic_baseline_search_24" />
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/search_show"
+            android:src="@drawable/ic_baseline_search_24"
+            android:padding="@dimen/margin_16dp"
+            android:background="?attr/selectableItemBackground"/>
     </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar

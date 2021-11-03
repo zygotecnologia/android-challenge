@@ -16,6 +16,7 @@ import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.utils.setBackEndImage
 import com.zygotecnologia.zygotv.utils.viewVisibility
 import com.zygotecnologia.zygotv.view.description.DescriptionActivity
+import com.zygotecnologia.zygotv.view.search.SearchActivity
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModel
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewModelFactory
 import com.zygotecnologia.zygotv.viewmodel.main.MainViewState
@@ -43,11 +44,18 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         ).get(MainViewModel::class.java)
 
         setupObservers()
+        setupListener()
 
         mainViewModel.isConnected {
             val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
             activeNetwork?.isConnectedOrConnecting == true
+        }
+    }
+
+    private fun setupListener() {
+        binding.searchShow.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
         }
     }
 

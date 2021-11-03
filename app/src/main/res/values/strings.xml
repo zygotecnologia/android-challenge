@@ -11,4 +11,5 @@
     <string name="episode_overview_placeholder">Descrição do episódio da séria para layout desenvolvido</string>
 
     <string name="no_connection_info">Você está sem conexão com a internet, verifique e tente novamente!</string>
+    <string name="search_show">Pesquisar Série</string>
 </resources>

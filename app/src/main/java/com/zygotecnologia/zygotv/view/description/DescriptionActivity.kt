@@ -1,5 +1,6 @@
 package com.zygotecnologia.zygotv.view.description
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +13,7 @@ import com.zygotecnologia.zygotv.network.TmdbClient
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import com.zygotecnologia.zygotv.utils.setBackEndImage
 import com.zygotecnologia.zygotv.utils.viewVisibility
+import com.zygotecnologia.zygotv.view.search.SearchActivity
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewModel
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewModelFactory
 import com.zygotecnologia.zygotv.viewmodel.description.DescriptionViewState
@@ -41,8 +43,15 @@ class DescriptionActivity : AppCompatActivity(), CoroutineScope {
         ).get(DescriptionViewModel::class.java)
 
         setupObservers()
+        setupListener()
 
         viewModel.fetchShowDescription(intent.getIntExtra(SHOW_ID_KEY, DEFAULT_VALUE_SHOW_ID))
+    }
+
+    private fun setupListener() {
+        binding.searchShow.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
     }
 
     private fun setupObservers() {
