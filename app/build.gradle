@@ -18,6 +18,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_KEY", '"27490b1bf49c0e5ffaa07dfd947e9605"'\
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
