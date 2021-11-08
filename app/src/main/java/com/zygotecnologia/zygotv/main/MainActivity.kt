@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.zygotecnologia.zygotv.BuildConfig
 import com.zygotecnologia.zygotv.R
-import com.zygotecnologia.zygotv.network.TmdbApi
 import com.zygotecnologia.zygotv.network.TmdbClient
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
