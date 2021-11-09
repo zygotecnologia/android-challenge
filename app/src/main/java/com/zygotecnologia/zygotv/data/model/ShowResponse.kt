@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.data.model
 
 import com.squareup.moshi.Json
 
@@ -13,5 +13,5 @@ data class ShowResponse(
     val totalPages: Int?,
 
     @Json(name = "results")
-    val results: List<Show>?
+    val results: List<Show> = emptyList()
 )
