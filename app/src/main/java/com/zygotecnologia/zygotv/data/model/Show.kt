@@ -1,6 +1,7 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.data.model
 
 import com.squareup.moshi.Json
+import com.zygotecnologia.zygotv.data.model.ShowDetailsModel.Genre
 
 data class Show(
     val genres: List<Genre>?,
@@ -21,5 +22,8 @@ data class Show(
     @Json(name = "overview")
     val overview: String?,
     @Json(name = "poster_path")
-    val posterPath: String?
+    val posterPath: String?,
+    @Json(name = "popularity")
+    val popularity: String?
+
 )
