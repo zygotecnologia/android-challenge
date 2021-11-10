@@ -13,13 +13,15 @@ import com.zygotecnologia.zygotv.databinding.ItemRecyclerSeriesBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class SeriesRecyclerAdapter(private val context: Context, private val listSeries : List<Show>) : RecyclerView.Adapter<SeriesRecyclerAdapter.HomeViewHolder>() {
+class SeriesRecyclerAdapter(private val context: Context, private val listSeries: List<Show>) :
+    RecyclerView.Adapter<SeriesRecyclerAdapter.HomeViewHolder>() {
     var onItemClick: ((show: Show) -> Unit)? = null
 
-    class  HomeViewHolder(private val itemBinding: ItemRecyclerSeriesBinding): RecyclerView.ViewHolder(itemBinding.root){
+    class HomeViewHolder(private val itemBinding: ItemRecyclerSeriesBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
 
-        var titleSeries : TextView? = null
-        var imageSeries : ShapeableImageView? = null
+        var titleSeries: TextView? = null
+        var imageSeries: ShapeableImageView? = null
 
         init {
             titleSeries = itemBinding.itemRecyclerNameSeries
@@ -28,7 +30,8 @@ class SeriesRecyclerAdapter(private val context: Context, private val listSeries
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val itemBinding = ItemRecyclerSeriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =
+            ItemRecyclerSeriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeViewHolder(itemBinding)
     }
 

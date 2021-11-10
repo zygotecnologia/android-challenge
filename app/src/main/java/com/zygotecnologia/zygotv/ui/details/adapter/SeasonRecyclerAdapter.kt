@@ -41,7 +41,8 @@ class SeasonRecyclerAdapter(
     override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
 
         val url = showDetails.seasons?.get(position)?.poster_path.let { posterPath ->
-            ImageUrlBuilder.buildBackdropUrl((posterPath ?: showDetails.backdrop_path)!!) }
+            ImageUrlBuilder.buildBackdropUrl((posterPath ?: showDetails.backdrop_path)!!)
+        }
 
         holder.titleSeason?.text = showDetails.seasons?.get(position)?.name
 
@@ -54,7 +55,8 @@ class SeasonRecyclerAdapter(
                 holder.synopsisSeason?.text = synopse
             }
             synopse == "" -> {
-                holder.synopsisSeason?.text = context.getString(R.string.series_details_without_description)
+                holder.synopsisSeason?.text =
+                    context.getString(R.string.series_details_without_description)
             }
             else -> {
                 holder.synopsisSeason?.text = synopse

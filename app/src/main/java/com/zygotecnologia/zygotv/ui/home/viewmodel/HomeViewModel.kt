@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zygotecnologia.zygotv.data.repository.TmdbRepository
-import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.InfoGenres
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
@@ -33,16 +32,19 @@ class HomeViewModel(private val repository: TmdbRepository) : ViewModel() {
     val listFamily: LiveData<List<Show>>
         get() = _listFamily
 
-    fun loadActionAventure(){
+    fun loadActionAventure() {
         loadShow(InfoGenres.ACTION_AVENTURE.id, _listActionAventure)
     }
-    fun loadComedy(){
+
+    fun loadComedy() {
         loadShow(InfoGenres.COMEDY.id, _listComedy)
     }
-    fun loadDrama(){
+
+    fun loadDrama() {
         loadShow(InfoGenres.DRAMA.id, _listDrama)
     }
-    fun loadFamily(){
+
+    fun loadFamily() {
         loadShow(InfoGenres.FAMILY.id, _listFamily)
     }
 
@@ -56,11 +58,11 @@ class HomeViewModel(private val repository: TmdbRepository) : ViewModel() {
         }
     }
 
-    private fun loadShow(genreId: Int, mutableLiveData :MutableLiveData<List<Show>>) {
+    private fun loadShow(genreId: Int, mutableLiveData: MutableLiveData<List<Show>>) {
         val listGenre: MutableList<Show> = mutableListOf()
         viewModelScope.launch {
             repository.fetchPopularShowsAsync()?.results?.map { showMap: Show ->
-                if(showMap.genreIds?.contains(genreId)!!){
+                if (showMap.genreIds?.contains(genreId)!!) {
                     listGenre.add(showMap)
                 }
             }

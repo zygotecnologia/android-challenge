@@ -13,12 +13,11 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.SeriesDetailsFragmentBinding
+import com.zygotecnologia.zygotv.extension.navigateWithAnimations
 import com.zygotecnologia.zygotv.model.ShowDetails
-import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.details.adapter.SeasonRecyclerAdapter
 import com.zygotecnologia.zygotv.ui.details.viewmodel.SeriesDetailsViewModel
 import com.zygotecnologia.zygotv.ui.home.fragment.HomeFragment
-import com.zygotecnologia.zygotv.utils.ConnectionLiveData
 import com.zygotecnologia.zygotv.utils.testConnection
 import org.koin.android.viewmodel.ext.android.viewModel
 

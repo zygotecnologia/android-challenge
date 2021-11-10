@@ -20,7 +20,26 @@ import javax.net.SocketFactory
 
 val TAG = "C-Manager"
 
-class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
+fun testConnection(
+    view: View,
+    viewLifecycleOwner: LifecycleOwner,
+    isConnection: () -> Unit,
+    notConnection: () -> Unit
+) {
+    val connectionLiveData = ConnectionLiveData(view.context)
+    connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
+        when (isNetworkAvailable) {
+            true -> {
+                isConnection()
+            }
+            false -> {
+                notConnection()
+            }
+        }
+    })
+}
+
+private class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
     private lateinit var networkCallback: ConnectivityManager.NetworkCallback
     private val cm = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
     private val validNetworks: MutableSet<Network> = HashSet()
@@ -69,25 +88,6 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
             checkValidNetworks()
         }
     }
-}
-
-fun testConnection(
-    view: View,
-    viewLifecycleOwner: LifecycleOwner,
-    isConnection: () -> Unit,
-    notConnection: () -> Unit
-) {
-    val connectionLiveData = ConnectionLiveData(view.context)
-    connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
-        when (isNetworkAvailable) {
-            true -> {
-                isConnection()
-            }
-            false -> {
-                notConnection()
-            }
-        }
-    })
 }
 
 object DoesNetworkHaveInternet {

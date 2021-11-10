@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.model
+package com.zygotecnologia.zygotv.extension
 
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
@@ -15,13 +15,13 @@ private val slideLeftOptions = NavOptions.Builder()
 fun NavController.navigateWithAnimations(
     destinationId: Int,
     animation: NavOptions = slideLeftOptions
-){
+) {
     this.navigate(destinationId, null, animation)
 }
 
 fun NavController.navigateWithAnimations(
     directions: NavDirections,
     animation: NavOptions = slideLeftOptions
-){
+) {
     this.navigate(directions, animation)
 }

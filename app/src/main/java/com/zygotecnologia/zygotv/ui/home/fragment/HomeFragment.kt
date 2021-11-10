@@ -12,14 +12,12 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
+import com.zygotecnologia.zygotv.extension.navigateWithAnimations
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.home.adapter.CategoriesAndSeriesRecyclerAdapter
 import com.zygotecnologia.zygotv.ui.home.viewmodel.HomeViewModel
-import com.zygotecnologia.zygotv.utils.ConnectionLiveData
 import com.zygotecnologia.zygotv.utils.testConnection
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class HomeFragment : Fragment() {
 
@@ -44,13 +42,13 @@ class HomeFragment : Fragment() {
 
         testConnection(view, viewLifecycleOwner,
             isConnection = {
-            Log.i(TAG, "Internet ON")
-            observeEvents(view.context)
-        }, notConnection = {
-            Log.i(TAG, "Internet OFF")
-            val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
-            snackbar.show()
-        })
+                Log.i(TAG, "Internet ON")
+                observeEvents(view.context)
+            }, notConnection = {
+                Log.i(TAG, "Internet OFF")
+                val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+            })
     }
 
     private fun observeEvents(context: Context) {
