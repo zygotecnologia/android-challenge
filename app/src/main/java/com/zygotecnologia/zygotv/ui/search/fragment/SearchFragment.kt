@@ -8,13 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.SearchFragmentBinding
 import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.home.fragment.HomeFragment
 import com.zygotecnologia.zygotv.ui.search.adapter.SearchListAdapter
 import com.zygotecnologia.zygotv.ui.search.viewmodel.SearchViewModel
 import com.zygotecnologia.zygotv.utils.ConnectionLiveData
+import com.zygotecnologia.zygotv.utils.testConnection
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
@@ -35,26 +39,26 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val connectionLiveData = ConnectionLiveData(view.context)
-
-        connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
-            when (isNetworkAvailable) {
-                true -> {
-                    Log.i(HomeFragment.TAG, "Internet ON")
-                    observeEvents()
-                }
-                false -> {
-                    Log.i(HomeFragment.TAG, "Internet OFF")
-                    val snackbar =
-                        Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
-                    snackbar.show()
-                }
+        testConnection(view, viewLifecycleOwner,
+            isConnection = {
+                Log.i(HomeFragment.TAG, "Internet ON")
+                observeEvents()
+            },
+            notConnection = {
+                Log.i(HomeFragment.TAG, "Internet OFF")
+                val snackbar =
+                    Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
+                snackbar.show()
             }
-        })
+        )
         setupLayout()
     }
 
     private fun setupLayout() {
+        binding.detailsIconBack.setOnClickListener {
+            findNavController().navigateWithAnimations(R.id.homeFragment)
+        }
+
         binding.searchEdittext.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }

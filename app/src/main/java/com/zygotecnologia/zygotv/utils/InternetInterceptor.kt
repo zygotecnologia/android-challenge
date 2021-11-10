@@ -7,6 +7,8 @@ import android.net.Network
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.net.NetworkRequest
 import android.util.Log
+import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,8 +52,8 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
                 // check if this network actually has internet
                 CoroutineScope(Dispatchers.IO).launch {
                     val hasInternet = DoesNetworkHaveInternet.execute(network.socketFactory)
-                    if(hasInternet){
-                        withContext(Dispatchers.Main){
+                    if (hasInternet) {
+                        withContext(Dispatchers.Main) {
                             Log.d(TAG, "onAvailable: adding network. $network")
                             validNetworks.add(network)
                             checkValidNetworks()
@@ -69,17 +71,36 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
     }
 }
 
+fun testConnection(
+    view: View,
+    viewLifecycleOwner: LifecycleOwner,
+    isConnection: () -> Unit,
+    notConnection: () -> Unit
+) {
+    val connectionLiveData = ConnectionLiveData(view.context)
+    connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
+        when (isNetworkAvailable) {
+            true -> {
+                isConnection()
+            }
+            false -> {
+                notConnection()
+            }
+        }
+    })
+}
+
 object DoesNetworkHaveInternet {
 
     fun execute(socketFactory: SocketFactory): Boolean {
-        return try{
+        return try {
             Log.d(TAG, "PINGING google.")
             val socket = socketFactory.createSocket() ?: throw IOException("Socket is null.")
             socket.connect(InetSocketAddress("8.8.8.8", 53), 1500)
             socket.close()
             Log.d(TAG, "PING success.")
             true
-        }catch (e: IOException){
+        } catch (e: IOException) {
             Log.e(TAG, "No internet connection. ${e}")
             false
         }

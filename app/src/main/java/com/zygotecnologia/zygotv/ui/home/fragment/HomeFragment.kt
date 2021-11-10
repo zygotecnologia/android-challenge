@@ -17,6 +17,7 @@ import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.home.adapter.CategoriesAndSeriesRecyclerAdapter
 import com.zygotecnologia.zygotv.ui.home.viewmodel.HomeViewModel
 import com.zygotecnologia.zygotv.utils.ConnectionLiveData
+import com.zygotecnologia.zygotv.utils.testConnection
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -40,21 +41,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val connectionLiveData = ConnectionLiveData(view.context)
 
-        connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
-            when (isNetworkAvailable) {
-                true -> {
-                    Log.i(TAG, "Internet ON")
-                        observeEvents(view.context)
-                }
-                false -> {
-                    Log.i(TAG, "Internet OFF")
-                    val snackbar =
-                        Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
-                    snackbar.show()
-                }
-            }
+        testConnection(view, viewLifecycleOwner,
+            isConnection = {
+            Log.i(TAG, "Internet ON")
+            observeEvents(view.context)
+        }, notConnection = {
+            Log.i(TAG, "Internet OFF")
+            val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
+            snackbar.show()
         })
     }
 
