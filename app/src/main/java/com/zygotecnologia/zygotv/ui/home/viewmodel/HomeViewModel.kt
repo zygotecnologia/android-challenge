@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zygotecnologia.zygotv.data.repository.TmdbRepository
+import com.zygotecnologia.zygotv.model.GenreResponse
 import com.zygotecnologia.zygotv.model.InfoGenres
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder

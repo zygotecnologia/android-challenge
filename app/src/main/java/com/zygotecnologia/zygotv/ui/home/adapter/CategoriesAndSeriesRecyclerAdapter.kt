@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zygotecnologia.zygotv.databinding.ItemRercyclerGenreWithSeriesBinding
+import com.zygotecnologia.zygotv.databinding.ItemRercyclerCategoriesAndSeriesBinding
 import com.zygotecnologia.zygotv.model.Show
 
 class CategoriesAndSeriesRecyclerAdapter(
@@ -16,7 +16,7 @@ class CategoriesAndSeriesRecyclerAdapter(
 
     var onClick: ((show: Show) -> Unit)? = null
 
-    inner class GenreViewHolder(private val itemBinding: ItemRercyclerGenreWithSeriesBinding) :
+    inner class GenreViewHolder(private val itemBinding: ItemRercyclerCategoriesAndSeriesBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         var titleSeries: TextView? = null
         var itemRecycler: RecyclerView
@@ -28,7 +28,7 @@ class CategoriesAndSeriesRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
-        val itemBinding = ItemRercyclerGenreWithSeriesBinding.inflate(
+        val itemBinding = ItemRercyclerCategoriesAndSeriesBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
