@@ -11,4 +11,8 @@
     <string name="series_details_season">Temporada 1></string>
     <string name="series_details_synopsis">Sinopse></string>
     <string name="series_details_without_description">Without Description</string>
+
+    <!--SearchFragment-->
+    <string name="search_text_result">Resultado da Busca</string>
+    <string name="search_for_series_here">Busque por Series Aqui</string>
 </resources>

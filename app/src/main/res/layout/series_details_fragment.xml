@@ -7,7 +7,7 @@
     android:background="@color/black"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".ui.details.SeriesDetailsFragment">
+    tools:context=".ui.details.fragment.SeriesDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

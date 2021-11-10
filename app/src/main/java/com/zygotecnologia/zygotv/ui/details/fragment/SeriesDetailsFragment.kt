@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.details
+package com.zygotecnologia.zygotv.ui.details.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -16,6 +16,7 @@ import com.zygotecnologia.zygotv.databinding.SeriesDetailsFragmentBinding
 import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.details.adapter.SeasonRecyclerAdapter
+import com.zygotecnologia.zygotv.ui.details.viewmodel.SeriesDetailsViewModel
 import com.zygotecnologia.zygotv.utils.ConnectionLiveData
 import org.koin.android.viewmodel.ext.android.viewModel
 
