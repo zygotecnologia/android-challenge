@@ -10,4 +10,5 @@
     <string name="series_details_name_serie">Nome da série></string>
     <string name="series_details_season">Temporada 1></string>
     <string name="series_details_synopsis">Sinopse></string>
+    <string name="series_details_without_description">Without Description</string>
 </resources>

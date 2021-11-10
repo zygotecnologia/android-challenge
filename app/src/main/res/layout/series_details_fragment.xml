@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,14 +7,14 @@
     android:background="@color/black"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".ui.home.fragment.HomeFragment">
+    tools:context=".ui.details.SeriesDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/app_toolbar"
+            android:id="@+id/details_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/black"
@@ -29,7 +28,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <TextView
-            android:id="@+id/home_text_name_serie"
+            android:id="@+id/details_text_name_serie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -37,22 +36,22 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/details_toolbar"
             tools:text="@string/home_text_name_serie" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/home_image_most_popular"
+            android:id="@+id/details_image_most_popular"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:adjustViewBounds="true"
             android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_text_name_serie"
+            app:layout_constraintTop_toBottomOf="@+id/details_text_name_serie"
             app:shapeAppearanceOverlay="@style/roundimageview" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/item_recycler_series"
+            android:id="@+id/item_details_recycler_seasons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
@@ -60,25 +59,38 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_image_most_popular"
-            tools:listitem="@layout/item_rercycler_categories_and_series" />
+            app:layout_constraintTop_toBottomOf="@id/details_image_most_popular"
+            tools:listitem="@layout/item_recycler_seasons" />
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="75dp"
                 android:layout_height="50dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/logo_zygo_tv" />
-        </RelativeLayout>
+                android:src="@drawable/logo_zygo_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/details_icon_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_back_"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
 
+</androidx.core.widget.NestedScrollView>
