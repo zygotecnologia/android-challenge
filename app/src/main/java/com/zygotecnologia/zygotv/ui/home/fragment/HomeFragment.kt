@@ -2,6 +2,7 @@ package com.zygotecnologia.zygotv.ui.home.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,32 +23,33 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
-
     private val listAdapter: MutableList<Pair<String, List<Show>>> = mutableListOf()
-
     private val viewModel: HomeViewModel by viewModel()
+
+    companion object {
+        const val TAG = "HOME CONNECTION NETWORK"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val connectionLiveData = ConnectionLiveData(view.context)
 
         connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
             when (isNetworkAvailable) {
                 true -> {
-                    println("Internet ON")
+                    Log.i(TAG, "Internet ON")
                         observeEvents(view.context)
                 }
                 false -> {
-                    println("Internet OFF")
+                    Log.i(TAG, "Internet OFF")
                     val snackbar =
                         Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
                     snackbar.show()
@@ -57,14 +59,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeEvents(context: Context) {
-
-
         viewModel.listActionAventure.observe(viewLifecycleOwner, { listActionAventure ->
             val list = Pair("Ação e Aventura", listActionAventure)
             setHomeRecycler(context, list)
         })
         viewModel.loadActionAventure()
-
 
         viewModel.listComedy.observe(viewLifecycleOwner, { listComedy ->
             val list = Pair("Comédia", listComedy)

@@ -20,55 +20,55 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/black"
             android:elevation="0dp"
+            android:popupTheme="@style/Theme.AppCompat.Light"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:popupTheme="@style/Theme.AppCompat.Light">
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/home_text_name_serie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        tools:text="@string/home_text_name_serie"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_toolbar"/>
+        <TextView
+            android:id="@+id/home_text_name_serie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_toolbar"
+            tools:text="@string/home_text_name_serie" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/home_image_most_popular"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:adjustViewBounds="true"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_text_name_serie"
-        app:shapeAppearanceOverlay="@style/roundimageview" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/home_image_most_popular"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_text_name_serie"
+            app:shapeAppearanceOverlay="@style/roundimageview" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/item_recycler_series"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_image_most_popular"
-        tools:listitem="@layout/item_rercycler_categories_and_series" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_recycler_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_image_most_popular"
+            tools:listitem="@layout/item_rercycler_categories_and_series" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
