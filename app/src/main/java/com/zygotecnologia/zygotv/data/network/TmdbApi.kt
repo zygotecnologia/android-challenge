@@ -2,7 +2,7 @@ package com.zygotecnologia.zygotv.data.network
 
 import com.zygotecnologia.zygotv.BuildConfig
 import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.model.ShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,7 +24,7 @@ interface TmdbApi {
 
     @GET("${BuildConfig.TMDB_API_VERSION}/tv/{tv_id}")
     suspend fun fetchShowAsync(
-        @Query("api_key") apiKey: String,
-        @Path("tv_id") id: Int
-    ): Show?
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): ShowDetails?
 }

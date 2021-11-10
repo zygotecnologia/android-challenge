@@ -3,7 +3,7 @@ package com.zygotecnologia.zygotv.data.repository
 import com.zygotecnologia.zygotv.BuildConfig
 import com.zygotecnologia.zygotv.data.network.TmdbClient
 import com.zygotecnologia.zygotv.model.GenreResponse
-import com.zygotecnologia.zygotv.model.Show
+import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.model.ShowResponse
 
 class TmdbDataSource(private val webClient: TmdbClient) : TmdbRepository {
@@ -21,7 +21,7 @@ class TmdbDataSource(private val webClient: TmdbClient) : TmdbRepository {
         )
     }
 
-    override suspend fun fetchShowAsync(id: Int): Show? {
+    override suspend fun fetchShowAsync(id: Int): ShowDetails? {
         return webClient.getInstance().fetchShowAsync(
             apiKey = BuildConfig.TMDB_API_KEY,
             id = id
