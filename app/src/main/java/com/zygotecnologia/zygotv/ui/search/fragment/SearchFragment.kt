@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.SearchFragmentBinding
+import com.zygotecnologia.zygotv.extension.navigateWithAnimations
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.ui.search.adapter.SearchListAdapter
 import com.zygotecnologia.zygotv.ui.search.viewmodel.SearchViewModel
@@ -24,7 +27,7 @@ class SearchFragment : Fragment() {
     private val listSearch: MutableList<Show> = mutableListOf()
 
     companion object {
-        const val TAG = "SEARCH CONNECTION NETWORK"
+        private const val TAG = "SEARCH CONNECTION NETWORK"
     }
 
     override fun onCreateView(
@@ -53,8 +56,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupLayout() {
+        binding.detailsIconBack.setOnClickListener {
+            findNavController().navigateWithAnimations(R.id.homeFragment)
+        }
         binding.searchEdittext.addTextChangedListener(object : TextWatcher {
-
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 binding.itemDetailsRecyclerSeasons.run {
                     listFilter.map { listShow ->

@@ -18,6 +18,11 @@ class SeasonRecyclerAdapter(
     private val showDetails: ShowDetails
 ) : RecyclerView.Adapter<SeasonRecyclerAdapter.SeasonViewHolder>() {
 
+    companion object{
+        private const val MAX_LENGTH = 50
+        private const val EMPTY_SYNOPSIS = ""
+    }
+
     class SeasonViewHolder(private val itemBinding: ItemRecyclerSeasonsBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
@@ -49,12 +54,12 @@ class SeasonRecyclerAdapter(
         var synopse = showDetails.seasons?.get(position)?.overview
 
         when {
-            synopse!!.length >= 50 -> {
-                synopse.substring(0, 50)
+            synopse!!.length >= MAX_LENGTH -> {
+                synopse.substring(0, MAX_LENGTH)
                 synopse = "$synopse..."
                 holder.synopsisSeason?.text = synopse
             }
-            synopse == "" -> {
+            synopse == EMPTY_SYNOPSIS -> {
                 holder.synopsisSeason?.text =
                     context.getString(R.string.series_details_without_description)
             }

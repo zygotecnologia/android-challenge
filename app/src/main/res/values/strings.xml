@@ -2,17 +2,17 @@
     <string name="app_name">ZygoTV</string>
 
     <!--HomeFragment-->
-    <string name="home_text_name_serie">Nome da série</string>
-    <string name="home_text_genre">Genero das Séries</string>
-    <string name="home_text_highlighted_series">Serie em Destaque</string>
+    <string name="home_text_name_serie">Series Name</string>
+    <string name="home_text_genre">Series Genre</string>
+    <string name="home_text_highlighted_series">Featured Series</string>
 
     <!--SeriesDetailsFragment-->
-    <string name="series_details_name_serie">Nome da série></string>
-    <string name="series_details_season">Temporada 1></string>
-    <string name="series_details_synopsis">Sinopse></string>
+    <string name="series_details_name_serie">Series Name</string>
+    <string name="series_details_season">Season 1</string>
+    <string name="series_details_synopsis">Synopsis</string>
     <string name="series_details_without_description">Without Description</string>
 
     <!--SearchFragment-->
-    <string name="search_text_result">Resultado da Busca</string>
-    <string name="search_for_series_here">Busque por Series Aqui</string>
+    <string name="search_text_result">Search result</string>
+    <string name="search_for_series_here">Search for Series Here</string>
 </resources>

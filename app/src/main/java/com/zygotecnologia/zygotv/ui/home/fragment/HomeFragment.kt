@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModel()
 
     companion object {
-        const val TAG = "HOME CONNECTION NETWORK"
+        private const val TAG = "HOME CONNECTION NETWORK"
     }
 
     override fun onCreateView(
@@ -49,6 +50,14 @@ class HomeFragment : Fragment() {
                 val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
                 snackbar.show()
             })
+
+        setupLayout()
+    }
+
+    private fun setupLayout() {
+        binding.homeIconSearch.setOnClickListener {
+            findNavController().navigateWithAnimations(R.id.searchFragment)
+        }
     }
 
     private fun observeEvents(context: Context) {

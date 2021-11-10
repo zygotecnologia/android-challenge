@@ -29,7 +29,7 @@ class SeriesDetailsFragment : Fragment() {
     private val args: SeriesDetailsFragmentArgs by navArgs()
 
     companion object {
-        const val TAG = "DETAILS CONNECTION NETWORK"
+        private const val TAG = "DETAILS CONNECTION NETWORK"
     }
 
     override fun onCreateView(
