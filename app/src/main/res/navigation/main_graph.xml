@@ -13,14 +13,22 @@
         <action
             android:id="@+id/action_homeFragment_to_seriesDetailsFragment"
             app:destination="@id/seriesDetailsFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment2"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/seriesDetailsFragment"
-        android:name="com.zygotecnologia.zygotv.ui.details.SeriesDetailsFragment"
+        android:name="com.zygotecnologia.zygotv.ui.details.fragment.SeriesDetailsFragment"
         android:label="series_details_fragment"
         tools:layout="@layout/series_details_fragment" >
         <argument
             android:name="show"
             app:argType="com.zygotecnologia.zygotv.model.Show" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.zygotecnologia.zygotv.ui.search.fragment.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
 </navigation>

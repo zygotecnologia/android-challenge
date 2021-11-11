@@ -11,7 +11,7 @@ import com.zygotecnologia.zygotv.model.Show
 
 class CategoriesAndSeriesRecyclerAdapter(
     private val context: Context,
-    private val listSeries: List<Pair<String,List<Show>>>
+    private val listSeries: List<Pair<String, List<Show>>>
 ) : RecyclerView.Adapter<CategoriesAndSeriesRecyclerAdapter.GenreViewHolder>() {
 
     var onClick: ((show: Show) -> Unit)? = null
@@ -45,7 +45,8 @@ class CategoriesAndSeriesRecyclerAdapter(
 
     private fun setCatItemRecycler(
         recyclerView: RecyclerView,
-        listSeries: List<Show>) {
+        listSeries: List<Show>
+    ) {
 
         val itemRecyclerAdapter = SeriesRecyclerAdapter(context, listSeries).apply {
             onItemClick = {

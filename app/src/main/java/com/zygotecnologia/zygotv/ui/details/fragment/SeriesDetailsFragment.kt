@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.details
+package com.zygotecnologia.zygotv.ui.details.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -13,10 +13,12 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.SeriesDetailsFragmentBinding
+import com.zygotecnologia.zygotv.extension.navigateWithAnimations
 import com.zygotecnologia.zygotv.model.ShowDetails
-import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.details.adapter.SeasonRecyclerAdapter
-import com.zygotecnologia.zygotv.utils.ConnectionLiveData
+import com.zygotecnologia.zygotv.ui.details.viewmodel.SeriesDetailsViewModel
+import com.zygotecnologia.zygotv.ui.home.fragment.HomeFragment
+import com.zygotecnologia.zygotv.utils.testConnection
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SeriesDetailsFragment : Fragment() {
@@ -27,7 +29,7 @@ class SeriesDetailsFragment : Fragment() {
     private val args: SeriesDetailsFragmentArgs by navArgs()
 
     companion object {
-        const val TAG = "DETAILS CONNECTION NETWORK"
+        private const val TAG = "DETAILS CONNECTION NETWORK"
     }
 
     override fun onCreateView(
@@ -40,22 +42,16 @@ class SeriesDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val connectionLiveData = ConnectionLiveData(view.context)
 
-        connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
-            when (isNetworkAvailable) {
-                true -> {
-                    Log.i(TAG, "Internet ON")
-                    observeEvents(view.context)
-                }
-                false -> {
-                    Log.i(TAG, "Internet OFF")
-                    val snackbar =
-                        Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
-                    snackbar.show()
-                }
-            }
-        })
+        testConnection(view, viewLifecycleOwner,
+            isConnection = {
+                Log.i(TAG, "Internet ON")
+                observeEvents(view.context)
+            }, notConnection = {
+                Log.i(TAG, "Internet OFF")
+                val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+            })
 
         setupLayout()
     }

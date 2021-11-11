@@ -6,9 +6,9 @@ import com.zygotecnologia.zygotv.model.ShowResponse
 
 interface TmdbRepository {
 
-    suspend fun fetchGenreAsync() : GenreResponse?
+    suspend fun fetchGenreAsync(): GenreResponse?
 
-    suspend fun fetchPopularShowsAsync() : ShowResponse?
+    suspend fun fetchPopularShowsAsync(): ShowResponse?
 
-    suspend fun fetchShowAsync(id: Int) : ShowDetails?
+    suspend fun fetchShowAsync(id: Int): ShowDetails?
 }

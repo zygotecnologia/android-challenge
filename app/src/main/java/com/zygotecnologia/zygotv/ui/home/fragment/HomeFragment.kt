@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.zygotecnologia.zygotv.R
 import com.zygotecnologia.zygotv.databinding.HomeFragmentBinding
+import com.zygotecnologia.zygotv.extension.navigateWithAnimations
 import com.zygotecnologia.zygotv.model.Show
-import com.zygotecnologia.zygotv.model.navigateWithAnimations
 import com.zygotecnologia.zygotv.ui.home.adapter.CategoriesAndSeriesRecyclerAdapter
 import com.zygotecnologia.zygotv.ui.home.viewmodel.HomeViewModel
-import com.zygotecnologia.zygotv.utils.ConnectionLiveData
+import com.zygotecnologia.zygotv.utils.testConnection
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class HomeFragment : Fragment() {
 
@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModel()
 
     companion object {
-        const val TAG = "HOME CONNECTION NETWORK"
+        private const val TAG = "HOME CONNECTION NETWORK"
     }
 
     override fun onCreateView(
@@ -40,22 +40,24 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val connectionLiveData = ConnectionLiveData(view.context)
 
-        connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
-            when (isNetworkAvailable) {
-                true -> {
-                    Log.i(TAG, "Internet ON")
-                        observeEvents(view.context)
-                }
-                false -> {
-                    Log.i(TAG, "Internet OFF")
-                    val snackbar =
-                        Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
-                    snackbar.show()
-                }
-            }
-        })
+        testConnection(view, viewLifecycleOwner,
+            isConnection = {
+                Log.i(TAG, "Internet ON")
+                observeEvents(view.context)
+            }, notConnection = {
+                Log.i(TAG, "Internet OFF")
+                val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+            })
+
+        setupLayout()
+    }
+
+    private fun setupLayout() {
+        binding.homeIconSearch.setOnClickListener {
+            findNavController().navigateWithAnimations(R.id.searchFragment)
+        }
     }
 
     private fun observeEvents(context: Context) {

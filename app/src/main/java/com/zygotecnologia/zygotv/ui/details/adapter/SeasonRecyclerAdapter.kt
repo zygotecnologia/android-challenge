@@ -18,6 +18,11 @@ class SeasonRecyclerAdapter(
     private val showDetails: ShowDetails
 ) : RecyclerView.Adapter<SeasonRecyclerAdapter.SeasonViewHolder>() {
 
+    companion object{
+        private const val MAX_LENGTH = 50
+        private const val EMPTY_SYNOPSIS = ""
+    }
+
     class SeasonViewHolder(private val itemBinding: ItemRecyclerSeasonsBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
@@ -41,20 +46,22 @@ class SeasonRecyclerAdapter(
     override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
 
         val url = showDetails.seasons?.get(position)?.poster_path.let { posterPath ->
-            ImageUrlBuilder.buildBackdropUrl((posterPath ?: showDetails.backdrop_path)!!) }
+            ImageUrlBuilder.buildBackdropUrl((posterPath ?: showDetails.backdrop_path)!!)
+        }
 
         holder.titleSeason?.text = showDetails.seasons?.get(position)?.name
 
         var synopse = showDetails.seasons?.get(position)?.overview
 
         when {
-            synopse!!.length >= 50 -> {
-                synopse.substring(0, 50)
+            synopse!!.length >= MAX_LENGTH -> {
+                synopse.substring(0, MAX_LENGTH)
                 synopse = "$synopse..."
                 holder.synopsisSeason?.text = synopse
             }
-            synopse == "" -> {
-                holder.synopsisSeason?.text = context.getString(R.string.series_details_without_description)
+            synopse == EMPTY_SYNOPSIS -> {
+                holder.synopsisSeason?.text =
+                    context.getString(R.string.series_details_without_description)
             }
             else -> {
                 holder.synopsisSeason?.text = synopse

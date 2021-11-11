@@ -26,4 +26,4 @@ data class Show(
     val overview: String?,
     @Json(name = "poster_path")
     val posterPath: String?
-): Parcelable
+) : Parcelable

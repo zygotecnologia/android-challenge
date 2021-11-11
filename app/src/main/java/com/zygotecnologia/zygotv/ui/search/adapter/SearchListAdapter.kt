@@ -1,4 +1,4 @@
-package com.zygotecnologia.zygotv.ui.home.adapter
+package com.zygotecnologia.zygotv.ui.search.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,13 +13,11 @@ import com.zygotecnologia.zygotv.databinding.ItemRecyclerSeriesBinding
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 
-class SeriesRecyclerAdapter(private val context: Context, private val listSeries: List<Show>) :
-    RecyclerView.Adapter<SeriesRecyclerAdapter.HomeViewHolder>() {
-    var onItemClick: ((show: Show) -> Unit)? = null
+class SearchListAdapter(private val context: Context, private val listSeries: List<Show>) :
+    RecyclerView.Adapter<SearchListAdapter.SearchListViewHolder>() {
 
-    class HomeViewHolder(private val itemBinding: ItemRecyclerSeriesBinding) :
+    class SearchListViewHolder(private val itemBinding: ItemRecyclerSeriesBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-
         var titleSeries: TextView? = null
         var imageSeries: ShapeableImageView? = null
 
@@ -29,15 +27,14 @@ class SeriesRecyclerAdapter(private val context: Context, private val listSeries
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val itemBinding =
-            ItemRecyclerSeriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(itemBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchListViewHolder {
+        val itemBinding = ItemRecyclerSeriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchListViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int = listSeries.size
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchListViewHolder, position: Int) {
 
         val url = listSeries[position].posterPath?.let { ImageUrlBuilder.buildBackdropUrl(it) }
         holder.titleSeries!!.text = listSeries[position].name
@@ -47,9 +44,5 @@ class SeriesRecyclerAdapter(private val context: Context, private val listSeries
             .centerCrop()
             .placeholder(R.drawable.image_placeholder)
             .into(holder.imageSeries as ImageView)
-
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(listSeries[position])
-        }
     }
 }
