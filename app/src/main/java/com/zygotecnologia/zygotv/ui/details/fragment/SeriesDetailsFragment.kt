@@ -45,10 +45,10 @@ class SeriesDetailsFragment : Fragment() {
 
         testConnection(view, viewLifecycleOwner,
             isConnection = {
-                Log.i(HomeFragment.TAG, "Internet ON")
+                Log.i(TAG, "Internet ON")
                 observeEvents(view.context)
             }, notConnection = {
-                Log.i(HomeFragment.TAG, "Internet OFF")
+                Log.i(TAG, "Internet OFF")
                 val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
                 snackbar.show()
             })
