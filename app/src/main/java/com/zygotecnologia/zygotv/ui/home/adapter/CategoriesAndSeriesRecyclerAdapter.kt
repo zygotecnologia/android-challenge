@@ -36,7 +36,9 @@ class CategoriesAndSeriesRecyclerAdapter(
         return GenreViewHolder(itemBinding)
     }
 
-    override fun getItemCount(): Int = listSeries.size
+    override fun getItemCount(): Int {
+        return listSeries.size
+    }
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         holder.titleSeries!!.text = listSeries[position].first
@@ -47,13 +49,11 @@ class CategoriesAndSeriesRecyclerAdapter(
         recyclerView: RecyclerView,
         listSeries: List<Show>
     ) {
-
         val itemRecyclerAdapter = SeriesRecyclerAdapter(context, listSeries).apply {
             onItemClick = {
                 onClick?.invoke(it)
             }
         }
-
         recyclerView.run {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = itemRecyclerAdapter

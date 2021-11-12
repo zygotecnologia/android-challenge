@@ -23,23 +23,24 @@
         android:id="@+id/item_recycler_seasons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:textColor="@color/white"
+        android:textSize="@dimen/text_medium"
         app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Nome Temporada" />
 
     <TextView
         android:id="@+id/item_recycler_synopsis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:paddingStart="8dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="8dp"
         android:scrollHorizontally="true"
         android:textColor="@color/white"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/text_small"
         app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
         app:layout_constraintTop_toBottomOf="@+id/item_recycler_seasons"
-        tools:text="Breve Sinopse" />
+        tools:text="Breve Sinopse Breve Sinopse Breve Sinopse Breve Sinopse Breve Sinopse Breve Sinopse" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
