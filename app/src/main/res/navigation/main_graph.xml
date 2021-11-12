@@ -31,4 +31,9 @@
         android:name="com.zygotecnologia.zygotv.ui.search.fragment.SearchFragment"
         android:label="search_fragment"
         tools:layout="@layout/search_fragment" />
+    <activity
+        android:id="@+id/splashScreen"
+        android:name="com.zygotecnologia.zygotv.ui.splash.SplashScreen"
+        android:label="activity_splash_screen"
+        tools:layout="@layout/activity_splash_screen" />
 </navigation>
