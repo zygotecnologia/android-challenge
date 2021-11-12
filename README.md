@@ -1,3 +1,35 @@
+# TMDB APP
+ Aplicativo feito em Kotlin usando alguns componentes do **Android Jetpack**, arquitetura adicionada ao projeto foi MVVM.
+
+ <img src="https://github.com/FelipeToniolo/android-challenge/blob/development/zygoTv.gif?raw=true" width="350">
+
+## Caracteristicas do Projeto
+AndroidX
+* [x] AndroidX
+* [x] MVVM
+* [x] Live Data
+* [x] View Model
+* [x] Navigation
+* [x] Safe Args
+* [x] Koin
+* [x] Retrofit
+* [x] Moshi
+* [x] Coroutines
+* [x] View Binding
+* [x] Testes
+
+## PROXIMOS PASSOS DO ESTUDO
+* [ ] ROOM
+
+## Informações do App
+
+O aplicativo foi feito consumindo os serviços da [TMDB API](https://www.themoviedb.org/)
+
+
+---------------------------------------------------
+
+
+
 # Zygo Programming Challenge - Android Developer
 
 Seu objetivo neste challenge é refatorar e adicionar novas features um pequeno aplicativo que lista Séries de TV.
@@ -6,10 +38,15 @@ Seu objetivo neste challenge é refatorar e adicionar novas features um pequeno 
 
 O aplicativo possui apenas uma tela de listagem das séries, seu desafio consiste em:
 
-* Implementar a tela de Detalhes da Série;
-* Remover as chamadas de API da Main;
-* Implementar o novo layout seguindo as especificicações da nossa Designer;
-* Resolver o Crash que ocorre ao iniciar o aplicativo sem conexão à Internet;
+- [x] Implementar a tela de Detalhes da Série;
+- [x] Remover as chamadas de API da Main;
+- [x] Implementar o novo layout seguindo as especificicações da nossa Designer;
+- [x] Resolver o Crash que ocorre ao iniciar o aplicativo sem conexão à Internet;
+- [x] A Série em destaque deve ser a top 1 mais popular retornada pela API.
+- [x] Os resultados devem ser organizados por Gênero como mostrado no Layout
+- [x] Remover a necessidade de passar os parâmetros `api_key` e `region` para toda a chamada da API;
+- [x] Armazenar a chave de API em um local seguro;
+- [x] Implementar a busca por nome das Séries;
 
 Acesse a [Documentação da API](https://developers.themoviedb.org/3/tv/get-tv-details) para qualquer dúvida!
 
@@ -19,9 +56,6 @@ capacidade de implementação das especificações
 
 ## Requisitos do Novo Layout
 As novas telas podem ser encontradas no [Invision](https://isabellataques225701.invisionapp.com/console/share/6Z2ABNOYVB/549307395)
-
-* A Série em destaque deve ser a top 1 mais popular retornada pela API.
-* O restante dos resultados devem ser organizados por Gênero como mostrado no Layout
 
 ## Requisitos técnicos
 
