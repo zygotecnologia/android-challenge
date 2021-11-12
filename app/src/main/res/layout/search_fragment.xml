@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_big"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_edittext"

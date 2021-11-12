@@ -40,9 +40,13 @@ android {
         viewBinding = true
     }
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def tmdbKey = properties.getProperty('tmdbKey')
+
     buildTypes.each {
         it.buildConfigField('String', 'TMDB_BASE_URL', "\"https://api.themoviedb.org\"")
-        it.buildConfigField('String', 'TMDB_API_KEY', "\"27490b1bf49c0e5ffaa07dfd947e9605\"")
+        it.buildConfigField('String', 'TMDB_API_KEY', "\"$tmdbKey\"")
         it.buildConfigField('String', 'TMDB_API_QUERY', "\"api_key\"")
         it.buildConfigField('String', 'TMDB_BASE_IMAGE_URL', "\"https://image.tmdb.org/t/p/original\"")
         it.buildConfigField('String', 'TMDB_API_VERSION', "\"3\"")

@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="@string/home_text_name_serie"
         android:textColor="@color/white"
+        android:textSize="@dimen/text_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_recycler_image"

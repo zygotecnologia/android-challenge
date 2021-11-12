@@ -15,4 +15,21 @@
     <!--SearchFragment-->
     <string name="search_text_result">Search result</string>
     <string name="search_for_series_here">Search for Series Here</string>
+    <string name="ACTION_AVENTURE">ACTION_AVENTURE</string>
+    <string name="ANIMATION">ANIMATION</string>
+    <string name="COMEDY">COMEDY</string>
+    <string name="CRIME">CRIME</string>
+    <string name="DOCUMENTARY">DOCUMENTARY</string>
+    <string name="DRAMA">DRAMA</string>
+    <string name="FAMILY">FAMILY</string>
+    <string name="KIDS">KIDS</string>
+    <string name="MYSTERY">MYSTERY</string>
+    <string name="NEWS">NEWS</string>
+    <string name="REALITY">REALITY</string>
+    <string name="SCIFI_FANTASY"><![CDATA[SCI-FI & FANTASY]]></string>
+    <string name="SOAP">SOAP</string>
+    <string name="TALK">TALK</string>
+    <string name="WAR_POLITICS">WAR POLITICS</string>
+    <string name="WESTERN">WESTERN</string>
+    <string name="UNKNOWN_CATEGORY">UNKNOWN CATEGORY</string>
 </resources>

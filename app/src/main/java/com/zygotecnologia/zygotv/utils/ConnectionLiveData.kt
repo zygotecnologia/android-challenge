@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import com.google.android.material.snackbar.Snackbar
+import com.zygotecnologia.zygotv.ui.search.fragment.SearchFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,20 +22,22 @@ import javax.net.SocketFactory
 
 val TAG = "C-Manager"
 
-fun testConnection(
+fun isConnected(
     view: View,
     viewLifecycleOwner: LifecycleOwner,
+    TAG: String,
     isConnection: () -> Unit,
-    notConnection: () -> Unit
 ) {
     val connectionLiveData = ConnectionLiveData(view.context)
     connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
         when (isNetworkAvailable) {
             true -> {
+                Log.i(TAG, "Internet ON")
                 isConnection()
             }
             false -> {
-                notConnection()
+                Log.i(TAG, "Internet OFF")
+                Snackbar.make(view, "No Internet Connection", Snackbar.LENGTH_LONG).show()
             }
         }
     })
