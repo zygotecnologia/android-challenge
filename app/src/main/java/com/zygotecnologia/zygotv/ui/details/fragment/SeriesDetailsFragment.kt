@@ -17,8 +17,7 @@ import com.zygotecnologia.zygotv.extension.navigateWithAnimations
 import com.zygotecnologia.zygotv.model.ShowDetails
 import com.zygotecnologia.zygotv.ui.details.adapter.SeasonRecyclerAdapter
 import com.zygotecnologia.zygotv.ui.details.viewmodel.SeriesDetailsViewModel
-import com.zygotecnologia.zygotv.ui.home.fragment.HomeFragment
-import com.zygotecnologia.zygotv.utils.testConnection
+import com.zygotecnologia.zygotv.utils.isConnected
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SeriesDetailsFragment : Fragment() {
@@ -43,15 +42,9 @@ class SeriesDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        testConnection(view, viewLifecycleOwner,
-            isConnection = {
-                Log.i(TAG, "Internet ON")
-                observeEvents(view.context)
-            }, notConnection = {
-                Log.i(TAG, "Internet OFF")
-                val snackbar = Snackbar.make(binding.root, "Sem Internet", Snackbar.LENGTH_SHORT)
-                snackbar.show()
-            })
+        isConnected(view, viewLifecycleOwner, TAG, {
+            observeEvents(view.context)
+        })
 
         setupLayout()
     }

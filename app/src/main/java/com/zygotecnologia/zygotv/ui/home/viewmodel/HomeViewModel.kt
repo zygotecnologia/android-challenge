@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zygotecnologia.zygotv.data.repository.TmdbRepository
-import com.zygotecnologia.zygotv.model.InfoGenres
+import com.zygotecnologia.zygotv.model.Genre
 import com.zygotecnologia.zygotv.model.Show
 import com.zygotecnologia.zygotv.utils.ImageUrlBuilder
 import kotlinx.coroutines.launch
@@ -16,37 +16,9 @@ class HomeViewModel(private val repository: TmdbRepository) : ViewModel() {
     val posterUrl: LiveData<String>
         get() = _url
 
-    private val _listActionAventure = MutableLiveData<List<Show>>()
-    val listActionAventure: LiveData<List<Show>>
-        get() = _listActionAventure
-
-    private val _listComedy = MutableLiveData<List<Show>>()
-    val listComedy: LiveData<List<Show>>
-        get() = _listComedy
-
-    private val _listDrama = MutableLiveData<List<Show>>()
-    val listDrama: LiveData<List<Show>>
-        get() = _listDrama
-
-    private val _listFamily = MutableLiveData<List<Show>>()
-    val listFamily: LiveData<List<Show>>
-        get() = _listFamily
-
-    fun loadActionAventure() {
-        loadShow(InfoGenres.ACTION_AVENTURE.id, _listActionAventure)
-    }
-
-    fun loadComedy() {
-        loadShow(InfoGenres.COMEDY.id, _listComedy)
-    }
-
-    fun loadDrama() {
-        loadShow(InfoGenres.DRAMA.id, _listDrama)
-    }
-
-    fun loadFamily() {
-        loadShow(InfoGenres.FAMILY.id, _listFamily)
-    }
+    private val _listShow = MutableLiveData<List<Pair<String, List<Show>>>>()
+    val listShow: LiveData<List<Pair<String, List<Show>>>>
+        get() = _listShow
 
     fun getUrlImage() {
         viewModelScope.launch {
@@ -58,15 +30,37 @@ class HomeViewModel(private val repository: TmdbRepository) : ViewModel() {
         }
     }
 
-    private fun loadShow(genreId: Int, mutableLiveData: MutableLiveData<List<Show>>) {
-        val listGenre: MutableList<Show> = mutableListOf()
-        viewModelScope.launch {
-            repository.fetchPopularShowsAsync()?.results?.map { showMap: Show ->
-                if (showMap.genreIds?.contains(genreId)!!) {
-                    listGenre.add(showMap)
+    fun loadFullShow() {
+        listGenre(
+            success = { listGenreShow ->
+                viewModelScope.launch {
+                    val listCategories = mutableListOf<Pair<String, List<Show>>>()
+                    listGenreShow!!.forEach { genre ->
+                        val listFilterGenre = mutableListOf<Show>()
+                        val genreId = genre.id
+
+                        listFilterGenre.clear()
+
+                        repository.fetchPopularShowsAsync()?.results?.map { show ->
+                            if (show.genreIds?.contains(genreId!!)!!) {
+                                listFilterGenre.add(show)
+                            }
+                        }
+                        if (listFilterGenre.isNotEmpty()) {
+                            listCategories.add(Pair(genre.name!!, listFilterGenre))
+                        }
+                    }
+                    _listShow.value = listCategories
                 }
             }
-            mutableLiveData.value = listGenre
+        )
+    }
+
+    private fun listGenre(success: (List<Genre>?) -> Unit) {
+        viewModelScope.launch {
+            repository.fetchGenreAsync()?.genres.let { listGenre ->
+                success(listGenre)
+            }
         }
     }
 }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/home_text_name_serie"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_big"
         android:padding="16dp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
